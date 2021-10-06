@@ -9,9 +9,18 @@ and open the template in the editor.
 */
 
 body .ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link.ui-state-hover{
-            
+          
     background: #32B7B4;
             
+}
+
+h1, h2, h3, h4, h5, h6, p{
+    font-family: sans-serif;
+}
+
+.container{
+    width: 80%;
+    margin: auto;
 }
 
 .firstBody, .menu{
@@ -32,6 +41,20 @@ body .ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link.ui-state-hover{
     font-family: sans-serif;
 }
 
+.titleH3{
+    color: #68717A;
+    font-weight: bold;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+}
+
+.title-opciones{
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #152536;
+    font-size: 18pt;
+}
+
 .welcome{
     padding-top: 2%;
     width: 80%;
@@ -39,7 +62,7 @@ body .ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link.ui-state-hover{
     text-align: center;
 }
 
-.styleImage{
+.styleImageHeader{
     width: 59%;
 }
 
@@ -50,6 +73,7 @@ body .ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link.ui-state-hover{
 
 .styleImage{
     width: 100%;
+    max-height: 200px;
     margin-top: -0.5%;
     margin-bottom: -13.1%;
 }
@@ -69,8 +93,9 @@ body .ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link.ui-state-hover{
 }
 
 .formLogin{
-    width: 27%; margin:
-        auto; margin-bottom: 3.5%;
+    width: 27%; 
+    margin:auto; 
+    margin-bottom: 3.5%;
 }
 
 .gridField{
@@ -101,8 +126,27 @@ body .ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link.ui-state-hover{
     font-family: sans-serif;
 }
 
+.opciones{
+    border: 1px solid #DEE2E6;
+   box-sizing: border-box;
+   border-radius: 4px;
+   height: 465px;
+}
+.info-opciones{
+   position: relative;
+   top: 50px;
+}
+
+.dialog{
+    width: 100%;
+    border-bottom:1.5px solid #68717A;
+    border-top:1.5px solid #68717A;
+    padding: 3px;
+    border-radius: 2px;
+}
+
 #mensaje{
-    text-align: justify;
+    text-align: left;
 }
 
 @media screen and (max-width:480px){

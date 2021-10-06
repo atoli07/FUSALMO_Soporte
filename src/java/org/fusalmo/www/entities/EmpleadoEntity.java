@@ -70,6 +70,8 @@ public class EmpleadoEntity implements Serializable {
     @ManyToOne(optional = false)
     private RecursosEntity idRecurso;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")
+    private List<PrestamoRecursosEntity> prestamoRecursosEntityList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")
     private List<MemosEntity> memosEntityList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")
     private List<TokensEntity> tokensEntityList;
@@ -187,6 +189,14 @@ public class EmpleadoEntity implements Serializable {
 
     public void setIdRecurso(RecursosEntity idRecurso) {
         this.idRecurso = idRecurso;
+    }
+
+    public List<PrestamoRecursosEntity> getPrestamoRecursosEntityList() {
+        return prestamoRecursosEntityList;
+    }
+
+    public void setPrestamoRecursosEntityList(List<PrestamoRecursosEntity> prestamoRecursosEntityList) {
+        this.prestamoRecursosEntityList = prestamoRecursosEntityList;
     }
 
     public List<MemosEntity> getMemosEntityList() {

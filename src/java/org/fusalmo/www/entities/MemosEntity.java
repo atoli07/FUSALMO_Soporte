@@ -6,7 +6,10 @@
 package org.fusalmo.www.entities;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -14,7 +17,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -25,7 +31,9 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "MemosEntity.findAll", query = "SELECT m FROM MemosEntity m")
     , @NamedQuery(name = "MemosEntity.findById", query = "SELECT m FROM MemosEntity m WHERE m.id = :id")
-    , @NamedQuery(name = "MemosEntity.findByTipo", query = "SELECT m FROM MemosEntity m WHERE m.tipo = :tipo")})
+    , @NamedQuery(name = "MemosEntity.findByFechaPrestamo", query = "SELECT m FROM MemosEntity m WHERE m.fechaPrestamo = :fechaPrestamo")
+    , @NamedQuery(name = "MemosEntity.findByFechaEntrega", query = "SELECT m FROM MemosEntity m WHERE m.fechaEntrega = :fechaEntrega")
+    , @NamedQuery(name = "MemosEntity.findByCantidadRecursos", query = "SELECT m FROM MemosEntity m WHERE m.cantidadRecursos = :cantidadRecursos")})
 public class MemosEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,27 +43,23 @@ public class MemosEntity implements Serializable {
     @Basic(optional = false)
     @Lob
     private String asunto;
-    @Basic(optional = false)
-    private String tipo;
     @Lob
     private String pdf;
     @Lob
     private String pDFFirmado;
-    @JoinColumn(name = "IdAsignacionMemo", referencedColumnName = "Id")
-    @ManyToOne
-    private AsignacionMemoEntity idAsignacionMemo;
+    @Temporal(TemporalType.DATE)
+    private Date fechaPrestamo;
+    @Temporal(TemporalType.DATE)
+    private Date fechaEntrega;
+    private Integer cantidadRecursos;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMemo")
+    private List<PrestamoRecursosEntity> prestamoRecursosEntityList;
     @JoinColumn(name = "IdEmpleado", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private EmpleadoEntity idEmpleado;
-    @JoinColumn(name = "IdPrestamoExternoMemo", referencedColumnName = "Id")
-    @ManyToOne
-    private PrestamoExternoMemoEntity idPrestamoExternoMemo;
-    @JoinColumn(name = "IdPrestamoInternoMemo", referencedColumnName = "Id")
-    @ManyToOne
-    private PrestamoInternoMemoEntity idPrestamoInternoMemo;
-    @JoinColumn(name = "IdRemocionMemo", referencedColumnName = "Id")
-    @ManyToOne
-    private RemocionMemoEntity idRemocionMemo;
+    @JoinColumn(name = "IdTipo", referencedColumnName = "IdTipo")
+    @ManyToOne(optional = false)
+    private TipoMemoEntity idTipo;
     @JoinColumn(name = "IdAgenteIT", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private UsuariosITEntity idAgenteIT;
@@ -67,10 +71,9 @@ public class MemosEntity implements Serializable {
         this.id = id;
     }
 
-    public MemosEntity(String id, String asunto, String tipo) {
+    public MemosEntity(String id, String asunto) {
         this.id = id;
         this.asunto = asunto;
-        this.tipo = tipo;
     }
 
     public String getId() {
@@ -89,14 +92,6 @@ public class MemosEntity implements Serializable {
         this.asunto = asunto;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     public String getPdf() {
         return pdf;
     }
@@ -113,12 +108,36 @@ public class MemosEntity implements Serializable {
         this.pDFFirmado = pDFFirmado;
     }
 
-    public AsignacionMemoEntity getIdAsignacionMemo() {
-        return idAsignacionMemo;
+    public Date getFechaPrestamo() {
+        return fechaPrestamo;
     }
 
-    public void setIdAsignacionMemo(AsignacionMemoEntity idAsignacionMemo) {
-        this.idAsignacionMemo = idAsignacionMemo;
+    public void setFechaPrestamo(Date fechaPrestamo) {
+        this.fechaPrestamo = fechaPrestamo;
+    }
+
+    public Date getFechaEntrega() {
+        return fechaEntrega;
+    }
+
+    public void setFechaEntrega(Date fechaEntrega) {
+        this.fechaEntrega = fechaEntrega;
+    }
+
+    public Integer getCantidadRecursos() {
+        return cantidadRecursos;
+    }
+
+    public void setCantidadRecursos(Integer cantidadRecursos) {
+        this.cantidadRecursos = cantidadRecursos;
+    }
+
+    public List<PrestamoRecursosEntity> getPrestamoRecursosEntityList() {
+        return prestamoRecursosEntityList;
+    }
+
+    public void setPrestamoRecursosEntityList(List<PrestamoRecursosEntity> prestamoRecursosEntityList) {
+        this.prestamoRecursosEntityList = prestamoRecursosEntityList;
     }
 
     public EmpleadoEntity getIdEmpleado() {
@@ -129,28 +148,12 @@ public class MemosEntity implements Serializable {
         this.idEmpleado = idEmpleado;
     }
 
-    public PrestamoExternoMemoEntity getIdPrestamoExternoMemo() {
-        return idPrestamoExternoMemo;
+    public TipoMemoEntity getIdTipo() {
+        return idTipo;
     }
 
-    public void setIdPrestamoExternoMemo(PrestamoExternoMemoEntity idPrestamoExternoMemo) {
-        this.idPrestamoExternoMemo = idPrestamoExternoMemo;
-    }
-
-    public PrestamoInternoMemoEntity getIdPrestamoInternoMemo() {
-        return idPrestamoInternoMemo;
-    }
-
-    public void setIdPrestamoInternoMemo(PrestamoInternoMemoEntity idPrestamoInternoMemo) {
-        this.idPrestamoInternoMemo = idPrestamoInternoMemo;
-    }
-
-    public RemocionMemoEntity getIdRemocionMemo() {
-        return idRemocionMemo;
-    }
-
-    public void setIdRemocionMemo(RemocionMemoEntity idRemocionMemo) {
-        this.idRemocionMemo = idRemocionMemo;
+    public void setIdTipo(TipoMemoEntity idTipo) {
+        this.idTipo = idTipo;
     }
 
     public UsuariosITEntity getIdAgenteIT() {

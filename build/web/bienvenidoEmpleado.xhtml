@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>FUSALMO IT Portal - Inicio</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <h:outputStylesheet library="css" name="primeflex.min.css" />
+    </h:head>
+    <h:body class="firstBody">
+        
+        <menu class="menu">
+
+            <div class="card">
+
+                <h:form>
+
+                    <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
+
+                        <p:menuitem url="index.xhtml">
+                            
+                            <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
+
+                        </p:menuitem>
+
+                    </p:menubar>
+
+                </h:form>
+
+            </div>
+
+        </menu>
+        
+        <div class="welcome">
+            <div class="p-grid">
+            <div class="title p-col-8">
+                
+                <h1 class="titleH1">Bienvenido/a <br/> Empleado</h1>
+                
+            </div>
+            <div class="image p-col-4">
+                
+                <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImageHeader"/>
+                    </div>
+            </div>
+            <p:divider class=""/>
+            
+        </div>
+
+        <div class="container">
+            <h1 class="titleH3">Menú de opciones:</h1>
+            <h:form class="p-grid">
+                <br/>
+                <div class="p-col-4 opciones">
+                    <p:graphicImage library="img" name="woman-blue.jpg" class="styleImage"/>
+                    <div class="info-opciones">
+                        <h:outputText value="Token" class="title-opciones"/>
+                        <br/>
+                        <br/>
+                        <p:outputLabel value="Esta sección es para que nos reporte si tiene un problema con su recurso."/>
+                        <br/>
+                        <br/>
+                        <p:commandButton value="CREAR TOKEN" styleClass="ui-button-outlined ui-button-help" style="margin-bottom: 10px"/>
+                        <p:commandButton value="VER TOKENS EN PROCESO E HISTORIAL" action="listadoTokens" styleClass="ui-button-outlined"/>
+                    </div>
+                </div>
+                <div class="p-col-4 opciones">
+                    <p:graphicImage library="img" name="person-laptop.jpg" class="styleImage"/>
+                    <div class="info-opciones">
+                        <h:outputText value="Mis recursos" class="title-opciones"/>
+                        <br/>
+                        <br/>
+                        <p:outputLabel value="Aquí puede ver el equipo (o los equipos) que tiene asignado."/>
+                        <br/>
+                        <br/>
+                        <p:commandButton value="VER MIS RECURSOS ASIGNADOS" action="recursosAsignados" styleClass="ui-button-outlined"/>
+                    </div>
+                </div>
+            </h:form>
+            <br/>
+        </div>
+    </h:body>
+</html>
+

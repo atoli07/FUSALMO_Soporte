@@ -16,6 +16,8 @@
     <class>org.fusalmo.www.entities.EstadoTokenEntity</class>
     <class>org.fusalmo.www.entities.AreaEntity</class>
     <class>org.fusalmo.www.entities.PrestamoExternoMemoEntity</class>
+    <class>org.fusalmo.www.entities.TipoMemoEntity</class>
+    <class>org.fusalmo.www.entities.PrestamoRecursosEntity</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/soportefusalmo?zeroDateTimeBehavior=convertToNull"/>

@@ -9,7 +9,7 @@
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Reestablecer Contraseña</title>
+                <title>FUSALMO IT Portal - Reestablecer Contraseña</title>
             </f:facet>
             <h:outputStylesheet library="css" name="style.css"/>
         <h:outputStylesheet library="css" name="primeflex.min.css" />
@@ -41,33 +41,34 @@
         
         <div class="welcome">
             <div class="p-grid">
-                <div class="title p-col-8" style="background-color: red">
+                <div class="title p-col-8">
                 
                 <h1 class="titleH1">Revise su bandeja de entrada</h1>
                 
             </div>
-                <div class="image p-col-4" style="background-color: blue">
+                <div class="image p-col-4">
                 
-                <i class="pi pi-check-circle" style="width: 100%; height: 100%; color: green;"></i>
+                <i class="pi pi-check-circle" style="font-size: 44pt; color: #299795;"></i>
                     </div>
             </div>
             <p:divider class=""/>
             
         </div>
 
-        <div class="card divLogin p-grid">
+        <div class="card p-grid">
 
-            <h:form class="formLogin">
+            <h:form class="container">
                 <div id="mensaje" class="p-col-12">
                     <p:outputLabel value="Deberias de recibir un mensaje a tu bandeja de entrada con la contraseña
                                 que tenías asignado/a."/>
+                    <br/>
                     <br/>
                     <p:outputLabel value="En caso no hayas recibido nada, recomendamos que revises spam."/>
                     <br/>
                     <p:outputLabel value="Y si aún no lo encuentra, comuníquese con el área de Recursos Tecnológicos
                                en el área de Innovación"/>
                 </div>
-                <p:button value="Regresar a login" styleClass="ui-button-outlined ui-button-help"/>
+                <p:commandButton action="index"  value="REGRESAR A LOGIN" styleClass="ui-button-outlined ui-button-help"/>
             </h:form>
         </div>
         

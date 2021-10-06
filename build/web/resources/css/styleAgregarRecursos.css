@@ -1,0 +1,43 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10-04-2021, 07:11:02 AM
+    Author     : Nemy
+*/
+
+/*-------------------------------Estilos de la vista agregarRecursos-------------------------------------*/
+
+.container1{
+    margin: auto;
+}
+
+.container2{
+    width: 65%;
+    text-align: center;
+    min-height: 295px;
+}
+
+.container3{
+    width: 50%;
+    text-align: center;
+    margin: auto;
+    background-color: white;
+    min-height: 345px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    background-color: #DEDEDE;
+}
+
+.cardsForm{
+    font-family: sans-serif;
+    background-color: #DEDEDE;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+span.ui-float-label{
+    display: grid;
+}

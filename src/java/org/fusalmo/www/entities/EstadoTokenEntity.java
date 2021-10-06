@@ -27,7 +27,8 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "EstadoTokenEntity.findAll", query = "SELECT e FROM EstadoTokenEntity e")
     , @NamedQuery(name = "EstadoTokenEntity.findById", query = "SELECT e FROM EstadoTokenEntity e WHERE e.id = :id")
-    , @NamedQuery(name = "EstadoTokenEntity.findByNombre", query = "SELECT e FROM EstadoTokenEntity e WHERE e.nombre = :nombre")})
+    , @NamedQuery(name = "EstadoTokenEntity.findByNombre", query = "SELECT e FROM EstadoTokenEntity e WHERE e.nombre = :nombre")
+    , @NamedQuery(name = "EstadoTokenEntity.findByDescripcion", query = "SELECT e FROM EstadoTokenEntity e WHERE e.descripcion = :descripcion")})
 public class EstadoTokenEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,6 +38,8 @@ public class EstadoTokenEntity implements Serializable {
     private Integer id;
     @Basic(optional = false)
     private String nombre;
+    @Basic(optional = false)
+    private String descripcion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEstado")
     private List<TokensEntity> tokensEntityList;
 
@@ -47,9 +50,10 @@ public class EstadoTokenEntity implements Serializable {
         this.id = id;
     }
 
-    public EstadoTokenEntity(Integer id, String nombre) {
+    public EstadoTokenEntity(Integer id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
+        this.descripcion = descripcion;
     }
 
     public Integer getId() {
@@ -66,6 +70,14 @@ public class EstadoTokenEntity implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public List<TokensEntity> getTokensEntityList() {

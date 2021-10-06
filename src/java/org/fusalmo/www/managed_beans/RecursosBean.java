@@ -32,4 +32,22 @@ public class RecursosBean {
         return modelo.listarRecursos();
     }
     
+    public String ponerIP(RecursosEntity recurso){
+        if (recurso.getDireccionIP()== null) {
+            return "NO";
+        }
+        else{
+            return recurso.getDireccionIP();
+        }
+    }
+    
+    public String ponerMAC(RecursosEntity recurso){
+        if (recurso.getDireccionMAC()== null) {
+            return "NO";
+        }
+        else{
+            return recurso.getDireccionMAC();
+        }
+    }
+    
 }

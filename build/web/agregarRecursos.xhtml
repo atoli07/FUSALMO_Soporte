@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="styleAgregarRecursos.css"/>
+        <h:outputStylesheet library="css" name="primeflex.min.css"/>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <title>Agregar recurso</title>
+    </h:head>
+    <h:body class="firstBody">
+        
+        <menu class="menu">
+
+            <div class="card">
+
+                <h:form>
+
+                    <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
+
+                        <p:menuitem url="index.xhtml">
+                            
+                            <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
+
+                        </p:menuitem>
+
+                    </p:menubar>
+
+                </h:form>
+
+            </div>
+
+        </menu>
+        
+        <div class="welcome">
+            <div class="p-grid">
+                <div class="title p-col-8" style="width: 70%; margin: auto">
+
+                    <h1 class="titleH1">Agregar computadoras</h1>
+
+                </div>
+                <div class="image p-col-4" style="width: 20%; margin: auto">
+
+                    <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
+                </div>
+            </div>
+            <p:divider class=""/>
+
+        </div>
+
+        
+
+        <h:form>
+
+            <div class="p-d-flex p-flex-column container1">
+
+                <div class="p-grid container2" style="margin: auto">
+
+                    <div class="p-col cardsForm" style="">
+
+                        <h5>ID</h5>
+                        <span class="ui-float-label" style="">
+                            <p:inputText id="float-input" value="#{inputTextView.text}"/>
+                            <p:outputLabel for="@previous" value="ID"/>
+                        </span>
+
+                    </div>
+
+                    <div class="p-col cardsForm">
+
+                        <h5>Nombre</h5>
+                        <span class="ui-float-label">
+                            <p:inputText id="float-input2" value="#{inputTextView.text}"/>
+                            <p:outputLabel for="@previous" value="DESKTOP-XXXXXXX"/>
+                        </span>
+
+                    </div>
+
+                    <div class="p-col cardsForm">
+
+                        <h5>Marca</h5>
+                        <span class="ui-float-label">
+                            <p:inputText id="float-input3" value="#{inputTextView.text}"/>
+                            <p:outputLabel for="@previous" value="HP"/>
+                        </span>
+
+                    </div>
+
+                    <div class="p-col cardsForm">
+
+                        <h5>Modelo</h5>
+                        <span class="ui-float-label">
+                            <p:inputText id="float-input4" value="#{inputTextView.text}"/>
+                            <p:outputLabel for="@previous" value="XX-XXXXXXX"/>
+                        </span>
+
+                    </div>
+
+                </div>
+                    
+                <div class="p-grid container2" style="margin: auto">
+                    
+                    <div class="p-col cardsForm">
+
+                        <h5>Numero de serie</h5>
+                        <span class="ui-float-label">
+                            <p:inputText id="float-input5" value="#{inputTextView.text}"/>
+                            <p:outputLabel for="@previous" value="000000000"/>
+                        </span>
+
+                    </div>
+
+                    <div class="p-col cardsForm">
+
+                        <h5>Dirección IP</h5>
+                        <span class="ui-float-label">
+                            <p:inputText id="float-input6" value="#{inputTextView.text}"/>
+                            <p:outputLabel for="@previous" value="XXX.XXX.XXX.XXX"/>
+                        </span>
+
+                    </div>
+
+                    <div class="p-col cardsForm">
+
+                        <h5>Dirección MAC</h5>
+                        <span class="ui-float-label">
+                            <p:inputText id="float-input7" value="#{inputTextView.text}"/>
+                            <p:outputLabel for="@previous" value="XX:XX:XX:XX:XX:XX"/>
+                        </span>
+
+                    </div>
+
+                    <div class="p-col cardsForm">
+
+                        <h5>Código activo</h5>
+                        <span class="ui-float-label">
+                            <p:inputText id="float-input8" value="#{inputTextView.text}"/>
+                            <p:outputLabel for="@previous" value="Username"/>
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="p-d-flex p-flex-column container3">
+
+                    <div>
+
+                        <h5>Area asignada</h5>
+
+                        <p:selectOneMenu id="options" value="#{selectOneMenuView.selectedOption}">
+                            <f:selectItem itemLabel="Select One" itemValue=""/>
+                            <f:selectItem itemLabel="Option1" itemValue="Option1"/>
+                            <f:selectItem itemLabel="Option2" itemValue="Option2"/>
+                            <f:selectItem itemLabel="Option3" itemValue="Option3"/>
+                        </p:selectOneMenu>
+
+                    </div>
+
+                    <div style="margin: auto">
+
+                        <h5>Cargador</h5>
+                        <p:selectOneRadio id="console" value="#{radioView.console}" unselectable="true">
+                            <f:selectItem itemLabel="Sí" itemValue="Sí"/>
+                            <f:selectItem itemLabel="No" itemValue="No"/>
+                        </p:selectOneRadio>
+
+                    </div>
+
+                    <div>
+
+                        <h5>Tipo de recurso</h5>
+                        <p:selectOneMenu id="option" value="#{selectOneMenuView.selectedOption}">
+                            <f:selectItem itemLabel="Select One" itemValue=""/>
+                            <f:selectItem itemLabel="Option1" itemValue="Option1"/>
+                            <f:selectItem itemLabel="Option2" itemValue="Option2"/>
+                            <f:selectItem itemLabel="Option3" itemValue="Option3"/>
+                        </p:selectOneMenu>
+
+                    </div>
+
+                </div>
+                
+            </div>
+            
+        </h:form>
+
+    </h:body>
+</html>
+
