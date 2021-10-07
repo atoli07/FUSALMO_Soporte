@@ -7,7 +7,7 @@ import org.fusalmo.www.entities.EmpleadoEntity;
 import org.fusalmo.www.entities.MemosEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-05T15:59:20")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-07T06:09:13")
 @StaticMetamodel(PrestamoRecursosEntity.class)
 public class PrestamoRecursosEntity_ { 
 

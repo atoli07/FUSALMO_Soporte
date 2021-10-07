@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        
+        <h:outputStylesheet library="css" name="styleAgregarRecursos.css"/>
+        <h:outputStylesheet library="css" name="primeflex.min.css"/>
+        <h:outputStylesheet library="css" name="style.css"/>
+        
+        <title>Selección de recurso</title>
+        
+    </h:head>
+    <h:body>
+        
+        Agregar Laptop
+        
+        <br/>
+        
+        <h:form>
+        
+            <a href="agregarLaptop.xhtml">Agregar Laptop</a>
+            
+            <p:commandButton 
+                
+                value="Guardar" 
+                styleClass="ui-button-outlined ui-button-success" 
+                style="width: 50%" 
+                action="#{recursosBean.opcAgregar(1)}">
+                
+            </p:commandButton>
+            
+        </h:form>        
+        
+        <br/>
+        
+        Agregar Microsoft Enterprise
+        
+    </h:body>
+</html>
+
