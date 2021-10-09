@@ -28,12 +28,12 @@ and open the template in the editor.
     min-height: 345px;
     border-radius: 5px;
     font-family: sans-serif;
-    background-color: #DEDEDE;
+    background-color: rgba(222,222,222,.5);
 }
 
 .cardsForm{
     font-family: sans-serif;
-    background-color: #DEDEDE;
+    background-color: rgba(222,222,222,.5);
     margin: 10px;
     border-radius: 5px;
 }
