@@ -54,7 +54,51 @@
             <p:divider class=""/>
 
         </div>
-        
+
+        <div class="p-d-flex p-flex-column" style="background-color: red; width: 80%; margin: auto">
+            
+            <div class="p-mb-2">
+            
+                <h5>Nombre</h5>
+                
+                <br/>
+                
+                <p:inputText size="50"/>
+                
+            </div>
+            
+            <div class="p-mb-2">
+                
+                <h5>Código activo</h5>
+                
+                <br/>
+                
+                <p:inputText size="50"/>
+            
+            </div>
+            
+            <div class="p-mb-2">
+            
+                <h5>Área asignada</h5>
+
+                <p:selectOneMenu id="options" value="#{recursosBean.areaAsignada}" style="min-width: 36.6%">
+                    <f:selectItems value="#{recursosBean.listarAreas}" var="list" itemLabel="#{list.nombre}" itemValue="#{list.id}"/>
+                </p:selectOneMenu>
+
+            </div>
+            
+            <div class="p-mb-2">
+            
+                <h5>URL imágen</h5>
+                
+                <br/>
+                
+                <p:inputText size="50"/>
+                
+            </div>
+            
+        </div>
+
     </h:body>
     
 </html>
