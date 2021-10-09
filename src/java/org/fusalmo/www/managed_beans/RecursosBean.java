@@ -93,9 +93,8 @@ public class RecursosBean {
         
         System.out.println(opcAdd);
         switch (opcAdd) {
-            case 1:
-                System.out.println("OPCION 1");
-                return "agregarLaptop?faces-redirect=true&prueba=" + opcAdd;
+            case 1://Agregar laptop
+                return "agregarLaptop?faces-redirect=true&type-resource=" + opcAdd;
             default:
                 throw new AssertionError();
         }
@@ -126,7 +125,7 @@ public class RecursosBean {
             //JsfUtil.setFlashMessage("exito", "");
             System.out.println("Laptop registrada exitosamente");
             //Forzando la redirección en el cliente
-            return "index?faces-redirect=true";
+            return "seleccionDeRecurso?faces-redirect=true";
             
         }
         
