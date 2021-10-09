@@ -83,7 +83,9 @@ public class RecursosBean {
         
         //modelo.contarRecursos();
         
-        //modelo.crearID();
+        
+        
+        System.out.println(modelo.crearID() + " ID retornado para guardar en la BD");
         
     }
     
