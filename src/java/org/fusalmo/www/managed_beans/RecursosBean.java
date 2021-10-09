@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import org.fusalmo.www.entities.AreaEntity;
 import org.fusalmo.www.entities.RecursosEntity;
+import org.fusalmo.www.entities.TipoRecursoEntity;
 import org.fusalmo.www.model.RecursosModel;
 import org.fusalmo.www.utils.JsfUtil;
 
@@ -38,6 +39,10 @@ public class RecursosBean {
     
     public List<RecursosEntity> getListaRecursos(){
         return modelo.listarRecursos();
+    }
+    
+    public List<TipoRecursoEntity> getListaTipoRecurso(){
+        return modelo.listarTipoRecursos();
     }
     
     public String ponerIP(RecursosEntity recurso){

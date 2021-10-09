@@ -8,7 +8,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         
-        <h:outputStylesheet library="css" name="styleAgregarRecursos.css"/>
+        <h:outputStylesheet library="css" name="styleSeleccionDeRecurso.css"/>
         <h:outputStylesheet library="css" name="primeflex.min.css"/>
         <h:outputStylesheet library="css" name="style.css"/>
         
@@ -16,12 +16,40 @@
         
     </h:head>
     <h:body>
-        
-        Agregar Laptop
-        
-        <br/>
-        
+
         <h:form>
+
+            Agregar Laptop
+            
+            <br/>
+            
+            <div class="p-grid containerCards" style="margin: auto">
+
+                <c:forEach items="#{recursosBean.listaTipoRecurso}" var="resources">
+
+                    <p:card class="cardForm">
+                        <f:facet name="header">
+                            <img alt="user header" src="../../resources/demo/images/usercard.png"/>
+                        </f:facet>
+                        <f:facet name="title">
+                            Advanced Card
+                        </f:facet>
+                        <f:facet name="subtitle">
+                            Card subtitle
+                        </f:facet>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                            quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
+
+                        <f:facet name="footer">
+                            <p:commandButton icon="pi pi-check" value="Save"/>
+                            <p:commandButton icon="pi pi-times" value="Cancel" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                        </f:facet>
+                    </p:card>
+
+                </c:forEach>
+
+            </div>
             
             <p:commandButton 
                 
