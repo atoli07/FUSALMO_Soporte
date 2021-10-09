@@ -100,6 +100,8 @@ public class RecursosBean {
         switch (opcAdd) {
             case 1://Agregar laptop
                 return "agregarLaptop?faces-redirect=true&type-resource=" + opcAdd;
+            case 2://Agregar laptop
+                return "agregarMicrosoftENT?faces-redirect=true&type-resource=" + opcAdd;
             default:
                 throw new AssertionError();
         }

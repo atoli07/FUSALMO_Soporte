@@ -18,10 +18,6 @@
     <h:body>
 
         <h:form>
-
-            Agregar Laptop
-            
-            <br/>
             
             <div class="p-grid containerCards" style="margin: auto">
 
@@ -29,21 +25,26 @@
 
                     <p:card class="cardForm">
                         <f:facet name="header">
-                            <img alt="user header" src="../../resources/demo/images/usercard.png"/>
+                            <img alt="user header" src="#{resources.img}"/>
                         </f:facet>
                         <f:facet name="title">
-                            Advanced Card
+                           #{resources.nombre}
                         </f:facet>
                         <f:facet name="subtitle">
-                            Card subtitle
+                            #{resources.descripcion}
                         </f:facet>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                            quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
-
+                        
                         <f:facet name="footer">
-                            <p:commandButton icon="pi pi-check" value="Save"/>
-                            <p:commandButton icon="pi pi-times" value="Cancel" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                            
+                            <p:commandButton
+
+                                value="Agregar" 
+                                icon="pi pi-check"
+                                style="width: 100%; " 
+                                action="#{recursosBean.opcAgregar(resources.id)}">
+
+                            </p:commandButton>
+                            
                         </f:facet>
                     </p:card>
 
@@ -51,20 +52,7 @@
 
             </div>
             
-            <p:commandButton 
-                
-                value="Guardar" 
-                styleClass="ui-button-outlined ui-button-success" 
-                style="width: 50%" 
-                action="#{recursosBean.opcAgregar(1)}">
-                
-            </p:commandButton>
-            
         </h:form>        
-        
-        <br/>
-        
-        Agregar Microsoft Enterprise
         
     </h:body>
 </html>
