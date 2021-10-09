@@ -189,7 +189,7 @@ public class RecursosModel {
         int countResource = Integer.valueOf(contarRecursos());
         int resultLength = String.valueOf(countResource).length();
         int numberReturn;
-        
+        System.out.println(countResource + " Conteo de recursos");
         if(resultLength == 1 && countResource < 10){
             
             if(countResource == 9){
@@ -201,8 +201,9 @@ public class RecursosModel {
                 //Es el id final que se retornará para guardar en la BD
                 //concatena el Id y el resultado de la cuenta total de los registros
                 //para guardar dinámicamente
-                finalID = idPlantilla + String.valueOf(countResource + 1);
-                System.out.println(finalID + " ID ANTES");
+                countResource = countResource + 1;
+                finalID = idPlantilla + String.valueOf(countResource);
+                
                 //Comprueba si ya existe este recurso, si existe se guardará en una
                 //posición anterior, sino continuará en aumento el numero en la BD
                 numberReturn = checkRecurso(finalID, countResource, idPlantilla);
@@ -220,16 +221,416 @@ public class RecursosModel {
                 //Es el id final que se retornará para guardar en la BD
                 //concatena el Id y el resultado de la cuenta total de los registros
                 //para guardar dinámicamente
-                finalID = idPlantilla + String.valueOf(countResource + 1);
-                System.out.println(finalID + " ID ANTES");
+                countResource = countResource + 1;
+                finalID = idPlantilla + String.valueOf(countResource);
+                
+                //Comprueba si ya existe este recurso, si existe se guardará en una
+                //posición anterior, sino continuará en aumento el numero en la BD
+                numberReturn = checkRecurso(finalID, countResource, idPlantilla);
+                
+                resultLength = String.valueOf(numberReturn).length();
+                
+                if(resultLength == 1){
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 2){
+                    
+                    //Borra el caracter 4 de la cadena
+                    idPlantilla = idPlantilla.deleteCharAt(4);
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 3){
+                    
+                    //Borra el caracter 4 y 3 de la cadena
+                    idPlantilla = idPlantilla.deleteCharAt(4);
+                    idPlantilla = idPlantilla.deleteCharAt(3);
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 4){
+                    
+                    //Borra el caracter 4, 3 y 2 de la cadena
+                    idPlantilla = idPlantilla.deleteCharAt(4);
+                    idPlantilla = idPlantilla.deleteCharAt(3);
+                    idPlantilla = idPlantilla.deleteCharAt(2);
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 5){
+                    
+                    //Borra el caracter 4, 3, 2 y 1 de la cadena
+                    idPlantilla = idPlantilla.deleteCharAt(4);
+                    idPlantilla = idPlantilla.deleteCharAt(3);
+                    idPlantilla = idPlantilla.deleteCharAt(2);
+                    idPlantilla = idPlantilla.deleteCharAt(1);
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                
+            }
+            
+        }
+        if(resultLength == 2 && countResource < 100){
+            
+            if(countResource == 99){
+                
+                //Borra el caracter 5, 4 y 3 de la cadena
+                idPlantilla = idPlantilla.deleteCharAt(5);
+                idPlantilla = idPlantilla.deleteCharAt(4);
+                idPlantilla = idPlantilla.deleteCharAt(3);
+                
+                //Es el id final que se retornará para guardar en la BD
+                //concatena el Id y el resultado de la cuenta total de los registros
+                //para guardar dinámicamente
+                countResource = countResource + 1;
+                finalID = idPlantilla + String.valueOf(countResource);
+                
+                //Comprueba si ya existe este recurso, si existe se guardará en una
+                //posición anterior, sino continuará en aumento el numero en la BD
+                numberReturn = checkRecurso(finalID, countResource, idPlantilla);
+                
+                resultLength = String.valueOf(numberReturn).length();
+                
+                finalID = idPlantilla + String.valueOf(numberReturn);
+                return finalID;
+                
+            }else{
+            
+                //Borra el caracter 5 y 4 de la cadena
+                idPlantilla = idPlantilla.deleteCharAt(5);
+                idPlantilla = idPlantilla.deleteCharAt(4);
+
+                //Es el id final que se retornará para guardar en la BD
+                //concatena el Id y el resultado de la cuenta total de los registros
+                //para guardar dinámicamente
+                countResource = countResource + 1;
+                finalID = idPlantilla + String.valueOf(countResource);
+                
                 //Comprueba si ya existe este recurso, si existe se guardará en una
                 //posición anterior, sino continuará en aumento el numero en la BD
                 numberReturn = checkRecurso(finalID, countResource, idPlantilla);
 
                 resultLength = String.valueOf(numberReturn).length();
+                
+                if(resultLength == 1){
+                    
+                    //Agrega el caracter 0 al string
+                    idPlantilla = idPlantilla.insert(4, "0");
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 2){
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 3){
+                    
+                    //Borra el caracter 3 de la cadena
+                    idPlantilla = idPlantilla.deleteCharAt(3);
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 4){
+                    
+                    //Borra el caracter 3 y 2 de la cadena
+                    idPlantilla = idPlantilla.deleteCharAt(3);
+                    idPlantilla = idPlantilla.deleteCharAt(2);
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 5){
+                    
+                    //Borra el caracter 3, 2 y 1 de la cadena
+                    idPlantilla = idPlantilla.deleteCharAt(3);
+                    idPlantilla = idPlantilla.deleteCharAt(2);
+                    idPlantilla = idPlantilla.deleteCharAt(1);
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                
+            }
             
+        }
+        if(resultLength == 3 && countResource < 1000){
+            
+            if(countResource == 999){
+                
+                //Borra el caracter 5, 4, 3 y 2 de la cadena
+                idPlantilla = idPlantilla.deleteCharAt(5);
+                idPlantilla = idPlantilla.deleteCharAt(4);
+                idPlantilla = idPlantilla.deleteCharAt(3);
+                idPlantilla = idPlantilla.deleteCharAt(2);
+                
+                //Es el id final que se retornará para guardar en la BD
+                //concatena el Id y el resultado de la cuenta total de los registros
+                //para guardar dinámicamente
+                countResource = countResource + 1;
+                finalID = idPlantilla + String.valueOf(countResource);
+                
+                //Comprueba si ya existe este recurso, si existe se guardará en una
+                //posición anterior, sino continuará en aumento el numero en la BD
+                numberReturn = checkRecurso(finalID, countResource, idPlantilla);
+                
+                resultLength = String.valueOf(numberReturn).length();
+                
                 finalID = idPlantilla + String.valueOf(numberReturn);
                 return finalID;
+                
+            }else{
+            
+                //Borra el caracter 5, 4 y 3 de la cadena
+                idPlantilla = idPlantilla.deleteCharAt(5);
+                idPlantilla = idPlantilla.deleteCharAt(4);
+                idPlantilla = idPlantilla.deleteCharAt(3);
+
+                //Es el id final que se retornará para guardar en la BD
+                //concatena el Id y el resultado de la cuenta total de los registros
+                //para guardar dinámicamente
+                countResource = countResource + 1;
+                finalID = idPlantilla + String.valueOf(countResource);
+                
+                //Comprueba si ya existe este recurso, si existe se guardará en una
+                //posición anterior, sino continuará en aumento el numero en la BD
+                numberReturn = checkRecurso(finalID, countResource, idPlantilla);
+
+                resultLength = String.valueOf(numberReturn).length();
+                
+                if(resultLength == 1){
+                    
+                    //Agrega el caracter 0 al string
+                    idPlantilla = idPlantilla.insert(4, "0");
+                    idPlantilla = idPlantilla.insert(3, "0");
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 2){
+                    
+                    idPlantilla = idPlantilla.insert(3, "0");
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 3){
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 4){
+                    
+                    //Borra el caracter 2 de la cadena
+                    idPlantilla = idPlantilla.deleteCharAt(2);
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 5){
+                    
+                    //Borra el caracter 2 y 1 de la cadena
+                    idPlantilla = idPlantilla.deleteCharAt(2);
+                    idPlantilla = idPlantilla.deleteCharAt(1);
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                
+            }
+            
+        }
+        if(resultLength == 4 && countResource < 10000){
+            
+            if(countResource == 9999){
+                
+                //Borra el caracter 5, 4, 3, 2 y 1 de la cadena
+                idPlantilla = idPlantilla.deleteCharAt(5);
+                idPlantilla = idPlantilla.deleteCharAt(4);
+                idPlantilla = idPlantilla.deleteCharAt(3);
+                idPlantilla = idPlantilla.deleteCharAt(2);
+                idPlantilla = idPlantilla.deleteCharAt(1);
+                
+                //Es el id final que se retornará para guardar en la BD
+                //concatena el Id y el resultado de la cuenta total de los registros
+                //para guardar dinámicamente
+                countResource = countResource + 1;
+                finalID = idPlantilla + String.valueOf(countResource);
+                
+                //Comprueba si ya existe este recurso, si existe se guardará en una
+                //posición anterior, sino continuará en aumento el numero en la BD
+                numberReturn = checkRecurso(finalID, countResource, idPlantilla);
+                
+                resultLength = String.valueOf(numberReturn).length();
+                
+                finalID = idPlantilla + String.valueOf(numberReturn);
+                return finalID;
+                
+            }else{
+            
+                //Borra el caracter 5, 4, 3 y 2 de la cadena
+                idPlantilla = idPlantilla.deleteCharAt(5);
+                idPlantilla = idPlantilla.deleteCharAt(4);
+                idPlantilla = idPlantilla.deleteCharAt(3);
+                idPlantilla = idPlantilla.deleteCharAt(2);
+
+                //Es el id final que se retornará para guardar en la BD
+                //concatena el Id y el resultado de la cuenta total de los registros
+                //para guardar dinámicamente
+                countResource = countResource + 1;
+                finalID = idPlantilla + String.valueOf(countResource);
+                
+                //Comprueba si ya existe este recurso, si existe se guardará en una
+                //posición anterior, sino continuará en aumento el numero en la BD
+                numberReturn = checkRecurso(finalID, countResource, idPlantilla);
+
+                resultLength = String.valueOf(numberReturn).length();
+                
+                if(resultLength == 1){
+                    
+                    //Agrega el caracter 0 al string
+                    idPlantilla = idPlantilla.insert(4, "0");
+                    idPlantilla = idPlantilla.insert(3, "0");
+                    idPlantilla = idPlantilla.insert(2, "0");
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 2){
+                    
+                    idPlantilla = idPlantilla.insert(3, "0");
+                    idPlantilla = idPlantilla.insert(2, "0");
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 3){
+                    
+                    idPlantilla = idPlantilla.insert(2, "0");
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 4){
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 5){
+                    
+                    //Borra el caracter 2 y 1 de la cadena
+                    idPlantilla = idPlantilla.deleteCharAt(1);
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                
+            }
+            
+        }
+        if(resultLength == 4 && countResource < 100000){
+            
+            if(countResource == 99999){
+                
+                return null;
+                
+            }else{
+            
+                //Borra el caracter 5, 4, 3, 2 y 1 de la cadena
+                idPlantilla = idPlantilla.deleteCharAt(5);
+                idPlantilla = idPlantilla.deleteCharAt(4);
+                idPlantilla = idPlantilla.deleteCharAt(3);
+                idPlantilla = idPlantilla.deleteCharAt(2);
+                idPlantilla = idPlantilla.deleteCharAt(1);
+
+                //Es el id final que se retornará para guardar en la BD
+                //concatena el Id y el resultado de la cuenta total de los registros
+                //para guardar dinámicamente
+                countResource = countResource + 1;
+                finalID = idPlantilla + String.valueOf(countResource);
+                
+                //Comprueba si ya existe este recurso, si existe se guardará en una
+                //posición anterior, sino continuará en aumento el numero en la BD
+                numberReturn = checkRecurso(finalID, countResource, idPlantilla);
+
+                resultLength = String.valueOf(numberReturn).length();
+                
+                if(resultLength == 1){
+                    
+                    //Agrega el caracter 0 al string
+                    idPlantilla = idPlantilla.insert(4, "0");
+                    idPlantilla = idPlantilla.insert(3, "0");
+                    idPlantilla = idPlantilla.insert(2, "0");
+                    idPlantilla = idPlantilla.insert(1, "0");
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 2){
+                    
+                    idPlantilla = idPlantilla.insert(3, "0");
+                    idPlantilla = idPlantilla.insert(2, "0");
+                    idPlantilla = idPlantilla.insert(1, "0");
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 3){
+                    
+                    idPlantilla = idPlantilla.insert(2, "0");
+                    idPlantilla = idPlantilla.insert(1, "0");
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 4){
+                    
+                    idPlantilla = idPlantilla.insert(1, "0");
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
+                if(resultLength == 5){
+                    
+                    //Borra el caracter 2 y 1 de la cadena
+                    idPlantilla = idPlantilla.deleteCharAt(1);
+                    
+                    finalID = idPlantilla + String.valueOf(numberReturn);
+                    return finalID;
+                    
+                }
                 
             }
             
