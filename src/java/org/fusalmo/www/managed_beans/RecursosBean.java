@@ -88,9 +88,13 @@ public class RecursosBean {
         
         //modelo.contarRecursos();
         
+        //System.out.println(modelo.crearID() + " ID retornado para guardar en la BD");
         
-        
-        System.out.println(modelo.crearID() + " ID retornado para guardar en la BD");
+        System.out.println(recurso.getNombre());
+        System.out.println(recurso.getCodActivo());
+        System.out.println(getAreaAsignada());
+        System.out.println(JsfUtil.getRequest().getParameter("tipoRecurso"));
+        System.out.println(recurso.getImagen());
         
     }
     
@@ -105,10 +109,6 @@ public class RecursosBean {
             default:
                 throw new AssertionError();
         }
-        
-        //opc = Integer.parseInt(JsfUtil.getRequest().getParameter("prueba"));
-        
-        //return "agregarLaptop?faces-redirect=true";
         
     }
     
@@ -125,15 +125,10 @@ public class RecursosBean {
         );
         
         if(modelo.nuevoRecurso(getRecurso()) != 1){
-            //JsfUtil.setErrorMessage(null, "Ya se registró un alumno con este carné");
             System.out.println("Hubo un error inesperado al registrar la laptop");
             return null;
         }else{
-            //JsfUtil.setFlashMessage("exito", "");
-            System.out.println("Laptop registrada exitosamente");
-            //Forzando la redirección en el cliente
             return "seleccionDeRecurso?faces-redirect=true";
-            
         }
         
     }

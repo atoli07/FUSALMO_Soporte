@@ -55,51 +55,74 @@
 
         </div>
 
-        <div class="p-d-flex p-flex-column" style="width: 80%; margin: auto">
-            
-            <div class="p-mb-2">
-            
-                <h5>Nombre</h5>
-                
-                <br/>
-                
-                <p:inputText size="50"/>
-                
-            </div>
-            
-            <div class="p-mb-2">
-                
-                <h5>Código activo</h5>
-                
-                <br/>
-                
-                <p:inputText size="50"/>
-            
-            </div>
-            
-            <div class="p-mb-2">
-            
-                <h5>Área asignada</h5>
+        <h:form>
 
-                <p:selectOneMenu id="options" value="#{recursosBean.areaAsignada}" style="min-width: 36.6%">
-                    <f:selectItems value="#{recursosBean.listarAreas}" var="list" itemLabel="#{list.nombre}" itemValue="#{list.id}"/>
-                </p:selectOneMenu>
+            <div class="p-d-flex p-flex-column" style="width: 80%; margin: auto">
+
+                <div class="p-mb-2">
+
+                    <h3>Nombre</h3>
+
+                    <br/>
+
+                    <p:inputText size="50" value="#{recursosBean.recurso.nombre}"/>
+
+                </div>
+
+                <div class="p-mb-2">
+
+                    <h3>Código activo</h3>
+
+                    <br/>
+
+                    <p:inputText size="50" value="#{recursosBean.recurso.codActivo}"/>
+
+                </div>
+
+                <div class="p-mb-2">
+
+                    <h3>Área asignada</h3>
+
+                    <p:selectOneMenu id="options" value="#{recursosBean.areaAsignada}" style="min-width: 36.6%">
+                        <f:selectItems value="#{recursosBean.listarAreas}" var="list" itemLabel="#{list.nombre}" itemValue="#{list.id}"/>
+                    </p:selectOneMenu>
+
+                </div>
+
+                <div class="p-mb-2">
+
+                    <h3>URL imágen</h3>
+
+                    <br/>
+
+                    <p:inputText size="50" value="#{recursosBean.recurso.imagen}"/>
+
+                </div>
+
+                <div class="p-mb-2">
+
+                    <p:commandButton 
+                        value="Guardar"
+                        styleClass="ui-button-outlined ui-button-success" 
+                        style="width: 17.5%; margin-bottom: 35px; margin-top: 35px; margin-right: 20px" 
+                        action="${recursosBean.guardarRecurso()}">
+                        <f:param name="tipoRecurso" value="${request.getParameter('type-resource')}"/>
+                    </p:commandButton>
+
+                    <p:button 
+                        value="Cancelar" 
+                        styleClass="ui-button-outlined ui-button-danger" 
+                        style="width: 17.5%; margin-bottom: 35px; margin-top: 35px;" 
+                        href="seleccionDeRecurso.xhtml"
+                        />
+
+                </div>
 
             </div>
-            
-            <div class="p-mb-2">
-            
-                <h5>URL imágen</h5>
-                
-                <br/>
-                
-                <p:inputText size="50"/>
-                
-            </div>
-            
-        </div>
+
+        </h:form>
 
     </h:body>
-    
+
 </html>
 
