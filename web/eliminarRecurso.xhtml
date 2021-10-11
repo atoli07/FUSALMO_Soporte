@@ -130,10 +130,12 @@
         </div>
 
         <c:if test="#{request.getParameter('result') == 1}">
-            <!--<button id="action-button">hola soy el action button, vengo a flotar</button>-->
-            <p:growl id="message2" showDetail="true"/>
+            <!---->
+            <button id="action-button" onclick="#{messageUtil.confirm()}" disabled="true"></button>
+            
             <script>
             
+                /*
                 $(document).ready(function() {
                 // indicamos que se ejecuta la funcion a los 5 segundos de haberse
                 // cargado la pagina
@@ -141,31 +143,35 @@
 
                 function clickbutton() {
                     // simulamos el click del mouse en el boton del formulario
-                    $("#action-button").click();
-                    //alert("Aqui llega"); //Debugger
+                    $("#prueba").click();
+                    alert("Aqui llega"); //Debugger
                 }
                 
-                /*
-                $('#action-button').on('click',function() {
+                $('#prueba').on('click',function() {
                   console.log('action button clicked');
                     });
                 });
                 */
             
             </script>
-                
-                <p:commandButton id="action-button" action="#{recursosBean.delete()}" update="message2" styleClass="ui-button-danger" icon="pi pi-times" >
-                </p:commandButton>
-                
-            <!--<h1>Entro en 1</h1>-->
-            <!--<p:button icon="pi pi-check" styleClass="rounded-button ui-button-outlined" onclick="#{recursosBean.delete()}"/>-->
-            
+
+            <h:form>
+
+                <p:growl id="message2" showDetail="true"/>
+
+            </h:form>
+
         </c:if>
         
         <c:if test="#{request.getParameter('result') == 0}">
             
-            <h1>Entro en 0</h1>
-            #{recursosBean.error()}
+            <button id="action-button" onclick="#{messageUtil.error()}" disabled="true"></button>
+            
+            <h:form>
+
+                <p:growl id="message2" showDetail="true"/>
+
+            </h:form>
             
         </c:if>
 

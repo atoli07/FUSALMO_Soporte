@@ -67,39 +67,6 @@ public class RecursosBean {
     
     public void saveResources(){
         
-        /*
-        System.out.println(recurso.getId());
-        System.out.println(recurso.getNombre());
-        System.out.println(recurso.getMarca());
-        System.out.println(recurso.getModelo());
-        System.out.println(recurso.getNumSerie());
-        System.out.println(recurso.getDireccionIP());
-        System.out.println(recurso.getDireccionMAC());
-        System.out.println(recurso.getCodActivo());
-        System.out.println(recurso.getImagen());
-        System.out.println(getAreaAsignada() + " Area asignada");
-        System.out.println(recurso.getCargador());
-        System.out.println(getTipoRecurso() + " Tipo de recurso");
-        
-        System.out.println(modelo.obtenerRecurso(getTipoRecurso()).getId());
-        System.out.println(modelo.obtenerRecurso(getTipoRecurso()).getNombre());
-        
-        System.out.println(modelo.obtenerArea(getAreaAsignada()).getId());
-        System.out.println(modelo.obtenerArea(getAreaAsignada()).getNombre());
-        */
-        
-        //modelo.contarRecursos();
-        
-        //System.out.println(modelo.crearID() + " ID retornado para guardar en la BD");
-        /*
-        System.out.println(recurso.getNombre());
-        System.out.println(recurso.getCodActivo());
-        System.out.println(getAreaAsignada());
-        System.out.println(JsfUtil.getRequest().getParameter("tipoRecurso"));
-        System.out.println(recurso.getImagen());
-        */
-        
-        System.out.println("Se presionó");
     }
     
     public String opcAgregar(int opcAdd){
@@ -199,30 +166,6 @@ public class RecursosBean {
      */
     public void setTipoRecurso(Integer tipoRecurso) {
         this.tipoRecurso = tipoRecurso;
-    }
-    
-    //Mensaje de confirmación en la vista
-    
-    public void confirm() {
-        addMessage("Confirmación", "Recurso eliminado");
-    }
-
-    public void error() {
-        addMessage("Error", "El recurso está siendo ocupado");
-    }
-
-    public void addMessage(String summary, String detail) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
-
-    public void addMessageError(String summary, String detail) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
-    
-    public void delete() {
-        addMessage("Confirmed", "Record deleted");
     }
     
 }
