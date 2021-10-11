@@ -66,7 +66,7 @@
                     </p:column>
                     <p:column headerText="Bitácora de soporte">
                         <p:commandButton value="Detalle" styleClass="ui-button-outlined ui-button-secondary"
-                                         oncomplete="PF('detalleToken').show()"> 
+                                         action="#{tokensBean.verBitacora()}"> 
                             <f:setPropertyActionListener value="#{token}" target="#{tokensBean.selectedToken}"/>
                         </p:commandButton>
                     </p:column>
@@ -76,18 +76,6 @@
                                      action="nuevoTokenEmpleado"/>
                     <p:commandButton value="REGRESAR A MENÚ DE OPCIONES" styleClass="ui-button-outlined ui-button-info" action="bienvenidoEmpleado" style="margin-left: 10px"/>
                 </div>
-                <p:dialog header="Estado: #{tokensBean.selectedToken.idEstado.nombre}" widgetVar="detalleToken" modal="true"
-                          showEffect="fade" hideEffect="fade" resizable="false">
-                    <p:outputPanel id="tokenDetail" style="text-align: justify">
-                        <p:column>
-                            <div class="dialog">
-                                <h:outputText value="#{tokensBean.selectedToken.idEstado.descripcion}"/>
-                            </div>
-                            <br/>
-                            <p:commandButton value="Entendido" styleClass="ui-button-help" style="float: right" onclick="PF('detalleToken').close()"/>
-                        </p:column>
-                    </p:outputPanel>
-                </p:dialog>
             </h:form>
         </div>
         

@@ -8,7 +8,9 @@ package org.fusalmo.www.managed_beans;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.EntityManager;
@@ -17,6 +19,7 @@ import org.fusalmo.www.entities.TokensEntity;
 import org.fusalmo.www.model.TokensModel;
 import org.fusalmo.www.utils.JPAUtil;
 import org.fusalmo.www.utils.JsfUtil;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -71,6 +74,12 @@ public class TokensBean {
         token.setIdEstado(null);
         token.setPrioridad("");
         token.setSeleccionRecurso(null);
+    }
+    
+    public void verBitacora(){
+        Map<String, Object> options= new HashMap<>();
+        options.put("resizable", false);
+        PrimeFaces.current().dialog().openDynamic("detalleBitacoraToken",options,null);
     }
     
     /*
