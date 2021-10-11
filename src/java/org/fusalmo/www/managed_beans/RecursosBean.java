@@ -6,8 +6,10 @@
 package org.fusalmo.www.managed_beans;
 
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import org.fusalmo.www.entities.AreaEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.entities.TipoRecursoEntity;
@@ -139,6 +141,22 @@ public class RecursosBean {
         
     }
     
+    public String borrarRecurso(){
+    
+        String idRecurso = JsfUtil.getRequest().getParameter("idRecurso");
+        
+        if(modelo.eliminarRecurso(idRecurso) > 0){
+        
+            return "eliminarRecurso?faces-redirect=true&result=1";
+            
+        }else{
+        
+            return "eliminarRecurso?faces-redirect=true&result=0";
+            
+        }
+        
+    }
+    
     /**
      * @return the recurso
      */
@@ -179,6 +197,26 @@ public class RecursosBean {
      */
     public void setTipoRecurso(Integer tipoRecurso) {
         this.tipoRecurso = tipoRecurso;
+    }
+    
+    //Mensaje de confirmación en la vista
+    
+    public void confirm() {
+        addMessage("Confirmación", "Recurso eliminado");
+    }
+
+    public void error() {
+        addMessage("Error", "El recurso está siendo ocupado");
+    }
+
+    public void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    public void addMessageError(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
     
 }

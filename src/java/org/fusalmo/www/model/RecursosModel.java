@@ -685,7 +685,37 @@ public class RecursosModel {
             
         }
         
+    }
+    
+    public int eliminarRecurso(String recurso){
         
+        EntityManager em = JPAUtil.getEntityManager();
+        
+        int filasBorradas = 0;
+        
+        try {
+            
+            RecursosEntity resource = em.find(RecursosEntity.class, recurso);
+            
+            if(resource != null){
+                
+                EntityTransaction tra = em.getTransaction();
+                tra.begin();
+                em.remove(resource);
+                tra.commit();
+                filasBorradas = 1;
+                
+            }
+            
+            em.close();
+            return filasBorradas;
+            
+        } catch (Exception e) {
+            
+            em.close();
+            return 0;
+            
+        }
         
     }
     
