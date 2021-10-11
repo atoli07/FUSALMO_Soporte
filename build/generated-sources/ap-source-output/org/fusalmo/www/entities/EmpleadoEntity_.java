@@ -11,7 +11,7 @@ import org.fusalmo.www.entities.PrestamoRecursosEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.entities.TokensEntity;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-05T15:59:20")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-07T06:09:13")
 @StaticMetamodel(EmpleadoEntity.class)
 public class EmpleadoEntity_ { 
 
