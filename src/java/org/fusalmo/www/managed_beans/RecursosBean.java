@@ -91,13 +91,15 @@ public class RecursosBean {
         //modelo.contarRecursos();
         
         //System.out.println(modelo.crearID() + " ID retornado para guardar en la BD");
-        
+        /*
         System.out.println(recurso.getNombre());
         System.out.println(recurso.getCodActivo());
         System.out.println(getAreaAsignada());
         System.out.println(JsfUtil.getRequest().getParameter("tipoRecurso"));
         System.out.println(recurso.getImagen());
+        */
         
+        System.out.println("Se presionó");
     }
     
     public String opcAgregar(int opcAdd){
@@ -217,6 +219,10 @@ public class RecursosBean {
     public void addMessageError(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+    
+    public void delete() {
+        addMessage("Confirmed", "Record deleted");
     }
     
 }

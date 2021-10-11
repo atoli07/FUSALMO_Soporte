@@ -91,27 +91,27 @@
                     <p:column headerText="IP">
                         <h:outputText value="#{resources.direccionIP}"/>
                     </p:column>
-                    
+
                     <p:column headerText="MAC">
                         <h:outputText value="#{resources.direccionMAC}"/>
                     </p:column>
-                    
+
                     <p:column headerText="Cargador">
                         <h:outputText value="#{resources.cargador}"/>
                     </p:column>
-                    
+
                     <p:column headerText="Cod. Activo">
                         <h:outputText value="#{resources.codActivo}"/>
                     </p:column>
-                    
+
                     <p:column headerText="Area asignada">
                         <h:outputText value="#{resources.idAreaAsignada.nombre}"/>
                     </p:column>
 
                     <p:column headerText="Acciones">
-                        
+
                         <p:growl id="message" showDetail="true"/>
-                        
+
                         <p:commandButton value="Borrar" action="#{recursosBean.borrarRecurso()}" update="message" styleClass="ui-button-danger" icon="pi pi-times">
                             <f:param name="idRecurso" value="#{resources.id}"/>
                             <p:confirm type="popup" header="Confirmation" message="¿Está seguro de eliminar el recurso?" icon="pi pi-info-circle"/>
@@ -122,18 +122,43 @@
                             <p:commandButton value="Sí" type="button" styleClass="ui-confirm-popup-yes" />
                         </p:confirmPopup>
                     </p:column>
-                    
+
                 </p:dataTable>
-                
+
             </h:form>
-            
+
         </div>
-        
+
         <c:if test="#{request.getParameter('result') == 1}">
+            <!--<button id="action-button">hola soy el action button, vengo a flotar</button>-->
+            <p:growl id="message2" showDetail="true"/>
+            <script>
             
-            <p:growl id="message" showDetail="true"/>
-            <h1>Entro en 1</h1>
-            #{recursosBean.confirm()}
+                $(document).ready(function() {
+                // indicamos que se ejecuta la funcion a los 5 segundos de haberse
+                // cargado la pagina
+                setTimeout(clickbutton, 5000);
+
+                function clickbutton() {
+                    // simulamos el click del mouse en el boton del formulario
+                    $("#action-button").click();
+                    //alert("Aqui llega"); //Debugger
+                }
+                
+                /*
+                $('#action-button').on('click',function() {
+                  console.log('action button clicked');
+                    });
+                });
+                */
+            
+            </script>
+                
+                <p:commandButton id="action-button" action="#{recursosBean.delete()}" update="message2" styleClass="ui-button-danger" icon="pi pi-times" >
+                </p:commandButton>
+                
+            <!--<h1>Entro en 1</h1>-->
+            <!--<p:button icon="pi pi-check" styleClass="rounded-button ui-button-outlined" onclick="#{recursosBean.delete()}"/>-->
             
         </c:if>
         
@@ -143,7 +168,10 @@
             #{recursosBean.error()}
             
         </c:if>
+
+        
         
     </h:body>
+    
 </html>
 
