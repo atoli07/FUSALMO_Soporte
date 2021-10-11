@@ -26,6 +26,7 @@ public class RecursosBean {
     private String areaAsignada;
     private Integer tipoRecurso;
     private RecursosEntity recurso;
+    String idRecurso;
     private List<RecursosEntity>listaRecursos;
     private List<AreaEntity> listarAreas;
     /**
@@ -179,6 +180,14 @@ public class RecursosBean {
      */
     public void setTipoRecurso(Integer tipoRecurso) {
         this.tipoRecurso = tipoRecurso;
+    }
+
+    public String getIdRecurso() {
+        return idRecurso;
+    }
+
+    public void setIdRecurso(String idRecurso) {
+        this.idRecurso = idRecurso;
     }
     
 }
