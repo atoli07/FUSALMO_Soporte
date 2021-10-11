@@ -4,13 +4,14 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 10-09-2021, 07:57:08 AM
-    Author     : Nemy
+    Created on : 11-oct-2021, 10:35:03
+    Author     : Soporte
 */
 
+
 .cardForm{
-    width: calc(32.8% - 5px);
-    margin: 5px;
+    width: calc(28% - 5px);
+    margin: 25px;
 }
 
 .containerCards{
