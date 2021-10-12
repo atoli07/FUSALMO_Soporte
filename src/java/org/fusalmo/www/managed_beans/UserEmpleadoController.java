@@ -34,10 +34,10 @@ public class UserEmpleadoController {
             return "principalEmpleado";
         }
         else{
-            return "index";         
+            return "indexEmpleado";         
         }
         }catch(NoResultException e) { 
-     return "indexAdmin"; 
+     return "indexEmpleado"; 
     } 
     }
 
