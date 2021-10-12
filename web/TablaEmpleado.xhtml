@@ -7,17 +7,57 @@
  xmlns:c="http://java.sun.com/jsp/jstl/core"
  xmlns:p="http://primefaces.org/ui">
  <h:head>
- <title>Registro de Empleados</title>
+ <title>Registro de empleados</title>
  <h:outputStylesheet name="css/bootstrap.min.css" />
  <h:outputStylesheet name="css/alertify.core.css" />
  <h:outputStylesheet name="css/alertify.default.css" />
  <h:outputScript name="js/alertify.js"/>
  </h:head>
- <h:body>
+ 
  <div class="container">
  <div class="row">
  <div class="col-md-12">
- <h2>Registro de Empleados</h2>
+ <h:body class="firstBody">
+        
+        <menu class="menu">
+
+            <div class="card">
+
+                <h:form>
+
+                    <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
+
+                        <p:menuitem url="index.xhtml">
+                            
+                            <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
+
+                        </p:menuitem>
+
+                    </p:menubar>
+
+                </h:form>
+
+            </div>
+            <div class="welcome">
+            
+            <div class="title">
+                
+                <h1 class="titleH1">Bienvenido/a al portal de Recursos Tecnológicos <br/> Estas en el control de empleados de la institucion</h1>
+                
+            </div>
+            
+            <div class="image">
+                
+                <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
+                
+            </div>
+            
+            <p:divider class=""/>
+            
+        </div>
+
+        </menu>
+ </h:body>
  <h:form id="miFormulario">
  <h:panelGroup layout="block" styleClass="alert alert-danger"
  rendered="#{not empty facesContext.messageList}">
@@ -199,6 +239,4 @@ requiredMessage="Debes ingresar tu Contraseña">
  return confirm("¿Está seguro que desea eliminar este empleado?");
 }
  </h:outputScript>
- </h:body>
 </html>
-

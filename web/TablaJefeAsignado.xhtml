@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
  xmlns:h="http://xmlns.jcp.org/jsf/html"
  xmlns:f="http://xmlns.jcp.org/jsf/core"
- xmlns:c="http://java.sun.com/jsp/jstl/core">
+ xmlns:c="http://java.sun.com/jsp/jstl/core"
+ xmlns:p="http://primefaces.org/ui">
  <h:head>
  <title>Registro de Jefes</title>
  <h:outputStylesheet name="css/bootstrap.min.css" />
@@ -12,11 +13,51 @@
  <h:outputStylesheet name="css/alertify.default.css" />
  <h:outputScript name="js/alertify.js"/>
  </h:head>
- <h:body>
+ 
  <div class="container">
  <div class="row">
  <div class="col-md-12">
- <h2>Registro de Jefes</h2>
+ <h:body class="firstBody">
+        
+        <menu class="menu">
+
+            <div class="card">
+
+                <h:form>
+
+                    <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
+
+                        <p:menuitem url="index.xhtml">
+                            
+                            <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
+
+                        </p:menuitem>
+
+                    </p:menubar>
+
+                </h:form>
+
+            </div>
+            <div class="welcome">
+            
+            <div class="title">
+                
+                <h1 class="titleH1">Bienvenido/a al portal de Recursos Tecnológicos <br/> Estas en el control de Jefes de la institucion</h1>
+                
+            </div>
+            
+            <div class="image">
+                
+                <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
+                
+            </div>
+            
+            <p:divider class=""/>
+            
+        </div>
+
+        </menu>
+ </h:body>
  <h:form id="miFormulario">
  <h:panelGroup layout="block" styleClass="alert alert-danger"
  rendered="#{not empty facesContext.messageList}">
@@ -92,6 +133,5 @@ requiredMessage="Debes ingresar tus apellidos">
  return confirm("¿Está seguro que desea eliminar este Jefe?");
 }
  </h:outputScript>
- </h:body>
 </html>
 
