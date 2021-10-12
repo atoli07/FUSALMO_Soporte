@@ -10,7 +10,7 @@ import javax.faces.bean.RequestScoped;
 import java.util.List;
 import org.fusalmo.www.entities.JefeAsignadoEntity;
 import org.fusalmo.www.model.JefeAsignadoModel;
-import org.fusalmo.www.utils.JpaUtil;
+import org.fusalmo.www.utils.JPAUtil;
 import org.fusalmo.www.utils.JsfUtil;
 
 

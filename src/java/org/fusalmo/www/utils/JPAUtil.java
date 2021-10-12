@@ -13,7 +13,7 @@ import javax.persistence.Persistence;
  *
  * @author Soporte
  */
-public class JpaUtil {
+public class JPAUtil {
     private static final EntityManagerFactory emFactory;
     static {
         emFactory = Persistence.createEntityManagerFactory("FUSALMO_Soporte_PU");

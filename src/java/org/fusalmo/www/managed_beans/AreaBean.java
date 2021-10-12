@@ -11,7 +11,7 @@ import java.util.List;
 import org.fusalmo.www.entities.AreaEntity;
 import org.fusalmo.www.model.AreaModel;
 import org.fusalmo.www.utils.JsfUtil;
-import org.fusalmo.www.utils.JpaUtil;
+import org.fusalmo.www.utils.JPAUtil;
 
 
 
@@ -26,6 +26,7 @@ public class AreaBean {
     AreaModel modelo = new AreaModel();
  private AreaEntity area;
  private List<AreaEntity> listaArea;
+ private AreaEntity idjefe;
  public AreaBean() {
  area = new AreaEntity();
  }
@@ -74,4 +75,11 @@ public class AreaBean {
         return "TablaArea?faces-redirect=true";
      
  }   
+   public List<AreaEntity> getListarJefeAsignado() {
+ /* Notese que se llama al método listarArea
+ para obtener la lista de objetos a partir de la bd */
+ return modelo.listarJefeAsignado();
+ }
+
+    
 }

@@ -4,13 +4,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
  xmlns:h="http://xmlns.jcp.org/jsf/html"
  xmlns:f="http://xmlns.jcp.org/jsf/core"
- xmlns:c="http://java.sun.com/jsp/jstl/core">
+ xmlns:c="http://java.sun.com/jsp/jstl/core"
+ xmlns:p="http://primefaces.org/ui">
  <h:head>
  <title>Registro de usuarios</title>
  <h:outputStylesheet name="css/bootstrap.min.css" />
  <h:outputStylesheet name="css/alertify.core.css" />
  <h:outputStylesheet name="css/alertify.default.css" />
  <h:outputScript name="js/alertify.js"/>
+ 
  </h:head>
  <h:body>
  <div class="container">
@@ -37,11 +39,9 @@ validatorMessage="Id no valido">
  required="true"
 requiredMessage="Debes ingresar el nombre"/>
  <h:outputLabel for="IdJefe" value="IdJefeAsignado:"/>
- <h:inputText id="IdJefe" value="#{areaBean.area.idJefeAsignado}"
- required="true" styleClass="form-control"
-requiredMessage="Debes ingresar el idJefe">
- <f:validateRegex pattern="[A-Z]{2}[0-9]{4}"/>
- </h:inputText>
+ <p:selectOneMenu id="opciones"  value="#{areaBean}">
+     <f:selectItems value="#{areaBean.listarJefeAsignado}" var="listar"  itemLabel="#{listar.id}"/> 
+   </p:selectOneMenu>
  </h:panelGrid>
  <h:commandButton value="Guardar" styleClass="btn btn-success"
  action="#{areaBean.guardarArea()}" style="margin-right:10px"/>

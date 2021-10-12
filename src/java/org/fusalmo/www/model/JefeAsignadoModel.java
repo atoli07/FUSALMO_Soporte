@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package org.fusalmo.www.model;
-import org.fusalmo.www.utils.JpaUtil;
+import org.fusalmo.www.utils.JPAUtil;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -19,7 +19,7 @@ import org.fusalmo.www.entities.JefeAsignadoEntity;
 public class JefeAsignadoModel {
     public List<JefeAsignadoEntity> listarJefe() {
  //Obtengo una instancia de EntityManager
- EntityManager em = JpaUtil.getEntityManager();
+ EntityManager em = JPAUtil.getEntityManager();
  try {
  Query consulta = em.createNamedQuery("JefeAsignadoEntity.findAll");
  //El método getResultList() de la clase Query permite obtener
@@ -33,7 +33,7 @@ public class JefeAsignadoModel {
  }
  }
  public JefeAsignadoEntity obtenerJefe(String id) {
- EntityManager em = JpaUtil.getEntityManager();
+ EntityManager em = JPAUtil.getEntityManager();
  try {
  //Recupero el objeto desde la BD a través del método find
  JefeAsignadoEntity jefe = em.find(JefeAsignadoEntity.class,
@@ -46,7 +46,7 @@ id);
  }
  }
  public int insertarJefe(JefeAsignadoEntity jefe) {
- EntityManager em = JpaUtil.getEntityManager();
+ EntityManager em = JPAUtil.getEntityManager();
  EntityTransaction tran = em.getTransaction();
  try {
  tran.begin();//Iniciando transacción
@@ -60,7 +60,7 @@ id);
  }
  }
  public int modificarJefe(JefeAsignadoEntity jefe) {
- EntityManager em = JpaUtil.getEntityManager();
+ EntityManager em = JPAUtil.getEntityManager();
  EntityTransaction tran = em.getTransaction();
  try {
  tran.begin();//Iniciando transacción
@@ -74,7 +74,7 @@ id);
  }
  }
  public int eliminarJefe(String id) {
- EntityManager em = JpaUtil.getEntityManager();
+ EntityManager em = JPAUtil.getEntityManager();
  int filasBorradas = 0;
  try {
  //Recuperando el objeto a eliminar
