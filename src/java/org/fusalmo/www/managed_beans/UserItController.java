@@ -6,7 +6,7 @@
 package org.fusalmo.www.managed_beans;
 
 import org.fusalmo.www.entities.UsuariosITEntity;
-import org.fusalmo.www.model.UserItModel;
+import org.fusalmo.www.model.UserModel;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.NoResultException;
@@ -26,7 +26,7 @@ public class UserItController {
     try{
         
     
-    UserItModel USER= new UserItModel();
+    UserModel USER= new UserModel();
     UsuariosITEntity u = USER.validarUsuario(login, password);
     if(u!=null){
         Id=u.getId();
