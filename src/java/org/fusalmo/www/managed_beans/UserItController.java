@@ -30,7 +30,7 @@ public class UserItController {
     UsuariosITEntity u = USER.validarUsuario(login, password);
     if(u!=null){
         Id=u.getId();
-        return "principal";
+        return "indexAdminIT";
     }else{
         return "index";
     }
