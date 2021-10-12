@@ -39,7 +39,7 @@
             <div class="title p-col-8">
                 
                 <h1 class="titleH1">Bienvenido/a al portal de Recursos Tecnológicos <br/> Inicia sesión para continuar</h1>
-                <h1 class="titleH1"> <br/>Login Administradores IT</h1>
+                <h1 class="titleH1"> <br/>Login Usuario</h1>
                 
             </div>
             <div class="image p-col-4">
@@ -60,11 +60,11 @@
 
                     <h3 class="h3User">Usuario/Correo</h3>
 
-                    <p:inputText class="inputTextUser" value="#{userIT.login}" id="Correo" requiredMessage="Debes ingresar el nombre"/>
+                    <p:inputText class="inputTextUser" value="#{userEmpleado.correo}" id="Correo" requiredMessage="Debes ingresar el nombre"/>
 
                     <h3 class="h3Password">Contraseña</h3>
 
-                    <p:password toggleMask="true" redisplay="true" size="38" id="Password" value="#{userIT.password}" styleClass="form-control" requiredMessage="Debes ingresar la Contraseña"/>
+                    <p:password toggleMask="true" redisplay="true" size="38" id="Password" value="#{userEmpleado.password}" styleClass="form-control" requiredMessage="Debes ingresar la Contraseña"/>
                     
                     
 
@@ -72,13 +72,13 @@
 
                 <h:panelGrid columns="2" class="panelGridButtons">
 
-                    <h:commandButton styleClass="ui-button-outlined ui-button-help" value="ingresar" action="#{userIT.validaLogin()}" ></h:commandButton>
+                    <h:commandButton styleClass="ui-button-outlined ui-button-help" value="ingresar" action="#{userEmpleado.validaLogin()}" ></h:commandButton>
 
                     <p:commandLink>
                     <h:outputText value="He olvidado mi contraseña"/>
                 </p:commandLink>
                     <p:commandLink>
-                    <h:outputText value="Login Admin IT"/>
+                    <h:outputText value="Login usuario IT"/>
                 </p:commandLink>
 
                 </h:panelGrid>
@@ -96,4 +96,3 @@
     </h:body>
     
 </html>
-
