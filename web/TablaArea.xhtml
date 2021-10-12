@@ -8,15 +8,14 @@
  xmlns:p="http://primefaces.org/ui">
  <h:head>
  <title>Registro de usuarios</title>
- <h:outputStylesheet name="css/bootstrap.min.css" />
  <h:outputStylesheet name="css/alertify.core.css" />
  <h:outputStylesheet name="css/alertify.default.css" />
  <h:outputScript name="js/alertify.js"/>
+ <h:outputStylesheet library="css" name="style.css"/>
+<h:outputStylesheet library="css" name="primeflex.min.css" />
  </h:head>
  
- <div class="container">
- <div class="row">
- <div class="col-md-12">
+
  <h:body class="firstBody">
         
         <menu class="menu">
@@ -86,9 +85,8 @@ requiredMessage="Debes ingresar el nombre"/>
  action="#{areaBean.guardarArea()}" style="margin-right:10px"/>
  <h:commandButton type="reset" value="Limpiar" styleClass="btn btn-danger"/>
  </h:form>
- </div>
- </div>
- <div class="row">
+
+
  <h:form>
      <h:dataTable styleClass="table"  value="#{areaBean.listaArea}"
        var="area"  rendered="#{areaBean.listaArea.size()>0}">
@@ -122,8 +120,8 @@ requiredMessage="Debes ingresar el nombre"/>
  </h:column>
  </h:dataTable>
  </h:form>
- </div>
- </div>
+
+
 <h:outputScript>
  <c:if test = "#{not empty flash.exito}" >
  alertify.success('#{flash.exito}');
