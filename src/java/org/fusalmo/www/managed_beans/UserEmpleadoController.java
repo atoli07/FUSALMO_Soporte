@@ -31,7 +31,7 @@ public class UserEmpleadoController {
         
         if(u!=null){
             Id= u.getId();
-            return "principalEmpleado";
+            return "bienvenidoEmpleado";
         }
         else{
             return "indexEmpleado";         

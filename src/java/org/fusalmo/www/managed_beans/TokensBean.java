@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.EntityManager;
+import org.fusalmo.www.entities.EmpleadoEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.entities.TokensEntity;
 import org.fusalmo.www.model.TokensModel;
@@ -32,6 +33,8 @@ public class TokensBean {
     TokensModel modelo= new TokensModel();
     private String idRecurso;
     private String idToken;
+    private EmpleadoEntity empleadoModel;
+    private String idEmpleado;
     private TokensEntity token;
     private TokensEntity selectedToken;
     private List<TokensEntity> listaTokens;
@@ -50,7 +53,9 @@ public class TokensBean {
     public String crearToken(){
         EntityManager em= JPAUtil.getEntityManager();
         token.setId(modelo.crearID());
-        token.setIdEmpleado(modelo.obtenerEmpleado("EM1234"));
+        idEmpleado=empleadoModel.getId();
+        System.out.println(idEmpleado);
+        token.setIdEmpleado(modelo.obtenerEmpleado(idEmpleado));
         System.out.println("");
         token.setIdEstado(modelo.obtenerEstadoToken(1));
         java.util.Date fecha = new Date();
@@ -124,5 +129,6 @@ public class TokensBean {
     public void setToken(TokensEntity token) {
         this.token = token;
     }
+
     
 }
