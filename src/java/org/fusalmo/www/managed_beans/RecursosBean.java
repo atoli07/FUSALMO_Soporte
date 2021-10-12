@@ -6,8 +6,10 @@
 package org.fusalmo.www.managed_beans;
 
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import org.fusalmo.www.entities.AreaEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.entities.TipoRecursoEntity;
@@ -66,37 +68,6 @@ public class RecursosBean {
     
     public void saveResources(){
         
-        /*
-        System.out.println(recurso.getId());
-        System.out.println(recurso.getNombre());
-        System.out.println(recurso.getMarca());
-        System.out.println(recurso.getModelo());
-        System.out.println(recurso.getNumSerie());
-        System.out.println(recurso.getDireccionIP());
-        System.out.println(recurso.getDireccionMAC());
-        System.out.println(recurso.getCodActivo());
-        System.out.println(recurso.getImagen());
-        System.out.println(getAreaAsignada() + " Area asignada");
-        System.out.println(recurso.getCargador());
-        System.out.println(getTipoRecurso() + " Tipo de recurso");
-        
-        System.out.println(modelo.obtenerRecurso(getTipoRecurso()).getId());
-        System.out.println(modelo.obtenerRecurso(getTipoRecurso()).getNombre());
-        
-        System.out.println(modelo.obtenerArea(getAreaAsignada()).getId());
-        System.out.println(modelo.obtenerArea(getAreaAsignada()).getNombre());
-        */
-        
-        //modelo.contarRecursos();
-        
-        //System.out.println(modelo.crearID() + " ID retornado para guardar en la BD");
-        
-        System.out.println(recurso.getNombre());
-        System.out.println(recurso.getCodActivo());
-        System.out.println(getAreaAsignada());
-        System.out.println(JsfUtil.getRequest().getParameter("tipoRecurso"));
-        System.out.println(recurso.getImagen());
-        
     }
     
     public String opcAgregar(int opcAdd){
@@ -137,6 +108,22 @@ public class RecursosBean {
     public List<AreaEntity> getListarAreas(){
         
         return modelo.listaAreas();
+        
+    }
+    
+    public String borrarRecurso(){
+    
+        String idRecurso = JsfUtil.getRequest().getParameter("idRecurso");
+        
+        if(modelo.eliminarRecurso(idRecurso) > 0){
+        
+            return "eliminarRecurso?faces-redirect=true&result=1";
+            
+        }else{
+        
+            return "eliminarRecurso?faces-redirect=true&result=0";
+            
+        }
         
     }
     
