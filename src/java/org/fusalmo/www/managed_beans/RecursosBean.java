@@ -65,10 +65,6 @@ public class RecursosBean {
         }
     }
     
-    public void saveResources(){
-        
-    }
-    
     public String opcAgregar(int opcAdd){
         
         System.out.println(opcAdd);
@@ -104,6 +100,21 @@ public class RecursosBean {
         
     }
     
+    public String modificarRecurso(){
+        System.out.println("ENTROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+        if(modelo.modificarRecurso(recurso) != 0){
+            
+            System.out.println("Recurso modificado con éxito!");
+            
+            return "editarRecursos?faces-redirect=true";
+            
+        }else{
+            System.out.println("Error inesperado al modificar recurso!");
+            return "editarRecursos?faces-redirect=true";
+        }
+        
+    }
+    
     public List<AreaEntity> getListarAreas(){
         
         return modelo.listaAreas();
@@ -126,21 +137,36 @@ public class RecursosBean {
         
     }
     
+    public void obtenerRecursoID(String resource){
+        
+        setRecurso(modelo.buscarRecursoId(resource));
+        
+    }
+    
     public String redirectEdit(){
         
-        System.out.println(JsfUtil.getRequest().getParameter("idRecurso"));
-        
-        recurso = (
+        setRecurso(
                 modelo.buscarRecursoId(
                         JsfUtil.getRequest().getParameter("idRecurso")
                 )
         );
         
-        System.out.println(recurso);
+        if(getRecurso().getIdTipoRecurso().getId() == 1){
+            return "editarRecurso?faces-redirect=true&idRecurso=" + getRecurso().getId() + "&tipo-Recurso=" + getRecurso().getIdTipoRecurso().getId();
+        }
+        if(getRecurso().getIdTipoRecurso().getId() == 2){
+            return "editarRecursoMicrosoft?faces-redirect=true&idRecurso=" + getRecurso().getId();
+        }
         
-        System.out.println(getRecurso());
+        return null;
         
-        return "editarRecurso?faces-redirect=true";
+    }
+    
+    public void prueba(){
+        
+        System.out.println("ENTROOO");
+        System.out.println(recurso.getId());
+        System.out.println(recurso.getNombre());
         
     }
     

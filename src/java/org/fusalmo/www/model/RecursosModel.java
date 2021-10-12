@@ -203,6 +203,28 @@ public class RecursosModel {
         
     }
     
+    public int modificarRecurso(RecursosEntity resource){
+        
+        EntityManager em = JPAUtil.getEntityManager();
+        EntityTransaction tra = em.getTransaction();
+        
+        try {
+            
+            tra.begin();
+            em.merge(resource);
+            tra.commit();
+            em.close();
+            return 1;
+                
+        } catch (Exception e) {
+            
+            em.close();
+            return 0;
+            
+        }
+        
+    }
+    
     public String crearID(){
         
         StringBuilder idPlantilla = new StringBuilder("R00000");

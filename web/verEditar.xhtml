@@ -109,9 +109,9 @@
 
                     <p:column headerText="Acciones">
 
-                        <p:button value="Editar" href="editarRecurso.xhtml" styleClass="ui-button-warning" icon="pi pi-pencil">
+                        <p:commandButton value="Editar" action="#{recursosBean.redirectEdit()}" styleClass="ui-button-warning" icon="pi pi-pencil">
                             <f:param name="idRecurso" value="#{resources.id}"/>
-                        </p:button>
+                        </p:commandButton>
                         
                     </p:column>
 

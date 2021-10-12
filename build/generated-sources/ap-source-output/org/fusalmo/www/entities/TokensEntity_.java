@@ -8,7 +8,7 @@ import org.fusalmo.www.entities.EmpleadoEntity;
 import org.fusalmo.www.entities.EstadoTokenEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-07T06:09:13")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-12T06:06:22")
 @StaticMetamodel(TokensEntity.class)
 public class TokensEntity_ { 
 

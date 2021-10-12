@@ -7,7 +7,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import org.fusalmo.www.entities.MemosEntity;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-07T06:09:13")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-12T06:06:22")
 @StaticMetamodel(UsuariosITEntity.class)
 public class UsuariosITEntity_ { 
 
