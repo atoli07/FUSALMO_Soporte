@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <h:outputStylesheet library="css" name="primeflex.min.css" />
+    </h:head>
+    
+    <h:body class="firstBody">
+        
+        <menu class="menu">
+
+            <div class="card">
+
+                <h:form>
+
+                    <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
+
+                        <p:menuitem url="index.xhtml">
+                            
+                            <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
+
+                        </p:menuitem>
+
+                    </p:menubar>
+
+                </h:form>
+
+            </div>
+
+        </menu>
+        
+        <div class="welcome">
+            <div class="p-grid">
+            <div class="title p-col-8">
+                
+                <h1 class="titleH1">Bienvenido/a al portal de Recursos Tecnológicos <br/> Inicia sesión para continuar</h1>
+                <h1 class="titleH1"> <br/>Login Administrador</h1>
+                
+            </div>
+            <div class="image p-col-4">
+                
+                <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
+                    </div>
+            </div>
+            <p:divider class=""/>
+            
+        </div>
+
+        <div class="card divLogin">
+
+            <h:form class="formLogin">
+
+                <h:panelGrid columns="1" class="gridField">
+                    
+
+                    <h3 class="h3User">Usuario/Correo</h3>
+
+                    <p:inputText class="inputTextUser" value="#{userAdmin.correo}" id="Correo" requiredMessage="Debes ingresar el nombre"/>
+
+                    <h3 class="h3Password">Contraseña</h3>
+
+                    <p:password toggleMask="true" redisplay="true" size="38" id="Password" value="#{userAdmin.password}" styleClass="form-control" requiredMessage="Debes ingresar la Contraseña"/>
+                    
+                    
+
+                </h:panelGrid>
+
+                <h:panelGrid columns="2" class="panelGridButtons">
+
+                    <h:commandButton styleClass="ui-button-outlined ui-button-help" value="ingresar" action="#{userAdmin.validaLogin()}" ></h:commandButton>
+
+                    <p:commandLink>
+                    <h:outputText value="He olvidado mi contraseña"/>
+                </p:commandLink>
+                    <p:commandLink>
+                    <h:outputText value="Login usuario IT"/>
+                </p:commandLink>
+
+                </h:panelGrid>
+
+            </h:form>
+            
+            <div class="imgLogin" style="margin: auto">
+                
+                <h:graphicImage library="img" name="laptop.png"/>
+                
+            </div>
+
+        </div>
+        
+    </h:body>
+    
+</html>
