@@ -54,9 +54,9 @@ public class TokensBean {
         EntityManager em= JPAUtil.getEntityManager();
         token.setId(modelo.crearID());
         idEmpleado=empleadoModel.getId();
-        System.out.println(idEmpleado);
-        token.setIdEmpleado(modelo.obtenerEmpleado(idEmpleado));
-        System.out.println("");
+        //System.out.println(idEmpleado);
+        token.setIdEmpleado(modelo.obtenerEmpleado("EM1234"));
+        //System.out.println("");
         token.setIdEstado(modelo.obtenerEstadoToken(1));
         java.util.Date fecha = new Date();
         System.out.println(fecha);
