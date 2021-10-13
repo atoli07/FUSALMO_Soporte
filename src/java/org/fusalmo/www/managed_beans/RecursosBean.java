@@ -127,6 +127,24 @@ public class RecursosBean {
         
     }
     
+    public String redirectEdit(){
+        
+        System.out.println(JsfUtil.getRequest().getParameter("idRecurso"));
+        
+        recurso = (
+                modelo.buscarRecursoId(
+                        JsfUtil.getRequest().getParameter("idRecurso")
+                )
+        );
+        
+        System.out.println(recurso);
+        
+        System.out.println(getRecurso());
+        
+        return "editarRecurso?faces-redirect=true";
+        
+    }
+    
     /**
      * @return the recurso
      */
