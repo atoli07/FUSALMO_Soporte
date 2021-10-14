@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>FUSALMO IT Portal - Nuevo Token</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <h:outputStylesheet library="css" name="primeflex.min.css" />
+    </h:head>
+   <h:body class="firstBody">
+        ${nombre}
+        <menu class="menu">
+
+            <div class="card">
+
+                <h:form>
+
+                    <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
+
+                        <p:menuitem url="${request.contextPath}/faces/empleadoIT/bienvenidoEmpleado.xhtml">
+                            
+                            <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
+
+                        </p:menuitem>
+
+                    </p:menubar>
+
+                </h:form>
+
+            </div>
+
+        </menu>
+        
+        <div class="welcome">
+            <div class="p-grid">
+            <div class="title p-col-8">
+                
+                <h1 class="titleH1">Formulario para<br/> nuevo token</h1>
+                
+            </div>
+            <div class="image p-col-4">
+                
+                <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImageHeader"/>
+                    </div>
+            </div>
+            <p:divider class=""/>
+            
+        </div>
+
+        <div class="container">
+            <h1 class="titleH3" >Nuevo Token</h1>
+            <h:form class="p-grid">
+                <div class="p-col-6">
+                    <h4 class="titleH1">Seleccione el equipo que tiene asignado</h4>
+                    <p:selectOneMenu value="#{tokensBean.idRecurso}">
+                        <f:selectItems value="#{recursosBean.listaRecursos}" var="recursos" itemLabel="#{recursos.codActivo}" itemValue="#{recursos.id}"/>
+                    </p:selectOneMenu>
+                    <h4 class="titleH1">Escriba por favor el problema que está presentando</h4>
+                    <h4 class="titleH1">Detalle en texto</h4>
+                    <p:inputTextarea rows="6" cols="33" value="#{tokensBean.token.descripcion}"/>
+                    <h4 class="titleH1">Seleccione prioridad</h4>
+                    <p:selectOneMenu value="#{tokensBean.token.prioridad}">
+                        <f:selectItem itemValue="Baja" itemLabel="Baja"/>
+                        <f:selectItem itemValue="Media" itemLabel="Media"/>
+                        <f:selectItem itemValue="Alta" itemLabel="Alta"/>
+                    </p:selectOneMenu>
+                </div>
+                <div class="p-col-12" style="margin-top: 15px">
+                    <p:commandButton value="ENVIAR" styleClass="ui-button-outlined ui-button-help" action="#{tokensBean.crearToken()}"/>
+                    <p:commandButton value="BORRAR DATOS" styleClass="ui-button-outlined ui-button-warning" style="margin-left: 10px" action="#{tokensBean.borrarDatos()}"/>
+                    <p:commandButton value="CANCELAR Y REGRESAR" styleClass="ui-button-outlined ui-button-danger" style="margin-left: 10px" action="/empleadoIT/bienvenidoEmpleado"/>
+                </div>
+            </h:form>
+        </div>
+        
+    </h:body>
+</html>
+

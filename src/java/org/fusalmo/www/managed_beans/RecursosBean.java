@@ -66,18 +66,14 @@ public class RecursosBean {
         }
     }
     
-    public void saveResources(){
-        
-    }
-    
     public String opcAgregar(int opcAdd){
         
         System.out.println(opcAdd);
         switch (opcAdd) {
             case 1://Agregar laptop
-                return "agregarLaptop?faces-redirect=true&type-resource=" + opcAdd;
+                return "tipo/agregarLaptop?faces-redirect=true&type-resource=" + opcAdd;
             case 2://Agregar laptop
-                return "agregarMicrosoftENT?faces-redirect=true&type-resource=" + opcAdd;
+                return "tipo/agregarMicrosoftENT?faces-redirect=true&type-resource=" + opcAdd;
             default:
                 throw new AssertionError();
         }
@@ -100,7 +96,7 @@ public class RecursosBean {
             System.out.println("Hubo un error inesperado al registrar la laptop");
             return null;
         }else{
-            return "seleccionDeRecurso?faces-redirect=true";
+            return "/adminIT/recursos/agregar/seleccionDeRecurso?faces-redirect=true";
         }
         
     }
@@ -129,19 +125,26 @@ public class RecursosBean {
     
     public String redirectEdit(){
         
-        System.out.println(JsfUtil.getRequest().getParameter("idRecurso"));
-        
-        recurso = (
+        setRecurso(
                 modelo.buscarRecursoId(
                         JsfUtil.getRequest().getParameter("idRecurso")
                 )
         );
         
-        System.out.println(recurso);
+        if(getRecurso().getIdTipoRecurso().getId() == 1){
+            return "tipo/laptop?faces-redirect=true&idRecurso=" + getRecurso().getId() + "&tipo-Recurso=" + getRecurso().getIdTipoRecurso().getId();
+        }
+        if(getRecurso().getIdTipoRecurso().getId() == 2){
+            return "tipo/microsoft?faces-redirect=true&idRecurso=" + getRecurso().getId() + "&tipo-Recurso=" + getRecurso().getIdTipoRecurso().getId();
+        }
         
-        System.out.println(getRecurso());
+        return null;
         
-        return "editarRecurso?faces-redirect=true";
+    }
+    
+    public void obtenerRecursoID(String resource){
+        
+        setRecurso(modelo.buscarRecursoId(resource));
         
     }
     

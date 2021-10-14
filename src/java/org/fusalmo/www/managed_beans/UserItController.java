@@ -15,29 +15,29 @@ import javax.persistence.NoResultException;
  *
  * @author Brymolina
  */
-@ManagedBean(name="userIT")
+@ManagedBean(name = "userIT")
 @RequestScoped
 public class UserItController {
-   private String Id;
-   private String login;
-   private String password;
-   
-   public String validaLogin()throws Exception {
-    try{
-        
-    
-    UserModel USER= new UserModel();
-    UsuariosITEntity u = USER.validarUsuario(login, password);
-    if(u!=null){
-        Id=u.getId();
-        return "indexAdminIT";
-    }else{
-        return "index";
+
+    private String Id;
+    private String login;
+    private String password;
+
+    public String validaLogin() throws Exception {
+        try {
+
+            UserModel USER = new UserModel();
+            UsuariosITEntity u = USER.validarUsuario(login, password);
+            if (u != null) {
+                Id = u.getId();
+                return "indexAdminIT";
+            } else {
+                return "index";
+            }
+        } catch (NoResultException e) {
+            return "index";
+        }
     }
-    }catch(NoResultException e) { 
-     return "index"; 
-    } 
-}
 
     public String getId() {
         return Id;
@@ -62,5 +62,5 @@ public class UserItController {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
 }
