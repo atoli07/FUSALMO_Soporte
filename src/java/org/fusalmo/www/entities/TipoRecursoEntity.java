@@ -30,7 +30,7 @@ import javax.persistence.Table;
     , @NamedQuery(name = "TipoRecursoEntity.findById", query = "SELECT t FROM TipoRecursoEntity t WHERE t.id = :id")
     , @NamedQuery(name = "TipoRecursoEntity.findByNombre", query = "SELECT t FROM TipoRecursoEntity t WHERE t.nombre = :nombre")})
 public class TipoRecursoEntity implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,16 +41,18 @@ public class TipoRecursoEntity implements Serializable {
     @Basic(optional = false)
     @Lob
     private String descripcion;
+    private String img;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoRecurso")
     private List<RecursosEntity> recursosEntityList;
 
     public TipoRecursoEntity() {
     }
-
+    
     public TipoRecursoEntity(Integer id) {
         this.id = id;
     }
-
+    
     public TipoRecursoEntity(Integer id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
@@ -79,6 +81,14 @@ public class TipoRecursoEntity implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+    
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public List<RecursosEntity> getRecursosEntityList() {
