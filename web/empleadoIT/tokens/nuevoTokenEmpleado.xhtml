@@ -9,8 +9,14 @@
         <h:outputStylesheet library="css" name="style.css"/>
         <h:outputStylesheet library="css" name="primeflex.min.css" />
     </h:head>
-   <h:body class="firstBody">
-        ${nombre}
+    <h:body class="firstBody">
+
+        Variables de sesion.
+        <br/>
+        Nombre: ${nombre}
+        <br/>
+        ID: ${idEmpleado}
+
         <menu class="menu">
 
             <div class="card">
@@ -20,7 +26,7 @@
                     <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
 
                         <p:menuitem url="${request.contextPath}/faces/empleadoIT/bienvenidoEmpleado.xhtml">
-                            
+
                             <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
 
                         </p:menuitem>
@@ -32,21 +38,21 @@
             </div>
 
         </menu>
-        
+
         <div class="welcome">
             <div class="p-grid">
-            <div class="title p-col-8">
-                
-                <h1 class="titleH1">Formulario para<br/> nuevo token</h1>
-                
-            </div>
-            <div class="image p-col-4">
-                
-                <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImageHeader"/>
-                    </div>
+                <div class="title p-col-8">
+
+                    <h1 class="titleH1">Formulario para<br/> nuevo token</h1>
+
+                </div>
+                <div class="image p-col-4">
+
+                    <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImageHeader"/>
+                </div>
             </div>
             <p:divider class=""/>
-            
+
         </div>
 
         <div class="container">
@@ -74,7 +80,7 @@
                 </div>
             </h:form>
         </div>
-        
+
     </h:body>
 </html>
 
