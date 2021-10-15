@@ -41,3 +41,21 @@ and open the template in the editor.
 span.ui-float-label{
     display: grid;
 }
+
+input.ui-button-outlined.ui-button-success{
+    width: 50%; 
+    border-color: #7CC041;
+    border-style: solid;
+    border-width: 1.9px;
+    background-color: transparent; 
+    min-height: 39px;
+    font-family: sans-serif;
+    border-radius: 4px;
+    padding-top: 2px;
+    font-size: 15px;
+    color: #689F38;
+}
+
+input.ui-button-outlined.ui-button-success:hover{
+    cursor: pointer;
+}

@@ -20,7 +20,7 @@
 
                     <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
 
-                        <p:menuitem url="index.xhtml">
+                        <p:menuitem url="${request.contextPath}/faces/adminIT/indexAdminIT.xhtml">
                             
                             <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
 
@@ -61,18 +61,32 @@
 
         </div>
 
-        
+        <h:panelGroup layout="block" styleClass="alert alert-danger"
+                      style="font-family: sans-serif; color: red"
+                      rendered="#{not empty facesContext.messageList}">
+            <h:messages/>
+        </h:panelGroup>
 
-        <h:form>
-            
+        <h:form id="miFormulario">
+
             <div class="p-grid container2" style="margin: auto">
 
                 <div class="p-col cardsForm">
 
                     <h5>Nombre</h5>
+
                     <span class="ui-float-label">
-                        <p:inputText id="float-input2" value="#{recursosBean.recurso.nombre}"/>
-                        <p:outputLabel for="@previous" value="DESKTOP-XXXXXXX"/>
+
+                        <p:inputText 
+                            id="float-input2" 
+                            value="#{recursosBean.recurso.nombre}" 
+                            required="true"
+                            requiredMessage="Debes ingresar el nombre"
+                            >
+                            <f:ajax event="blur" render="@this"/>
+                        </p:inputText>
+                        <p:outputLabel for="@previous" value="Nombre"/>
+
                     </span>
 
                 </div>
@@ -81,7 +95,16 @@
 
                     <h5>Marca</h5>
                     <span class="ui-float-label">
-                        <p:inputText id="float-input3" value="#{recursosBean.recurso.marca}"/>
+                        <p:inputText 
+                            id="float-input3" 
+                            value="#{recursosBean.recurso.marca}"
+                            required="true"
+                            requiredMessage="Ingrese una marca"
+                            >
+                            
+                            <f:ajax event="blur" render="@form"/>
+                            
+                        </p:inputText>
                         <p:outputLabel for="@previous" value="HP"/>
                     </span>
 
@@ -91,7 +114,14 @@
 
                     <h5>Modelo</h5>
                     <span class="ui-float-label">
-                        <p:inputText id="float-input4" value="#{recursosBean.recurso.modelo}"/>
+                        <p:inputText 
+                            id="float-input4" 
+                            value="#{recursosBean.recurso.modelo}"
+                            required="true"
+                            requiredMessage="Ingrese un modelo"
+                            >
+                            <f:ajax event="blur" render="@form"/>
+                        </p:inputText>
                         <p:outputLabel for="@previous" value="XX-XXXXXXX"/>
                     </span>
 
@@ -101,7 +131,14 @@
 
                     <h5>Numero de serie</h5>
                     <span class="ui-float-label">
-                        <p:inputText id="float-input5" value="#{recursosBean.recurso.numSerie}"/>
+                        <p:inputText 
+                            id="float-input5" 
+                            value="#{recursosBean.recurso.numSerie}"
+                            required="true"
+                            requiredMessage="Ingrese un número de serie"
+                            >
+                            <f:ajax event="blur" render="@form"/>
+                        </p:inputText>
                         <p:outputLabel for="@previous" value="000000000"/>
                     </span>
 
@@ -111,8 +148,21 @@
 
                     <h5>Dirección IP</h5>
                     <span class="ui-float-label">
-                        <p:inputText id="float-input6" value="#{recursosBean.recurso.direccionIP}"/>
+                        
+                        <p:inputText 
+                            id="float-input6" 
+                            value="#{recursosBean.recurso.direccionIP}"
+                            required="true"
+                            requiredMessage="Debe ingresar una dirección IP">
+                        
+                            <f:validator validatorId="validate.ip"/>
+                            
+                            <f:ajax event="blur" render="@form"/>
+                            
+                        </p:inputText>
+                        
                         <p:outputLabel for="@previous" value="XXX.XXX.XXX.XXX"/>
+                    
                     </span>
 
                 </div>
@@ -121,7 +171,17 @@
 
                     <h5>Dirección MAC</h5>
                     <span class="ui-float-label">
-                        <p:inputText id="float-input7" value="#{recursosBean.recurso.direccionMAC}"/>
+                        <p:inputText 
+                            id="float-input7" 
+                            value="#{recursosBean.recurso.direccionMAC}"
+                            required="true"
+                            requiredMessage="Ingrese una dirección IP"
+                            >
+                            
+                            <f:validator validatorId="validate.MAC"/>
+                            <f:ajax event="blur" render="@form"/>
+                            
+                        </p:inputText>
                         <p:outputLabel for="@previous" value="XX:XX:XX:XX:XX:XX"/>
                     </span>
 
@@ -131,7 +191,15 @@
 
                     <h5>Código activo</h5>
                     <span class="ui-float-label">
-                        <p:inputText id="float-input8" value="#{recursosBean.recurso.codActivo}"/>
+                        <p:inputText 
+                            id="float-input8" 
+                            value="#{recursosBean.recurso.codActivo}"
+                            required="true"
+                            requiredMessage="Ingrese un código activo"
+                            >
+                            <f:validator validatorId="validate.codAct"/>
+                            <f:ajax event="blur" render="@form"/>
+                        </p:inputText>
                         <p:outputLabel for="@previous" value="XXX-XX-XX-XXXX"/>
                     </span>
 
@@ -141,7 +209,14 @@
 
                     <h5>URL imágen</h5>
                     <span class="ui-float-label">
-                        <p:inputText id="float-input9" value="#{recursosBean.recurso.imagen}"/>
+                        <p:inputText 
+                            id="float-input9" 
+                            value="#{recursosBean.recurso.imagen}"
+                            required="true"
+                            requiredMessage="Ingrese una URL"
+                            >
+                            <f:ajax event="blur" render="@form"/>
+                        </p:inputText>
                         <p:outputLabel for="@previous" value="URL"/>
                     </span>
 
@@ -164,7 +239,13 @@
                 <div style="margin: auto">
                     
                     <h5>Cargador</h5>
-                    <p:selectOneRadio id="console" value="#{recursosBean.recurso.cargador}" unselectable="true">
+                    <p:selectOneRadio 
+                        id="console" 
+                        value="#{recursosBean.recurso.cargador}" 
+                        unselectable="true" 
+                        required="true"
+                        requiredMessage="Seleccione una opción"
+                        >
                         <f:selectItem itemLabel="Sí" itemValue="1"/>
                         <f:selectItem itemLabel="No" itemValue="0"/>
                     </p:selectOneRadio>
@@ -177,13 +258,14 @@
 
                 <div class="p-col" style="text-align: end">
                     
-                    <p:commandButton 
+                    <h:commandButton 
                         value="Guardar"
                         styleClass="ui-button-outlined ui-button-success" 
-                        style="width: 50%" 
+                        style="width: 50%;" 
                         action="${recursosBean.guardarRecurso()}">
                         <f:param name="tipoRecurso" value="${request.getParameter('type-resource')}"/>
-                    </p:commandButton>
+                        
+                    </h:commandButton>
                 
                 </div>
 

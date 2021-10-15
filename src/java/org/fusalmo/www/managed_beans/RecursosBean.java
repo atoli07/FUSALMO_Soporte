@@ -15,6 +15,7 @@ import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.entities.TipoRecursoEntity;
 import org.fusalmo.www.model.RecursosModel;
 import org.fusalmo.www.utils.JsfUtil;
+import org.fusalmo.www.utils.Validate_codAct;
 
 /**
  *
@@ -25,6 +26,7 @@ import org.fusalmo.www.utils.JsfUtil;
 public class RecursosBean {
 
     RecursosModel modelo = new RecursosModel();
+    Validate_codAct validar = new Validate_codAct();
     private String areaAsignada;
     private Integer tipoRecurso;
     private RecursosEntity recurso;
