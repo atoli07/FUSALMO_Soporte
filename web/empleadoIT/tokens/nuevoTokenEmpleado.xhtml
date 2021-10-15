@@ -30,6 +30,17 @@
                             <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
 
                         </p:menuitem>
+                        
+                        <f:facet name="options">
+                            <p:button 
+                                class="buttonLogout"
+                                value="Salir" 
+                                icon="pi pi-fw pi-sign-out" 
+                                styleClass="ui-button-info" 
+                                href="${request.contextPath}/faces/logout.jsp"
+                                style="color: #DEE2E6; font-weight: bold;"
+                                />
+                        </f:facet>
 
                     </p:menubar>
 
@@ -76,7 +87,7 @@
                 <div class="p-col-12" style="margin-top: 15px">
                     <p:commandButton value="ENVIAR" styleClass="ui-button-outlined ui-button-help" action="#{tokensBean.crearToken()}"/>
                     <p:commandButton value="BORRAR DATOS" styleClass="ui-button-outlined ui-button-warning" style="margin-left: 10px" action="#{tokensBean.borrarDatos()}"/>
-                    <p:commandButton value="CANCELAR Y REGRESAR" styleClass="ui-button-outlined ui-button-danger" style="margin-left: 10px" action="/empleadoIT/bienvenidoEmpleado"/>
+                    <p:button value="CANCELAR Y REGRESAR" styleClass="ui-button-outlined ui-button-danger" style="margin-left: 10px" href="#{request.contextPath}/faces/empleadoIT/bienvenidoEmpleado.xhtml"/>
                 </div>
             </h:form>
         </div>

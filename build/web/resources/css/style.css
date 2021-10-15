@@ -14,6 +14,15 @@ body .ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link.ui-state-hover{
             
 }
 
+body .ui-button.ui-button-info, body .ui-splitbutton.ui-button-info > .ui-button{
+    background-color: #299795;
+    border: none;
+}
+
+body .ui-button.ui-button-info.ui-state-hover, body .ui-splitbutton.ui-button-info > .ui-button .ui-state-hover{
+    background-color: #32B7B4;
+}
+
 h1, h2, h3, h4, h5, h6, p{
     font-family: sans-serif;
 }

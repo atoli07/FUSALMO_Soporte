@@ -9,13 +9,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.fusalmo.www.entities.EmpleadoEntity;
+import org.fusalmo.www.entities.UsuariosITEntity;
 import org.fusalmo.www.utils.JPAUtil;
 
 /**
  *
  * @author Nemy
  */
-public class Model_login_temporal {
+public class Login_model {
     
     public List<EmpleadoEntity> buscarEmpleado(String mail, String password){
         
@@ -23,15 +24,13 @@ public class Model_login_temporal {
         
         try {
             
-            Query consultaMail = em.createNamedQuery("EmpleadoEntity.findByCorreo").setParameter("correo", mail);
-            Query consultaPassword = em.createNamedQuery("EmpleadoEntity.findByContra").setParameter("contra", password);
+            Query finUser = em.createNamedQuery("EmpleadoEntity.findByMailPass").setParameter("correo", mail).setParameter("contra", password);
             
-            List<EmpleadoEntity> responseMail = consultaMail.getResultList();
-            List<EmpleadoEntity> responsePassword = consultaPassword.getResultList();
+            List<EmpleadoEntity> responseQuery = finUser.getResultList();
             
-            if(responseMail != null && responsePassword != null){
+            if(responseQuery != null){
                 
-                return responseMail;
+                return responseQuery;
                 
             }else{
                 
@@ -39,6 +38,35 @@ public class Model_login_temporal {
                 
             }
             
+                
+        } catch (Exception e) {
+            
+            em.close();
+            return null;
+            
+        }
+        
+    }
+    
+    public List<UsuariosITEntity> buscarAdmin(String mail, String password){
+    
+        EntityManager em = JPAUtil.getEntityManager();
+        
+        try {
+            
+            Query findUser = em.createNamedQuery("UsuariosITEntity.findByMailPass").setParameter("correo", mail).setParameter("contra", password);
+            
+            List<UsuariosITEntity> responseQuery = findUser.getResultList();
+            
+            if(responseQuery != null){
+                
+                return responseQuery;
+                
+            }else{
+                
+                return null;
+                
+            }
                 
         } catch (Exception e) {
             

@@ -9,7 +9,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import org.fusalmo.www.entities.EmpleadoEntity;
-import org.fusalmo.www.model.Model_login_temporal;
+import org.fusalmo.www.entities.UsuariosITEntity;
+import org.fusalmo.www.model.Login_model;
 
 /**
  *
@@ -17,40 +18,51 @@ import org.fusalmo.www.model.Model_login_temporal;
  */
 @ManagedBean
 @SessionScoped
-public class Login_temporal_Bean {
+public class Login_Bean {
 
-    Model_login_temporal modelo = new Model_login_temporal();
+    Login_model modelo = new Login_model();
     private String mail;
     private String password;
     private String id;
     private String name;
     private String ape;
-    private EmpleadoEntity empleado;
     
     /**
      * Creates a new instance of login_temporal
      */
-    public Login_temporal_Bean() {
-        
-        empleado = new EmpleadoEntity();
+    public Login_Bean() {
         
     }
     
     public String verifiedData(){
-        
+        System.out.println(mail + password);
         List<EmpleadoEntity> empleado = modelo.buscarEmpleado(mail, password);
+        List<UsuariosITEntity> admin = modelo.buscarAdmin(mail, password);
         
-        for (EmpleadoEntity empleadoEntity : empleado) {
+        if(empleado.isEmpty() != true && empleado.size() != 0){
             
-            setId(empleadoEntity.getId());
-            setName(empleadoEntity.getNombres());
-            setApe(empleadoEntity.getApellidos());
+            for (EmpleadoEntity empleadoEntity : empleado) {
+
+                setId(empleadoEntity.getId());
+                setName(empleadoEntity.getNombres());
+                setApe(empleadoEntity.getApellidos());
+
+            }
+            
+            return "redirectEmpleado?faces-redirect=trueid-emp=" + id + "&name=" + name + "&ape=" + ape;
             
         }
-        
-        if(empleado != null){
+        if(admin.isEmpty() != true && admin.size() != 0){
             
-            return "empleadoIT/bienvenidoEmpleado?faces-redirect=trueid-emp=" + id + "&name=" + name + "&ape=" + ape;
+            for (UsuariosITEntity usuariosITEntity : admin) {
+                
+                setId(usuariosITEntity.getId());
+                setName(usuariosITEntity.getNombres());
+                setApe(usuariosITEntity.getApellidos());
+                
+            }
+            
+            return "redirectAdmin?faces-redirect=trueid-emp=" + id + "&name=" + name + "&ape=" + ape;
             
         }else{
             
@@ -64,12 +76,6 @@ public class Login_temporal_Bean {
         
         System.out.println(getMail());
         System.out.println(getPassword());
-        
-    }
-    
-    public void buscarEmpleado(String argsEmpleado){
-        
-        setEmpleado(modelo.buscarIdEmpleado(argsEmpleado));
         
     }
     
@@ -113,20 +119,6 @@ public class Login_temporal_Bean {
      */
     public void setId(String id) {
         this.id = id;
-    }
-    
-    /**
-     * @return the empleado
-     */
-    public EmpleadoEntity getEmpleado() {
-        return empleado;
-    }
-
-    /**
-     * @param empleado the empleado to set
-     */
-    public void setEmpleado(EmpleadoEntity empleado) {
-        this.empleado = empleado;
     }
     
     /**

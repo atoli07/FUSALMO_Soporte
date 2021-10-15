@@ -26,6 +26,17 @@
                             <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
 
                         </p:menuitem>
+                        
+                        <f:facet name="options">
+                            <p:button 
+                                class="buttonLogout"
+                                value="Salir" 
+                                icon="pi pi-fw pi-sign-out" 
+                                styleClass="ui-button-info" 
+                                href="${request.contextPath}/faces/logout.jsp"
+                                style="color: #DEE2E6; font-weight: bold;"
+                                />
+                        </f:facet>
 
                     </p:menubar>
 
@@ -71,7 +82,7 @@
                 </c:forEach>
                 
                 <div class="p-col-12" style="margin-top: 15px">
-                    <p:commandButton value="REGRESAR A MENÚ DE OPCIONES" styleClass="ui-button-outlined ui-button-info" action="/empleadoIT/bienvenidoEmpleado" style="margin-left: 10px"/>
+                    <p:button value="REGRESAR A MENÚ DE OPCIONES" styleClass="ui-button-outlined ui-button-info" href="#{request.contextPath}/faces/empleadoIT/bienvenidoEmpleado.xhtml" style="margin-left: 10px"/>
                 </div>
             </h:form>
         </div>    

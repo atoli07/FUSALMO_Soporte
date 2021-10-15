@@ -25,7 +25,7 @@
                             <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
 
                         </p:menuitem>
-
+                        
                     </p:menubar>
 
                 </h:form>
@@ -59,11 +59,11 @@
 
                     <h3 class="h3User">Usuario/Correo</h3>
 
-                    <p:inputText class="inputTextUser" value="#{login_temporal_Bean.mail}" id="Correo" requiredMessage="Debes ingresar el nombre"/>
+                    <p:inputText class="inputTextUser" value="#{login_Bean.mail}" id="Correo" requiredMessage="Debes ingresar el nombre"/>
 
                     <h3 class="h3Password">Contraseña</h3>
 
-                    <p:password toggleMask="true" redisplay="true" size="38" id="Password" value="#{login_temporal_Bean.password}" styleClass="form-control" requiredMessage="Debes ingresar la Contraseña"/>
+                    <p:password toggleMask="true" redisplay="true" size="38" id="Password" value="#{login_Bean.password}" styleClass="form-control" requiredMessage="Debes ingresar la Contraseña"/>
                     
                     
 
@@ -71,7 +71,7 @@
 
                 <h:panelGrid columns="2" class="panelGridButtons">
 
-                    <p:commandButton styleClass="ui-button-outlined ui-button-help" value="Ingresar" action="#{login_temporal_Bean.verifiedData()}" ></p:commandButton>
+                    <p:commandButton styleClass="ui-button-outlined ui-button-help" value="Ingresar" action="#{login_Bean.verifiedData()}" ></p:commandButton>
                     
                     <p:commandLink value="He olvidado mi contraseña">
                         

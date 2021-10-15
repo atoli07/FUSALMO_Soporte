@@ -12,91 +12,110 @@
     </h:head>
     <h:body class="firstBody">
         
-        <c:set var="idEmpleado" scope="session">
-            
-            ${request.getParameter("id-emp")}
-            
-        </c:set>
+        <!--Condicional que verifica si el usuario ha iniciado sesión
+        De ser así carga todo el contenido-->
+        <c:if test="#{nombre != null}">
         
-        <c:set var="nombre" scope="session">
-            
-            ${request.getParameter("name")} ${request.getParameter("ape")}
-            
-        </c:set>
-        
-        <menu class="menu">
+            <menu class="menu">
 
-            <div class="card">
+                <div class="card">
 
-                <h:form>
+                    <h:form>
 
-                    <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
+                        <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
 
-                        <p:menuitem url="${request.contextPath}/faces/empleadoIT/bienvenidoEmpleado.xhtml">
-                            
-                            <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
+                            <p:menuitem url="${request.contextPath}/faces/empleadoIT/bienvenidoEmpleado.xhtml">
 
-                        </p:menuitem>
+                                <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
 
-                    </p:menubar>
+                            </p:menuitem>
+
+                            <f:facet name="options">
+                                <p:button 
+                                    value="Salir" 
+                                    icon="pi pi-fw pi-sign-out" 
+                                    styleClass="ui-button-info" 
+                                    href="${request.contextPath}/faces/logout.jsp"
+                                    style="color: #DEE2E6; font-weight: bold;"
+                                    />
+                            </f:facet>
+
+                        </p:menubar>
+
+                    </h:form>
+
+                </div>
+
+            </menu>
+
+            <div class="welcome">
+                <div class="p-grid">
+                <div class="title p-col-8">
+
+                    <h1 class="titleH1">Bienvenido/a <br/>#{nombre}</h1>
+
+                </div>
+                <div class="image p-col-4">
+
+                    <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImageHeader"/>
+                        </div>
+                </div>
+
+                <p:divider class=""/>
+
+            </div>
+
+            <div class="container">
+                <h1 class="titleH3">Menú de opciones:</h1>
+                <h:form class="p-grid">
+                    <br/>
+                    <div class="p-col-4 opciones">
+                        <p:graphicImage library="img" name="woman-blue.jpg" class="styleImage"/>
+                        <div class="info-opciones">
+                            <h:outputText value="Token" class="title-opciones"/>
+                            <br/>
+                            <br/>
+                            <p:outputLabel value="Esta sección es para que nos reporte si tiene un problema con su recurso."/>
+                            <br/>
+                            <br/>
+
+                            <p:button value="CREAR TOKEN" styleClass="ui-button-outlined ui-button-help"
+                                             style="margin-bottom: 10px" 
+                                             href="#{request.contextPath}/faces/empleadoIT/tokens/nuevoTokenEmpleado.xhtml"/>
+                            <p:button value="VER TOKENS EN PROCESO E HISTORIAL" href="#{request.contextPath}/faces/empleadoIT/tokens/listadoTokens.xhtml" styleClass="ui-button-outlined"/>
+                        </div>
+                    </div>
+                    <div class="p-col-4 opciones">
+                        <p:graphicImage library="img" name="person-laptop.jpg" class="styleImage"/>
+                        <div class="info-opciones">
+                            <h:outputText value="Mis recursos" class="title-opciones"/>
+                            <br/>
+                            <br/>
+                            <p:outputLabel value="Aquí puede ver el equipo (o los equipos) que tiene asignado."/>
+                            <br/>
+                            <br/>
+                            <p:button value="VER MIS RECURSOS ASIGNADOS" href="#{request.contextPath}/faces/empleadoIT/recursos/recursosAsignados.xhtml" styleClass="ui-button-outlined"/>
+                        </div>
+
+                    </div>
 
                 </h:form>
 
-            </div>
-
-        </menu>
-        
-        <div class="welcome">
-            <div class="p-grid">
-            <div class="title p-col-8">
-                
-                <h1 class="titleH1">Bienvenido/a <br/>#{nombre}</h1>
-                
-            </div>
-            <div class="image p-col-4">
-                
-                <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImageHeader"/>
-                    </div>
-            </div>
-            <p:divider class=""/>
-            
-        </div>
-
-        <div class="container">
-            <h1 class="titleH3">Menú de opciones:</h1>
-            <h:form class="p-grid">
                 <br/>
-                <div class="p-col-4 opciones">
-                    <p:graphicImage library="img" name="woman-blue.jpg" class="styleImage"/>
-                    <div class="info-opciones">
-                        <h:outputText value="Token" class="title-opciones"/>
-                        <br/>
-                        <br/>
-                        <p:outputLabel value="Esta sección es para que nos reporte si tiene un problema con su recurso."/>
-                        <br/>
-                        <br/>
-                        
-                        <p:button value="CREAR TOKEN" styleClass="ui-button-outlined ui-button-help"
-                                         style="margin-bottom: 10px" 
-                                         href="tokens/nuevoTokenEmpleado.xhtml"/>
-                        <p:commandButton value="VER TOKENS EN PROCESO E HISTORIAL" action="tokens/listadoTokens" styleClass="ui-button-outlined"/>
-                    </div>
-                </div>
-                <div class="p-col-4 opciones">
-                    <p:graphicImage library="img" name="person-laptop.jpg" class="styleImage"/>
-                    <div class="info-opciones">
-                        <h:outputText value="Mis recursos" class="title-opciones"/>
-                        <br/>
-                        <br/>
-                        <p:outputLabel value="Aquí puede ver el equipo (o los equipos) que tiene asignado."/>
-                        <br/>
-                        <br/>
-                        <p:commandButton value="VER MIS RECURSOS ASIGNADOS" action="recursos/recursosAsignados" styleClass="ui-button-outlined"/>
-                    </div>
-                </div>
-            </h:form>
-            <br/>
-        </div>
+
+            </div>
+           
+        </c:if>
+        
+        <!--Condicional que verifica si el usuario ha iniciado sesión
+        Si no es así redirecciona al login-->
+        <c:if test="#{nombre == null}">
+            
+            <meta http-equiv="REFRESH" content="1;URL=${request.contextPath}/faces/index.xhtml"/>
+            
+        </c:if>
+        
     </h:body>
+    
 </html>
 
