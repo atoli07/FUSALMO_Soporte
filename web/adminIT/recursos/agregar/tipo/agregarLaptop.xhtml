@@ -61,13 +61,13 @@
 
         </div>
 
-        <h:panelGroup layout="block" styleClass="alert alert-danger"
-                      style="font-family: sans-serif; color: red"
-                      rendered="#{not empty facesContext.messageList}">
-            <h:messages/>
-        </h:panelGroup>
-
         <h:form id="miFormulario">
+
+            <h:panelGroup layout="block" styleClass="alert alert-danger"
+                          style="font-family: sans-serif; color: red"
+                          rendered="#{not empty facesContext.messageList}">
+                <h:messages/>
+            </h:panelGroup>
 
             <div class="p-grid container2" style="margin: auto">
 
@@ -83,7 +83,6 @@
                             required="true"
                             requiredMessage="Debes ingresar el nombre"
                             >
-                            <f:ajax event="blur" render="@this"/>
                         </p:inputText>
                         <p:outputLabel for="@previous" value="Nombre"/>
 
@@ -94,15 +93,15 @@
                 <div class="p-col cardsForm">
 
                     <h5>Marca</h5>
+                    
                     <span class="ui-float-label">
+                        
                         <p:inputText 
                             id="float-input3" 
                             value="#{recursosBean.recurso.marca}"
                             required="true"
                             requiredMessage="Ingrese una marca"
                             >
-                            
-                            <f:ajax event="blur" render="@form"/>
                             
                         </p:inputText>
                         <p:outputLabel for="@previous" value="HP"/>
@@ -120,7 +119,7 @@
                             required="true"
                             requiredMessage="Ingrese un modelo"
                             >
-                            <f:ajax event="blur" render="@form"/>
+                            
                         </p:inputText>
                         <p:outputLabel for="@previous" value="XX-XXXXXXX"/>
                     </span>
@@ -137,7 +136,7 @@
                             required="true"
                             requiredMessage="Ingrese un número de serie"
                             >
-                            <f:ajax event="blur" render="@form"/>
+                            
                         </p:inputText>
                         <p:outputLabel for="@previous" value="000000000"/>
                     </span>
@@ -156,8 +155,6 @@
                             requiredMessage="Debe ingresar una dirección IP">
                         
                             <f:validator validatorId="validate.ip"/>
-                            
-                            <f:ajax event="blur" render="@form"/>
                             
                         </p:inputText>
                         
@@ -179,7 +176,6 @@
                             >
                             
                             <f:validator validatorId="validate.MAC"/>
-                            <f:ajax event="blur" render="@form"/>
                             
                         </p:inputText>
                         <p:outputLabel for="@previous" value="XX:XX:XX:XX:XX:XX"/>
@@ -190,15 +186,18 @@
                 <div class="p-col cardsForm">
 
                     <h5>Código activo</h5>
+                    
                     <span class="ui-float-label">
+                        
                         <p:inputText 
                             id="float-input8" 
                             value="#{recursosBean.recurso.codActivo}"
                             required="true"
                             requiredMessage="Ingrese un código activo"
                             >
+                            
                             <f:validator validatorId="validate.codAct"/>
-                            <f:ajax event="blur" render="@form"/>
+                            
                         </p:inputText>
                         <p:outputLabel for="@previous" value="XXX-XX-XX-XXXX"/>
                     </span>
@@ -209,13 +208,16 @@
 
                     <h5>URL imágen</h5>
                     <span class="ui-float-label">
+                        
                         <p:inputText 
                             id="float-input9" 
                             value="#{recursosBean.recurso.imagen}"
                             required="true"
                             requiredMessage="Ingrese una URL"
                             >
-                            <f:ajax event="blur" render="@form"/>
+                            
+                        <f:validator validatorId="validate.URL"/>
+                            
                         </p:inputText>
                         <p:outputLabel for="@previous" value="URL"/>
                     </span>
@@ -258,14 +260,16 @@
 
                 <div class="p-col" style="text-align: end">
                     
-                    <h:commandButton 
+                    <p:commandButton 
                         value="Guardar"
+                        update="@form"
                         styleClass="ui-button-outlined ui-button-success" 
                         style="width: 50%;" 
-                        action="${recursosBean.guardarRecurso()}">
+                        action="${recursosBean.guardarRecurso()}"
+                        >
                         <f:param name="tipoRecurso" value="${request.getParameter('type-resource')}"/>
                         
-                    </h:commandButton>
+                    </p:commandButton>
                 
                 </div>
 
