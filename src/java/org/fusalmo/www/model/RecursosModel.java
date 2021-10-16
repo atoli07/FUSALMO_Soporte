@@ -719,4 +719,26 @@ public class RecursosModel {
         
     }
     
+    public int modificarRecurso(RecursosEntity recurso){
+        
+        EntityManager em = JPAUtil.getEntityManager();
+        EntityTransaction tran = em.getTransaction();
+        
+        try {
+            
+            tran.begin();
+            em.merge(recurso);
+            tran.commit();
+            em.close();
+            return 1;
+                
+        } catch (Exception e) {
+            
+            em.close();
+            return 0;
+            
+        }
+        
+    }
+    
 }

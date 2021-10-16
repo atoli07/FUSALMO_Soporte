@@ -59,91 +59,85 @@
         para luego imprimirlo en los campos de abajo-->
         #{recursosBean.obtenerRecursoID(request.getParameter("idRecurso"))}
 
-        <h:form>
-
-            <!--Apartado para modificar el recurso MICROSOFT-->
-
-            <div class="p-d-flex p-flex-column" style="width: 80%; margin: auto">
-
-                <div class="p-mb-2">
-
-                    <h3>ID</h3>
-
-                    <br/>
-
-                    <p:inputText size="50" value="#{recursosBean.recurso.id}"/>
-
-                </div>
-
-                <div class="p-mb-2">
-
-                    <h3>Nombre</h3>
-
-                    <br/>
-
-                    <p:inputText size="50" value="#{recursosBean.recurso.nombre}"/>
-
-                </div>
-
-                <div class="p-mb-2">
-
-                    <h3>Tipo de recurso</h3>
-
-                    <br/>
-
-                    <p:inputText size="50" value="#{recursosBean.recurso.idTipoRecurso}" readonly="true"/>
-
-                </div>
-
-                <div class="p-mb-2">
-
-                    <h3>Cod. Activo</h3>
-
-                    <br/>
-
-                    <p:inputText size="50" value="#{recursosBean.recurso.codActivo}"/>
-
-                </div>
-
-                <div class="p-mb-2">
-
-                    <h3>Área asignada</h3>
-
-                    <br/>
-
-                    <p:inputText size="50" value="#{recursosBean.recurso.idAreaAsignada}" readonly="true"/>
-
-                </div>
-
-                <div class="p-mb-2">
-
-                    <h3>Imágen</h3>
-
-                    <br/>
-
-                    <p:inputText size="50" value="#{recursosBean.recurso.imagen}"/>
-
-                </div>
+        <h:form style="width: 80%; margin: auto;">
+            
+            <h:panelGrid columns="1" cellpadding="7" styleClass="p-mb-1">
                 
-                <div class="p-mb-2">
+                <p:outputLabel for="nombre" value="Nombre"/>
+                <p:inputText 
+                    id="nombre" 
+                    value="#{recursosBean.recurso.nombre}" 
+                    required="true"
+                    label="Firstname"
+                    requiredMessage="Introduce el nombre del recurso"
+                    validatorMessage="Debes ingresar un nombre válido"
+                    placeholder="Microsoft"
+                    size="50"
+                    >
+                    <f:validateLength minimum="2"/>
+                    <p:ajax update="msgNombre" event="blur"/>
+                </p:inputText>
+                <p:message for="nombre" id="msgNombre"/>
+                
+                <p:outputLabel for="codACT" value="Código Activo"/>
+                <p:inputText 
+                    id="codACT" 
+                    value="#{recursosBean.recurso.codActivo}" 
+                    required="true"
+                    label="codAct"
+                    requiredMessage="Introduce el código activo del recurso"
+                    validatorMessage="Debes ingresar un código activo válido"
+                    placeholder="FSO-EI-MU-1234"
+                    size="50"
+                    >
+                    <f:validator validatorId="validate.codAct"/>
+                    <p:ajax update="msgCodAct" event="keyup"/>
+                </p:inputText>
+                <p:message for="codACT" id="msgCodAct"/>
+                
+                <p:outputLabel for="url" value="URL Imágen"/>
+                <p:inputText 
+                    id="url" 
+                    value="#{recursosBean.recurso.imagen}" 
+                    required="true"
+                    label="url"
+                    requiredMessage="Ingrese un nombre"
+                    placeholder="URL"
+                    size="50"
+                    >
+                    <f:validator validatorId="validate.URL"/>
+                    <p:ajax update="imgRecurso" event="blur"/>
+                    <p:ajax update="msgURL" event="blur"/>
+                </p:inputText>
+                <p:message for="url" id="msgURL"/>
+                
+                <h:graphicImage url="#{recursosBean.recurso.imagen}" width="30%" id="imgRecurso">
+                </h:graphicImage>
+                
+                <p:outputLabel for="area" value="Área asignada"/>
+                <p:selectOneMenu id="area" value="#{recursosBean.areaAsignada}">
+                    <f:selectItems value="#{recursosBean.listarAreas}" var="list" itemLabel="#{list.nombre}" itemValue="#{list.id}"/>
+                </p:selectOneMenu>
+                <p:message for="area"/>
+                
+            </h:panelGrid>
 
-                    <p:commandButton 
-                        value="Guardar"
-                        styleClass="ui-button-outlined ui-button-success" 
-                        style="width: 17.5%; margin-bottom: 35px; margin-top: 35px; margin-right: 20px" 
-                        action="${recursosBean.modificarRecurso()}">
-                    </p:commandButton>
+            <p:commandButton 
+                value="Guardar"
+                update="@form"
+                styleClass="ui-button-outlined ui-button-success" 
+                style="margin-bottom: 35px; margin-top: 35px; margin-right: 20px; min-width: 25%;"
+                action="${recursosBean.editarRecurso()}">
+                <f:param name="tipoRecurso" value="2"/>
+                <f:param name="idRecurso" value="#{request.getParameter('idRecurso')}"/>
+            </p:commandButton>
 
-                    <p:button 
-                        value="Cancelar" 
-                        styleClass="ui-button-outlined ui-button-danger" 
-                        style="width: 17.5%; margin-bottom: 35px; margin-top: 35px;" 
-                        href="${request.contextPath}/faces/adminIT/recursos/editar/verEditar.xhtml"
-                        />
-
-                </div>
-
-            </div>
+            <p:button 
+                value="Cancelar" 
+                styleClass="ui-button-outlined ui-button-danger" 
+                style="margin-bottom: 35px; margin-top: 35px; min-width: 25%;" 
+                href="${request.contextPath}/faces/adminIT/recursos/editar/verEditar.xhtml"
+                />
 
         </h:form>
 

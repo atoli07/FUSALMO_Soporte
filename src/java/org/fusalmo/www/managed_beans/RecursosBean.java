@@ -156,6 +156,37 @@ public class RecursosBean {
         
     }
     
+    public String editarRecurso(){
+        
+        //-----------System.out.println(recurso);-------------
+        //System.out.println(recurso.getId());
+        //System.out.println(recurso.getNombre());
+        //System.out.println(recurso.getCodActivo());
+        //System.out.println(recurso.getImagen());
+        //System.out.println(areaAsignada);
+        //System.out.println(recurso.getIdTipoRecurso());
+        
+        //System.out.println(JsfUtil.getRequest().getParameter("tipoRecurso"));
+        //System.out.println(JsfUtil.getRequest().getParameter("idRecurso"));
+        
+        recurso.setId(JsfUtil.getRequest().getParameter("idRecurso"));
+        recurso.setIdTipoRecurso(modelo.obtenerRecurso(Integer.parseInt(JsfUtil.getRequest().getParameter("tipoRecurso"))));
+        recurso.setIdAreaAsignada(modelo.obtenerArea(areaAsignada));
+        
+        if(modelo.modificarRecurso(recurso) != 0){
+            
+            System.out.println("Se modificó correctamente el recurso");
+            return "/adminIT/recursos/editar/verEditar?faces-redirect=true";
+            
+        }else{
+            
+            System.out.println("Hubo un error al modificar el recurso");
+            return null;
+            
+        }
+        
+    }
+    
     /**
      * @return the recurso
      */

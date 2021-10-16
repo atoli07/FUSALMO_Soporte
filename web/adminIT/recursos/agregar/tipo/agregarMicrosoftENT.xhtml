@@ -113,9 +113,13 @@
                     size="50"
                     >
                     <f:validator validatorId="validate.URL"/>
+                    <p:ajax update="imgRecurso" event="blur"/>
                     <p:ajax update="msgURL" event="blur"/>
                 </p:inputText>
                 <p:message for="url" id="msgURL"/>
+                
+                <h:graphicImage url="#{recursosBean.recurso.imagen}" width="30%" id="imgRecurso">
+                </h:graphicImage>
                 
                 <p:outputLabel for="area" value="Área asignada"/>
                 <p:selectOneMenu id="area" value="#{recursosBean.areaAsignada}">
@@ -138,7 +142,7 @@
                 value="Cancelar" 
                 styleClass="ui-button-outlined ui-button-danger" 
                 style="margin-bottom: 35px; margin-top: 35px; min-width: 25%;" 
-                href="seleccionDeRecurso.xhtml"
+                href="${request.contextPath}/faces/adminIT/recursos/agregar/seleccionDeRecurso.xhtml"
                 />
 
         </h:form>
