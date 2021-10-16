@@ -22,7 +22,7 @@ import javax.faces.validator.ValidatorException;
 @FacesValidator("validate.codAct")
 public class Validate_codAct implements Validator{
     
-    private static final String CUSTOM_PATTERN = "^[A-z]{2,3}-[0-9]{2,3}-[0-9]{2,3}-[0-9]{3,4}$";
+    private static final String CUSTOM_PATTERN = "^[A-Z]{2,3}-[A-Z]{2,3}-[A-Z]{2,3}-[0-9]{3,4}$";
     private Pattern pattern;
     private Matcher matcher;
     

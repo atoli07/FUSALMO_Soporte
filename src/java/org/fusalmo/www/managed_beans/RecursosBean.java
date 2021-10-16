@@ -5,7 +5,9 @@
  */
 package org.fusalmo.www.managed_beans;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -16,6 +18,7 @@ import org.fusalmo.www.entities.TipoRecursoEntity;
 import org.fusalmo.www.model.RecursosModel;
 import org.fusalmo.www.utils.JsfUtil;
 import org.fusalmo.www.utils.Validate_codAct;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -31,6 +34,7 @@ public class RecursosBean {
     private Integer tipoRecurso;
     private RecursosEntity recurso;
     String idRecurso;
+    private int tipoRecursoModificar;
     private List<RecursosEntity>listaRecursos;
     private List<AreaEntity> listarAreas;
     /**
@@ -148,6 +152,8 @@ public class RecursosBean {
         
         setRecurso(modelo.buscarRecursoId(resource));
         
+        setTipoRecursoModificar((int) recurso.getIdTipoRecurso().getId());
+        
     }
     
     /**
@@ -198,6 +204,20 @@ public class RecursosBean {
 
     public void setIdRecurso(String idRecurso) {
         this.idRecurso = idRecurso;
+    }
+    
+    /**
+     * @return the tipoRecursoModificar
+     */
+    public int getTipoRecursoModificar() {
+        return tipoRecursoModificar;
+    }
+
+    /**
+     * @param tipoRecursoModificar the tipoRecursoModificar to set
+     */
+    public void setTipoRecursoModificar(int tipoRecursoModificar) {
+        this.tipoRecursoModificar = tipoRecursoModificar;
     }
     
 }
