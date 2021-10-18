@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    <h:head>
+        <title>FUSALMO IT Portal - Recursos</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <h:outputStylesheet library="css" name="primeflex.min.css" />
+    </h:head>
+    <h:body class="firstBody">
+        
+        <menu class="menu">
+
+            <div class="card">
+
+                <h:form>
+
+                    <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
+
+                        <p:menuitem url="${request.contextPath}/faces/empleadoIT/bienvenidoEmpleado.xhtml">
+                            
+                            <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
+
+                        </p:menuitem>
+                        
+                        <f:facet name="options">
+                            <p:button 
+                                class="buttonLogout"
+                                value="Salir" 
+                                icon="pi pi-fw pi-sign-out" 
+                                styleClass="ui-button-info" 
+                                href="${request.contextPath}/faces/logout.jsp"
+                                style="color: #DEE2E6; font-weight: bold;"
+                                />
+                        </f:facet>
+
+                    </p:menubar>
+
+                </h:form>
+            </div>
+
+        </menu>
+        
+        <div class="welcome">
+            <div class="p-grid">
+            <div class="title p-col-8">
+                
+                <h1 class="titleH1">Recursos<br/> asignados</h1>
+                
+            </div>
+            <div class="image p-col-4">
+                
+                <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImageHeader"/>
+                    </div>
+            </div>
+            <p:divider class=""/>
+            
+        </div>
+
+        <div class="container">
+            <h1 class="titleH3" >Estos son sus recursos asignados</h1>
+            <h:form id="formulario" class="p-grid">
+                <c:forEach var="recurso" items="#{recursosBean.listaRecursos}">
+                    <div class="p-col-4 opciones">
+                        <p:graphicImage url="#{recurso.imagen}" class="styleImage"/>
+                        <div class="info-opciones" style="padding: 15px">
+                            <p:outputLabel value="#{recurso.codActivo}" class="title-opciones"/>
+                            <br/>
+                            <br/>
+                            <p:outputLabel value="Tipo: #{recurso.idTipoRecurso.nombre}"/><br/>
+                            <p:outputLabel value="Marca: #{recurso.marca}"/><br/>
+                            <p:outputLabel value="Modelo: #{recurso.modelo}"/><br/>
+                            <p:outputLabel value="Número de serie: #{recurso.numSerie}"/><br/>
+                            <p:outputLabel value="IP asignada: #{recursosBean.ponerIP(recurso)}"/><br/>
+                            <p:outputLabel value="Dirección MAC: #{recursosBean.ponerMAC(recurso)}"/><br/>
+                        </div>
+                    </div>          
+                </c:forEach>
+                
+                <div class="p-col-12" style="margin-top: 15px">
+                    <p:button value="REGRESAR A MENÚ DE OPCIONES" styleClass="ui-button-outlined ui-button-info" href="#{request.contextPath}/faces/empleadoIT/bienvenidoEmpleado.xhtml" style="margin-left: 10px"/>
+                </div>
+            </h:form>
+        </div>    
+    </h:body>
+</html>
+
