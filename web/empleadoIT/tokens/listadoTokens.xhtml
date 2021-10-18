@@ -63,7 +63,7 @@
         <div class="container">
             <h1 class="titleH3" >Mis tokens</h1>
             <h:form class="p-grid">
-                <p:dataTable id="tokens" var="token" value="#{tokensBean.listaTokens}" rowKey="#{token.id}" stripedRows="true">
+                <p:dataTable id="tokens" var="token" value="#{tokensBean.getListaTokensByIdEmpleado(idEmpleado)}" rowKey="#{token.id}" stripedRows="true">
                     <p:column headerText="Fecha de creación">
                         <h:outputText value="#{token.fecha}">
                             <f:convertDateTime pattern="dd/MM/yyyy"/> 

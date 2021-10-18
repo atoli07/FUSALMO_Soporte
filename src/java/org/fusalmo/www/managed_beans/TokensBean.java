@@ -50,6 +50,17 @@ public class TokensBean {
         return modelo.listarTokens();
     }
     
+    public List<TokensEntity> getListaTokensByIdEmpleado(String idemp){
+        listaTokens =modelo.listarTokensByIdEmpleado(idemp);
+        EmpleadoEntity  emp=modelo.obtenerEmpleado(idemp);
+                System.out.println("+++++++++++++++++++++++++++++++++++++++++");
+                System.out.println(emp.getId());
+                System.out.println(emp.getNombres());
+                System.out.println(emp.getApellidos());
+                System.out.println("+++++++++++++++++++++++++++++++++++++++++");
+        return  listaTokens;
+    }
+    
     public String crearToken(){
         EntityManager em= JPAUtil.getEntityManager();
         token.setId(modelo.crearID());
