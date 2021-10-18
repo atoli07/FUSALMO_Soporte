@@ -10,7 +10,7 @@ import org.fusalmo.www.entities.PrestamoInternoMemoEntity;
 import org.fusalmo.www.entities.RemocionMemoEntity;
 import org.fusalmo.www.entities.UsuariosITEntity;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-07T20:33:21")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-17T22:18:56")
 @StaticMetamodel(MemosEntity.class)
 public class MemosEntity_ { 
 

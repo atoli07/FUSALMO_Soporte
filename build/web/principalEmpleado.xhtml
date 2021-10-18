@@ -3,13 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
        
-        <h:outputLabel value="Bienvendio Administrador estas en la pagina principal usuario: #{userEmpleado.id} !!!"  />
+        <h:outputLabel value="Bienvendio Administrador estas en la pagina principal usuario: #{userIT.id} !!!"  />
+        <c:set var="id" value="#{userIT.id}}" scope="session"  />
     </h:body>
 </html>
 

@@ -8,7 +8,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import org.fusalmo.www.entities.MemosEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-07T20:33:21")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-17T22:18:56")
 @StaticMetamodel(PrestamoInternoMemoEntity.class)
 public class PrestamoInternoMemoEntity_ { 
 

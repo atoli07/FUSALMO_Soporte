@@ -5,6 +5,8 @@
  */
 package org.fusalmo.www.model;
 
+import org.fusalmo.www.entities.EmpleadoEntity;
+
 import org.fusalmo.www.entities.UsuariosITEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,15 +29,25 @@ public class UserModel {
     EntityManager em=emf.createEntityManager();
     
     String sql="SELECT u FROM UsuariosITEntity u WHERE u.correo = :correo AND u.contra = :contra";
-    
     Query query =em.createQuery(sql);
-    
     query.setParameter("correo", correo);
     query.setParameter("contra", contra);
     
     user= (UsuariosITEntity) query.getSingleResult();
-    
         return user;
 }
+   public EmpleadoEntity validarEmpleado(String correo, String contra){
+       EmpleadoEntity empleado;
+       EntityManager em = emf.createEntityManager();
+       
+    String sql ="SELECT e FROM EmpleadoEntity e WHERE e.correo = :correo AND e.contra = :contra";
+    Query query =em.createQuery(sql);
+    query.setParameter("correo", correo);
+    query.setParameter("contra", contra);
+    
+    empleado = (EmpleadoEntity) query.getSingleResult();
+    
+    return empleado;
+   }
     
 }
