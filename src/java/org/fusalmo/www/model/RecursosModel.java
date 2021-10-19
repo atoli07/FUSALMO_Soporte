@@ -13,6 +13,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.FlushModeType;
 import javax.persistence.Query;
 import org.fusalmo.www.entities.AreaEntity;
+import org.fusalmo.www.entities.RecursosDeEmpleadosEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.entities.TipoRecursoEntity;
 /**
@@ -34,12 +35,24 @@ public class RecursosModel {
     }
     
     public List<RecursosEntity> listarRecursosByIdEmpleado(String idemp){
+        RecursosEmpleadosModel modelo= new RecursosEmpleadosModel();
         EntityManager em= JPAUtil.getEntityManager();
         try{
-            Query consulta= em.createQuery("SELECT r FROM RecursosDeEmpleadosEntity r WHERE r.idEmpleado= :idEmpleado");
-            consulta.setParameter("idEmpleado",idemp);
-            System.out.println(idemp);
-            List<RecursosEntity> lista= consulta.getResultList();
+            List<RecursosEntity> lista= null;
+            List<RecursosDeEmpleadosEntity> listaId= modelo.listarRecursosPorIdEmpleado(idemp);
+            if (listaId.isEmpty()) {
+                System.out.println("------------------------");
+                System.out.println("ESTA VACIO");
+            }
+            for (RecursosDeEmpleadosEntity idrec: listaId) {
+                System.out.println(idrec.getIdRecurso());
+                if (idrec.getIdRecurso()!= null) {
+                    //System.out.println(idrec.getIdRecurso());
+                    Query consulta= em.createNamedQuery("RecursosEntity.findById");
+                    consulta.setParameter("id",idrec.getIdRecurso());
+                    lista.add((RecursosEntity)(consulta.getSingleResult()));
+                }
+            }
             return lista;
         }catch(Exception e){
             em.close();

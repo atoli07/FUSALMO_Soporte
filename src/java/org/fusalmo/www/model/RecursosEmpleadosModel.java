@@ -19,9 +19,8 @@ public class RecursosEmpleadosModel {
     public List<RecursosDeEmpleadosEntity> listarRecursosPorIdEmpleado(String idemp){
         EntityManager em= JPAUtil.getEntityManager();
         try{
-            Query consulta= em.createQuery("SELECT r FROM RecursosDeEmpleadosEntity r WHERE r.idEmpleado= :idEmpleado");
+            Query consulta= em.createQuery("SELECT r FROM RecursosDeEmpleadosEntity r WHERE r.idEmpleado.id = :idEmpleado");
             consulta.setParameter("idEmpleado",idemp);
-            System.out.println(idemp);
             List<RecursosDeEmpleadosEntity> lista= consulta.getResultList();
             return lista;
         }catch(Exception e){
