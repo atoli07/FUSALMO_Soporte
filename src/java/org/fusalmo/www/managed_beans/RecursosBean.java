@@ -13,8 +13,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import org.fusalmo.www.entities.AreaEntity;
+import org.fusalmo.www.entities.EmpleadoEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.entities.TipoRecursoEntity;
+import org.fusalmo.www.model.EmpleadoModel;
 import org.fusalmo.www.model.RecursosModel;
 import org.fusalmo.www.utils.JsfUtil;
 import org.fusalmo.www.utils.Validate_codAct;
@@ -29,11 +31,13 @@ import org.primefaces.PrimeFaces;
 public class RecursosBean {
 
     RecursosModel modelo = new RecursosModel();
+    EmpleadoModel empmodelo= new EmpleadoModel();
     Validate_codAct validar = new Validate_codAct();
     private String areaAsignada;
     private Integer tipoRecurso;
     private RecursosEntity recurso;
     String idRecurso;
+    private EmpleadoEntity empleado;
     private int tipoRecursoModificar;
     private List<RecursosEntity>listaRecursos;
     private List<AreaEntity> listarAreas;
@@ -53,6 +57,12 @@ public class RecursosBean {
     public List<TipoRecursoEntity> getListaTipoRecurso(){
         return modelo.listarTipoRecursos();
     }
+    
+    public List<RecursosEntity> getListaRecursosByIdEmpleado(String idemp){
+        System.out.println(idemp.substring(22, 28));
+        empleado= empmodelo.obtenerEmpleado(idemp.substring(22, 28));
+        return modelo.listarRecursosByIdEmpleado(empleado.getIdRecurso().getId());
+    } 
     
     public String ponerIP(RecursosEntity recurso){
         if (recurso.getDireccionIP()== null) {

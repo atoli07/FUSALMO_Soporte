@@ -64,7 +64,7 @@
         <div class="container">
             <h1 class="titleH3" >Estos son sus recursos asignados</h1>
             <h:form id="formulario" class="p-grid">
-                <c:forEach var="recurso" items="#{recursosBean.listaRecursos}">
+                <c:forEach var="recurso" items="#{recursosBean.getListaRecursosByIdEmpleado(idEmpleado)}">
                     <div class="p-col-4 opciones">
                         <p:graphicImage url="#{recurso.imagen}" class="styleImage"/>
                         <div class="info-opciones" style="padding: 15px">

@@ -39,15 +39,7 @@ public class TokensModel {
             Query consulta =em.createQuery("SELECT t FROM TokensEntity t WHERE t.idEmpleado.id = :idEmpleado");
             consulta.setParameter("idEmpleado",idemp);
             List<TokensEntity> lista= consulta.getResultList();
-            for (int i = 0; i < lista.size(); i++) {
-                System.out.println("***********************");
-                System.out.println(lista.get(i).getId());
-                System.out.println(lista.get(i).getIdEmpleado());
-                System.out.println(lista.get(i).getDescripcion());
-                System.out.println("***********************");
-            }
-            
-            for (TokensEntity tokensEntity : lista) {
+            /*for (TokensEntity tokensEntity : lista) {
                 
                 System.out.println("+++++++++++++++++++++++++++++++++++++++++");
                 System.out.println(tokensEntity.getId());
@@ -55,8 +47,7 @@ public class TokensModel {
                 System.out.println(tokensEntity.getDescripcion());
                 System.out.println("+++++++++++++++++++++++++++++++++++++++++");
                 
-            }
-            
+            }*/
             return lista;
         }catch(Exception e){
             em.close();
@@ -65,7 +56,6 @@ public class TokensModel {
     }
      
     public EmpleadoEntity obtenerEmpleado(String id){
-        System.out.println(id);
         EntityManager em= JPAUtil.getEntityManager();
         try{
             EmpleadoEntity consulta = em.find(EmpleadoEntity.class, id);
