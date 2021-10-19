@@ -36,7 +36,6 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "MemosEntity.findByCantidadRecursos", query = "SELECT m FROM MemosEntity m WHERE m.cantidadRecursos = :cantidadRecursos")})
 public class MemosEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     private String id;
@@ -48,10 +47,19 @@ public class MemosEntity implements Serializable {
     @Lob
     private String pDFFirmado;
     @Temporal(TemporalType.DATE)
-    private Date fechaPrestamo;
+    private Date fechaDevolucion;
     @Temporal(TemporalType.DATE)
     private Date fechaEntrega;
     private Integer cantidadRecursos;
+    @Basic(optional = false)
+    private String para;
+    @Basic(optional = false)
+    private String de;
+    @Basic(optional = false)
+    @Lob
+    private String descripcion;
+
+    private static final long serialVersionUID = 1L;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMemo")
     private List<PrestamoRecursosEntity> prestamoRecursosEntityList;
     @JoinColumn(name = "IdEmpleado", referencedColumnName = "Id")
@@ -107,15 +115,7 @@ public class MemosEntity implements Serializable {
     public void setPDFFirmado(String pDFFirmado) {
         this.pDFFirmado = pDFFirmado;
     }
-
-    public Date getFechaPrestamo() {
-        return fechaPrestamo;
-    }
-
-    public void setFechaPrestamo(Date fechaPrestamo) {
-        this.fechaPrestamo = fechaPrestamo;
-    }
-
+    
     public Date getFechaEntrega() {
         return fechaEntrega;
     }
@@ -188,5 +188,44 @@ public class MemosEntity implements Serializable {
     public String toString() {
         return "org.fusalmo.www.entities.MemosEntity[ id=" + id + " ]";
     }
+
+    public MemosEntity(String id, String asunto, String para, String de, String descripcion) {
+        this.id = id;
+        this.asunto = asunto;
+        this.para = para;
+        this.de = de;
+        this.descripcion = descripcion;
+    }
+
+    public Date getFechaDevolucion() {
+        return fechaDevolucion;
+    }
+
+    public void setFechaDevolucion(Date fechaDevolucion) {
+        this.fechaDevolucion = fechaDevolucion;
+    }
     
+    public String getPara() {
+        return para;
+    }
+
+    public void setPara(String para) {
+        this.para = para;
+    }
+
+    public String getDe() {
+        return de;
+    }
+
+    public void setDe(String de) {
+        this.de = de;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 }
