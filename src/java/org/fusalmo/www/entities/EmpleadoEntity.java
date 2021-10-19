@@ -42,6 +42,9 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "EmpleadoEntity.findByMailPass", query = "SELECT e FROM EmpleadoEntity e WHERE e.correo = :correo AND e.contra = :contra")})
 public class EmpleadoEntity implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")
+    private List<RecursosDeEmpleadosEntity> recursosDeEmpleadosEntityList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -239,6 +242,15 @@ public class EmpleadoEntity implements Serializable {
     @Override
     public String toString() {
         return "org.fusalmo.www.entities.EmpleadoEntity[ id=" + id + " ]";
+    }
+
+
+    public List<RecursosDeEmpleadosEntity> getRecursosDeEmpleadosEntityList() {
+        return recursosDeEmpleadosEntityList;
+    }
+
+    public void setRecursosDeEmpleadosEntityList(List<RecursosDeEmpleadosEntity> recursosDeEmpleadosEntityList) {
+        this.recursosDeEmpleadosEntityList = recursosDeEmpleadosEntityList;
     }
     
 }

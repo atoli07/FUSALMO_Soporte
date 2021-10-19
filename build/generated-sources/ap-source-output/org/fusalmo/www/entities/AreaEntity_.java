@@ -8,7 +8,7 @@ import org.fusalmo.www.entities.EmpleadoEntity;
 import org.fusalmo.www.entities.JefeAsignadoEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-14T09:22:46")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-19T14:51:49")
 @StaticMetamodel(AreaEntity.class)
 public class AreaEntity_ { 
 
