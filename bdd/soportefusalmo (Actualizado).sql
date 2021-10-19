@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 19-10-2021 a las 20:48:32
+-- Tiempo de generación: 19-10-2021 a las 21:18:24
 -- Versión del servidor: 8.0.21
 -- Versión de PHP: 7.3.21
 
@@ -149,9 +149,12 @@ CREATE TABLE IF NOT EXISTS `memos` (
   `IdTipo` char(3) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `PDF` text CHARACTER SET utf8 COLLATE utf8_general_ci,
   `PDFFirmado` text CHARACTER SET utf8 COLLATE utf8_general_ci,
-  `FechaPrestamo` date DEFAULT NULL,
+  `FechaDevolucion` date DEFAULT NULL,
   `FechaEntrega` date DEFAULT NULL,
   `CantidadRecursos` int DEFAULT '0',
+  `Para` varchar(10000) NOT NULL,
+  `De` varchar(10000) NOT NULL,
+  `Descripcion` text NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `ck_agente_IT` (`IdAgenteIT`),
   KEY `ck_empleados` (`IdEmpleado`),
@@ -162,8 +165,8 @@ CREATE TABLE IF NOT EXISTS `memos` (
 -- Volcado de datos para la tabla `memos`
 --
 
-INSERT INTO `memos` (`Id`, `IdAgenteIT`, `IdEmpleado`, `Asunto`, `IdTipo`, `PDF`, `PDFFirmado`, `FechaPrestamo`, `FechaEntrega`, `CantidadRecursos`) VALUES
-('ME0001', 'IT0001', 'EM1234', 'cualquiera', 'ASI', NULL, NULL, NULL, NULL, 0);
+INSERT INTO `memos` (`Id`, `IdAgenteIT`, `IdEmpleado`, `Asunto`, `IdTipo`, `PDF`, `PDFFirmado`, `FechaDevolucion`, `FechaEntrega`, `CantidadRecursos`, `Para`, `De`, `Descripcion`) VALUES
+('ME0001', 'IT0001', 'EM1234', 'cualquiera', 'ASI', NULL, NULL, NULL, NULL, 0, '', '', '');
 
 -- --------------------------------------------------------
 
