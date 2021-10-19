@@ -63,7 +63,8 @@
         <div class="container">
             <h1 class="titleH3" >Mis tokens</h1>
             <h:form class="p-grid">
-                <p:dataTable id="tokens" var="token" value="#{tokensBean.getListaTokensByIdEmpleado(idEmpleado)}" rowKey="#{token.id}" stripedRows="true">
+                <p:dataTable id="tokens" var="token" value="#{tokensBean.getListaTokensByIdEmpleado(idEmpleado)}" 
+                             rowKey="#{token.id}" selectionMode="single" selection="#{tokensBean.selectedToken}" stripedRows="true">
                     <p:column headerText="Fecha de creación">
                         <h:outputText value="#{token.fecha}">
                             <f:convertDateTime pattern="dd/MM/yyyy"/> 
@@ -76,12 +77,22 @@
                         <h:outputText value="#{token.descripcion}"/>
                     </p:column>
                     <p:column headerText="Bitácora de soporte">
-                        <p:commandButton value="Detalle" styleClass="ui-button-outlined ui-button-secondary"
-                                         action="#{tokensBean.verBitacora()}"> 
-                            <f:setPropertyActionListener value="#{token}" target="#{tokensBean.selectedToken}"/>
-                        </p:commandButton>
+                            <p:commandButton value="Detalle" styleClass="ui-button-outlined ui-button-secondary"
+                                             update="detalleBitacora" oncomplete="PF('detalle').show('#{component.clientId}');">
+                                <f:setPropertyActionListener value="#{token}" target="#{tokensBean.selectedToken}"/>
+                            </p:commandButton>
+                        <p:overlayPanel widgetVar="detalle" showCloseIcon="true" dynamic="true">
+                    <p:outputPanel id="detalleBitacora">
+                    <div class="dialog">
+                        <h:outputText value="#{tokensBean.selectedToken.idEstado.descripcion}"/>
+                    </div>
+                    <br/>
+                    <p:commandButton value="Entendido" styleClass="ui-button-help" style="float: right"/>
+                    </p:outputPanel>
+                </p:overlayPanel>
                     </p:column>
                 </p:dataTable>
+                
                 <div style="margin-top: 15px">
                     <p:commandButton value="CREAR TOKEN NUEVO" styleClass="ui-button-outlined ui-button-help"
                                      action="nuevoTokenEmpleado"/>
@@ -89,6 +100,8 @@
                 </div>
             </h:form>
         </div>
+        
+        
         
     </h:body>
 </html>

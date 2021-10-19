@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 11-10-2021 a las 15:48:28
+-- Tiempo de generación: 19-10-2021 a las 20:48:32
 -- Versión del servidor: 8.0.21
 -- Versión de PHP: 7.3.21
 
@@ -62,18 +62,16 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `IdAreaAsignada` char(6) NOT NULL,
   `Correo` varchar(100) NOT NULL,
   `Contra` varchar(20) NOT NULL,
-  `IdRecurso` char(6) NOT NULL,
   PRIMARY KEY (`Id`),
-  KEY `ck_area_asignada_empleado` (`IdAreaAsignada`),
-  KEY `ck_recuros_empleado` (`IdRecurso`)
+  KEY `ck_area_asignada_empleado` (`IdAreaAsignada`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `empleado`
 --
 
-INSERT INTO `empleado` (`Id`, `Nombres`, `Apellidos`, `FechaNacimiento`, `TelefonoFijo`, `Genero`, `DUI`, `Cargo`, `IdAreaAsignada`, `Correo`, `Contra`, `IdRecurso`) VALUES
-('EM1234', 'Juan', 'Frank', '2021-09-16', '49823788', 'M', '0194839902', 'Educador de tecnología', 'AR0001', 'fiasingt2@gmail.com', '123456', 'R00001');
+INSERT INTO `empleado` (`Id`, `Nombres`, `Apellidos`, `FechaNacimiento`, `TelefonoFijo`, `Genero`, `DUI`, `Cargo`, `IdAreaAsignada`, `Correo`, `Contra`) VALUES
+('EM1234', 'Juan', 'Frank', '2021-09-16', '49823788', 'M', '0194839902', 'Educador de tecnología', 'AR0001', 'fiasingt2@gmail.com', '123456');
 
 -- --------------------------------------------------------
 
@@ -228,6 +226,22 @@ INSERT INTO `recursos` (`Id`, `Nombre`, `Marca`, `Modelo`, `NumSerie`, `IdTipoRe
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `recursosdeempleados`
+--
+
+DROP TABLE IF EXISTS `recursosdeempleados`;
+CREATE TABLE IF NOT EXISTS `recursosdeempleados` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idRecurso` char(6) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `idEmpleado` char(6) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ck_recursos_empleados1` (`idRecurso`),
+  KEY `ck_recursos_empleados2` (`idEmpleado`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tipomemo`
 --
 
@@ -297,7 +311,10 @@ CREATE TABLE IF NOT EXISTS `tokens` (
 --
 
 INSERT INTO `tokens` (`Id`, `IdEmpleado`, `SeleccionRecurso`, `Descripcion`, `IdEstado`, `Fecha`, `Prioridad`) VALUES
-('TK0001', 'EM1234', 'R00001', 'Mi laptop agarró fuego', 1, '2021-10-05', 'Sumamente importante así el edificio no agarra fuego también');
+('TK0001', 'EM1234', 'R00001', 'Mi laptop agarró fuego', 1, '2021-10-05', 'Sumamente importante así el edificio no agarra fuego también'),
+('TK0003', 'EM1234', 'R00001', 'No quiere encender', 1, '2021-10-11', 'Media'),
+('TK0004', 'EM1234', 'R00002', 'No puedo iniciar sesión', 1, '2021-10-11', 'Baja'),
+('TK0005', 'EM1234', 'R00001', 'No quiere encender', 1, '2021-10-19', 'Alta');
 
 -- --------------------------------------------------------
 
@@ -339,8 +356,7 @@ ALTER TABLE `area`
 -- Filtros para la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  ADD CONSTRAINT `ck_area_asignada_empleado` FOREIGN KEY (`IdAreaAsignada`) REFERENCES `area` (`Id`),
-  ADD CONSTRAINT `ck_recuros_empleado` FOREIGN KEY (`IdRecurso`) REFERENCES `recursos` (`Id`);
+  ADD CONSTRAINT `ck_area_asignada_empleado` FOREIGN KEY (`IdAreaAsignada`) REFERENCES `area` (`Id`);
 
 --
 -- Filtros para la tabla `mantenimientos`
@@ -370,6 +386,13 @@ ALTER TABLE `prestamorecursos`
 ALTER TABLE `recursos`
   ADD CONSTRAINT `ck_area_asignada` FOREIGN KEY (`IdAreaAsignada`) REFERENCES `area` (`Id`),
   ADD CONSTRAINT `ck_tipos` FOREIGN KEY (`IdTipoRecurso`) REFERENCES `tiporecurso` (`Id`);
+
+--
+-- Filtros para la tabla `recursosdeempleados`
+--
+ALTER TABLE `recursosdeempleados`
+  ADD CONSTRAINT `ck_recursos_empleados1` FOREIGN KEY (`idRecurso`) REFERENCES `recursos` (`Id`),
+  ADD CONSTRAINT `ck_recursos_empleados2` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`Id`);
 
 --
 -- Filtros para la tabla `tokens`
