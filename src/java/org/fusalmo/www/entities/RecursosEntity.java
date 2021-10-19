@@ -35,7 +35,8 @@ import javax.persistence.Table;
     , @NamedQuery(name = "RecursosEntity.findByDireccionIP", query = "SELECT r FROM RecursosEntity r WHERE r.direccionIP = :direccionIP")
     , @NamedQuery(name = "RecursosEntity.findByDireccionMAC", query = "SELECT r FROM RecursosEntity r WHERE r.direccionMAC = :direccionMAC")
     , @NamedQuery(name = "RecursosEntity.findByCargador", query = "SELECT r FROM RecursosEntity r WHERE r.cargador = :cargador")
-    , @NamedQuery(name = "RecursosEntity.findByCodActivo", query = "SELECT r FROM RecursosEntity r WHERE r.codActivo = :codActivo")})
+    , @NamedQuery(name = "RecursosEntity.findByCodActivo", query = "SELECT r FROM RecursosEntity r WHERE r.codActivo = :codActivo")
+    , @NamedQuery(name = "RecursosEntity.countAll", query = "SELECT COUNT(r.id) FROM RecursosEntity r")})
 public class RecursosEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -82,6 +83,56 @@ public class RecursosEntity implements Serializable {
         this.nombre = nombre;
         this.codActivo = codActivo;
         this.imagen = imagen;
+    }
+
+    public RecursosEntity(
+            String id, 
+            String nombre, 
+            String marca, 
+            String modelo, 
+            String numSerie,
+            boolean cargador, 
+            String codActivo,
+            String imagen) {
+        
+        this.id = id;
+        this.nombre = nombre;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.numSerie = numSerie;
+        this.cargador = cargador;
+        this.codActivo = codActivo;
+        this.imagen = imagen;
+        
+    }
+    
+    public RecursosEntity(
+            String id, 
+            String nombre,
+            String marca, 
+            String modelo, 
+            String numSerie, 
+            TipoRecursoEntity idTipoRecurso,
+            String direccionIP,
+            String direccionMAC,
+            boolean cargador, 
+            String codActivo, 
+            AreaEntity idAreaAsignada, 
+            String imagen){
+        
+        this.id = id;
+        this.nombre = nombre;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.numSerie = numSerie;
+        this.idTipoRecurso = idTipoRecurso;
+        this.direccionIP = direccionIP;
+        this.direccionMAC = direccionMAC;
+        this.cargador = cargador;
+        this.codActivo = codActivo;
+        this.idAreaAsignada = idAreaAsignada;
+        this.imagen = imagen;
+        
     }
 
     public String getId() {
