@@ -120,4 +120,5 @@ public class AreaEntity implements Serializable {
     public String toString() {
         return "org.fusalmo.www.entities.AreaEntity[ id=" + id + " ]";
     }
+    
 }

@@ -28,9 +28,10 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "TipoRecursoEntity.findAll", query = "SELECT t FROM TipoRecursoEntity t")
     , @NamedQuery(name = "TipoRecursoEntity.findById", query = "SELECT t FROM TipoRecursoEntity t WHERE t.id = :id")
-    , @NamedQuery(name = "TipoRecursoEntity.findByNombre", query = "SELECT t FROM TipoRecursoEntity t WHERE t.nombre = :nombre")})
+    , @NamedQuery(name = "TipoRecursoEntity.findByNombre", query = "SELECT t FROM TipoRecursoEntity t WHERE t.nombre = :nombre")
+    , @NamedQuery(name = "TipoRecursoEntity.findByImg", query = "SELECT t FROM TipoRecursoEntity t WHERE t.img = :img")})
 public class TipoRecursoEntity implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,22 +42,23 @@ public class TipoRecursoEntity implements Serializable {
     @Basic(optional = false)
     @Lob
     private String descripcion;
+    @Basic(optional = false)
     private String img;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoRecurso")
     private List<RecursosEntity> recursosEntityList;
 
     public TipoRecursoEntity() {
     }
-    
+
     public TipoRecursoEntity(Integer id) {
         this.id = id;
     }
-    
-    public TipoRecursoEntity(Integer id, String nombre, String descripcion) {
+
+    public TipoRecursoEntity(Integer id, String nombre, String descripcion, String img) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.img = img;
     }
 
     public Integer getId() {
@@ -82,7 +84,7 @@ public class TipoRecursoEntity implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
     public String getImg() {
         return img;
     }
@@ -123,11 +125,5 @@ public class TipoRecursoEntity implements Serializable {
     public String toString() {
         return "org.fusalmo.www.entities.TipoRecursoEntity[ id=" + id + " ]";
     }
-
-    public TipoRecursoEntity(Integer id, String nombre, String descripcion, String img) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.img = img;
-    }
+    
 }

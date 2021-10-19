@@ -8,10 +8,11 @@ import javax.persistence.metamodel.StaticMetamodel;
 import org.fusalmo.www.entities.AreaEntity;
 import org.fusalmo.www.entities.MemosEntity;
 import org.fusalmo.www.entities.PrestamoRecursosEntity;
+import org.fusalmo.www.entities.RecursosDeEmpleadosEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.entities.TokensEntity;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-19T14:51:49")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-19T15:32:31")
 @StaticMetamodel(EmpleadoEntity.class)
 public class EmpleadoEntity_ { 
 
@@ -20,6 +21,7 @@ public class EmpleadoEntity_ {
     public static volatile SingularAttribute<EmpleadoEntity, Date> fechaNacimiento;
     public static volatile SingularAttribute<EmpleadoEntity, RecursosEntity> idRecurso;
     public static volatile ListAttribute<EmpleadoEntity, PrestamoRecursosEntity> prestamoRecursosEntityList;
+    public static volatile ListAttribute<EmpleadoEntity, RecursosDeEmpleadosEntity> recursosDeEmpleadosEntityList;
     public static volatile SingularAttribute<EmpleadoEntity, AreaEntity> idAreaAsignada;
     public static volatile SingularAttribute<EmpleadoEntity, String> nombres;
     public static volatile SingularAttribute<EmpleadoEntity, String> telefonoFijo;

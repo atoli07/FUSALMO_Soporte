@@ -31,11 +31,14 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "MemosEntity.findAll", query = "SELECT m FROM MemosEntity m")
     , @NamedQuery(name = "MemosEntity.findById", query = "SELECT m FROM MemosEntity m WHERE m.id = :id")
-    , @NamedQuery(name = "MemosEntity.findByFechaPrestamo", query = "SELECT m FROM MemosEntity m WHERE m.fechaPrestamo = :fechaPrestamo")
+    , @NamedQuery(name = "MemosEntity.findByFechaDevolucion", query = "SELECT m FROM MemosEntity m WHERE m.fechaDevolucion = :fechaDevolucion")
     , @NamedQuery(name = "MemosEntity.findByFechaEntrega", query = "SELECT m FROM MemosEntity m WHERE m.fechaEntrega = :fechaEntrega")
-    , @NamedQuery(name = "MemosEntity.findByCantidadRecursos", query = "SELECT m FROM MemosEntity m WHERE m.cantidadRecursos = :cantidadRecursos")})
+    , @NamedQuery(name = "MemosEntity.findByCantidadRecursos", query = "SELECT m FROM MemosEntity m WHERE m.cantidadRecursos = :cantidadRecursos")
+    , @NamedQuery(name = "MemosEntity.findByPara", query = "SELECT m FROM MemosEntity m WHERE m.para = :para")
+    , @NamedQuery(name = "MemosEntity.findByDe", query = "SELECT m FROM MemosEntity m WHERE m.de = :de")})
 public class MemosEntity implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     private String id;
@@ -58,8 +61,6 @@ public class MemosEntity implements Serializable {
     @Basic(optional = false)
     @Lob
     private String descripcion;
-
-    private static final long serialVersionUID = 1L;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMemo")
     private List<PrestamoRecursosEntity> prestamoRecursosEntityList;
     @JoinColumn(name = "IdEmpleado", referencedColumnName = "Id")
@@ -79,9 +80,12 @@ public class MemosEntity implements Serializable {
         this.id = id;
     }
 
-    public MemosEntity(String id, String asunto) {
+    public MemosEntity(String id, String asunto, String para, String de, String descripcion) {
         this.id = id;
         this.asunto = asunto;
+        this.para = para;
+        this.de = de;
+        this.descripcion = descripcion;
     }
 
     public String getId() {
@@ -115,7 +119,15 @@ public class MemosEntity implements Serializable {
     public void setPDFFirmado(String pDFFirmado) {
         this.pDFFirmado = pDFFirmado;
     }
-    
+
+    public Date getFechaDevolucion() {
+        return fechaDevolucion;
+    }
+
+    public void setFechaDevolucion(Date fechaDevolucion) {
+        this.fechaDevolucion = fechaDevolucion;
+    }
+
     public Date getFechaEntrega() {
         return fechaEntrega;
     }
@@ -130,6 +142,30 @@ public class MemosEntity implements Serializable {
 
     public void setCantidadRecursos(Integer cantidadRecursos) {
         this.cantidadRecursos = cantidadRecursos;
+    }
+
+    public String getPara() {
+        return para;
+    }
+
+    public void setPara(String para) {
+        this.para = para;
+    }
+
+    public String getDe() {
+        return de;
+    }
+
+    public void setDe(String de) {
+        this.de = de;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public List<PrestamoRecursosEntity> getPrestamoRecursosEntityList() {
@@ -188,44 +224,5 @@ public class MemosEntity implements Serializable {
     public String toString() {
         return "org.fusalmo.www.entities.MemosEntity[ id=" + id + " ]";
     }
-
-    public MemosEntity(String id, String asunto, String para, String de, String descripcion) {
-        this.id = id;
-        this.asunto = asunto;
-        this.para = para;
-        this.de = de;
-        this.descripcion = descripcion;
-    }
-
-    public Date getFechaDevolucion() {
-        return fechaDevolucion;
-    }
-
-    public void setFechaDevolucion(Date fechaDevolucion) {
-        this.fechaDevolucion = fechaDevolucion;
-    }
     
-    public String getPara() {
-        return para;
-    }
-
-    public void setPara(String para) {
-        this.para = para;
-    }
-
-    public String getDe() {
-        return de;
-    }
-
-    public void setDe(String de) {
-        this.de = de;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 }

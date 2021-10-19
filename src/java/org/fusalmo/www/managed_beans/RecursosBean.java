@@ -58,11 +58,11 @@ public class RecursosBean {
         return modelo.listarTipoRecursos();
     }
     
-    public List<RecursosEntity> getListaRecursosByIdEmpleado(String idemp){
+    /*public List<RecursosEntity> getListaRecursosByIdEmpleado(String idemp){
         System.out.println(idemp.substring(22, 28));
         empleado= empmodelo.obtenerEmpleado(idemp.substring(22, 28));
         return modelo.listarRecursosByIdEmpleado(empleado.getIdRecurso().getId());
-    } 
+    } */
     
     public String ponerIP(RecursosEntity recurso){
         if (recurso.getDireccionIP()== null) {

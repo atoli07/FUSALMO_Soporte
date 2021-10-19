@@ -109,4 +109,5 @@ public class JefeAsignadoEntity implements Serializable {
     public String toString() {
         return "org.fusalmo.www.entities.JefeAsignadoEntity[ id=" + id + " ]";
     }
+    
 }

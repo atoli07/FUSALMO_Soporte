@@ -38,12 +38,8 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "EmpleadoEntity.findByDui", query = "SELECT e FROM EmpleadoEntity e WHERE e.dui = :dui")
     , @NamedQuery(name = "EmpleadoEntity.findByCargo", query = "SELECT e FROM EmpleadoEntity e WHERE e.cargo = :cargo")
     , @NamedQuery(name = "EmpleadoEntity.findByCorreo", query = "SELECT e FROM EmpleadoEntity e WHERE e.correo = :correo")
-    , @NamedQuery(name = "EmpleadoEntity.findByContra", query = "SELECT e FROM EmpleadoEntity e WHERE e.contra = :contra")
-    , @NamedQuery(name = "EmpleadoEntity.findByMailPass", query = "SELECT e FROM EmpleadoEntity e WHERE e.correo = :correo AND e.contra = :contra")})
+    , @NamedQuery(name = "EmpleadoEntity.findByContra", query = "SELECT e FROM EmpleadoEntity e WHERE e.contra = :contra")})
 public class EmpleadoEntity implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")
-    private List<RecursosDeEmpleadosEntity> recursosDeEmpleadosEntityList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -67,14 +63,13 @@ public class EmpleadoEntity implements Serializable {
     private String correo;
     @Basic(optional = false)
     private String contra;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")
+    private List<PrestamoRecursosEntity> prestamoRecursosEntityList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")
+    private List<RecursosDeEmpleadosEntity> recursosDeEmpleadosEntityList;
     @JoinColumn(name = "IdAreaAsignada", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private AreaEntity idAreaAsignada;
-    @JoinColumn(name = "IdRecurso", referencedColumnName = "Id")
-    @ManyToOne(optional = false)
-    private RecursosEntity idRecurso;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")
-    private List<PrestamoRecursosEntity> prestamoRecursosEntityList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")
     private List<MemosEntity> memosEntityList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")
@@ -179,28 +174,28 @@ public class EmpleadoEntity implements Serializable {
         this.contra = contra;
     }
 
-    public AreaEntity getIdAreaAsignada() {
-        return idAreaAsignada;
-    }
-
-    public void setIdAreaAsignada(AreaEntity idAreaAsignada) {
-        this.idAreaAsignada = idAreaAsignada;
-    }
-
-    public RecursosEntity getIdRecurso() {
-        return idRecurso;
-    }
-
-    public void setIdRecurso(RecursosEntity idRecurso) {
-        this.idRecurso = idRecurso;
-    }
-
     public List<PrestamoRecursosEntity> getPrestamoRecursosEntityList() {
         return prestamoRecursosEntityList;
     }
 
     public void setPrestamoRecursosEntityList(List<PrestamoRecursosEntity> prestamoRecursosEntityList) {
         this.prestamoRecursosEntityList = prestamoRecursosEntityList;
+    }
+
+    public List<RecursosDeEmpleadosEntity> getRecursosDeEmpleadosEntityList() {
+        return recursosDeEmpleadosEntityList;
+    }
+
+    public void setRecursosDeEmpleadosEntityList(List<RecursosDeEmpleadosEntity> recursosDeEmpleadosEntityList) {
+        this.recursosDeEmpleadosEntityList = recursosDeEmpleadosEntityList;
+    }
+
+    public AreaEntity getIdAreaAsignada() {
+        return idAreaAsignada;
+    }
+
+    public void setIdAreaAsignada(AreaEntity idAreaAsignada) {
+        this.idAreaAsignada = idAreaAsignada;
     }
 
     public List<MemosEntity> getMemosEntityList() {
@@ -242,15 +237,6 @@ public class EmpleadoEntity implements Serializable {
     @Override
     public String toString() {
         return "org.fusalmo.www.entities.EmpleadoEntity[ id=" + id + " ]";
-    }
-
-
-    public List<RecursosDeEmpleadosEntity> getRecursosDeEmpleadosEntityList() {
-        return recursosDeEmpleadosEntityList;
-    }
-
-    public void setRecursosDeEmpleadosEntityList(List<RecursosDeEmpleadosEntity> recursosDeEmpleadosEntityList) {
-        this.recursosDeEmpleadosEntityList = recursosDeEmpleadosEntityList;
     }
     
 }

@@ -8,10 +8,11 @@ import org.fusalmo.www.entities.AreaEntity;
 import org.fusalmo.www.entities.EmpleadoEntity;
 import org.fusalmo.www.entities.MantenimientosEntity;
 import org.fusalmo.www.entities.PrestamoRecursosEntity;
+import org.fusalmo.www.entities.RecursosDeEmpleadosEntity;
 import org.fusalmo.www.entities.TipoRecursoEntity;
 import org.fusalmo.www.entities.TokensEntity;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-19T14:51:49")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-19T15:32:31")
 @StaticMetamodel(RecursosEntity.class)
 public class RecursosEntity_ { 
 
@@ -19,6 +20,7 @@ public class RecursosEntity_ {
     public static volatile ListAttribute<RecursosEntity, TokensEntity> tokensEntityList;
     public static volatile ListAttribute<RecursosEntity, MantenimientosEntity> mantenimientosEntityList;
     public static volatile ListAttribute<RecursosEntity, PrestamoRecursosEntity> prestamoRecursosEntityList;
+    public static volatile ListAttribute<RecursosEntity, RecursosDeEmpleadosEntity> recursosDeEmpleadosEntityList;
     public static volatile SingularAttribute<RecursosEntity, String> imagen;
     public static volatile SingularAttribute<RecursosEntity, Boolean> cargador;
     public static volatile ListAttribute<RecursosEntity, EmpleadoEntity> empleadoEntityList;
