@@ -10,6 +10,8 @@ import org.fusalmo.www.model.UserModel;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.NoResultException;
+import org.fusalmo.www.entities.EmpleadoEntity;
+import org.fusalmo.www.model.UserEmpleadoModel;
 
 /**
  *
@@ -23,19 +25,22 @@ public class UserItController {
    private String password;
    
    public String validaLogin()throws Exception {
+       UserModel USER= new UserModel();
+       
     try{
-        
-    
-    UserModel USER= new UserModel();
     UsuariosITEntity u = USER.validarUsuario(login, password);
-    if(u!=null){
         Id=u.getId();
-        return "indexAdminIT";
-    }else{
-        return "index";
-    }
+        return "principal";
+        
     }catch(NoResultException e) { 
-     return "index"; 
+        try{
+            EmpleadoEntity emp = USER.validarEmpleado(login, password);
+            Id=emp.getId();
+            return "principalEmpleado";
+        }catch(NoResultException e2) {
+            return "index";
+        }
+        
     } 
 }
 

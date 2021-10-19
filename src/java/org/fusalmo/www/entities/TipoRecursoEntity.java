@@ -123,5 +123,11 @@ public class TipoRecursoEntity implements Serializable {
     public String toString() {
         return "org.fusalmo.www.entities.TipoRecursoEntity[ id=" + id + " ]";
     }
-    
+
+    public TipoRecursoEntity(Integer id, String nombre, String descripcion, String img) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.img = img;
+    }
 }

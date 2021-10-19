@@ -31,14 +31,14 @@ public class UserAdminController {
         
         if(u!=null){
             Id= u.getId();
-            return "principalAdmin";
+            return "adminIT/indexAdminIT";
         }
         else{
-            return "index";         
+            return "indexAdmin";         
         }
         }catch(NoResultException e) { 
-     return "indexAdmin"; 
-    } 
+            return "indexAdmin"; 
+        } 
     }
 
     public String getId() {

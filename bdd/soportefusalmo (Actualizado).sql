@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 11-10-2021 a las 15:48:28
+-- Tiempo de generación: 19-10-2021 a las 21:18:24
 -- Versión del servidor: 8.0.21
 -- Versión de PHP: 7.3.21
 
@@ -62,18 +62,16 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `IdAreaAsignada` char(6) NOT NULL,
   `Correo` varchar(100) NOT NULL,
   `Contra` varchar(20) NOT NULL,
-  `IdRecurso` char(6) NOT NULL,
   PRIMARY KEY (`Id`),
-  KEY `ck_area_asignada_empleado` (`IdAreaAsignada`),
-  KEY `ck_recuros_empleado` (`IdRecurso`)
+  KEY `ck_area_asignada_empleado` (`IdAreaAsignada`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `empleado`
 --
 
-INSERT INTO `empleado` (`Id`, `Nombres`, `Apellidos`, `FechaNacimiento`, `TelefonoFijo`, `Genero`, `DUI`, `Cargo`, `IdAreaAsignada`, `Correo`, `Contra`, `IdRecurso`) VALUES
-('EM1234', 'Juan', 'Frank', '2021-09-16', '49823788', 'M', '0194839902', 'Educador de tecnología', 'AR0001', 'fiasingt2@gmail.com', '123456', 'R00001');
+INSERT INTO `empleado` (`Id`, `Nombres`, `Apellidos`, `FechaNacimiento`, `TelefonoFijo`, `Genero`, `DUI`, `Cargo`, `IdAreaAsignada`, `Correo`, `Contra`) VALUES
+('EM1234', 'Juan', 'Frank', '2021-09-16', '49823788', 'M', '0194839902', 'Educador de tecnología', 'AR0001', 'fiasingt2@gmail.com', '123456');
 
 -- --------------------------------------------------------
 
@@ -151,9 +149,12 @@ CREATE TABLE IF NOT EXISTS `memos` (
   `IdTipo` char(3) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `PDF` text CHARACTER SET utf8 COLLATE utf8_general_ci,
   `PDFFirmado` text CHARACTER SET utf8 COLLATE utf8_general_ci,
-  `FechaPrestamo` date DEFAULT NULL,
+  `FechaDevolucion` date DEFAULT NULL,
   `FechaEntrega` date DEFAULT NULL,
   `CantidadRecursos` int DEFAULT '0',
+  `Para` varchar(10000) NOT NULL,
+  `De` varchar(10000) NOT NULL,
+  `Descripcion` text NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `ck_agente_IT` (`IdAgenteIT`),
   KEY `ck_empleados` (`IdEmpleado`),
@@ -164,8 +165,8 @@ CREATE TABLE IF NOT EXISTS `memos` (
 -- Volcado de datos para la tabla `memos`
 --
 
-INSERT INTO `memos` (`Id`, `IdAgenteIT`, `IdEmpleado`, `Asunto`, `IdTipo`, `PDF`, `PDFFirmado`, `FechaPrestamo`, `FechaEntrega`, `CantidadRecursos`) VALUES
-('ME0001', 'IT0001', 'EM1234', 'cualquiera', 'ASI', NULL, NULL, NULL, NULL, 0);
+INSERT INTO `memos` (`Id`, `IdAgenteIT`, `IdEmpleado`, `Asunto`, `IdTipo`, `PDF`, `PDFFirmado`, `FechaDevolucion`, `FechaEntrega`, `CantidadRecursos`, `Para`, `De`, `Descripcion`) VALUES
+('ME0001', 'IT0001', 'EM1234', 'cualquiera', 'ASI', NULL, NULL, NULL, NULL, 0, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -224,6 +225,22 @@ CREATE TABLE IF NOT EXISTS `recursos` (
 INSERT INTO `recursos` (`Id`, `Nombre`, `Marca`, `Modelo`, `NumSerie`, `IdTipoRecurso`, `DireccionIP`, `DireccionMAC`, `Cargador`, `CodActivo`, `IdAreaAsignada`, `Imagen`) VALUES
 ('R00001', 'DESKTOP-SD6RO5M', 'HP', '14-ck0013la', '5CG8182FC6', 1, '172.19.8.151', '80:C5:F2:A2:57:C3', 1, 'FS0-ST-EI-0049', 'AR0001', 'https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c06596763.png'),
 ('R00002', 'OFFICE 365', NULL, NULL, NULL, 2, NULL, NULL, NULL, 'FSO-51-MO-003', 'AR0001', 'https://www.r2tecnio.com/wp-content/uploads/2021/01/365MS.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `recursosdeempleados`
+--
+
+DROP TABLE IF EXISTS `recursosdeempleados`;
+CREATE TABLE IF NOT EXISTS `recursosdeempleados` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idRecurso` char(6) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `idEmpleado` char(6) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ck_recursos_empleados1` (`idRecurso`),
+  KEY `ck_recursos_empleados2` (`idEmpleado`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -297,7 +314,10 @@ CREATE TABLE IF NOT EXISTS `tokens` (
 --
 
 INSERT INTO `tokens` (`Id`, `IdEmpleado`, `SeleccionRecurso`, `Descripcion`, `IdEstado`, `Fecha`, `Prioridad`) VALUES
-('TK0001', 'EM1234', 'R00001', 'Mi laptop agarró fuego', 1, '2021-10-05', 'Sumamente importante así el edificio no agarra fuego también');
+('TK0001', 'EM1234', 'R00001', 'Mi laptop agarró fuego', 1, '2021-10-05', 'Sumamente importante así el edificio no agarra fuego también'),
+('TK0003', 'EM1234', 'R00001', 'No quiere encender', 1, '2021-10-11', 'Media'),
+('TK0004', 'EM1234', 'R00002', 'No puedo iniciar sesión', 1, '2021-10-11', 'Baja'),
+('TK0005', 'EM1234', 'R00001', 'No quiere encender', 1, '2021-10-19', 'Alta');
 
 -- --------------------------------------------------------
 
@@ -339,8 +359,7 @@ ALTER TABLE `area`
 -- Filtros para la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  ADD CONSTRAINT `ck_area_asignada_empleado` FOREIGN KEY (`IdAreaAsignada`) REFERENCES `area` (`Id`),
-  ADD CONSTRAINT `ck_recuros_empleado` FOREIGN KEY (`IdRecurso`) REFERENCES `recursos` (`Id`);
+  ADD CONSTRAINT `ck_area_asignada_empleado` FOREIGN KEY (`IdAreaAsignada`) REFERENCES `area` (`Id`);
 
 --
 -- Filtros para la tabla `mantenimientos`
@@ -370,6 +389,13 @@ ALTER TABLE `prestamorecursos`
 ALTER TABLE `recursos`
   ADD CONSTRAINT `ck_area_asignada` FOREIGN KEY (`IdAreaAsignada`) REFERENCES `area` (`Id`),
   ADD CONSTRAINT `ck_tipos` FOREIGN KEY (`IdTipoRecurso`) REFERENCES `tiporecurso` (`Id`);
+
+--
+-- Filtros para la tabla `recursosdeempleados`
+--
+ALTER TABLE `recursosdeempleados`
+  ADD CONSTRAINT `ck_recursos_empleados1` FOREIGN KEY (`idRecurso`) REFERENCES `recursos` (`Id`),
+  ADD CONSTRAINT `ck_recursos_empleados2` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`Id`);
 
 --
 -- Filtros para la tabla `tokens`

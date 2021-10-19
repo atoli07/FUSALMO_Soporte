@@ -18,27 +18,26 @@ import javax.persistence.NoResultException;
 @ManagedBean(name="userEmpleado")
 @RequestScoped
 public class UserEmpleadoController {
-    
+
     private String Id;
     private String correo;
     private String Password;
-    
-    public String validaLogin(){
-        
-        try{
-        UserEmpleadoModel USER=new UserEmpleadoModel();
-        EmpleadoEntity u = USER.validarUsuario(correo, Password);
-        
-        if(u!=null){
-            Id= u.getId();
-            return "bienvenidoEmpleado";
+
+    public String validaLogin() {
+
+        try {
+            UserEmpleadoModel USER = new UserEmpleadoModel();
+            EmpleadoEntity u = USER.validarUsuario(correo, Password);
+
+            if (u != null) {
+                Id = u.getId();
+                return "empleadoIT/bienvenidoEmpleado";
+            } else {
+                return "index";
+            }
+        } catch (NoResultException e) {
+            return "index";
         }
-        else{
-            return "indexEmpleado";         
-        }
-        }catch(NoResultException e) { 
-     return "indexEmpleado"; 
-    } 
     }
 
     public String getId() {
@@ -64,6 +63,5 @@ public class UserEmpleadoController {
     public void setPassword(String Password) {
         this.Password = Password;
     }
-    
-    
+
 }

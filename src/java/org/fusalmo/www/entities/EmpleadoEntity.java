@@ -38,8 +38,12 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "EmpleadoEntity.findByDui", query = "SELECT e FROM EmpleadoEntity e WHERE e.dui = :dui")
     , @NamedQuery(name = "EmpleadoEntity.findByCargo", query = "SELECT e FROM EmpleadoEntity e WHERE e.cargo = :cargo")
     , @NamedQuery(name = "EmpleadoEntity.findByCorreo", query = "SELECT e FROM EmpleadoEntity e WHERE e.correo = :correo")
-    , @NamedQuery(name = "EmpleadoEntity.findByContra", query = "SELECT e FROM EmpleadoEntity e WHERE e.contra = :contra")})
+    , @NamedQuery(name = "EmpleadoEntity.findByContra", query = "SELECT e FROM EmpleadoEntity e WHERE e.contra = :contra")
+    , @NamedQuery(name = "EmpleadoEntity.findByMailPass", query = "SELECT e FROM EmpleadoEntity e WHERE e.correo = :correo AND e.contra = :contra")})
 public class EmpleadoEntity implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")
+    private List<RecursosDeEmpleadosEntity> recursosDeEmpleadosEntityList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -238,6 +242,15 @@ public class EmpleadoEntity implements Serializable {
     @Override
     public String toString() {
         return "org.fusalmo.www.entities.EmpleadoEntity[ id=" + id + " ]";
+    }
+
+
+    public List<RecursosDeEmpleadosEntity> getRecursosDeEmpleadosEntityList() {
+        return recursosDeEmpleadosEntityList;
+    }
+
+    public void setRecursosDeEmpleadosEntityList(List<RecursosDeEmpleadosEntity> recursosDeEmpleadosEntityList) {
+        this.recursosDeEmpleadosEntityList = recursosDeEmpleadosEntityList;
     }
     
 }

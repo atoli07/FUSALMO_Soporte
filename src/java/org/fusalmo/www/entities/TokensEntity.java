@@ -30,7 +30,8 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "TokensEntity.findById", query = "SELECT t FROM TokensEntity t WHERE t.id = :id")
     , @NamedQuery(name = "TokensEntity.findByFecha", query = "SELECT t FROM TokensEntity t WHERE t.fecha = :fecha")
     , @NamedQuery(name = "TokensEntity.findByPrioridad", query = "SELECT t FROM TokensEntity t WHERE t.prioridad = :prioridad")
-    , @NamedQuery(name= "TokensEntity.countAll", query ="SELECT COUNT(t.id) FROM TokensEntity t")})
+    , @NamedQuery(name= "TokensEntity.countAll", query ="SELECT COUNT(t.id) FROM TokensEntity t")
+    ,@NamedQuery(name="TokensEntity.findByIdEmpleado", query="SELECT t FROM TokensEntity t WHERE t.idEmpleado.id = :idEmp")})
 public class TokensEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

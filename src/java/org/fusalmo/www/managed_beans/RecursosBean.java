@@ -5,16 +5,22 @@
  */
 package org.fusalmo.www.managed_beans;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import org.fusalmo.www.entities.AreaEntity;
+import org.fusalmo.www.entities.EmpleadoEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.entities.TipoRecursoEntity;
+import org.fusalmo.www.model.EmpleadoModel;
 import org.fusalmo.www.model.RecursosModel;
 import org.fusalmo.www.utils.JsfUtil;
+import org.fusalmo.www.utils.Validate_codAct;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -25,10 +31,14 @@ import org.fusalmo.www.utils.JsfUtil;
 public class RecursosBean {
 
     RecursosModel modelo = new RecursosModel();
+    EmpleadoModel empmodelo= new EmpleadoModel();
+    Validate_codAct validar = new Validate_codAct();
     private String areaAsignada;
     private Integer tipoRecurso;
     private RecursosEntity recurso;
     String idRecurso;
+    private EmpleadoEntity empleado;
+    private int tipoRecursoModificar;
     private List<RecursosEntity>listaRecursos;
     private List<AreaEntity> listarAreas;
     /**
@@ -48,6 +58,12 @@ public class RecursosBean {
         return modelo.listarTipoRecursos();
     }
     
+    public List<RecursosEntity> getListaRecursosByIdEmpleado(String idemp){
+        System.out.println(idemp.substring(22, 28));
+        empleado= empmodelo.obtenerEmpleado(idemp.substring(22, 28));
+        return modelo.listarRecursosByIdEmpleado(empleado.getIdRecurso().getId());
+    } 
+    
     public String ponerIP(RecursosEntity recurso){
         if (recurso.getDireccionIP()== null) {
             return "NO";
@@ -66,18 +82,14 @@ public class RecursosBean {
         }
     }
     
-    public void saveResources(){
-        
-    }
-    
     public String opcAgregar(int opcAdd){
         
         System.out.println(opcAdd);
         switch (opcAdd) {
             case 1://Agregar laptop
-                return "agregarLaptop?faces-redirect=true&type-resource=" + opcAdd;
+                return "tipo/agregarLaptop?faces-redirect=true&type-resource=" + opcAdd;
             case 2://Agregar laptop
-                return "agregarMicrosoftENT?faces-redirect=true&type-resource=" + opcAdd;
+                return "tipo/agregarMicrosoftENT?faces-redirect=true&type-resource=" + opcAdd;
             default:
                 throw new AssertionError();
         }
@@ -100,7 +112,7 @@ public class RecursosBean {
             System.out.println("Hubo un error inesperado al registrar la laptop");
             return null;
         }else{
-            return "seleccionDeRecurso?faces-redirect=true";
+            return "/adminIT/recursos/agregar/seleccionDeRecurso?faces-redirect=true";
         }
         
     }
@@ -129,19 +141,59 @@ public class RecursosBean {
     
     public String redirectEdit(){
         
-        System.out.println(JsfUtil.getRequest().getParameter("idRecurso"));
-        
-        recurso = (
+        setRecurso(
                 modelo.buscarRecursoId(
                         JsfUtil.getRequest().getParameter("idRecurso")
                 )
         );
         
-        System.out.println(recurso);
+        if(getRecurso().getIdTipoRecurso().getId() == 1){
+            return "tipo/laptop?faces-redirect=true&idRecurso=" + getRecurso().getId() + "&tipo-Recurso=" + getRecurso().getIdTipoRecurso().getId();
+        }
+        if(getRecurso().getIdTipoRecurso().getId() == 2){
+            return "tipo/microsoft?faces-redirect=true&idRecurso=" + getRecurso().getId() + "&tipo-Recurso=" + getRecurso().getIdTipoRecurso().getId();
+        }
         
-        System.out.println(getRecurso());
+        return null;
         
-        return "editarRecurso?faces-redirect=true";
+    }
+    
+    public void obtenerRecursoID(String resource){
+        
+        setRecurso(modelo.buscarRecursoId(resource));
+        
+        setTipoRecursoModificar((int) recurso.getIdTipoRecurso().getId());
+        
+    }
+    
+    public String editarRecurso(){
+        
+        //-----------System.out.println(recurso);-------------
+        //System.out.println(recurso.getId());
+        //System.out.println(recurso.getNombre());
+        //System.out.println(recurso.getCodActivo());
+        //System.out.println(recurso.getImagen());
+        //System.out.println(areaAsignada);
+        //System.out.println(recurso.getIdTipoRecurso());
+        
+        //System.out.println(JsfUtil.getRequest().getParameter("tipoRecurso"));
+        //System.out.println(JsfUtil.getRequest().getParameter("idRecurso"));
+        
+        recurso.setId(JsfUtil.getRequest().getParameter("idRecurso"));
+        recurso.setIdTipoRecurso(modelo.obtenerRecurso(Integer.parseInt(JsfUtil.getRequest().getParameter("tipoRecurso"))));
+        recurso.setIdAreaAsignada(modelo.obtenerArea(areaAsignada));
+        
+        if(modelo.modificarRecurso(recurso) != 0){
+            
+            System.out.println("Se modificó correctamente el recurso");
+            return "/adminIT/recursos/editar/verEditar?faces-redirect=true";
+            
+        }else{
+            
+            System.out.println("Hubo un error al modificar el recurso");
+            return null;
+            
+        }
         
     }
     
@@ -193,6 +245,20 @@ public class RecursosBean {
 
     public void setIdRecurso(String idRecurso) {
         this.idRecurso = idRecurso;
+    }
+    
+    /**
+     * @return the tipoRecursoModificar
+     */
+    public int getTipoRecursoModificar() {
+        return tipoRecursoModificar;
+    }
+
+    /**
+     * @param tipoRecursoModificar the tipoRecursoModificar to set
+     */
+    public void setTipoRecursoModificar(int tipoRecursoModificar) {
+        this.tipoRecursoModificar = tipoRecursoModificar;
     }
     
 }

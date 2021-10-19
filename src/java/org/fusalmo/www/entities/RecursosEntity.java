@@ -39,6 +39,9 @@ import javax.persistence.Table;
     , @NamedQuery(name = "RecursosEntity.countAll", query = "SELECT COUNT(r.id) FROM RecursosEntity r")})
 public class RecursosEntity implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRecurso")
+    private List<RecursosDeEmpleadosEntity> recursosDeEmpleadosEntityList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -284,5 +287,25 @@ public class RecursosEntity implements Serializable {
     public String toString() {
         return "org.fusalmo.www.entities.RecursosEntity[ id=" + id + " ]";
     }
-    
+
+    public RecursosEntity(String id, String nombre, String codActivo, String imagen) {
+        this.id = id;
+        this.nombre = nombre;
+        this.codActivo = codActivo;
+        this.imagen = imagen;
+    }
+
+    public void setCargador(Boolean cargador) {
+        this.cargador = cargador;
+    }
+
+
+    public List<RecursosDeEmpleadosEntity> getRecursosDeEmpleadosEntityList() {
+        return recursosDeEmpleadosEntityList;
+    }
+
+    public void setRecursosDeEmpleadosEntityList(List<RecursosDeEmpleadosEntity> recursosDeEmpleadosEntityList) {
+        this.recursosDeEmpleadosEntityList = recursosDeEmpleadosEntityList;
+    }
+
 }

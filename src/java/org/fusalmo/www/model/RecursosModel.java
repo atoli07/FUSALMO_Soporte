@@ -33,6 +33,20 @@ public class RecursosModel {
         }
     }
     
+    public List<RecursosEntity> listarRecursosByIdEmpleado(String idemp){
+        EntityManager em= JPAUtil.getEntityManager();
+        try{
+            Query consulta= em.createNamedQuery("RecursosEntity.findById");
+            consulta.setParameter("id",idemp);
+            System.out.println(idemp);
+            List<RecursosEntity> lista= consulta.getResultList();
+            return lista;
+        }catch(Exception e){
+            em.close();
+            return null;
+        }
+    }
+    
     public List<TipoRecursoEntity> listarTipoRecursos(){
         
         EntityManager em = JPAUtil.getEntityManager();
@@ -710,6 +724,28 @@ public class RecursosModel {
             em.close();
             return filasBorradas;
             
+        } catch (Exception e) {
+            
+            em.close();
+            return 0;
+            
+        }
+        
+    }
+    
+    public int modificarRecurso(RecursosEntity recurso){
+        
+        EntityManager em = JPAUtil.getEntityManager();
+        EntityTransaction tran = em.getTransaction();
+        
+        try {
+            
+            tran.begin();
+            em.merge(recurso);
+            tran.commit();
+            em.close();
+            return 1;
+                
         } catch (Exception e) {
             
             em.close();

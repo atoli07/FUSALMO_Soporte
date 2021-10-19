@@ -34,7 +34,8 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "UsuariosITEntity.findByGenero", query = "SELECT u FROM UsuariosITEntity u WHERE u.genero = :genero")
     , @NamedQuery(name = "UsuariosITEntity.findByDui", query = "SELECT u FROM UsuariosITEntity u WHERE u.dui = :dui")
     , @NamedQuery(name = "UsuariosITEntity.findByCorreo", query = "SELECT u FROM UsuariosITEntity u WHERE u.correo = :correo")
-    , @NamedQuery(name = "UsuariosITEntity.findByContra", query = "SELECT u FROM UsuariosITEntity u WHERE u.contra = :contra")})
+    , @NamedQuery(name = "UsuariosITEntity.findByContra", query = "SELECT u FROM UsuariosITEntity u WHERE u.contra = :contra")
+    , @NamedQuery(name = "UsuariosITEntity.findByMailPass", query = "SELECT u FROM UsuariosITEntity u WHERE u.correo = :correo AND u.contra = :contra")})
 public class UsuariosITEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

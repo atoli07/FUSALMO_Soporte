@@ -50,13 +50,23 @@ public class TokensBean {
         return modelo.listarTokens();
     }
     
+    public List<TokensEntity> getListaTokensByIdEmpleado(String idemp){
+        listaTokens =modelo.listarTokensByIdEmpleado(idemp.substring(22,28));
+        /*EmpleadoEntity  emp=modelo.obtenerEmpleado(idemp);
+                System.out.println("+++++++++++++++++++++++++++++++++++++++++");
+                System.out.println(emp.getId());
+                System.out.println(emp.getNombres());
+                System.out.println(emp.getApellidos());
+                System.out.println("+++++++++++++++++++++++++++++++++++++++++");*/
+        return  listaTokens;
+    }
+    
     public String crearToken(){
         EntityManager em= JPAUtil.getEntityManager();
         token.setId(modelo.crearID());
-        idEmpleado=empleadoModel.getId();
-        //System.out.println(idEmpleado);
-        token.setIdEmpleado(modelo.obtenerEmpleado("EM1234"));
-        //System.out.println("");
+        token.setIdEmpleado(modelo.obtenerEmpleado(idEmpleado.substring(22,28)));
+        System.out.println("-----------------------");
+        System.out.println(getIdEmpleado());
         token.setIdEstado(modelo.obtenerEstadoToken(1));
         java.util.Date fecha = new Date();
         System.out.println(fecha);
@@ -130,5 +140,12 @@ public class TokensBean {
         this.token = token;
     }
 
+    public String getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public void setIdEmpleado(String idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
     
 }
