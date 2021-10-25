@@ -46,6 +46,8 @@ public class Memos_Model {
             Query consulta = em.createNamedQuery("EmpleadoEntity.findByAreaAsignada");
             consulta.setParameter("idAreaAsignada", idArea);
             List<EmpleadoEntity> listarEmpleados = consulta.getResultList();
+            System.out.println("#############################");
+            System.out.println(listarEmpleados.get(0).getApellidos());
             return listarEmpleados;
             
         } catch (Exception e) {

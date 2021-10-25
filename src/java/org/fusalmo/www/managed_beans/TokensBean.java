@@ -64,7 +64,13 @@ public class TokensBean {
     public String crearToken(){
         EntityManager em= JPAUtil.getEntityManager();
         token.setId(modelo.crearID());
-        token.setIdEmpleado(modelo.obtenerEmpleado(idEmpleado.substring(22,28)));
+        if (idEmpleado.length()>6) {
+            System.out.println("ENTRA AL IF DE >6");
+            token.setIdEmpleado(modelo.obtenerEmpleado(idEmpleado.substring(22,28)));
+        }
+        else{
+            token.setIdEmpleado(modelo.obtenerEmpleado(idEmpleado));
+        }
         System.out.println("-----------------------");
         System.out.println(getIdEmpleado());
         token.setIdEstado(modelo.obtenerEstadoToken(1));
@@ -73,12 +79,22 @@ public class TokensBean {
         token.setFecha(fecha);
         token.setSeleccionRecurso(em.find(RecursosEntity.class, idRecurso));
         
-        if(modelo.crearToken(getToken()) != 1){
+        if (idEmpleado.length()>6) {
+            if(modelo.crearToken(getToken()) != 1){
             System.out.println("Hubo un error inesperado al crear el token");
             return null;
-        }else{
+            }else{
             return "listadoTokens?faces-redirect=true";
-        }     
+            } 
+        } 
+        else{
+            if(modelo.crearToken(getToken()) != 1){
+            System.out.println("Hubo un error inesperado al crear el token");
+            return null;
+            }else{
+            return "administracionTokens?faces-redirect=true";
+            } 
+        }
     }
     
     public void borrarDatos(){

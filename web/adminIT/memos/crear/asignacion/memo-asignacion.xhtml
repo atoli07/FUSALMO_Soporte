@@ -146,8 +146,7 @@
                                     itemLabel="#{list.idJefeAsignado.nombres} #{list.idJefeAsignado.apellidos} (#{list.nombre})" 
                                     itemValue="#{list.id}"/>
                                 <p:ajax event="change" listener="#{memos_Bean.onChanged()}" update="mostrarNombre empleados"/>
-                                <!--<p:ajax event="change" listener="#{memos_Bean.obtenerArea()}" update="mostrarNombre"/>-->
-                                <!--<p:ajax event="change" listener="#{memos_Bean.generarLista(memos_Bean.areaSeleccionada)}" update="empleados"/>-->
+                                
                             </p:selectOneMenu>
                             <p:message for="para" id="msgPara"/>
 
@@ -175,20 +174,20 @@
                             <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
                             
                             <p:outputLabel for="empleados" value="Usuario a entregar recursos:"/>
-                            <p:selectOneMenu
-                                id="empleados"
-                                value="#{memos_Bean.empleadoSeleccionado}">
-                                <f:selectItem itemLabel="Selecciona un usuario" itemValue=""/>
-                                <f:selectItems
-                                    value="#{memos_Bean.listaEMPArea}"
-                                    var="listEmpleados"
-                                    itemLabel="#{listEmpleados.nombres} #{listEmpleados.apellidos} (#{listEmpleados.cargo})"
-                                    itemValue="#{listEmpleados.id}"
-                                    />
-                                <p:ajax event="change" listener="#{memos_Bean.prueba()}"/>
-                                <!--<p:ajax event="change" update="@this" />-->
-                                <!--<p:ajax update="mostrarEmpleado" event="change"/>-->
-                            </p:selectOneMenu>
+                            <p:dataTable id="empleados" value="#{memos_Bean.listaEMPArea}" var="empleado"
+                                         rowKey="#{empleado.id}" selectionMode="single" 
+                                         selection="#{memos_Bean.empleadoSeleccionado}">
+                                <p:column headerText="Nombres">
+                                    <h:outputText value="#{empleado.nombres}"/>
+                                </p:column>
+                                <p:column headerText="Apellidos">
+                                    <h:outputText value="#{empleado.apellidos}"/>
+                                </p:column>
+                                <p:column headerText="Cargo">
+                                    <h:outputText value="#{empleado.cargo}"/>
+                                </p:column>
+                            </p:dataTable>
+                           
                             
                         </h:panelGrid>
                         
@@ -208,7 +207,7 @@
                             value="Cancelar" 
                             styleClass="ui-button-outlined ui-button-danger" 
                             style="margin-bottom: 35px; margin-top: 35px; min-width: 25%;" 
-                            href="${request.contextPath}/faces/adminIT/recursos/agregar/seleccionDeRecurso.xhtml"
+                            href="${request.contextPath}/faces/adminIT/memos/crear/index-crear.xhtml"
                             />
                         
                     </p:tab>

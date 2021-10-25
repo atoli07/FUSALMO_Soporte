@@ -19,7 +19,7 @@
 
                     <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
 
-                        <p:menuitem url="${request.contextPath}/faces/empleadoIT/bienvenidoEmpleado.xhtml">
+                        <p:menuitem url="${request.contextPath}/faces/adminIT/indexAdminIT.xhtml">
                             
                             <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
 
@@ -48,7 +48,7 @@
             <div class="p-grid">
             <div class="title p-col-8">
                 
-                <h1 class="titleH1">Lista e historial<br/> de Tokens</h1>
+                <h1 class="titleH1">Administración de<br/> Tokens</h1>
                 
             </div>
             <div class="image p-col-4">
@@ -61,26 +61,31 @@
         </div>
 
         <div class="container">
-            <h1 class="titleH3" >Mis tokens</h1>
+            <h1 class="titleH3" >Aquí tiene los tokens en cola <br/>generados por los empleados:</h1>
             <h:form class="p-grid">
-                <p:dataTable id="tokens" var="token" value="#{tokensBean.getListaTokensByIdEmpleado(idEmpleado)}" 
-                             rowKey="#{token.id}" stripedRows="true">
-                    <p:column headerText="Fecha de creación">
+                <div class="p-d-flex p-p-3" style=" width:100%">
+                    <p:button value="CREAR TOKEN NUEVO" styleClass="ui-button-outlined ui-button-help p-mr-2"
+                              href="nuevoTokenIT.xhtml"/>
+                    <p:button value="VER HISTORIAL DE RESOLUCIONES" styleClass="ui-button-outlined ui-button-success"/>
+                    <p:button value="REGRESAR A MENÚ DE OPCIONES" styleClass="ui-button-outlined ui-button-info p-ml-auto" 
+                              href="${request.contextPath}/faces/adminIT/indexAdminIT.xhtml"/>
+                </div>
+                <p:dataTable id="tokens" var="token" value="#{tokensBean.listaTokens}" 
+                             rowKey="#{token.id}" selectionMode="single" selection="#{tokensBean.selectedToken}" stripedRows="true">
+                    <p:column headerText="Fecha de creación" class="p-col-2">
                         <h:outputText value="#{token.fecha}">
                             <f:convertDateTime pattern="dd/MM/yyyy"/> 
                         </h:outputText>
                     </p:column>
-                    <p:column headerText="Equipo seleccionado">
+                    <p:column headerText="Equipo seleccionado" class="p-col-2">
                         <h:outputText value="#{token.seleccionRecurso.codActivo}"/>
                     </p:column>
-                    <p:column headerText="Detalle">
+                    <p:column headerText="Detalle" class="p-col-4">
                         <h:outputText value="#{token.descripcion}"/>
                     </p:column>
-                    <p:column headerText="Bitácora de soporte">
-                        <p:commandButton update="detalle" value="Detalle" styleClass="ui-button-outlined ui-button-secondary"
-                                         oncomplete="PF('dialogDetalle').show();">
-                            <f:setPropertyActionListener target="#{tokensBean.selectedToken}" value="#{token}"/>
-                        </p:commandButton>
+                    <p:column headerText="Acciones" class="p-col-4">
+                        <p:commandButton value="EDITAR BITÁCORA" styleClass="ui-button-outlined ui-button-secondary p-mr-3"/>
+                        <p:commandButton value="BORRAR" styleClass="ui-button-outlined ui-button-danger"/>
                     </p:column>
                     <p:dialog header="Estado actual:"
                           widgetVar="dialogDetalle" modal="true" showEffect="fade"
@@ -95,15 +100,8 @@
                 </p:dialog>
                 </p:dataTable>
                 <div style="margin-top: 15px">
-                    <p:commandButton value="CREAR TOKEN NUEVO" styleClass="ui-button-outlined ui-button-help"
-                                     action="nuevoTokenEmpleado"/>
-                    <p:button value="REGRESAR A MENÚ DE OPCIONES" styleClass="ui-button-outlined ui-button-info" href="#{request.contextPath}/faces/empleadoIT/bienvenidoEmpleado.xhtml" style="margin-left: 10px"/>
                 </div>
             </h:form>
-        </div>
-        
-        
-        
+        </div>       
     </h:body>
 </html>
-

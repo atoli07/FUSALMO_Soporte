@@ -78,6 +78,8 @@ public class Memos_Bean {
             System.out.println(getAreaSeleccionada());
             AreaEntity area = modelo.obtenerArea(getAreaSeleccionada());
             getMemos().setPara(area.getIdJefeAsignado().getNombres() + " " + area.getIdJefeAsignado().getApellidos() + " (" + area.getNombre() + ")");
+            System.out.println("------------------------");
+            System.out.println(areaSeleccionada);
             listaEMPArea = modelo.listarEMPArea(areaSeleccionada);
             
         }else{
@@ -86,10 +88,8 @@ public class Memos_Bean {
         
     }
     
-    public void prueba(){
-        
-        System.out.println(getEmpleadoSeleccionado());
-        
+    public void prueba(){   
+        System.out.println(getEmpleadoSeleccionado());  
     }
     
     public void convertirFecha(){
