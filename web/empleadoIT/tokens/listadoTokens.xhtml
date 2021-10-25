@@ -8,6 +8,8 @@
         <title>FUSALMO IT Portal - Tokens</title>
         <h:outputStylesheet library="css" name="style.css"/>
         <h:outputStylesheet library="css" name="primeflex.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
     </h:head>
     <h:body class="firstBody">
         
@@ -64,7 +66,7 @@
             <h1 class="titleH3" >Mis tokens</h1>
             <h:form class="p-grid">
                 <p:dataTable id="tokens" var="token" value="#{tokensBean.getListaTokensByIdEmpleado(idEmpleado)}" 
-                             rowKey="#{token.id}" stripedRows="true">
+                             rowKey="#{token.id}" selectionMode="single" selection="#{tokensBean.selectedToken}" stripedRows="true">
                     <p:column headerText="Fecha de creación">
                         <h:outputText value="#{token.fecha}">
                             <f:convertDateTime pattern="dd/MM/yyyy"/> 
@@ -73,26 +75,50 @@
                     <p:column headerText="Equipo seleccionado">
                         <h:outputText value="#{token.seleccionRecurso.codActivo}"/>
                     </p:column>
+                    
+                    <p:column headerText="Detalle">
+                        <h:outputText value="#{token.descripcion}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Bitácora de soporte">
+                        <p:commandButton
+                            update="prueba"
+                            value="Detalles" 
+                            oncomplete="$('#exampleModal').modal('show');" 
+                            title="Ver campos" 
+                            actionListener="#{tokensBean.mostrarDetalle(token.id)}">
+                        </p:commandButton>
+                    </p:column>
+                    
+                    <!--
+                    
+                    <p:column headerText="Bitácora de soporte">
+                        <p:commandButton update="ventanaModal" value="Show" type="button" icon="pi pi-external-link" onclick="PF('dlg2').show()" actionListener="#{tokensBean.mostrarDetalle(token.id)}"/>
+                    </p:column>
+                    
+                    
+                    -->
+                    
+                    <!--
                     <p:column headerText="Detalle">
                         <h:outputText value="#{token.descripcion}"/>
                     </p:column>
                     <p:column headerText="Bitácora de soporte">
-                        <p:commandButton update="detalle" value="Detalle" styleClass="ui-button-outlined ui-button-secondary"
-                                         oncomplete="PF('dialogDetalle').show();">
-                            <f:setPropertyActionListener target="#{tokensBean.selectedToken}" value="#{token}"/>
-                        </p:commandButton>
-                    </p:column>
-                    <p:dialog header="Estado actual:"
-                          widgetVar="dialogDetalle" modal="true" showEffect="fade"
-                          hideEffect="fade" resizable="false">
-                    <p:outputPanel id="detalle">
-                        <div class="dialog">
-                            <h:outputText value="#{tokensBean.selectedToken.idEstado.descripcion}"/>
-                        </div>
-                        <br/>
-                        <p:commandButton value="Entendido" styleClass="ui-button-help" style="float: right" onclick="PF('dialogDetalle').hide()"/>
+                            <p:commandButton value="Detalle" styleClass="ui-button-outlined ui-button-secondary"
+                                             update="detalleBitacora" oncomplete="PF('detalle').show('#{component.clientId}');">
+                                <f:setPropertyActionListener value="#{token}" target="#{tokensBean.selectedToken}"/>
+                            </p:commandButton>
+                        <p:overlayPanel widgetVar="detalle" showCloseIcon="true" dynamic="true">
+                    <p:outputPanel id="detalleBitacora">
+                    <div class="dialog">
+                        <h:outputText value="#{tokensBean.selectedToken.idEstado.descripcion}"/>
+                    </div>
+                    <br/>
+                    <p:commandButton value="Entendido" styleClass="ui-button-help" style="float: right"/>
                     </p:outputPanel>
-                </p:dialog>
+                </p:overlayPanel>
+                    </p:column>
+                -->
                 </p:dataTable>
                 <div style="margin-top: 15px">
                     <p:commandButton value="CREAR TOKEN NUEVO" styleClass="ui-button-outlined ui-button-help"
@@ -102,8 +128,35 @@
             </h:form>
         </div>
         
+        <p:dialog header="Header" widgetVar="dlg2" minHeight="40" width="350" showEffect="fade" modal="true" id="ventanaModal">
+            
+            <p class="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            
+        </p:dialog>
         
+        <p:outputPanel id="prueba">
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Estado: <b style="color: green">#{tokensBean.selectedToken.idEstado.nombre}</b></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            #{tokensBean.selectedToken.idEstado.descripcion}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </p:outputPanel>
         
     </h:body>
 </html>
-

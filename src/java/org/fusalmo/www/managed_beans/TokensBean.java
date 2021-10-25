@@ -113,6 +113,14 @@ public class TokensBean {
         PrimeFaces.current().dialog().openDynamic("detalleBitacoraToken",options,null);
     }
     
+    public void mostrarDetalle(String id){
+        
+        System.out.println(id);
+        this.selectedToken = new TokensEntity();
+        selectedToken = modelo.obtenerToken(id);
+        
+    }
+    
     /*
     public String crearToken(){
         
