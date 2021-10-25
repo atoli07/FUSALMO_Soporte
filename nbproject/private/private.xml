@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/model/RecursosEmpleadosModel.java</file>
-            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/entities/RecursosEntity.java</file>
-            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/model/RecursosModel.java</file>
-            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/web/index.xhtml</file>
-            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/web/empleadoIT/recursos/recursosAsignados.xhtml</file>
-            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/managed_beans/RecursosBean.java</file>
-            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/model/EmpleadoModel.java</file>
+            <file>file:/C:/Users/hassa/Documents/NetBeansProjects/Proyecto%20de%20catedra/alexia/FUSALMO_Soporte/src/java/org/fusalmo/www/managed_beans/Memos_Bean.java</file>
+            <file>file:/C:/Users/hassa/Documents/NetBeansProjects/Proyecto%20de%20catedra/alexia/FUSALMO_Soporte/web/adminIT/memos/crear/asignacion/memo-asignacion.xhtml</file>
+            <file>file:/C:/Users/hassa/Documents/NetBeansProjects/Proyecto%20de%20catedra/alexia/FUSALMO_Soporte/src/java/org/fusalmo/www/entities/EmpleadoEntity.java</file>
+            <file>file:/C:/Users/hassa/Documents/NetBeansProjects/Proyecto%20de%20catedra/alexia/FUSALMO_Soporte/src/java/org/fusalmo/www/model/Memos_Model.java</file>
         </group>
     </open-files>
 </project-private>

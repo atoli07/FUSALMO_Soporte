@@ -89,6 +89,10 @@ public class RecursosBean {
                 return "tipo/agregarLaptop?faces-redirect=true&type-resource=" + opcAdd;
             case 2://Agregar laptop
                 return "tipo/agregarMicrosoftENT?faces-redirect=true&type-resource=" + opcAdd;
+            case 3://Agregar accesorios
+                return "tipo/agregar-accesorio?faces-redirect=true&type-resource=" + opcAdd;
+            case 4://Agregar pc escritorio
+                return "tipo/agregar-pc?faces-redirect=true&type-resource=" + opcAdd;
             default:
                 throw new AssertionError();
         }

@@ -41,7 +41,27 @@ CREATE TABLE IF NOT EXISTS `area` (
 --
 
 INSERT INTO `area` (`Id`, `Nombre`, `IdJefeAsignado`) VALUES
-('AR0001', 'Contabilidad', 'JF0001');
+('AR0001', 'Contabilidad', 'JF0001'),
+('AR0002', 'Socio Laboral', 'JF0001'),
+('AR0003', 'Innovación', 'JF0002'),
+('AR0004', 'CAIF', 'JF0002'),
+('AR0005', 'Deportes', 'JF0003'),
+('AR0006', 'MINED 1', 'JF0003'),
+('AR0007', 'MINED 2: Escuela Abierta para la Convivencia', 'JF0003'),
+('AR0008', 'Administración', 'JF0004'),
+('AR0009', 'RRHH', 'JF0001'),
+('AR0010', 'Gestión y Recaudación', 'JF0001'),
+('AR0011', 'Servicios Generales', 'JF0001'),
+('AR0012', 'Proyecto GIZ', 'JF0002'),
+('AR0013', 'Comunicaciones', 'JF0002'),
+('AR0014', 'Gerencia Educativa', 'JF0003'),
+('AR0015', 'Red de Juventudes', 'JF0003'),
+('AR0016', 'FUSALMO Santa Ana', 'JF0004'),
+('AR0017', 'FUSALMO San Miguel', 'JF0001'),
+('AR0018', 'FUSALMO Centro Cultural', 'JF0002'),
+('AR0019', 'CAIF Santa Ana', 'JF0003'),
+('AR0020', 'Innovación San Miguel', 'JF0004'),
+('AR0021', 'Innovación Santa Ana', 'JF0004');
 
 -- --------------------------------------------------------
 
@@ -71,7 +91,8 @@ CREATE TABLE IF NOT EXISTS `empleado` (
 --
 
 INSERT INTO `empleado` (`Id`, `Nombres`, `Apellidos`, `FechaNacimiento`, `TelefonoFijo`, `Genero`, `DUI`, `Cargo`, `IdAreaAsignada`, `Correo`, `Contra`) VALUES
-('EM1234', 'Juan', 'Frank', '2021-09-16', '49823788', 'M', '0194839902', 'Educador de tecnología', 'AR0001', 'fiasingt2@gmail.com', '123456');
+('EM0001', 'Ricardo Alberto', 'Morales Rosas', '2021-06-11', '72189654', 'M', '8596584184', 'Asistente técnico', 'AR0002', 'ricardo.morales@subdominio.dominio', '456'),
+('EM1234', 'Juan', 'Frank', '2021-09-16', '49823788', 'M', '0194839902', 'Educador de tecnología', 'AR0001', 'juan.frank@subdominio.dominio', '123456');
 
 -- --------------------------------------------------------
 
@@ -116,7 +137,10 @@ CREATE TABLE IF NOT EXISTS `jefeasignado` (
 --
 
 INSERT INTO `jefeasignado` (`Id`, `Nombres`, `Apellidos`) VALUES
-('JF0001', 'Juan Antonio', 'Perez Gomez');
+('JF0001', 'Juan Antonio', 'Perez Gomez'),
+('JF0002', 'Alberto Ramos', 'Pérez Rosas'),
+('JF0003', 'Marta Flores', 'Castro Villareal'),
+('JF0004', 'Marco Antonio', 'Gómez Peraza');
 
 -- --------------------------------------------------------
 
@@ -167,7 +191,6 @@ CREATE TABLE IF NOT EXISTS `memos` (
 
 INSERT INTO `memos` (`Id`, `IdAgenteIT`, `IdEmpleado`, `Asunto`, `IdTipo`, `PDF`, `PDFFirmado`, `FechaDevolucion`, `FechaEntrega`, `CantidadRecursos`, `Para`, `De`, `Descripcion`) VALUES
 ('ME0001', 'IT0001', 'EM1234', 'cualquiera', 'ASI', NULL, NULL, NULL, NULL, 0, '', '', '');
-
 -- --------------------------------------------------------
 
 --
@@ -224,7 +247,10 @@ CREATE TABLE IF NOT EXISTS `recursos` (
 
 INSERT INTO `recursos` (`Id`, `Nombre`, `Marca`, `Modelo`, `NumSerie`, `IdTipoRecurso`, `DireccionIP`, `DireccionMAC`, `Cargador`, `CodActivo`, `IdAreaAsignada`, `Imagen`) VALUES
 ('R00001', 'DESKTOP-SD6RO5M', 'HP', '14-ck0013la', '5CG8182FC6', 1, '172.19.8.151', '80:C5:F2:A2:57:C3', 1, 'FS0-ST-EI-0049', 'AR0001', 'https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c06596763.png'),
-('R00002', 'OFFICE 365', NULL, NULL, NULL, 2, NULL, NULL, NULL, 'FSO-51-MO-003', 'AR0001', 'https://www.r2tecnio.com/wp-content/uploads/2021/01/365MS.jpg');
+('R00002', 'OFFICE 365', NULL, NULL, NULL, 2, NULL, NULL, NULL, 'FSO-51-MO-003', 'AR0001', 'https://www.r2tecnio.com/wp-content/uploads/2021/01/365MS.jpg'),
+('R00003', 'Laptop 15', 'HP', 'HP Heavy 2021', 'LFOJI935235', 1, '192.168.1.1', '12:54:66:99:12:33', 0, 'FSO-ST-EI-0018', 'AR0019', 'https://siman.vtexassets.com/arquivos/ids/1012612/102961247_2.jpg?v=637431413600630000'),
+('R00004', 'DELL', 'HP', 'HP Heavy 2021', 'LFOJI935235', 4, '192.168.1.1', '12:54:66:99:12:33', NULL, 'FSO-ST-EI-0018', 'AR0004', 'https://http2.mlstatic.com/D_NQ_NP_731895-MPE45788894850_052021-O.jpg'),
+('R00005', 'Teclado USB', 'Enhance', 'GTX-865', 'BFUASB8214', 3, NULL, NULL, NULL, 'FSO-ST-EI-0001', 'AR0003', 'https://poindoin.com/wp-content/uploads/2021/03/22630_pictures_product_pictorial_1.png');
 
 -- --------------------------------------------------------
 
@@ -286,7 +312,9 @@ CREATE TABLE IF NOT EXISTS `tiporecurso` (
 
 INSERT INTO `tiporecurso` (`Id`, `Nombre`, `Descripcion`, `img`) VALUES
 (1, 'Laptop ', 'Computadora portátil de peso y tamaño ligero.', 'https://www.abasteo.mx/out/pictures/master/category/icon/laptops-home2.png'),
-(2, 'Producto Microsoft Enterprise ', 'Producto oficial de Microsoft 365.', 'https://cdn.codecoda.com/img/ms-enterprise.png');
+(2, 'Producto Microsoft Enterprise ', 'Producto oficial de Microsoft 365.', 'https://cdn.codecoda.com/img/ms-enterprise.png'),
+(3, 'Accesorios', 'Accesorios electrónicos con el cual pueden ser acompañados otros tipos de recursos electrónicos en la fundación.', 'https://static.kemikcdn.com/2019/10/Personalcomputers-L-ARCOBALENO-Palermo-006-300x300.jpg'),
+(4, 'PC Desktop', 'Computadora de escritorio de peso liviano, mediano y pesado.', 'https://s3.us-east-2.amazonaws.com/ccp-prd-s3-uploads/2021/4/28/f5febb708cb1ee1f5dca4f194184a463ded32af2.jpeg');
 
 -- --------------------------------------------------------
 
@@ -343,7 +371,8 @@ CREATE TABLE IF NOT EXISTS `usuariosit` (
 --
 
 INSERT INTO `usuariosit` (`Id`, `Nombres`, `Apellidos`, `FechaNacimiento`, `Genero`, `DUI`, `Correo`, `Contra`) VALUES
-('IT0001', 'Luis', 'Erazo', '2021-09-28', 'M', '9210494022', 'saijfij21@gmail.com', '123');
+('IT0001', 'Luis', 'Erazo', '2021-09-28', 'M', '9210494022', 'saijfij21@gmail.com', '123'),
+('IT0002', 'Pedro', 'Elmono', '2021-10-03', 'M', '8596584184', 'pedro.elm@subdominio.dominio', '995511');
 
 --
 -- Restricciones para tablas volcadas

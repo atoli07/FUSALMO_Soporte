@@ -39,7 +39,8 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "EmpleadoEntity.findByCargo", query = "SELECT e FROM EmpleadoEntity e WHERE e.cargo = :cargo")
     , @NamedQuery(name = "EmpleadoEntity.findByCorreo", query = "SELECT e FROM EmpleadoEntity e WHERE e.correo = :correo")
     , @NamedQuery(name = "EmpleadoEntity.findByContra", query = "SELECT e FROM EmpleadoEntity e WHERE e.contra = :contra")
-    , @NamedQuery(name = "EmpleadoEntity.findByMailPass", query = "SELECT e FROM EmpleadoEntity e WHERE e.correo = :correo AND e.contra = :contra")})
+    , @NamedQuery(name = "EmpleadoEntity.findByMailPass", query = "SELECT e FROM EmpleadoEntity e WHERE e.correo = :correo AND e.contra = :contra")
+    , @NamedQuery(name = "EmpleadoEntity.findByAreaAsignada", query = "SELECT e FROM EmpleadoEntity e WHERE e.idAreaAsignada.id = :idAreaAsignada")})
 public class EmpleadoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

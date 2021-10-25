@@ -7,17 +7,18 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         
-        <h:outputStylesheet library="css" name="styleAdministrarRecursos.css"/>
+        <h:outputStylesheet library="css" name="styleIndexMemos.css"/>
         <h:outputStylesheet library="css" name="primeflex.min.css"/>
         <h:outputStylesheet library="css" name="style.css"/>
         
-        <title>Administración de recursos</title>
+        <title>Memos</title>
         
     </h:head>
+
     <h:body class="firstBody">
-        
+
         <menu class="menu">
-            
+
             <div class="card">
 
                 <h:form>
@@ -25,11 +26,11 @@
                     <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
 
                         <p:menuitem url="${request.contextPath}/faces/adminIT/indexAdminIT.xhtml">
-                            
+
                             <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
 
                         </p:menuitem>
-                        
+
                         <f:facet name="options">
                             <p:button 
                                 class="buttonLogout"
@@ -48,19 +49,23 @@
             </div>
 
         </menu>
-        
+
         <div class="welcome">
             <div class="p-grid">
                 <div class="title p-col-8" style="width: 70%; margin: auto">
 
-                    <h1 class="titleH1">Administración de recursos</h1>
+                    <h1 class="titleH1">
+                        Administración de memos
+                    </h1>
 
                 </div>
                 <div class="image p-col-4" style="width: 20%; margin: auto">
 
                     <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
+
                 </div>
             </div>
+            
             <p:divider class=""/>
 
         </div>
@@ -73,16 +78,14 @@
             href="${request.contextPath}/faces/adminIT/indexAdminIT.xhtml"
             />
         
-        <br/>
-
         <div class="p-grid containerCards" style="margin: auto">
             
             <p:card class="cardForm" style="text-align: center">
                 <f:facet name="header">
-                    <i class="pi pi-search" style="font-size: 500%; "></i>
+                    <i class="pi pi-book" style="font-size: 500%; "></i>
                 </f:facet>
                 <f:facet name="title">
-                    Ver todos
+                    Ver historial
                 </f:facet>
 
                 <f:facet name="footer">
@@ -92,7 +95,7 @@
                         styleClass="ui-button-outlined ui-button-info"
                         icon="pi pi-check"
                         style="width: 100%; color: #7749F8"
-                        href="ver/verRecursosDisponibles.xhtml">
+                        href="historial/ver-historial.xhtml">
 
                     </p:button>
 
@@ -104,7 +107,7 @@
                     <i class="pi pi-th-large" style="font-size: 500%; "></i>
                 </f:facet>
                 <f:facet name="title">
-                    Agregar nuevo
+                    Crear memo
                 </f:facet>
 
                 <f:facet name="footer">
@@ -114,60 +117,17 @@
                         styleClass="ui-button-outlined ui-button-info"
                         icon="pi pi-check"
                         style="width: 100%; color: #7749F8"
-                        href="agregar/seleccionDeRecurso.xhtml">
+                        href="crear/index-crear.xhtml">
 
                     </p:button>
 
                 </f:facet>
-            </p:card>
-
-            <p:card class="cardForm" style="text-align: center">
-                <f:facet name="header">
-                    <i class="pi pi-trash" style="font-size: 500%; "></i>
-                </f:facet>
-                <f:facet name="title">
-                    Eliminar
-                </f:facet>
-
-                <f:facet name="footer">
-
-                    <p:button
-
-                        styleClass="ui-button-outlined ui-button-info"
-                        icon="pi pi-check"
-                        style="width: 100%; color: #7749F8"
-                        href="eliminar/eliminarRecurso.xhtml">
-
-                    </p:button>
-
-                </f:facet>
-            </p:card>
-            
-            <p:card class="cardForm" style="text-align: center">
-                <f:facet name="header">
-                    <i class="pi pi-pencil" style="font-size: 500%; "></i>
-                </f:facet>
-                <f:facet name="title">
-                    Editar
-                </f:facet>
-
-                <f:facet name="footer">
-
-                    <p:button
-
-                        styleClass="ui-button-outlined ui-button-info"
-                        icon="pi pi-check"
-                        style="width: 100%; color: #7749F8" 
-                        href="editar/verEditar.xhtml">
-
-                    </p:button>
-
-                </f:facet>
+                
             </p:card>
             
         </div>
-        
+
     </h:body>
-    
+
 </html>
 
