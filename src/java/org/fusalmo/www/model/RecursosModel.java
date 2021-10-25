@@ -5,6 +5,7 @@
  */
 package org.fusalmo.www.model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import org.fusalmo.www.utils.JPAUtil;
 import java.util.List;
@@ -38,19 +39,13 @@ public class RecursosModel {
         RecursosEmpleadosModel modelo= new RecursosEmpleadosModel();
         EntityManager em= JPAUtil.getEntityManager();
         try{
-            List<RecursosEntity> lista= null;
+            List<RecursosEntity> lista= new ArrayList();
+            RecursosEntity recursotemp= new RecursosEntity();
             List<RecursosDeEmpleadosEntity> listaId= modelo.listarRecursosPorIdEmpleado(idemp);
-            if (listaId.isEmpty()) {
-                System.out.println("------------------------");
-                System.out.println("ESTA VACIO");
-            }
             for (RecursosDeEmpleadosEntity idrec: listaId) {
-                System.out.println(idrec.getIdRecurso());
-                if (idrec.getIdRecurso()!= null) {
-                    //System.out.println(idrec.getIdRecurso());
-                    Query consulta= em.createNamedQuery("RecursosEntity.findById");
-                    consulta.setParameter("id",idrec.getIdRecurso());
-                    lista.add((RecursosEntity)(consulta.getSingleResult()));
+                if (idrec.getIdRecurso().getId()!= null) {
+                    recursotemp=em.find(RecursosEntity.class, idrec.getIdRecurso().getId());
+                    lista.add(recursotemp);
                 }
             }
             return lista;
