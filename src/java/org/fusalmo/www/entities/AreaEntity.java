@@ -36,6 +36,8 @@ public class AreaEntity implements Serializable {
     private String id;
     @Basic(optional = false)
     private String nombre;
+    @Basic(optional = false)
+    private boolean isDeleted;
     @JoinColumn(name = "IdJefeAsignado", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private JefeAsignadoEntity idJefeAsignado;
@@ -71,6 +73,15 @@ public class AreaEntity implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+    
 
     public JefeAsignadoEntity getIdJefeAsignado() {
         return idJefeAsignado;

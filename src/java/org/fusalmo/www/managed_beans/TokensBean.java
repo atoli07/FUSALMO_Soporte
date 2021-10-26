@@ -15,8 +15,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.EntityManager;
 import org.fusalmo.www.entities.EmpleadoEntity;
+import org.fusalmo.www.entities.EstadoTokenEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.entities.TokensEntity;
+import org.fusalmo.www.model.EstadoTokenModel;
 import org.fusalmo.www.model.TokensModel;
 import org.fusalmo.www.utils.JPAUtil;
 import org.fusalmo.www.utils.JsfUtil;
@@ -33,11 +35,13 @@ public class TokensBean {
     TokensModel modelo= new TokensModel();
     private String idRecurso;
     private String idToken;
+    private Integer idEstadoToken;
     private EmpleadoEntity empleadoModel;
     private String idEmpleado;
     private TokensEntity token;
     private TokensEntity selectedToken;
     private List<TokensEntity> listaTokens;
+    private List<EstadoTokenEntity> listaEstado;
 
     /**
      * Creates a new instance of TokensBean
@@ -59,6 +63,12 @@ public class TokensBean {
                 System.out.println(emp.getApellidos());
                 System.out.println("+++++++++++++++++++++++++++++++++++++++++");*/
         return  listaTokens;
+    }
+    
+    public List<EstadoTokenEntity> getListaEstadoTokens(){
+        EstadoTokenModel estadoModel= new EstadoTokenModel();
+        listaEstado = estadoModel.listarEstadoTokens();
+        return listaEstado;
     }
     
     public String crearToken(){
@@ -107,12 +117,6 @@ public class TokensBean {
         token.setSeleccionRecurso(null);
     }
     
-    public void verBitacora(){
-        Map<String, Object> options= new HashMap<>();
-        options.put("resizable", false);
-        PrimeFaces.current().dialog().openDynamic("detalleBitacoraToken",options,null);
-    }
-    
     public void mostrarDetalle(String id){
         
         System.out.println(id);
@@ -121,6 +125,15 @@ public class TokensBean {
         System.out.println(selectedToken.getIdEstado().getDescripcion());
         
     }
+    
+    public void cambiarEstadoToken(Integer idEst){
+        EntityManager em= JPAUtil.getEntityManager();
+        System.out.println(idEst);
+        EstadoTokenEntity newId=modelo.obtenerEstadoToken(idEst);
+        System.out.println(newId.getNombre());
+        //selectedToken.setIdEstado(newId);
+    }
+    
     
     /*
     public String crearToken(){
@@ -172,5 +185,14 @@ public class TokensBean {
     public void setIdEmpleado(String idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
+
+    public Integer getIdEstadoToken() {
+        return idEstadoToken;
+    }
+
+    public void setIdEstadoToken(Integer idEstadoToken) {
+        this.idEstadoToken = idEstadoToken;
+    }
+    
     
 }

@@ -44,6 +44,8 @@ public class TokensEntity implements Serializable {
     private Date fecha;
     @Basic(optional = false)
     private String prioridad;
+    @Basic(optional = false)
+    private boolean isDeleted;
     @JoinColumn(name = "IdEmpleado", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private EmpleadoEntity idEmpleado;
@@ -98,6 +100,14 @@ public class TokensEntity implements Serializable {
 
     public void setPrioridad(String prioridad) {
         this.prioridad = prioridad;
+    }
+
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public EmpleadoEntity getIdEmpleado() {

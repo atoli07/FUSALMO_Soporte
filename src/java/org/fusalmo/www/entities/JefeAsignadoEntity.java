@@ -37,6 +37,8 @@ public class JefeAsignadoEntity implements Serializable {
     private String nombres;
     @Basic(optional = false)
     private String apellidos;
+    @Basic(optional = false)
+    private boolean isDeleted;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idJefeAsignado")
     private List<AreaEntity> areaEntityList;
 
@@ -75,6 +77,14 @@ public class JefeAsignadoEntity implements Serializable {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public List<AreaEntity> getAreaEntityList() {

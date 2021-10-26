@@ -65,6 +65,8 @@ public class EmpleadoEntity implements Serializable {
     private String correo;
     @Basic(optional = false)
     private String contra;
+    @Basic(optional = false)
+    private boolean isDeleted;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")
     private List<PrestamoRecursosEntity> prestamoRecursosEntityList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")
@@ -174,6 +176,14 @@ public class EmpleadoEntity implements Serializable {
 
     public void setContra(String contra) {
         this.contra = contra;
+    }
+
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public List<PrestamoRecursosEntity> getPrestamoRecursosEntityList() {

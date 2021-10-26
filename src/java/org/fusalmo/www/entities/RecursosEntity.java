@@ -56,6 +56,8 @@ public class RecursosEntity implements Serializable {
     @Basic(optional = false)
     @Lob
     private String imagen;
+    @Basic(optional = false)
+    private boolean isDeleted;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRecurso")
     private List<PrestamoRecursosEntity> prestamoRecursosEntityList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRecurso")
@@ -213,6 +215,14 @@ public class RecursosEntity implements Serializable {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public List<PrestamoRecursosEntity> getPrestamoRecursosEntityList() {

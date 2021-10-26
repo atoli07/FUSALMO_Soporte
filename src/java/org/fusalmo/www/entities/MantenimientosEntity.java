@@ -10,9 +10,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -28,7 +26,8 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "MantenimientosEntity.findAll", query = "SELECT m FROM MantenimientosEntity m")
     , @NamedQuery(name = "MantenimientosEntity.findById", query = "SELECT m FROM MantenimientosEntity m WHERE m.id = :id")
-    , @NamedQuery(name = "MantenimientosEntity.findByFechaRealizacion", query = "SELECT m FROM MantenimientosEntity m WHERE m.fechaRealizacion = :fechaRealizacion")})
+    , @NamedQuery(name = "MantenimientosEntity.findByFechaRealizacion", query = "SELECT m FROM MantenimientosEntity m WHERE m.fechaRealizacion = :fechaRealizacion")
+    , @NamedQuery(name = "MantenimientosEntity.findByIsDeleted", query = "SELECT m FROM MantenimientosEntity m WHERE m.isDeleted = :isDeleted")})
 public class MantenimientosEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,9 +39,8 @@ public class MantenimientosEntity implements Serializable {
     @Basic(optional = false)
     @Temporal(TemporalType.DATE)
     private Date fechaRealizacion;
-    @JoinColumn(name = "IdRecurso", referencedColumnName = "Id")
-    @ManyToOne(optional = false)
-    private RecursosEntity idRecurso;
+    @Basic(optional = false)
+    private boolean isDeleted;
 
     public MantenimientosEntity() {
     }
@@ -51,9 +49,10 @@ public class MantenimientosEntity implements Serializable {
         this.id = id;
     }
 
-    public MantenimientosEntity(String id, Date fechaRealizacion) {
+    public MantenimientosEntity(String id, Date fechaRealizacion, boolean isDeleted) {
         this.id = id;
         this.fechaRealizacion = fechaRealizacion;
+        this.isDeleted = isDeleted;
     }
 
     public String getId() {
@@ -80,12 +79,12 @@ public class MantenimientosEntity implements Serializable {
         this.fechaRealizacion = fechaRealizacion;
     }
 
-    public RecursosEntity getIdRecurso() {
-        return idRecurso;
+    public boolean getIsDeleted() {
+        return isDeleted;
     }
 
-    public void setIdRecurso(RecursosEntity idRecurso) {
-        this.idRecurso = idRecurso;
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     @Override

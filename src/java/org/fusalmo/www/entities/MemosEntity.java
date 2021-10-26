@@ -61,6 +61,8 @@ public class MemosEntity implements Serializable {
     @Basic(optional = false)
     @Lob
     private String descripcion;
+    @Basic(optional = false)
+    private boolean isDeleted;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMemo")
     private List<PrestamoRecursosEntity> prestamoRecursosEntityList;
     @JoinColumn(name = "IdEmpleado", referencedColumnName = "Id")
@@ -166,6 +168,14 @@ public class MemosEntity implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public List<PrestamoRecursosEntity> getPrestamoRecursosEntityList() {
