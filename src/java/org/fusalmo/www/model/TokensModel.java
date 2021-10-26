@@ -153,10 +153,10 @@ public class TokensModel {
         EntityManager em= JPAUtil.getEntityManager();
         int countResource = Integer.valueOf(contarTokens());
         int resultLength = String.valueOf(countResource).length();
+        System.out.println("El resultLength es: "+resultLength);
         int numberReturn;
         System.out.println(countResource + " Conteo de tokens");
         if(resultLength == 1 && countResource < 10){
-            
             if(countResource == 9){
                 
                 //Borra el caracter 5 y 4 de la cadena
@@ -188,13 +188,11 @@ public class TokensModel {
                 //para guardar dinámicamente
                 countResource = countResource + 1;
                 finalID = idPlantilla + String.valueOf(countResource);
-                
                 //Comprueba si ya existe este recurso, si existe se guardará en una
                 //posición anterior, sino continuará en aumento el numero en la BD
                 numberReturn = checkToken(finalID, countResource, idPlantilla);
-                
                 resultLength = String.valueOf(numberReturn).length();
-                
+                System.out.println("~~~~resultLength "+resultLength);
                 if(resultLength == 1){
                     
                     finalID = idPlantilla + String.valueOf(numberReturn);
@@ -204,7 +202,8 @@ public class TokensModel {
                 if(resultLength == 2){
                     
                     //Borra el caracter 4 de la cadena
-                    idPlantilla = idPlantilla.deleteCharAt(4);
+                    System.out.println("~~~~idPlantilla "+idPlantilla);
+                    //idPlantilla = idPlantilla.deleteCharAt(4);
                     
                     finalID = idPlantilla + String.valueOf(numberReturn);
                     return finalID;
@@ -618,8 +617,22 @@ public class TokensModel {
             while (returnResource != null) {
 
                 resultCount += 1;
-                
-                finalId = id + String.valueOf(resultCount);
+           
+                if (resultCount>=10) {
+                    id= id.deleteCharAt(4);
+                    System.out.println(id);
+                    
+                    while(returnResource != null){
+                        resultCount += 1;
+                        finalId = id + String.valueOf(resultCount);
+                        returnResource = obtenerToken(finalId);
+                        System.out.println(returnResource + " token retornado");
+                    }
+                    return resultCount;
+                }
+                else{
+                    finalId = id + String.valueOf(resultCount);
+                }
 
                 returnResource = obtenerToken(finalId);
                 System.out.println(returnResource + " token retornado");

@@ -12,11 +12,6 @@
     </h:head>
     <h:body class="firstBody">
 
-        Variables de sesion.
-        <br/>
-        Nombre: ${nombre}
-        <br/>
-        ID: #{idEmpleado} 
         <c:set target="#{tokensBean}" property="idEmpleado" value="${idEmpleado}"/>
 
         <menu class="menu">
@@ -84,7 +79,6 @@
                                      required="true"
                                      requiredMessage="Debe detallar el problema"
                                      validatorMessage="Solo se aceptan letras en este campo">
-                        <f:validateRegex pattern="[a-zA-Z\s]"/>
                     </p:inputTextarea>
                     <p:message for="descripcion"/>
                     <h4 class="titleH1">Seleccione prioridad</h4>

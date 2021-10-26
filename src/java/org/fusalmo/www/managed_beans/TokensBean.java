@@ -118,6 +118,7 @@ public class TokensBean {
         System.out.println(id);
         this.selectedToken = new TokensEntity();
         selectedToken = modelo.obtenerToken(id);
+        System.out.println(selectedToken.getIdEstado().getDescripcion());
         
     }
     
