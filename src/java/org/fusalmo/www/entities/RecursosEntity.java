@@ -80,11 +80,12 @@ public class RecursosEntity implements Serializable {
         this.id = id;
     }
 
-    public RecursosEntity(String id, String nombre, String codActivo, String imagen) {
+    public RecursosEntity(String id, String nombre, String codActivo, String imagen, boolean isDeleted) {
         this.id = id;
         this.nombre = nombre;
         this.codActivo = codActivo;
         this.imagen = imagen;
+        this.isDeleted= isDeleted;
     }
 
     public RecursosEntity(

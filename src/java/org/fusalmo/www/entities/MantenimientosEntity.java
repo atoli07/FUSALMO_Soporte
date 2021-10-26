@@ -10,7 +10,9 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -41,6 +43,9 @@ public class MantenimientosEntity implements Serializable {
     private Date fechaRealizacion;
     @Basic(optional = false)
     private boolean isDeleted;
+    @JoinColumn(name = "IdRecurso", referencedColumnName = "Id")
+    @ManyToOne(optional = false)
+    private RecursosEntity idRecurso;
 
     public MantenimientosEntity() {
     }
@@ -85,6 +90,14 @@ public class MantenimientosEntity implements Serializable {
 
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public RecursosEntity getIdRecurso() {
+        return idRecurso;
+    }
+
+    public void setIdRecurso(RecursosEntity idRecurso) {
+        this.idRecurso = idRecurso;
     }
 
     @Override

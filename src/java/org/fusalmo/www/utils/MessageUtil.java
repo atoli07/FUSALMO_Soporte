@@ -34,6 +34,13 @@ public class MessageUtil {
         addMessage("Error", "El recurso está siendo ocupado");
     }
 
+    public void confirmDeleteToken(){
+        addMessage("Confirmación", "El token ha sido eliminado");
+    }
+    
+    public void errorDeleteToken(){
+        addMessage("Error", "El token está siendo ocupado");
+    }
     public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);

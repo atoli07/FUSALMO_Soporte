@@ -69,7 +69,7 @@ public class UsuariosITEntity implements Serializable {
         this.id = id;
     }
 
-    public UsuariosITEntity(String id, String nombres, String apellidos, Date fechaNacimiento, Character genero, String dui, String correo, String contra) {
+    public UsuariosITEntity(String id, String nombres, String apellidos, Date fechaNacimiento, Character genero, String dui, String correo, String contra, boolean isDeleted) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -78,6 +78,7 @@ public class UsuariosITEntity implements Serializable {
         this.dui = dui;
         this.correo = correo;
         this.contra = contra;
+        this.isDeleted= isDeleted;
     }
 
     public String getId() {

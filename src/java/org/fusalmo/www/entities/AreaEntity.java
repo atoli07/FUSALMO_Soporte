@@ -53,9 +53,10 @@ public class AreaEntity implements Serializable {
         this.id = id;
     }
 
-    public AreaEntity(String id, String nombre) {
+    public AreaEntity(String id, String nombre, boolean isDeleted) {
         this.id = id;
         this.nombre = nombre;
+        this.isDeleted= isDeleted;
     }
 
     public String getId() {

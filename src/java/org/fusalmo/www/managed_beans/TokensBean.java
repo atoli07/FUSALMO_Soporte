@@ -107,6 +107,15 @@ public class TokensBean {
         }
     }
     
+    public String borrarToken(){
+        String id = JsfUtil.getRequest().getParameter("idToken");
+        if (modelo.eliminarToken(id)!= 1) {
+            return "administracionTokens?faces-redirect=true&result=0";
+        }else{
+            return "administracionTokens?faces-redirect=true&result=1";
+        }
+    }
+    
     public void borrarDatos(){
         token.setId("");
         token.setDescripcion("");

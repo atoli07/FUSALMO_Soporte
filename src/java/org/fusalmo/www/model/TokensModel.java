@@ -105,6 +105,19 @@ public class TokensModel {
         }
      }
      
+   public int eliminarToken(String id){
+        EntityManager em= JPAUtil.getEntityManager();
+        try{
+            Query consulta= em.createNamedQuery("TokensEntity.softDelete");
+            System.out.println(id);
+            consulta.setParameter(":id", id);
+            return 1;
+        }catch(Exception e){
+            em.close();
+            return 0;
+        }
+    }
+     
      
      public int crearToken(TokensEntity token){
         EntityManager em= JPAUtil.getEntityManager();

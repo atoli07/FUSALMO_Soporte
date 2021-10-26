@@ -82,12 +82,13 @@ public class MemosEntity implements Serializable {
         this.id = id;
     }
 
-    public MemosEntity(String id, String asunto, String para, String de, String descripcion) {
+    public MemosEntity(String id, String asunto, String para, String de, String descripcion, boolean isDeleted) {
         this.id = id;
         this.asunto = asunto;
         this.para = para;
         this.de = de;
         this.descripcion = descripcion;
+        this.isDeleted=isDeleted;
     }
 
     public String getId() {

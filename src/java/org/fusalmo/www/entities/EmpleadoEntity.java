@@ -86,7 +86,7 @@ public class EmpleadoEntity implements Serializable {
         this.id = id;
     }
 
-    public EmpleadoEntity(String id, String nombres, String apellidos, Date fechaNacimiento, Character genero, String dui, String cargo, String correo, String contra) {
+    public EmpleadoEntity(String id, String nombres, String apellidos, Date fechaNacimiento, Character genero, String dui, String cargo, String correo, String contra, boolean isDeleted) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -96,6 +96,7 @@ public class EmpleadoEntity implements Serializable {
         this.cargo = cargo;
         this.correo = correo;
         this.contra = contra;
+        this.isDeleted=isDeleted;
     }
 
     public String getId() {

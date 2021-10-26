@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
     xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>FUSALMO IT Portal - Tokens</title>
@@ -87,14 +88,46 @@
                         <h:outputText value="#{token.descripcion}"/>
                     </p:column>
                     <p:column headerText="Acciones" class="p-col-4">
+                        <p:growl id="message" showDetail="true"/>
                         <p:commandButton value="EDITAR BITÁCORA" styleClass="ui-button-outlined ui-button-secondary p-mr-3"
                                          update="prueba" oncomplete="$('#exampleModal').modal('show');"
-                                         action="#{tokensBean.mostrarDetalle(token.id)}"/>
-                        <p:commandButton value="BORRAR" styleClass="ui-button-outlined ui-button-danger"/>
+                                         action="#{tokensBean.mostrarDetalle()}"/>
+                        <p:commandButton value="BORRAR" styleClass="ui-button-outlined ui-button-danger"
+                                         action="#{tokensBean.borrarToken()}"
+                                         update="message">
+                            <f:param name="idToken" value="#{token.id}"/>
+                            <p:confirm type="popup" header="Confirmation" message="¿Está seguro de eliminar el recurso?" icon="pi pi-info-circle"/>
+                        </p:commandButton>
+                        <p:confirmPopup global="true">
+                            <p:commandButton value="No" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+                            <p:commandButton value="Sí" type="button" styleClass="ui-confirm-popup-yes" />
+                        </p:confirmPopup>
                     </p:column>
                 </p:dataTable>
+                <c:if test="#{request.getParameter('result') == 1}">
+            <!---->
+            <button id="action-button" onclick="#{messageUtil.confirmDeleteToken()}" disabled="true"></button>
+            <h:form>
+
+                <p:growl id="message2" showDetail="true"/>
+
+            </h:form>
+
+            </c:if>
+            <c:if test="#{request.getParameter('result') == 0}">
+            
+                <button id="action-button" onclick="#{messageUtil.errorDeleteToken()}" disabled="true"></button>
+            
+            <h:form>
+
+                <p:growl id="message2" showDetail="true"/>
+
+            </h:form>
+            
+            </c:if>
             </h:form>
             <p:outputPanel id="prueba">
+                <h:form>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -117,6 +150,7 @@
                     </div>
                 </div>
             </div>
+                    </h:form>
             </p:outputPanel>
         </div>       
     </h:body>

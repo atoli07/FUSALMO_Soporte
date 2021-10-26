@@ -29,7 +29,8 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "TokensEntity.findAll", query = "SELECT t FROM TokensEntity t")
     , @NamedQuery(name = "TokensEntity.findById", query = "SELECT t FROM TokensEntity t WHERE t.id = :id")
     , @NamedQuery(name = "TokensEntity.findByFecha", query = "SELECT t FROM TokensEntity t WHERE t.fecha = :fecha")
-    , @NamedQuery(name = "TokensEntity.findByPrioridad", query = "SELECT t FROM TokensEntity t WHERE t.prioridad = :prioridad")})
+    , @NamedQuery(name = "TokensEntity.findByPrioridad", query = "SELECT t FROM TokensEntity t WHERE t.prioridad = :prioridad")
+    , @NamedQuery(name = "TokensEntity.softDelete", query = "UPDATE TokensEntity t SET t.isDeleted = true WHERE t.id= :id")})
 public class TokensEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,7 +46,7 @@ public class TokensEntity implements Serializable {
     @Basic(optional = false)
     private String prioridad;
     @Basic(optional = false)
-    private boolean isDeleted;
+    private Boolean isDeleted;
     @JoinColumn(name = "IdEmpleado", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private EmpleadoEntity idEmpleado;
@@ -63,11 +64,12 @@ public class TokensEntity implements Serializable {
         this.id = id;
     }
 
-    public TokensEntity(String id, String descripcion, Date fecha, String prioridad) {
+    public TokensEntity(String id, String descripcion, Date fecha, String prioridad, Boolean isDeleted) {
         this.id = id;
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.prioridad = prioridad;
+        this.isDeleted= isDeleted;
     }
 
     public String getId() {
