@@ -64,12 +64,11 @@
             <h1 class="titleH3" >Aquí tiene los tokens en cola <br/>generados por los empleados:</h1>
             <h:form class="p-grid">
                 <div class="p-d-flex p-p-3" style=" width:100%">
-                    <p:button value="CREAR TOKEN NUEVO" styleClass="ui-button-outlined ui-button-help p-mr-2"
-                              href="nuevoTokenIT.xhtml"/>
-                    <p:button value="VER HISTORIAL DE RESOLUCIONES" styleClass="ui-button-outlined ui-button-success"
-                              href="${request.contextPath}/faces/adminIT/tokens/resolucionesTokensIT.xhtml"/>
+                    <p:commandButton value="Imprimir historial" styleClass="ui-button-outlined ui-button-help">
+                        <p:printer target="tokens"/>
+                    </p:commandButton>
                     <p:button value="REGRESAR A MENÚ DE OPCIONES" styleClass="ui-button-outlined ui-button-info p-ml-auto" 
-                              href="${request.contextPath}/faces/adminIT/indexAdminIT.xhtml"/>
+                              href="${request.contextPath}/faces/adminIT/tokens/administracionTokens.xhtml"/>
                 </div>
                 <p:dataTable id="tokens" var="token" value="#{tokensBean.listaTokens}" 
                              rowKey="#{token.id}" selectionMode="single" selection="#{tokensBean.selectedToken}" stripedRows="true">
@@ -81,28 +80,15 @@
                     <p:column headerText="Equipo seleccionado" class="p-col-2">
                         <h:outputText value="#{token.seleccionRecurso.codActivo}"/>
                     </p:column>
-                    <p:column headerText="Detalle" class="p-col-4">
+                    <p:column headerText="Detalle" class="p-col-5">
                         <h:outputText value="#{token.descripcion}"/>
                     </p:column>
-                    <p:column headerText="Acciones" class="p-col-4">
-                        <p:commandButton value="EDITAR BITÁCORA" styleClass="ui-button-outlined ui-button-secondary p-mr-3"/>
-                        <p:commandButton value="BORRAR" styleClass="ui-button-outlined ui-button-danger"/>
+                    <p:column headerText="Resolución Final" class="p-col-3">
+                        <h:outputText value="#{token.idEstado.nombre}"/>
                     </p:column>
-                    <p:dialog header="Estado actual:"
-                          widgetVar="dialogDetalle" modal="true" showEffect="fade"
-                          hideEffect="fade" resizable="false">
-                    <p:outputPanel id="detalle">
-                        <div class="dialog">
-                            <h:outputText value="#{tokensBean.selectedToken.idEstado.descripcion}"/>
-                        </div>
-                        <br/>
-                        <p:commandButton value="Entendido" styleClass="ui-button-help" style="float: right" onclick="PF('dialogDetalle').hide()"/>
-                    </p:outputPanel>
-                </p:dialog>
                 </p:dataTable>
-                <div style="margin-top: 15px">
-                </div>
             </h:form>
         </div>       
     </h:body>
 </html>
+

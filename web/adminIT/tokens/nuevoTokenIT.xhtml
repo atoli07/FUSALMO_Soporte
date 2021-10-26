@@ -74,7 +74,12 @@
                     </p:selectOneMenu>
                     <h4 class="titleH1">Escriba por favor el problema que está presentando</h4>
                     <h4 class="titleH1">Detalle en texto</h4>
-                    <p:inputTextarea rows="6" cols="33" value="#{tokensBean.token.descripcion}"/>
+                    <p:inputTextarea id="descripcion"
+                                     rows="6" cols="33" 
+                                     value="#{tokensBean.token.descripcion}"
+                                     required="true"
+                                     requiredMessage="Debe detallar el problema"/>
+                    <p:message for="descripcion"/>
                     <h4 class="titleH1">Seleccione prioridad</h4>
                     <p:selectOneMenu value="#{tokensBean.token.prioridad}">
                         <f:selectItem itemValue="Baja" itemLabel="Baja"/>
@@ -83,7 +88,7 @@
                     </p:selectOneMenu>
                 </div>
                 <div class="p-col-12" style="margin-top: 15px">
-                    <p:commandButton value="ENVIAR" styleClass="ui-button-outlined ui-button-help" action="#{tokensBean.crearToken()}"/>
+                    <p:commandButton update="@form" value="ENVIAR" styleClass="ui-button-outlined ui-button-help" action="#{tokensBean.crearToken()}"/>
                     <p:commandButton value="BORRAR DATOS" styleClass="ui-button-outlined ui-button-warning" style="margin-left: 10px" action="#{tokensBean.borrarDatos()}"/>
                     <p:button value="CANCELAR Y REGRESAR" styleClass="ui-button-outlined ui-button-danger" style="margin-left: 10px" href="#{request.contextPath}/faces/adminIT/tokens/administracionTokens.xhtml"/>
                 </div>
