@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Soporte
+ * @author El Salvador
  */
 @Entity
 @Table(name = "tokens")
@@ -31,7 +31,8 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "TokensEntity.findById", query = "SELECT t FROM TokensEntity t WHERE t.id = :id")
     , @NamedQuery(name = "TokensEntity.findByFecha", query = "SELECT t FROM TokensEntity t WHERE t.fecha = :fecha")
     , @NamedQuery(name = "TokensEntity.findByPrioridad", query = "SELECT t FROM TokensEntity t WHERE t.prioridad = :prioridad")
-    , @NamedQuery(name = "TokensEntity.softDelete", query = "UPDATE TokensEntity t SET t.isDeleted = 1 WHERE t.id= :id")})
+    , @NamedQuery(name = "TokensEntity.findByIsDeleted", query = "SELECT t FROM TokensEntity t WHERE t.isDeleted = :isDeleted")
+    , @NamedQuery(name = "TokensEntity.softDelete", query = "UPDATE TokensEntity t SET t.isDeleted = 'TRUE' OR 1 WHERE t.id= :id")})
 public class TokensEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,7 +48,6 @@ public class TokensEntity implements Serializable {
     @Basic(optional = false)
     private String prioridad;
     @Basic(optional = false)
-    @Column(nullable= false, columnDefinition = "TINYINT(1)")
     private Boolean isDeleted;
     @JoinColumn(name = "IdEmpleado", referencedColumnName = "Id")
     @ManyToOne(optional = false)
@@ -71,7 +71,7 @@ public class TokensEntity implements Serializable {
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.prioridad = prioridad;
-        this.isDeleted= isDeleted;
+        this.isDeleted = isDeleted;
     }
 
     public String getId() {
@@ -106,11 +106,11 @@ public class TokensEntity implements Serializable {
         this.prioridad = prioridad;
     }
 
-    public boolean isIsDeleted() {
+    public Boolean getIsDeleted() {
         return isDeleted;
     }
 
-    public void setIsDeleted(boolean isDeleted) {
+    public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 

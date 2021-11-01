@@ -87,39 +87,10 @@
                             oncomplete="$('#exampleModal').modal('show');" 
                             title="Ver campos" 
                             styleClass="ui-button-outlined ui-button-secondary"
-                            actionListener="#{tokensBean.mostrarDetalle(token.id)}">
+                            actionListener="#{tokensBean.mostrarDetalle()}">
+                            <f:param name="idToken" value="#{token.id}"/>
                         </p:commandButton>
                     </p:column>
-                    
-                    <!--
-                    
-                    <p:column headerText="Bitácora de soporte">
-                        <p:commandButton update="ventanaModal" value="Show" type="button" icon="pi pi-external-link" onclick="PF('dlg2').show()" actionListener="#{tokensBean.mostrarDetalle(token.id)}"/>
-                    </p:column>
-                    
-                    
-                    -->
-                    
-                    <!--
-                    <p:column headerText="Detalle">
-                        <h:outputText value="#{token.descripcion}"/>
-                    </p:column>
-                    <p:column headerText="Bitácora de soporte">
-                            <p:commandButton value="Detalle" styleClass="ui-button-outlined ui-button-secondary"
-                                             update="detalleBitacora" oncomplete="PF('detalle').show('#{component.clientId}');">
-                                <f:setPropertyActionListener value="#{token}" target="#{tokensBean.selectedToken}"/>
-                            </p:commandButton>
-                        <p:overlayPanel widgetVar="detalle" showCloseIcon="true" dynamic="true">
-                    <p:outputPanel id="detalleBitacora">
-                    <div class="dialog">
-                        <h:outputText value="#{tokensBean.selectedToken.idEstado.descripcion}"/>
-                    </div>
-                    <br/>
-                    <p:commandButton value="Entendido" styleClass="ui-button-help" style="float: right"/>
-                    </p:outputPanel>
-                </p:overlayPanel>
-                    </p:column>
-                -->
                 </p:dataTable>
                 <div style="margin-top: 15px">
                     <p:commandButton value="CREAR TOKEN NUEVO" styleClass="ui-button-outlined ui-button-help"
@@ -128,15 +99,6 @@
                 </div>
             </h:form>
         </div>
-        
-        <p:dialog header="Header" widgetVar="dlg2" minHeight="40" width="350" showEffect="fade" modal="true" id="ventanaModal">
-            
-            <p class="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            
-        </p:dialog>
         
         <p:outputPanel id="prueba">
             
@@ -153,7 +115,7 @@
                             #{tokensBean.selectedToken.idEstado.descripcion}
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>

@@ -129,18 +129,13 @@ public class TokensBean {
     
     public void mostrarDetalle(){
         String id = JsfUtil.getRequest().getParameter("idToken");
-        System.out.println(id);
         this.selectedToken = new TokensEntity();
-        selectedToken = modelo.obtenerToken(id);
-        System.out.println(selectedToken.getIdEstado().getDescripcion());
-        
+        selectedToken = modelo.obtenerToken(id);        
     }
     
     public void cambiarEstadoToken(Integer idEst){
         String id = JsfUtil.getRequest().getParameter("idToken");
-        System.out.println(idEst);
         EstadoTokenEntity newId=modelo.obtenerEstadoToken(idEst);
-        System.out.println(newId.getNombre());
         this.selectedToken= modelo.obtenerToken(id);
         selectedToken.setIdEstado(newId);
         
