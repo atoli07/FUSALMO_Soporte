@@ -33,21 +33,25 @@ public class TokensModel {
         }
     }
      
+     public  List<TokensEntity> listarTokensActivos(){
+         EntityManager em= JPAUtil.getEntityManager();
+         try{
+            Query consulta= em.createNamedQuery("TokensEntity.findByIsDeleted");
+            consulta.setParameter("isDeleted", Boolean.FALSE);
+            List<TokensEntity> lista= consulta.getResultList();
+            return lista;
+        }catch(Exception e){
+            em.close();
+            return null;
+        }
+     }
+     
     public List<TokensEntity> listarTokensByIdEmpleado(String idemp){
         EntityManager em= JPAUtil.getEntityManager();
         try{
             Query consulta =em.createQuery("SELECT t FROM TokensEntity t WHERE t.idEmpleado.id = :idEmpleado");
             consulta.setParameter("idEmpleado",idemp);
             List<TokensEntity> lista= consulta.getResultList();
-            /*for (TokensEntity tokensEntity : lista) {
-                
-                System.out.println("+++++++++++++++++++++++++++++++++++++++++");
-                System.out.println(tokensEntity.getId());
-                System.out.println(tokensEntity.getIdEmpleado());
-                System.out.println(tokensEntity.getDescripcion());
-                System.out.println("+++++++++++++++++++++++++++++++++++++++++");
-                
-            }*/
             return lista;
         }catch(Exception e){
             em.close();
@@ -107,12 +111,18 @@ public class TokensModel {
      
    public int eliminarToken(String id){
         EntityManager em= JPAUtil.getEntityManager();
+        EntityTransaction tran =em.getTransaction();
         try{
-            Query consulta= em.createNamedQuery("TokensEntity.softDelete");
-            consulta.setParameter(":id", id);
+            TokensEntity temp=em.find(TokensEntity.class, id);
+            temp.setIsDeleted(Boolean.TRUE);
+            tran.begin();
+            em.persist(temp);
+            tran.commit();
+            em.close();
             return 1;
         }catch(Exception e){
             em.close();
+            System.out.println(e);
             return 0;
         }
     }

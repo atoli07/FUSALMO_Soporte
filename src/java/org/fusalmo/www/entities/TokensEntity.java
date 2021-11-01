@@ -8,7 +8,6 @@ package org.fusalmo.www.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -31,8 +30,7 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "TokensEntity.findById", query = "SELECT t FROM TokensEntity t WHERE t.id = :id")
     , @NamedQuery(name = "TokensEntity.findByFecha", query = "SELECT t FROM TokensEntity t WHERE t.fecha = :fecha")
     , @NamedQuery(name = "TokensEntity.findByPrioridad", query = "SELECT t FROM TokensEntity t WHERE t.prioridad = :prioridad")
-    , @NamedQuery(name = "TokensEntity.findByIsDeleted", query = "SELECT t FROM TokensEntity t WHERE t.isDeleted = :isDeleted")
-    , @NamedQuery(name = "TokensEntity.softDelete", query = "UPDATE TokensEntity t SET t.isDeleted = 'TRUE' OR 1 WHERE t.id= :id")})
+    , @NamedQuery(name = "TokensEntity.findByIsDeleted", query = "SELECT t FROM TokensEntity t WHERE t.isDeleted = :isDeleted")})
 public class TokensEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

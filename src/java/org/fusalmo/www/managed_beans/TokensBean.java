@@ -42,6 +42,7 @@ public class TokensBean {
     private TokensEntity token;
     private TokensEntity selectedToken;
     private List<TokensEntity> listaTokens;
+    private List<TokensEntity> listaTokensActivos;
     private List<EstadoTokenEntity> listaEstado;
 
     /**
@@ -53,6 +54,10 @@ public class TokensBean {
     
     public List<TokensEntity> getListaTokens(){
         return modelo.listarTokens();
+    }
+    
+    public List<TokensEntity> getListaTokensActivos(){
+        return modelo.listarTokensActivos();
     }
     
     public List<TokensEntity> getListaTokensByIdEmpleado(String idemp){
@@ -110,10 +115,10 @@ public class TokensBean {
     
     public String borrarToken(){
         String id = JsfUtil.getRequest().getParameter("idToken");
-        if (modelo.eliminarToken(id)!= 1) {
-            return "administracionTokens?faces-redirect=true&result=0";
-        }else{
+        if (modelo.eliminarToken(id)== 1) {
             return "administracionTokens?faces-redirect=true&result=1";
+        }else{
+            return "administracionTokens?faces-redirect=true&result=0";
         }
     }
     
