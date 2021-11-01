@@ -9,54 +9,13 @@
         
         <h:outputStylesheet library="css" name="primeflex.min.css"/>
         <h:outputStylesheet library="css" name="style.css"/>
+        <h:outputScript name="memos.js" library="js" target="body"/>
         
         <title>Memo de asignación</title>
         
     </h:head>
     
     <h:body class="firstBody">
-
-        <script type="text/javascript">
-            PrimeFaces.locales['es'] = {
-                closeText: 'Cerrar',
-                prevText: 'Anterior',
-                nextText: 'Siguiente',
-                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
-                dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-                weekHeader: 'Semana',
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: '',
-                timeOnlyTitle: 'Sólo hora',
-                timeText: 'Tiempo',
-                hourText: 'Hora',
-                minuteText: 'Minuto',
-                secondText: 'Segundo',
-                millisecondText: 'Milisegundo',
-                currentText: 'Fecha actual',
-                ampm: false,
-                month: 'Mes',
-                week: 'Semana',
-                day: 'Día',
-                allDayText: 'Todo el día',
-                today: 'Hoy',
-                clear: 'Claro'
-            };
-            
-        </script>
-
-        <script type="text/javascript">
-            //<![CDATA[
-            function dateTemplateFunc(date) {
-                return '<span style="background-color:' + ((date.day < 21 && date.day > 10) ? '#81C784' : 'inherit') + ';border-radius:50%;width: 2.5rem;height: 2.5rem;line-height: 2.5rem;display: flex;align-items: center;justify-content: center;">' + date.day + '</span>';
-            }
-
-            //]]>
-        </script>
 
         <style type="text/css">
             .value {
@@ -117,15 +76,9 @@
 
         </div>
         
-        <p:button 
-            styleClass="ui-button-outlined ui-button-info"
-            value="Regresar" 
-            icon="pi pi-chevron-left"
-            style="width: 50%; margin-left: 25%; margin-bottom: 20px; margin-top: 10px; color: #17A2B8"
-            href="${request.contextPath}/faces/adminIT/memos/crear/index-crear.xhtml"
-            />
-        
-        <h:form style="width: 80%; margin: auto;">
+        <h:form style="width: 80%; margin: auto;" id="form">
+            
+            <p:messages id="msgs"/>
             
             <div class="card">
 
@@ -138,15 +91,19 @@
                         <h:panelGrid columns="1" cellpadding="7" styleClass="p-mb-1">
 
                             <p:outputLabel for="para" value="Para:"/>
-                            <p:selectOneMenu id="para" value="#{memos_Bean.areaSeleccionada}">
+                            <p:selectOneMenu 
+                                id="para" 
+                                value="#{memos_Bean.areaSeleccionada}"
+                                required="true"
+                                requiredMessage="Seleccione un jefe de área"
+                                >
                                 <f:selectItem itemLabel="Seleccione una opción" itemValue=""/>
                                 <f:selectItems
                                     value="#{memos_Bean.listarAreas}" 
                                     var="list" 
                                     itemLabel="#{list.idJefeAsignado.nombres} #{list.idJefeAsignado.apellidos} (#{list.nombre})" 
                                     itemValue="#{list.id}"/>
-                                <p:ajax event="change" listener="#{memos_Bean.onChanged()}" update="mostrarNombre empleados"/>
-                                
+                                <p:ajax event="change" listener="#{memos_Bean.onChanged()}" update="mostrarNombre"/>
                             </p:selectOneMenu>
                             <p:message for="para" id="msgPara"/>
 
@@ -168,28 +125,112 @@
                             <p:message for="asunto" id="msgAsunto"/>
 
                             <p:outputLabel for="basic" value="Fecha de entrega:"/>
-                            <p:datePicker id="basic" value="#{memos_Bean.date}">
-                                <p:ajax update="mostrarFecha" listener="#{memos_Bean.convertirFecha()}" event="focus"/>
+                            <p:datePicker 
+                                id="basic" 
+                                value="#{memos_Bean.date}" 
+                                placeholder="MM-DD-YYYY"
+                                required="true"
+                                requiredMessage="Debe ingresar una fecha"
+                                >
+                                <p:ajax event="blur" listener="#{memos_Bean.convertirFecha()}" update="mostrarFecha"/>
                             </p:datePicker>
-                            <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
-                            
-                            <p:outputLabel for="empleados" value="Usuario a entregar recursos:"/>
-                            <p:dataTable id="empleados" value="#{memos_Bean.listaEMPArea}" var="empleado"
-                                         rowKey="#{empleado.id}" selectionMode="single" 
-                                         selection="#{memos_Bean.empleadoSeleccionado}">
-                                <p:column headerText="Nombres">
-                                    <h:outputText value="#{empleado.nombres}"/>
-                                </p:column>
-                                <p:column headerText="Apellidos">
-                                    <h:outputText value="#{empleado.apellidos}"/>
-                                </p:column>
-                                <p:column headerText="Cargo">
-                                    <h:outputText value="#{empleado.cargo}"/>
-                                </p:column>
-                            </p:dataTable>
-                           
-                            
+                            <p:message for="basic" id="msgDATE"/>
+
                         </h:panelGrid>
+
+                        <p:dataTable var="empleados" value="#{memos_Bean.listaEmpleados}" 
+                                     widgetVar="customersTable"
+                                     emptyMessage="No se han encontrado empleados"
+                                     filteredValue="#{memos_Bean.filtrarListaEmpleados}"
+                                     rowKey="#{empleados.id}"
+                                     selection="#{memos_Bean.empleadoSeleccionado}"
+                                     selectionMode="single"
+                                     paginator="true"
+                                     rows="5"
+                                     paginatorPosition="bottom"
+                                     >
+                            
+                            <p:ajax event="rowSelect" listener="#{memos_Bean.onRowSelectedArea()}"/>
+                            
+                            <f:facet name="header">
+                                <div class="p-d-flex p-ai-center p-jc-between">
+                                    <span>Seleccione un empleado a asignar el recurso</span>
+                                    <div>
+                                        <p:inputText id="globalFilter" onkeyup="PF('customersTable').filter()" style="width:10rem" placeholder="Ingrese una palabra" />
+                                    </div>
+                                </div>
+
+                            </f:facet>
+
+                            <p:column headerText="Nombres" sortBy="#{empleados.nombres}" filterBy="#{empleados.nombres}">
+                                <h:outputText value="#{empleados.nombres}" />
+                            </p:column>
+
+                            <p:column headerText="Apellidos" sortBy="#{empleados.apellidos}" filterBy="#{empleados.apellidos}">
+                                <h:outputText value="#{empleados.apellidos}" />
+                            </p:column>
+                            
+                            <p:column headerText="Cargo" sortBy="#{empleados.cargo}" filterBy="#{empleados.cargo}">
+                                <h:outputText value="#{empleados.cargo}" />
+                            </p:column>
+                            
+                            <p:column headerText="Código" sortBy="#{empleados.id}" filterBy="#{empleados.id}">
+                                <h:outputText value="#{empleados.id}" />
+                            </p:column>
+                            
+                            <p:column headerText="Área" sortBy="#{empleados.idAreaAsignada.id}" filterBy="#{empleados.idAreaAsignada.id}">
+                                <h:outputText value="#{empleados.idAreaAsignada.id}" />
+                            </p:column>
+
+                        </p:dataTable>
+                        
+                        <p:dataTable var="resources" value="#{memos_Bean.listarRecursos}" 
+                                     widgetVar="customersResources"
+                                     emptyMessage="No se han encontrado recursos"
+                                     filteredValue="#{memos_Bean.filtrarListaRecursos}"
+                                     rowKey="#{resources.id}"
+                                     selection="#{memos_Bean.recursosSeleccionados}"
+                                     paginator="true"
+                                     rows="5"
+                                     paginatorPosition="bottom"
+                                     rowSelectMode="add"
+                                     > 
+                            
+                            <p:column selectionMode="multiple" exportable="false"></p:column>
+                            
+                            <p:ajax event="rowSelect" listener="#{memos_Bean.onRowSelectedResources()}"/>
+                            
+                            <f:facet name="header">
+                                <div class="p-d-flex p-ai-center p-jc-between">
+                                    <span>Seleccione los recursos que asignará</span>
+                                    <div>
+                                        <p:inputText id="globalFilter" onkeyup="PF('customersResources').filter()" style="width:10rem" placeholder="Ingrese una palabra" />
+                                    </div>
+                                </div>
+
+                            </f:facet>
+
+                            <p:column headerText="Área" sortBy="#{resources.idAreaAsignada.id}" filterBy="#{resources.idAreaAsignada.id}">
+                                <h:outputText value="#{resources.idAreaAsignada.id}" />
+                            </p:column>
+                            
+                            <p:column headerText="Tipo" sortBy="#{resources.idTipoRecurso.nombre}" filterBy="#{resources.idTipoRecurso.nombre}">
+                                <h:outputText value="#{resources.idTipoRecurso.nombre}" />
+                            </p:column>
+                            
+                            <p:column headerText="Marca" sortBy="#{resources.marca}" filterBy="#{resources.marca}">
+                                <h:outputText value="#{resources.marca}" />
+                            </p:column>
+                            
+                            <p:column headerText="Modelo" sortBy="#{resources.modelo}" filterBy="#{resources.modelo}">
+                                <h:outputText value="#{resources.modelo}" />
+                            </p:column>
+                            
+                            <p:column headerText="Nº Serie/Etiqueta de servicio" sortBy="#{resources.numSerie}" filterBy="#{resources.numSerie}">
+                                <h:outputText value="#{resources.numSerie}" />
+                            </p:column>
+
+                        </p:dataTable>
                         
                         <p:commandButton
                             value="Guardar"
@@ -198,9 +239,7 @@
                             style="margin-bottom: 35px; margin-top: 35px; margin-right: 20px; min-width: 25%;"
                             action="#{memos_Bean.agregarMemo()}"
                             >
-
-                            <f:param name="tipoRecurso" value="4"/>
-
+                            <f:param name="nombreAdminIT" value="#{nombre}"/>
                         </p:commandButton>
 
                         <p:button 
@@ -214,7 +253,23 @@
 
                     <!--Vista previa de la inserción de datos para PDF-->
                     
-                    <p:tab title="Vista previa">
+                    <p:tab title="Vista previa" id="vistaPrevia">
+                        
+                        <p:staticMessage 
+                            severity="info" 
+                            summary="NOTA:" 
+                            detail="Si sus datos ingresados no se muestan en pantalla, vuelva a llenar los campos, o reeleccione datos y presione el botón de reload para la tabla."
+                            style="width: 100%"/>
+                        
+                        <br/>
+                        <br/>
+                        
+                        <p:commandButton
+                            style="width: 10%"
+                            icon="pi pi-replay"
+                            update="tableResourcesFinal"
+                            >
+                        </p:commandButton>
                         
                         <h4>MEMORÁNDUM</h4>
                         
@@ -246,7 +301,9 @@
                         <p>
                             Por este medio, se efectúa la asignación de equipo
                             informático en calidad de <b>ASIGNACIÓN</b> para el
-                            usuario <b><h:outputText id="mostrarEmpleado" value="#{memos_Bean.empleadoSeleccionado}"/></b>
+                            usuario 
+                            <b>"El usuario se mostrará en el documento final"</b>
+                            <h:outputText value="#{memos_Bean.datosEmpleado}" id="mostrarEmpleado"/>
                         </p>
                         
                         <p>
@@ -255,23 +312,29 @@
 
                         <div class="card">
                             
-                            <p:dataTable var="product" value="#{dtBasicView.products}" showGridlines="true">
+                            <p:dataTable 
+                                id="tableResourcesFinal"
+                                var="resourcesSelected" 
+                                value="#{memos_Bean.recursosSeleccionados}" 
+                                showGridlines="true">
                                 <p:column headerText="Tipo de equipo">
-                                    <h:outputText value="#{product.code}" />
+                                    <h:outputText value="#{resourcesSelected.idTipoRecurso.nombre}" />
                                 </p:column>
 
                                 <p:column headerText="Marca">
-                                    <h:outputText value="#{product.name}" />
+                                    <h:outputText value="#{resourcesSelected.marca}" />
                                 </p:column>
 
                                 <p:column headerText="Modelo">
-                                    <h:outputText value="#{product.category}" />
+                                    <h:outputText value="#{resourcesSelected.modelo}" />
                                 </p:column>
 
                                 <p:column headerText="Número de serie / Etiqueta de servicio">
-                                    <h:outputText value="#{product.quantity}" />
+                                    <h:outputText value="#{resourcesSelected.numSerie}" />
                                 </p:column>
+                                
                             </p:dataTable>
+                            
                         </div>
 
                     </p:tab>

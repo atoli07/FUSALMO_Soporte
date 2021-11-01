@@ -17,18 +17,9 @@
     </h:head>
     <h:body style="margin: 0px;">
         
-        <c:set var="idEmpleado" scope="session">
+        <c:set var="idEmpleado" scope="session" value="${request.getParameter('id-emp')}"/>
         
-            ${request.getParameter("id-emp")}
-            
-        </c:set>
-        
-        <c:set var="nombre" scope="session">
-            
-            ${request.getParameter("name")}
-            ${request.getParameter("ape")}
-            
-        </c:set>
+        <c:set var="nombre" scope="session" value="${request.getParameter('name')} ${request.getParameter('ape')}"/>
         
         <div style="text-align: center; margin-top: 25%">
             

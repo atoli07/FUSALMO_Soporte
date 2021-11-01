@@ -31,8 +31,7 @@ se elimina de forma automatica en cuanto una vista lo muestre)*/
     }
 
     public static HttpServletRequest getRequest() {
-        return (HttpServletRequest) FacesContext.getCurrentInstance()
-                .getExternalContext().getRequest();
+        return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
     }
 
 }
