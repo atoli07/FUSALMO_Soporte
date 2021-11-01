@@ -69,7 +69,7 @@
                 <div class="p-col-6">
                     <h4 class="titleH1">Seleccione el equipo que tiene asignado</h4>
                     <p:selectOneMenu value="#{tokensBean.idRecurso}">
-                        <f:selectItems value="#{recursosBean.listaRecursos}" 
+                        <f:selectItems value="#{recursosBean.getListaRecursosByIdEmpleado(idEmpleado)}" 
                                        var="recursos" itemLabel="#{recursos.codActivo}" itemValue="#{recursos.id}"/>
                     </p:selectOneMenu>
                     <h4 class="titleH1">Escriba por favor el problema que está presentando</h4>
