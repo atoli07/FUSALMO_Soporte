@@ -109,7 +109,6 @@ public class TokensModel {
         EntityManager em= JPAUtil.getEntityManager();
         try{
             Query consulta= em.createNamedQuery("TokensEntity.softDelete");
-            System.out.println(id);
             consulta.setParameter(":id", id);
             return 1;
         }catch(Exception e){
@@ -125,6 +124,21 @@ public class TokensModel {
         try{
             tran.begin();
             em.persist(token);
+            tran.commit();
+            em.close();
+            return 1;
+        }catch(Exception e){
+            em.close();
+            return 0;
+        }
+     }
+     
+     public int actualizarEstadoToken(TokensEntity token){
+         EntityManager em= JPAUtil.getEntityManager();
+        EntityTransaction tran =em.getTransaction();
+        try{
+            tran.begin();
+            em.merge(token);
             tran.commit();
             em.close();
             return 1;

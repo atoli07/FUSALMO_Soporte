@@ -8,6 +8,7 @@ package org.fusalmo.www.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -30,7 +31,7 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "TokensEntity.findById", query = "SELECT t FROM TokensEntity t WHERE t.id = :id")
     , @NamedQuery(name = "TokensEntity.findByFecha", query = "SELECT t FROM TokensEntity t WHERE t.fecha = :fecha")
     , @NamedQuery(name = "TokensEntity.findByPrioridad", query = "SELECT t FROM TokensEntity t WHERE t.prioridad = :prioridad")
-    , @NamedQuery(name = "TokensEntity.softDelete", query = "UPDATE TokensEntity t SET t.isDeleted = true WHERE t.id= :id")})
+    , @NamedQuery(name = "TokensEntity.softDelete", query = "UPDATE TokensEntity t SET t.isDeleted = 1 WHERE t.id= :id")})
 public class TokensEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,6 +47,7 @@ public class TokensEntity implements Serializable {
     @Basic(optional = false)
     private String prioridad;
     @Basic(optional = false)
+    @Column(nullable= false, columnDefinition = "TINYINT(1)")
     private Boolean isDeleted;
     @JoinColumn(name = "IdEmpleado", referencedColumnName = "Id")
     @ManyToOne(optional = false)

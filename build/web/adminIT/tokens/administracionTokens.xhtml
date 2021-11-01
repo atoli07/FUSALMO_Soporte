@@ -91,7 +91,9 @@
                         <p:growl id="message" showDetail="true"/>
                         <p:commandButton value="EDITAR BITÁCORA" styleClass="ui-button-outlined ui-button-secondary p-mr-3"
                                          update="prueba" oncomplete="$('#exampleModal').modal('show');"
-                                         action="#{tokensBean.mostrarDetalle()}"/>
+                                         action="#{tokensBean.mostrarDetalle()}">
+                            <f:param name="idToken" value="#{token.id}"/>
+                        </p:commandButton>
                         <p:commandButton value="BORRAR" styleClass="ui-button-outlined ui-button-danger"
                                          action="#{tokensBean.borrarToken()}"
                                          update="message">
@@ -128,6 +130,7 @@
             </h:form>
             <p:outputPanel id="prueba">
                 <h:form>
+                    <p:growl id="message3" showDetail="true"/>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -138,13 +141,17 @@
                         </div>
                         <div class="modal-body">
                             <label for="newEstado">Seleccione el nuevo estado para el token:</label><br/>
-                            <p:selectOneMenu value="#{tokensBean.idEstadoToken}">
+                            <h:selectOneMenu value="#{tokensBean.idEstadoToken}" class="form-select">
                                 <f:selectItems value="#{tokensBean.listaEstadoTokens}" var="estado" itemLabel="#{estado.nombre}" itemValue="#{estado.id}"/>
-                            </p:selectOneMenu>
+                            </h:selectOneMenu>
                         </div>
                         <div class="modal-footer">
                             <p:commandButton value="Guardar cambios" styleClass="ui-button-outlined ui-button-help"
-                                             action="#{tokensBean.cambiarEstadoToken(tokensBean.idEstadoToken)}"/>
+                                             action="#{tokensBean.cambiarEstadoToken(tokensBean.idEstadoToken)}"
+                                             oncomplete="$('#exampleModal').modal('hide');"
+                                             update="message3">
+                                <f:param name="idToken" value="#{tokensBean.selectedToken.id}"/>
+                            </p:commandButton>
                             <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>

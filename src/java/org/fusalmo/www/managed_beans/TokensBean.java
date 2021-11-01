@@ -22,6 +22,7 @@ import org.fusalmo.www.model.EstadoTokenModel;
 import org.fusalmo.www.model.TokensModel;
 import org.fusalmo.www.utils.JPAUtil;
 import org.fusalmo.www.utils.JsfUtil;
+import org.fusalmo.www.utils.MessageUtil;
 import org.primefaces.PrimeFaces;
 
 /**
@@ -126,8 +127,8 @@ public class TokensBean {
         token.setSeleccionRecurso(null);
     }
     
-    public void mostrarDetalle(String id){
-        
+    public void mostrarDetalle(){
+        String id = JsfUtil.getRequest().getParameter("idToken");
         System.out.println(id);
         this.selectedToken = new TokensEntity();
         selectedToken = modelo.obtenerToken(id);
@@ -136,11 +137,22 @@ public class TokensBean {
     }
     
     public void cambiarEstadoToken(Integer idEst){
-        EntityManager em= JPAUtil.getEntityManager();
+        String id = JsfUtil.getRequest().getParameter("idToken");
         System.out.println(idEst);
         EstadoTokenEntity newId=modelo.obtenerEstadoToken(idEst);
         System.out.println(newId.getNombre());
-        //selectedToken.setIdEstado(newId);
+        this.selectedToken= modelo.obtenerToken(id);
+        selectedToken.setIdEstado(newId);
+        
+        if (modelo.actualizarEstadoToken(getSelectedToken())!=1) {
+            MessageUtil mensaje= new MessageUtil();
+            mensaje.addMessage("Error", "El estado del token no puede ser actualizado");
+        }
+        else{
+            MessageUtil mensaje= new MessageUtil();
+            mensaje.addMessage("Confirmación", "El estado del token ha sido actualizado");
+        }
+        
     }
     
     
