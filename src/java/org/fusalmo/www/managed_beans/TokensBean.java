@@ -87,13 +87,11 @@ public class TokensBean {
         else{
             token.setIdEmpleado(modelo.obtenerEmpleado(idEmpleado));
         }
-        System.out.println("-----------------------");
-        System.out.println(getIdEmpleado());
         token.setIdEstado(modelo.obtenerEstadoToken(1));
         java.util.Date fecha = new Date();
-        System.out.println(fecha);
         token.setFecha(fecha);
         token.setSeleccionRecurso(em.find(RecursosEntity.class, idRecurso));
+        token.setIsDeleted(Boolean.FALSE);
         
         if (idEmpleado.length()>6) {
             if(modelo.crearToken(getToken()) != 1){
