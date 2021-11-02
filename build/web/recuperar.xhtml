@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <h:outputStylesheet library="css" name="primeflex.min.css" />
+    </h:head>
+
+    <h:body class="firstBody">
+
+        <menu class="menu">
+
+            <div class="card">
+
+                <h:form>
+
+                    <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
+
+                        <p:menuitem url="index.xhtml">
+
+                            <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
+
+                        </p:menuitem>
+
+                    </p:menubar>
+
+                </h:form>
+
+            </div>
+
+        </menu>
+
+        <div class="welcome">
+            <div class="p-grid">
+                <div class="title p-col-8">
+
+                    <h1 class="titleH1">RECUPERAR CONTRASEÑA <br/></h1>
+                    <h1 class="titleH1"> <br/>Ingresa tu correo para recibir tu contraseña en la bandeja de entrada de tu correo</h1>
+
+                </div>
+                <div class="image p-col-4">
+
+                    <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
+                </div>
+            </div>
+            <p:divider class=""/>
+
+        </div>
+
+        <div class="card divLogin">
+    <h3 class="titleH1"> <h:outputLabel value="#{userIT.res} " style="color: #ff0000; font-weight: bold;" /></h3>
+            <h:form class="formLogin">
+
+                <h:panelGrid columns="1" class="gridField">
+
+
+                    <h3 class="h3User">Correo</h3>
+
+                    <p:inputText class="inputTextUser" value="#{userIT.login}" id="Correo" requiredMessage="Debes ingresar el correo" />
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                </h:panelGrid>
+
+                <h:panelGrid columns="2" class="panelGridButtons">
+
+                    <h:commandButton styleClass="ui-button-outlined ui-button-help" value="Enviar" action="#{userIT.recuperarContra()}" ></h:commandButton>
+
+                </h:panelGrid>
+
+            </h:form>
+
+            <div class="imgLogin" style="margin: auto">
+
+                <h:graphicImage library="img" name="laptop.png"/>
+
+            </div>
+
+        </div>
+
+    </h:body>
+
+</html>
+
