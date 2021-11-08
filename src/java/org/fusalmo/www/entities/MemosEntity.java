@@ -35,7 +35,8 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "MemosEntity.findByFechaEntrega", query = "SELECT m FROM MemosEntity m WHERE m.fechaEntrega = :fechaEntrega")
     , @NamedQuery(name = "MemosEntity.findByCantidadRecursos", query = "SELECT m FROM MemosEntity m WHERE m.cantidadRecursos = :cantidadRecursos")
     , @NamedQuery(name = "MemosEntity.findByPara", query = "SELECT m FROM MemosEntity m WHERE m.para = :para")
-    , @NamedQuery(name = "MemosEntity.findByDe", query = "SELECT m FROM MemosEntity m WHERE m.de = :de")})
+    , @NamedQuery(name = "MemosEntity.findByDe", query = "SELECT m FROM MemosEntity m WHERE m.de = :de")
+    , @NamedQuery(name = "MemosEntity.findByIsDeleted", query = "SELECT m FROM MemosEntity m WHERE m.isDeleted = :isDeleted")})
 public class MemosEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,9 +47,9 @@ public class MemosEntity implements Serializable {
     @Lob
     private String asunto;
     @Lob
-    private String pdf;
+    private byte[] pdf;
     @Lob
-    private String pDFFirmado;
+    private byte[] pDFFirmado;
     @Temporal(TemporalType.DATE)
     private Date fechaDevolucion;
     @Temporal(TemporalType.DATE)
@@ -88,7 +89,7 @@ public class MemosEntity implements Serializable {
         this.para = para;
         this.de = de;
         this.descripcion = descripcion;
-        this.isDeleted=isDeleted;
+        this.isDeleted = isDeleted;
     }
 
     public String getId() {
@@ -107,19 +108,19 @@ public class MemosEntity implements Serializable {
         this.asunto = asunto;
     }
 
-    public String getPdf() {
+    public byte[] getPdf() {
         return pdf;
     }
 
-    public void setPdf(String pdf) {
+    public void setPdf(byte[] pdf) {
         this.pdf = pdf;
     }
 
-    public String getPDFFirmado() {
+    public byte[] getPDFFirmado() {
         return pDFFirmado;
     }
 
-    public void setPDFFirmado(String pDFFirmado) {
+    public void setPDFFirmado(byte[] pDFFirmado) {
         this.pDFFirmado = pDFFirmado;
     }
 
@@ -171,7 +172,7 @@ public class MemosEntity implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public boolean isIsDeleted() {
+    public boolean getIsDeleted() {
         return isDeleted;
     }
 
@@ -210,6 +211,7 @@ public class MemosEntity implements Serializable {
     public void setIdAgenteIT(UsuariosITEntity idAgenteIT) {
         this.idAgenteIT = idAgenteIT;
     }
+    
 
     @Override
     public int hashCode() {

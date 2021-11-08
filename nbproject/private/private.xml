@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/El%20Salvador/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/utils/JPAUtil.java</file>
-            <file>file:/C:/Users/El%20Salvador/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/managed_beans/TokensBean.java</file>
-            <file>file:/C:/Users/El%20Salvador/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/entities/TokensEntity.java</file>
-            <file>file:/C:/Users/El%20Salvador/Documents/GitHub/FUSALMO_Soporte/web/empleadoIT/tokens/nuevoTokenEmpleado.xhtml</file>
-            <file>file:/C:/Users/El%20Salvador/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/utils/MessageUtil.java</file>
-            <file>file:/C:/Users/El%20Salvador/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/model/TokensModel.java</file>
+            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/web/adminIT/recursos/agregar/tipo/agregarLaptop.xhtml</file>
+            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/web/adminIT/tokens/administracionTokens.xhtml</file>
+            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/entities/TokensEntity.java</file>
+            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/model/TokensModel.java</file>
+            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/web/adminIT/recursos/eliminar/eliminarRecurso.xhtml</file>
+            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/managed_beans/RecursosBean.java</file>
+            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/managed_beans/TokensBean.java</file>
+            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/utils/MessageUtil.java</file>
         </group>
     </open-files>
 </project-private>
