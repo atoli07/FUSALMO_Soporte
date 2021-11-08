@@ -74,6 +74,7 @@
                     <p:button value="REGRESAR A MENÚ DE OPCIONES" styleClass="ui-button-outlined ui-button-info p-ml-auto" 
                               href="${request.contextPath}/faces/adminIT/indexAdminIT.xhtml"/>
                 </div>
+                
                 <p:dataTable id="tokens" var="token" value="#{tokensBean.listaTokensActivos}" 
                              rowKey="#{token.id}" selectionMode="single" selection="#{tokensBean.selectedToken}" stripedRows="true">
                     <p:column headerText="Fecha de creación" class="p-col-2">
@@ -106,6 +107,7 @@
                         </p:confirmPopup>
                     </p:column>
                 </p:dataTable>
+                
                 <c:if test="#{request.getParameter('result') == 1}">
             <!---->
             <button id="action-button" onclick="#{messageUtil.confirmDeleteToken()}" disabled="true"></button>

@@ -24,6 +24,7 @@ public class Historial_Memos_Bean {
     
     private StreamedContent file;
     private List<MemosEntity> listarMemos;
+    private List<MemosEntity> listarMemosByPrestamo;
     private List<MemosEntity> filtrarMemos;
     private Historial_Memos_Model model;
 
@@ -46,6 +47,10 @@ public class Historial_Memos_Bean {
     
     public List<MemosEntity> getListarMemos(){
         return getModel().listaMemos();
+    }
+    
+    public List<MemosEntity> getListarMemosByPrestamo(){
+        return getModel().listaMemosByPrestamo();
     }
 
     /**

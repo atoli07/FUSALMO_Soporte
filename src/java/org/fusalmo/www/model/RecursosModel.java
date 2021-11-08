@@ -35,6 +35,19 @@ public class RecursosModel {
         }
     }
     
+    public  List<RecursosEntity> listarRecursosActivos(){
+         EntityManager em= JPAUtil.getEntityManager();
+         try{
+            Query consulta= em.createNamedQuery("RecursosEntity.findByIsDeleted");
+            consulta.setParameter("isDeleted", Boolean.FALSE);
+            List<RecursosEntity> lista= consulta.getResultList();
+            return lista;
+        }catch(Exception e){
+            em.close();
+            return null;
+        }
+     }
+    
     public List<RecursosEntity> listarRecursosByIdEmpleado(String idemp){
         RecursosEmpleadosModel modelo= new RecursosEmpleadosModel();
         EntityManager em= JPAUtil.getEntityManager();
@@ -710,35 +723,21 @@ public class RecursosModel {
     }
     
     public int eliminarRecurso(String recurso){
-        
-        EntityManager em = JPAUtil.getEntityManager();
-        
-        int filasBorradas = 0;
-        
-        try {
-            
-            RecursosEntity resource = em.find(RecursosEntity.class, recurso);
-            
-            if(resource != null){
-                
-                EntityTransaction tra = em.getTransaction();
-                tra.begin();
-                em.remove(resource);
-                tra.commit();
-                filasBorradas = 1;
-                
-            }
-            
+        EntityManager em= JPAUtil.getEntityManager();
+        EntityTransaction tran =em.getTransaction();
+        try{
+            RecursosEntity temp=em.find(RecursosEntity.class, recurso);
+            temp.setIsDeleted(Boolean.TRUE);
+            tran.begin();
+            em.persist(temp);
+            tran.commit();
             em.close();
-            return filasBorradas;
-            
-        } catch (Exception e) {
-            
+            return 1;
+        }catch(Exception e){
             em.close();
+            System.out.println(e);
             return 0;
-            
-        }
-        
+        }        
     }
     
     public int modificarRecurso(RecursosEntity recurso){

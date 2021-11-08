@@ -33,7 +33,7 @@ public class TokensModel {
         }
     }
      
-     public  List<TokensEntity> listarTokensActivos(){
+    public  List<TokensEntity> listarTokensActivos(){
          EntityManager em= JPAUtil.getEntityManager();
          try{
             Query consulta= em.createNamedQuery("TokensEntity.findByIsDeleted");

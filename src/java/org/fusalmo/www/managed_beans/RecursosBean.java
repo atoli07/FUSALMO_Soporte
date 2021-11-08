@@ -40,6 +40,7 @@ public class RecursosBean {
     private EmpleadoEntity empleado;
     private int tipoRecursoModificar;
     private List<RecursosEntity>listaRecursos;
+    private List<RecursosEntity>listaRecursosActivos;
     private List<AreaEntity> listarAreas;
     /**
      * Creates a new instance of RecursosBean
@@ -52,6 +53,10 @@ public class RecursosBean {
     
     public List<RecursosEntity> getListaRecursos(){
         return modelo.listarRecursos();
+    }
+    
+     public List<RecursosEntity> getListaRecursosActivos(){
+        return modelo.listarRecursosActivos();
     }
     
     public List<TipoRecursoEntity> getListaTipoRecurso(){
@@ -156,7 +161,12 @@ public class RecursosBean {
         if(getRecurso().getIdTipoRecurso().getId() == 2){
             return "tipo/microsoft?faces-redirect=true&idRecurso=" + getRecurso().getId() + "&tipo-Recurso=" + getRecurso().getIdTipoRecurso().getId();
         }
-        
+        if(getRecurso().getIdTipoRecurso().getId() == 3){
+            return "tipo/accesorios?faces-redirect=true&idRecurso=" + getRecurso().getId() + "&tipo-Recurso=" + getRecurso().getIdTipoRecurso().getId();
+        }
+        if(getRecurso().getIdTipoRecurso().getId() == 4){
+            return "tipo/pc?faces-redirect=true&idRecurso=" + getRecurso().getId() + "&tipo-Recurso=" + getRecurso().getIdTipoRecurso().getId();
+        }
         return null;
         
     }

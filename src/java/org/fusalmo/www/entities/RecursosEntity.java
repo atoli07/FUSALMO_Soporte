@@ -36,7 +36,8 @@ import javax.persistence.Table;
     , @NamedQuery(name = "RecursosEntity.findByDireccionMAC", query = "SELECT r FROM RecursosEntity r WHERE r.direccionMAC = :direccionMAC")
     , @NamedQuery(name = "RecursosEntity.findByCargador", query = "SELECT r FROM RecursosEntity r WHERE r.cargador = :cargador")
     , @NamedQuery(name = "RecursosEntity.findByCodActivo", query = "SELECT r FROM RecursosEntity r WHERE r.codActivo = :codActivo")
-    , @NamedQuery(name = "RecursosEntity.countAll", query = "SELECT COUNT(r.id) FROM RecursosEntity r")})
+    , @NamedQuery(name = "RecursosEntity.countAll", query = "SELECT COUNT(r.id) FROM RecursosEntity r")
+    , @NamedQuery(name = "RecursosEntity.findByIsDeleted", query ="SELECT r FROM RecursosEntity r WHERE r.isDeleted =  :isDeleted")})
 public class RecursosEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

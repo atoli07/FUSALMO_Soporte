@@ -11,7 +11,7 @@
         <h:outputStylesheet library="css" name="primeflex.min.css"/>
         <h:outputStylesheet library="css" name="style.css"/>
         
-        <title>Prestamos</title>
+        <title>FUSALMO IT PORTAL - Prestamos</title>
         
     </h:head>
     
@@ -77,7 +77,27 @@
             style="width: 50%; margin-left: 25%; margin-bottom: 20px; margin-top: 10px; color: #17A2B8"
             href="${request.contextPath}/faces/adminIT/indexAdminIT.xhtml"
             />
-
+        <h:form class="container">
+            <p:dataTable id="memosPrestamos" value="#{historial_Memos_Bean.listarMemosByPrestamo}" var="prestamo">
+                <p:column headerText="ID">
+                    <h:outputText value="#{prestamo.id}"/>
+                </p:column>
+                <p:column headerText="ID Empleado">
+                    <h:outputText value="#{prestamo.idEmpleado.id}"/>
+                </p:column>
+                <p:column headerText="Tipo">
+                    <h:outputText value="#{prestamo.idTipo.nombre}"/>
+                </p:column>
+                <p:column headerText="Asunto">
+                    <h:outputText value="#{prestamo.asunto}"/>
+                </p:column>
+                <p:column headerText="PDF Firmado">
+                    <p:commandButton icon="pi pi-download" styleClass="ui-button-outlined" style="width: 25%">
+                        <p:fileDownload value="#{historial_Memos_Bean.file}"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
     </h:body>
     
 </html>

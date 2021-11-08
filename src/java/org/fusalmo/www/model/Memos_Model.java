@@ -164,7 +164,7 @@ public class Memos_Model {
     }
     
     //Creación de fuentes
-    public static final String FONT = "C:\\Users\\hassa\\Documents\\NetBeansProjects\\Proyecto de catedra\\alexia\\FUSALMO_Soporte\\web\\resources\\fonts\\arialBold.ttf";
+    public static final String FONT = "C:\\Users\\Soporte\\Documents\\GitHub\\FUSALMO_Soporte\\build\\web\\resources\\fonts\\arialBold.ttf";
     private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
     private static Font arialFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
     private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.RED);
@@ -198,7 +198,7 @@ public class Memos_Model {
             documento = new Document();
             
             //Destino de la creación del archivo y su nombre como ruta absoluta
-            file = new File("C:\\Users\\hassa\\Documents\\NetBeansProjects\\Proyecto de catedra\\alexia\\pdf\\prueba.pdf");
+            file = new File("C:\\Users\\Soporte\\Documents\\GitHub\\FUSALMO_Soporte\\build\\web\\resources\\demo\\prueba.pdf");
             
             //Se crea una instancia de tipo fileOutputStream pasando la ruta
             //absoluta
@@ -219,7 +219,7 @@ public class Memos_Model {
             Image image = null;
             
             //Se guarda la ruta absoluta de la imagen
-            image = Image.getInstance("C:\\Users\\hassa\\Documents\\NetBeansProjects\\Proyecto de catedra\\alexia\\pdf\\img\\LogoFusalmo.png");
+            image = Image.getInstance("C:\\Users\\Soporte\\Documents\\GitHub\\FUSALMO_Soporte\\build\\web\\resources\\img\\LogoFusalmo.png");
             
             //Se le da una escala absoluta o estática
             image.scaleAbsolute(150, 100);

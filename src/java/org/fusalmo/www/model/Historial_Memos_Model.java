@@ -38,4 +38,16 @@ public class Historial_Memos_Model {
         
     }
     
+    public List<MemosEntity> listaMemosByPrestamo(){
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            Query consulta = em.createQuery("SELECT m FROM MemosEntity m WHERE m.idTipo.idTipo = 'EXT' OR m.idTipo.idTipo = 'INT'");
+            List<MemosEntity> listarMemos = consulta.getResultList();
+            return listarMemos;
+        } catch (Exception e) {
+            em.close();
+            return null;
+        }
+    }
+    
 }
