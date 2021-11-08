@@ -93,6 +93,7 @@
                 </p:column>
                 <p:column headerText="PDF Firmado">
                     <p:commandButton icon="pi pi-download" styleClass="ui-button-outlined" style="width: 25%">
+                        <f:param name="idMemo" value="#{prestamo.id}"/>
                         <p:fileDownload value="#{historial_Memos_Bean.file}"/>
                     </p:commandButton>
                 </p:column>

@@ -43,6 +43,7 @@ public class Memos_Bean {
     private String areaSeleccionada;
     private String dateSelected;
     private String datosEmpleado;
+    private byte [] PDFFirmado;
 
     /**
      * Creates a new instance of Memos_Bean
@@ -152,6 +153,14 @@ public class Memos_Bean {
             );
 
         }
+        
+    }
+    
+    public void getPDFFirmado(){
+        setMemos(
+               modelo.buscarMemoById(JsfUtil.getRequest().getParameter("idRecurso"))
+        );
+        
         
     }
     

@@ -21,9 +21,12 @@ import com.itextpdf.text.pdf.PdfPTable;
 //import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
@@ -34,6 +37,7 @@ import org.fusalmo.www.entities.MemosEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.entities.UsuariosITEntity;
 import org.fusalmo.www.utils.JPAUtil;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -162,6 +166,40 @@ public class Memos_Model {
         }
         
     }
+    
+    public MemosEntity buscarMemoById(String idMemo){
+         EntityManager em = JPAUtil.getEntityManager();
+        try {
+            MemosEntity memo = em.find(MemosEntity.class, idMemo);
+            em.close();
+            return memo;
+        } catch (Exception e) {
+            em.close();
+            return null;
+        }
+    }
+    
+    public OutputStream obtenerPDFFirmadoById(String idMemo){
+        EntityManager em = JPAUtil.getEntityManager();
+        byte [] temp = null;
+        try {
+            Query consulta =em.createQuery("SELECT m.pDFFirmado FROM MemosEntity m WHERE m.id = :idMemo").setParameter("idMemo", idMemo);
+            temp=(byte[])consulta.getSingleResult();
+            em.close();
+            InputStream bos= new ByteArrayInputStream(temp);
+            int tamInput = bos.available();
+            byte [] pdf_firmado= new byte[tamInput];
+            bos.read(pdf_firmado, 0, tamInput);
+            
+            OutputStream archivo = new FileOutputStream("pdf_firmado.pdf");
+            archivo.write(pdf_firmado);
+            return archivo;
+        } catch (Exception e) {
+            em.close();
+            return null;
+        }
+    }
+    
     
     //Creación de fuentes
     public static final String FONT = "C:\\Users\\Soporte\\Documents\\GitHub\\FUSALMO_Soporte\\build\\web\\resources\\fonts\\arialBold.ttf";
