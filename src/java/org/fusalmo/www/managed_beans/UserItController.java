@@ -42,7 +42,7 @@ public class UserItController {
                 Id = emp.getId();
                 return "principalEmpleado";
             } catch (NoResultException e2) {
-                setRes("!!LAS CREDENCIALES CON CONCUERDAN CON NINGUN USUARIO, Intente nuevamente!!");
+                setRes("LAS CREDENCIALES NO CONCUERDAN CON NINGUN USUARIO, Intente nuevamente!!");
                 return "index";
             }
 
@@ -65,7 +65,7 @@ public class UserItController {
                 password = emp.getContra();
                 return "reestablecerOk";
             } catch (NoResultException e2) {
-                setRes("!!El CORREO NO EXISTE PORVAFOR INGRESE UN CORREO VALIDO!!");
+                setRes("El CORREO NO EXISTE PORVAFOR INGRESE UN CORREO VALIDO!!");
                 return "recuperar";
             }
 

@@ -89,7 +89,7 @@
                 </div>
                 <div class="p-col-12" style="margin-top: 15px">
                     <p:commandButton update="@form" value="ENVIAR" styleClass="ui-button-outlined ui-button-help" action="#{tokensBean.crearToken()}"/>
-                    <p:commandButton value="BORRAR DATOS" styleClass="ui-button-outlined ui-button-warning" style="margin-left: 10px" action="#{tokensBean.borrarDatos()}"/>
+                    <p:commandButton type="reset" value="BORRAR DATOS" styleClass="ui-button-outlined ui-button-warning" style="margin-left: 10px"/>
                     <p:button value="CANCELAR Y REGRESAR" styleClass="ui-button-outlined ui-button-danger" style="margin-left: 10px" href="#{request.contextPath}/faces/adminIT/tokens/administracionTokens.xhtml"/>
                 </div>
             </h:form>
