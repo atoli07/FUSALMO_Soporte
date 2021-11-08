@@ -5,10 +5,12 @@
  */
 package org.fusalmo.www.managed_beans;
 
+import javax.faces.application.FacesMessage;
 import org.fusalmo.www.entities.UsuariosITEntity;
 import org.fusalmo.www.model.UserModel;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.NoResultException;
 import org.fusalmo.www.entities.EmpleadoEntity;
 import org.fusalmo.www.model.UserEmpleadoModel;
@@ -65,7 +67,8 @@ public class UserItController {
                 password = emp.getContra();
                 return "reestablecerOk";
             } catch (NoResultException e2) {
-                setRes("El CORREO NO EXISTE PORVAFOR INGRESE UN CORREO VALIDO!!");
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","El correo no existe, por favor ingrese un correo válido"));
+                //setRes("El CORREO NO EXISTE PORVAFOR INGRESE UN CORREO VALIDO!!");
                 return "recuperar";
             }
 

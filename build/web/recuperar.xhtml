@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>FUSALMO IT PORTAL - Recuperar contraseña</title>
         <h:outputStylesheet library="css" name="style.css"/>
         <h:outputStylesheet library="css" name="primeflex.min.css" />
     </h:head>
@@ -53,6 +53,9 @@
 
         <div class="card divLogin">
     <h3 class="titleH1"> <h:outputLabel value="#{userIT.res} " style="color: #ff0000; font-weight: bold;" /></h3>
+    <p:messages id="mensajeLogin" showDetail="true" closable="true" style="width: 80%; margin: 0 auto">
+        <p:autoUpdate/>
+    </p:messages>
             <h:form class="formLogin">
 
                 <h:panelGrid columns="1" class="gridField">
@@ -60,18 +63,14 @@
 
                     <h3 class="h3User">Correo</h3>
 
-                    <p:inputText class="inputTextUser" value="#{userIT.login}" id="Correo" requiredMessage="Debes ingresar el correo" />
-                    <br/>
-                    <br/>
-                    <br/>
+                    <p:inputText class="inputTextUser" value="#{userIT.login}" id="Correo" required="true" requiredMessage="Debes ingresar el correo" />
+                    <p:message for="Correo"/> 
                     <br/>
                     <br/>
                 </h:panelGrid>
 
                 <h:panelGrid columns="2" class="panelGridButtons">
-
-                    <h:commandButton styleClass="ui-button-outlined ui-button-help" value="Enviar" action="#{userIT.recuperarContra()}" ></h:commandButton>
-
+                    <p:commandButton update="@form" styleClass="ui-button-outlined ui-button-help" value="Enviar" action="#{userIT.recuperarContra()}"/>
                 </h:panelGrid>
 
             </h:form>
