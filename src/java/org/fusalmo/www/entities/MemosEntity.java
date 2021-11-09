@@ -36,6 +36,7 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "MemosEntity.findByCantidadRecursos", query = "SELECT m FROM MemosEntity m WHERE m.cantidadRecursos = :cantidadRecursos")
     , @NamedQuery(name = "MemosEntity.findByPara", query = "SELECT m FROM MemosEntity m WHERE m.para = :para")
     , @NamedQuery(name = "MemosEntity.findByDe", query = "SELECT m FROM MemosEntity m WHERE m.de = :de")
+    , @NamedQuery(name = "MemosEntity.countAll", query = "SELECT COUNT(m.id) FROM MemosEntity m")
     , @NamedQuery(name = "MemosEntity.findByIsDeleted", query = "SELECT m FROM MemosEntity m WHERE m.isDeleted = :isDeleted")})
 public class MemosEntity implements Serializable {
 

@@ -51,7 +51,7 @@ public class Memos_Bean {
     private String memoSelected;
     private StreamedContent PDFFirmado;
     private UploadedFile filePDF;
-    private String IDMEMO;
+
     /**
      * Creates a new instance of Memos_Bean
      */
@@ -111,9 +111,9 @@ public class Memos_Bean {
     public void agregarMemo(){
         
         if(getEmpleadoSeleccionado() != null && getRecursosSeleccionados().isEmpty() != true) {
-
+            
+            MemosEntity addMemo = new MemosEntity();
             String datosAdmin = "";
-
             AreaEntity area = getModelo().obtenerArea(getAreaSeleccionada());
 
             getMemos().setPara(
@@ -126,6 +126,8 @@ public class Memos_Bean {
             );
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+            SimpleDateFormat dateForBase = new SimpleDateFormat("YYYY/MM/dd");
+            
             setDateSelected(dateFormat.format(getDate()));
 
             setDatosEmpleado(
@@ -147,9 +149,14 @@ public class Memos_Bean {
                     getMemos().getAsunto(),
                     getDateSelected(),
                     getDatosEmpleado(),
-                    getRecursosSeleccionados()
+                    getRecursosSeleccionados(),
+                    getMemos().getId()
             );
+            
+            System.out.println(getModelo().convertirPDF());
 
+            System.out.println(getModelo().crearID());
+            
         } else {
 
             FacesContext.getCurrentInstance().addMessage(
@@ -163,14 +170,9 @@ public class Memos_Bean {
         
     }
     
-    public StreamedContent obtenerPDFFirmado(String idMemo){
-        this.PDFFirmado= modelo.obtenerPDFFirmadoById(idMemo);
+    public StreamedContent getPDFFirmado(){
+        this.PDFFirmado= modelo.obtenerPDFFirmadoById(JsfUtil.getRequest().getParameter("idMemo"));
         return this.PDFFirmado;
-    }
-    
-    public void prueba(String id){
-        JsfUtil.getRequest().setAttribute("idMemo", id);
-        System.out.println(JsfUtil.getRequest().getParameter("idMemo") + " Parametro 2");
     }
     
     public void updateEmpSelect(String args){
@@ -187,11 +189,6 @@ public class Memos_Bean {
             MemosEntity obtenerMemo = getModelo().buscarMemoById(JsfUtil.getRequest().getParameter("args"));
             
             System.out.println(obtenerMemo);
-            
-            //System.out.println(getFilePDF().getFileName() + " Filenames");
-            //System.out.println(getFilePDF().getInputStream() + " InputStream");
-            //System.out.println(getFilePDF().getContent());
-            //getMemos().setPDFFirmado(getFilePDF().getContent());
             
             obtenerMemo.setPDFFirmado(getFilePDF().getContent());
             
@@ -403,14 +400,5 @@ public class Memos_Bean {
     public void setMemoSelected(String memoSelected) {
         this.memoSelected = memoSelected;
     }
-
-    public String getIDMEMO() {
-        return IDMEMO;
-    }
-
-    public void setIDMEMO(String IDMEMO) {
-        this.IDMEMO = IDMEMO;
-    }
-    
     
 }
