@@ -51,7 +51,7 @@ public class Memos_Bean {
     private String memoSelected;
     private StreamedContent PDFFirmado;
     private UploadedFile filePDF;
-
+    private String IDMEMO;
     /**
      * Creates a new instance of Memos_Bean
      */
@@ -163,9 +163,14 @@ public class Memos_Bean {
         
     }
     
-    public StreamedContent getPDFFirmado(){
-        this.PDFFirmado= modelo.obtenerPDFFirmadoById(JsfUtil.getRequest().getParameter("idMemo"));
+    public StreamedContent obtenerPDFFirmado(String idMemo){
+        this.PDFFirmado= modelo.obtenerPDFFirmadoById(idMemo);
         return this.PDFFirmado;
+    }
+    
+    public void prueba(String id){
+        JsfUtil.getRequest().setAttribute("idMemo", id);
+        System.out.println(JsfUtil.getRequest().getParameter("idMemo") + " Parametro 2");
     }
     
     public void updateEmpSelect(String args){
@@ -398,5 +403,14 @@ public class Memos_Bean {
     public void setMemoSelected(String memoSelected) {
         this.memoSelected = memoSelected;
     }
+
+    public String getIDMEMO() {
+        return IDMEMO;
+    }
+
+    public void setIDMEMO(String IDMEMO) {
+        this.IDMEMO = IDMEMO;
+    }
+    
     
 }

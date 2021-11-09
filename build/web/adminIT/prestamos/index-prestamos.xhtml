@@ -92,9 +92,9 @@
                     <h:outputText value="#{prestamo.asunto}"/>
                 </p:column>
                 <p:column headerText="PDF Firmado">
-                    <p:commandButton icon="pi pi-download" styleClass="ui-button-outlined" ajax="false" style="width: 25%">
-                        <f:param name="idMemo" value="#{prestamo.id}"/>
-                        <p:fileDownload value="#{memos_Bean.PDFFirmado}"/>
+                    <h:outputText value="No se ha subido un archivo" rendered="#{prestamo.PDFFirmado eq null}"/>
+                    <p:commandButton rendered="#{prestamo.PDFFirmado ne null}" icon="pi pi-download" styleClass="ui-button-outlined" ajax="false" style="width: 25%">
+                        <p:fileDownload value="#{memos_Bean.obtenerPDFFirmado(prestamo.id)}"/>
                     </p:commandButton>
                 </p:column>
             </p:dataTable>

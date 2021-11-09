@@ -196,15 +196,6 @@ public class Memos_Model {
                             ()-> stream
                     )
                     .build();
-            
-            /*Query consulta =em.createQuery("SELECT m.pDFFirmado FROM MemosEntity m WHERE m.id = :idMemo").setParameter("idMemo", idMemo);
-            int tamInput = bos.available();
-            byte [] pdf_firmado= new byte[tamInput];
-            bos.read(pdf_firmado, 0, tamInput);
-            
-            OutputStream archivo = new FileOutputStream("pdf_firmado.pdf");
-            archivo.write(pdf_firmado);*/
-            
             em.close();
             return archivo;
         } catch (Exception e) {
