@@ -38,6 +38,7 @@ import org.fusalmo.www.entities.MemosEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.entities.UsuariosITEntity;
 import org.fusalmo.www.utils.JPAUtil;
+import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 /**
@@ -180,23 +181,35 @@ public class Memos_Model {
         }
     }
     
-    public OutputStream obtenerPDFFirmadoById(String idMemo){
+    public StreamedContent obtenerPDFFirmadoById(String idMemo){
         EntityManager em = JPAUtil.getEntityManager();
-        byte [] temp = null;
+        System.out.println("ID*****"+idMemo);
         try {
-            Query consulta =em.createQuery("SELECT m.pDFFirmado FROM MemosEntity m WHERE m.id = :idMemo").setParameter("idMemo", idMemo);
-            temp=(byte[])consulta.getSingleResult();
-            em.close();
-            InputStream bos= new ByteArrayInputStream(temp);
+            MemosEntity a= em.find(MemosEntity.class, idMemo);
+            byte [] temp =a.getPDFFirmado();
+            temp.getClass().getResourceAsStream("pDFFirmado");
+            InputStream stream= new ByteArrayInputStream(temp);
+            StreamedContent archivo = DefaultStreamedContent.builder()
+                    .name("pdf_firmado.pdf")
+                    .contentType("aplication/pdf")
+                    .stream(
+                            ()-> stream
+                    )
+                    .build();
+            
+            /*Query consulta =em.createQuery("SELECT m.pDFFirmado FROM MemosEntity m WHERE m.id = :idMemo").setParameter("idMemo", idMemo);
             int tamInput = bos.available();
             byte [] pdf_firmado= new byte[tamInput];
             bos.read(pdf_firmado, 0, tamInput);
             
             OutputStream archivo = new FileOutputStream("pdf_firmado.pdf");
-            archivo.write(pdf_firmado);
+            archivo.write(pdf_firmado);*/
+            
+            em.close();
             return archivo;
         } catch (Exception e) {
             em.close();
+            System.out.println(e);
             return null;
         }
     }

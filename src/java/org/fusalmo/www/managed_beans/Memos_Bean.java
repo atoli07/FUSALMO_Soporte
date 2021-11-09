@@ -24,6 +24,7 @@ import org.fusalmo.www.entities.UsuariosITEntity;
 import org.fusalmo.www.model.Memos_Model;
 import org.fusalmo.www.utils.JsfUtil;
 import org.primefaces.PrimeFaces;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;
 
 /**
@@ -48,7 +49,7 @@ public class Memos_Bean {
     private String dateSelected;
     private String datosEmpleado;
     private String memoSelected;
-    private byte [] PDFFirmado;
+    private StreamedContent PDFFirmado;
     private UploadedFile filePDF;
 
     /**
@@ -162,12 +163,9 @@ public class Memos_Bean {
         
     }
     
-    public void getPDFFirmado(){
-        setMemos(
-               modelo.buscarMemoById(JsfUtil.getRequest().getParameter("idRecurso"))
-        );
-        
-        
+    public StreamedContent getPDFFirmado(){
+        this.PDFFirmado= modelo.obtenerPDFFirmadoById(JsfUtil.getRequest().getParameter("idMemo"));
+        return this.PDFFirmado;
     }
     
     public void updateEmpSelect(String args){
@@ -205,7 +203,6 @@ public class Memos_Bean {
         }
         
     }
-    
     /**
      * @return the memos
      */
