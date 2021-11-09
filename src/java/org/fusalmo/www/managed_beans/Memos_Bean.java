@@ -5,9 +5,12 @@
  */
 package org.fusalmo.www.managed_beans;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -21,6 +24,7 @@ import org.fusalmo.www.entities.UsuariosITEntity;
 import org.fusalmo.www.model.Memos_Model;
 import org.fusalmo.www.utils.JsfUtil;
 import org.primefaces.PrimeFaces;
+import org.primefaces.model.file.UploadedFile;
 
 /**
  *
@@ -43,7 +47,9 @@ public class Memos_Bean {
     private String areaSeleccionada;
     private String dateSelected;
     private String datosEmpleado;
+    private String memoSelected;
     private byte [] PDFFirmado;
+    private UploadedFile filePDF;
 
     /**
      * Creates a new instance of Memos_Bean
@@ -161,6 +167,42 @@ public class Memos_Bean {
                modelo.buscarMemoById(JsfUtil.getRequest().getParameter("idRecurso"))
         );
         
+        
+    }
+    
+    public void updateEmpSelect(String args){
+        setMemoSelected(args);
+    }
+    
+    public void uploadPDF(){
+        
+        System.out.println(getFilePDF());
+        if (getFilePDF() != null) {
+            
+            System.out.println();
+            
+            MemosEntity obtenerMemo = getModelo().buscarMemoById(JsfUtil.getRequest().getParameter("args"));
+            
+            System.out.println(obtenerMemo);
+            
+            //System.out.println(getFilePDF().getFileName() + " Filenames");
+            //System.out.println(getFilePDF().getInputStream() + " InputStream");
+            //System.out.println(getFilePDF().getContent());
+            //getMemos().setPDFFirmado(getFilePDF().getContent());
+            
+            obtenerMemo.setPDFFirmado(getFilePDF().getContent());
+            
+            if(getModelo().modificarMemo(obtenerMemo) != 0){
+                
+                System.out.println("Se agregó el PDF firmado con éxito");
+                
+            }else{
+                System.out.println("No se agregó el archivo PDF firmado");
+            }
+            
+        }else{
+            System.out.println("No seleccionó un archivo");
+        }
         
     }
     
@@ -330,6 +372,34 @@ public class Memos_Bean {
      */
     public void setFiltrarListaRecursos(List<RecursosEntity> filtrarListaRecursos) {
         this.filtrarListaRecursos = filtrarListaRecursos;
+    }
+
+    /**
+     * @return the filePDF
+     */
+    public UploadedFile getFilePDF() {
+        return filePDF;
+    }
+
+    /**
+     * @param filePDF the filePDF to set
+     */
+    public void setFilePDF(UploadedFile filePDF) {
+        this.filePDF = filePDF;
+    }
+
+    /**
+     * @return the memoSelected
+     */
+    public String getMemoSelected() {
+        return memoSelected;
+    }
+
+    /**
+     * @param memoSelected the memoSelected to set
+     */
+    public void setMemoSelected(String memoSelected) {
+        this.memoSelected = memoSelected;
     }
     
 }

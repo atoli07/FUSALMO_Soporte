@@ -30,6 +30,7 @@ import java.io.OutputStream;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import org.fusalmo.www.entities.AreaEntity;
 import org.fusalmo.www.entities.EmpleadoEntity;
@@ -200,6 +201,27 @@ public class Memos_Model {
         }
     }
     
+    public int modificarMemo( MemosEntity memo ){
+        
+        EntityManager em = JPAUtil.getEntityManager();
+        EntityTransaction tran = em.getTransaction();
+        
+        try {
+            
+            tran.begin();
+            em.merge(memo);
+            tran.commit();
+            em.close();
+            return 1;
+                
+        } catch (Exception e) {
+            
+            em.close();
+            return 0;
+            
+        }
+        
+    }
     
     //Creación de fuentes
     public static final String FONT = "C:\\Users\\Soporte\\Documents\\GitHub\\FUSALMO_Soporte\\build\\web\\resources\\fonts\\arialBold.ttf";
