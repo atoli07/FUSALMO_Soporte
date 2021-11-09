@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>FUSALMO IT Portal - Tokens</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <h:outputStylesheet library="css" name="primeflex.min.css" />
+    </h:head>
+    <h:body class="firstBody">
+        
+        <menu class="menu">
+
+            <div class="card">
+
+                <h:form>
+
+                    <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
+
+                        <p:menuitem url="${request.contextPath}/faces/adminIT/indexAdminIT.xhtml">
+                            
+                            <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
+
+                        </p:menuitem>
+                        
+                        <f:facet name="options">
+                            <p:button 
+                                class="buttonLogout"
+                                value="Salir" 
+                                icon="pi pi-fw pi-sign-out" 
+                                styleClass="ui-button-info" 
+                                href="${request.contextPath}/faces/logout.jsp"
+                                style="color: #DEE2E6; font-weight: bold;"
+                                />
+                        </f:facet>
+
+                    </p:menubar>
+
+                </h:form>
+
+            </div>
+
+        </menu>
+        
+        <div class="welcome">
+            <div class="p-grid">
+            <div class="title p-col-8">
+                
+                <h1 class="titleH1">Administración de<br/> Tokens</h1>
+                
+            </div>
+            <div class="image p-col-4">
+                
+                <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImageHeader"/>
+                    </div>
+            </div>
+            <p:divider class=""/>
+            
+        </div>
+
+        <div class="container">
+            <h1 class="titleH3" >Aquí tiene los tokens en cola <br/>generados por los empleados:</h1>
+            <h:form class="p-grid">
+                <div class="p-d-flex p-p-3" style=" width:100%">
+                    <p:commandButton value="Imprimir historial" styleClass="ui-button-outlined ui-button-help">
+                        <p:printer target="tokens"/>
+                    </p:commandButton>
+                    <p:button value="REGRESAR A MENÚ DE OPCIONES" styleClass="ui-button-outlined ui-button-info p-ml-auto" 
+                              href="${request.contextPath}/faces/adminIT/tokens/administracionTokens.xhtml"/>
+                </div>
+                <p:dataTable id="tokens" var="token" value="#{tokensBean.listaTokens}" 
+                             rowKey="#{token.id}" selectionMode="single" selection="#{tokensBean.selectedToken}" stripedRows="true">
+                    <p:column headerText="Fecha de creación" class="p-col-2">
+                        <h:outputText value="#{token.fecha}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/> 
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Equipo seleccionado" class="p-col-2">
+                        <h:outputText value="#{token.seleccionRecurso.codActivo}"/>
+                    </p:column>
+                    <p:column headerText="Detalle" class="p-col-5">
+                        <h:outputText value="#{token.descripcion}"/>
+                    </p:column>
+                    <p:column headerText="Resolución Final" class="p-col-3">
+                        <h:outputText value="#{token.idEstado.nombre}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>       
+    </h:body>
+</html>
+

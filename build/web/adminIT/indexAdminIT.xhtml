@@ -1,0 +1,262 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        
+        <h:outputStylesheet library="css" name="styleIndexAdminIT.css"/>
+        <h:outputStylesheet library="css" name="primeflex.min.css"/>
+        <h:outputStylesheet library="css" name="style.css"/>
+        
+        <title>FUSALMO IT Portal - Inicio</title>
+        
+    </h:head>
+    <h:body class="firstBody">
+        
+        <!--Condicional que verifica si el usuario ha iniciado sesión
+        De ser así carga todo el contenido-->
+        <c:if test="#{nombre != null}">
+        
+            <menu class="menu">
+
+                <div class="card">
+
+                    <h:form>
+
+                        <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
+
+                            <p:menuitem url="${request.contextPath}/faces/adminIT/indexAdminIT.xhtml">
+
+                                <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
+
+                            </p:menuitem>
+
+                            <f:facet name="options">
+                                <p:button 
+                                    class="buttonLogout"
+                                    value="Salir" 
+                                    icon="pi pi-fw pi-sign-out" 
+                                    styleClass="ui-button-info" 
+                                    href="${request.contextPath}/faces/logout.jsp"
+                                    style="color: #DEE2E6; font-weight: bold;"
+                                    />
+                            </f:facet>
+
+                        </p:menubar>
+
+                    </h:form>
+
+                </div>
+
+            </menu>
+
+            <div class="welcome">
+                <div class="p-grid">
+                    <div class="title p-col-8" style="width: 70%; margin: auto">
+
+                        <h1 class="titleH1">
+                            Bienvenido/a
+                            <br/>
+                            ${nombre}
+                        </h1>
+
+                    </div>
+                    <div class="image p-col-4" style="width: 20%; margin: auto">
+
+                        <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
+
+                    </div>
+                </div>
+                <p:divider class=""/>
+
+            </div>
+
+            <div>
+
+                <h1 class="titleH3" style="width: 77%; margin: auto">Menú de opciones principales:</h1>
+
+                <div class="p-grid containerCards" style="margin: auto">
+
+                    <p:card class="cardForm">
+                        <f:facet name="header">
+                            <img alt="user header" src="../resources/img/indexAdminIT/img6.png"/>
+                        </f:facet>
+                        <f:facet name="title">
+                            Administrar tokens
+                        </f:facet>
+                        <f:facet name="subtitle">
+                            Accede al tablero de peticiones de asistencia
+                        </f:facet>
+
+                        <f:facet name="footer">
+
+                            <p:button
+
+                                styleClass="ui-button-outlined ui-button-info"
+                                value="Acceder al tablero"
+                                style="width: 100%; color: #7749F8" 
+                                href="tokens/administracionTokens.xhtml">
+
+                            </p:button>
+
+                        </f:facet>
+                    </p:card>
+
+                    <p:card class="cardForm">
+                        <f:facet name="header">
+                            <img alt="user header" src="../resources/img/indexAdminIT/img5.png"/>
+                        </f:facet>
+                        <f:facet name="title">
+                            Admin. Recursos Tecnológicos (Activo Fijo)
+                        </f:facet>
+                        <f:facet name="subtitle">
+                            Entrada al tablero de insumos tecnológicos en Activo Fijo
+                        </f:facet>
+
+                        <f:facet name="footer">
+
+                            <p:button
+
+                                styleClass="ui-button-outlined ui-button-info"
+                                value="Acceder a sección"
+                                style="width: 100%; color: #7749F8" 
+                                href="recursos/administrarRecursosEmpleadoIT.xhtml">
+
+                            </p:button>
+
+                        </f:facet>
+                    </p:card>
+
+                    <p:card class="cardForm">
+                        <f:facet name="header">
+                            <img alt="user header" src="../resources/img/indexAdminIT/img4.png"/>
+                        </f:facet>
+                        <f:facet name="title">
+                            Gestión de prestamos
+                        </f:facet>
+                        <f:facet name="subtitle">
+                            Entrada a la sección de prestamos de insumos solicitados
+                            por los empleados
+                        </f:facet>
+
+                        <f:facet name="footer">
+
+                            <p:button
+
+                                styleClass="ui-button-outlined ui-button-info"
+                                value="Acceder a sección"
+                                style="width: 100%; color: #7749F8" 
+                                href="prestamos/index-prestamos.xhtml">
+
+                            </p:button>
+
+                        </f:facet>
+                    </p:card>
+
+                    <p:card class="cardForm">
+                        <f:facet name="header">
+                            <img alt="user header" src="../resources/img/indexAdminIT/img3.png"/>
+                        </f:facet>
+                        <f:facet name="title">
+                            Área de administración de memos
+                        </f:facet>
+                        <f:facet name="subtitle">
+                            Entra aquí para ver los memos que puedes generar y ver
+                            su historial
+                        </f:facet>
+
+                        <f:facet name="footer">
+
+                            <p:button
+
+                                styleClass="ui-button-outlined ui-button-info"
+                                value="Acceder a sección"
+                                style="width: 100%; color: #7749F8" 
+                                href="memos/indexMemos.xhtml">
+
+                            </p:button>
+
+                        </f:facet>
+                    </p:card>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <h1 class="titleH3" style="width: 77%; margin: auto">Menú de opciones secudarias:</h1>
+
+                <div class="p-grid containerCards" style="margin: auto">
+
+                    <p:card class="cardForm">
+                        <f:facet name="header">
+                            <img alt="user header" src="../resources/img/indexAdminIT/img2.png"/>
+                        </f:facet>
+                        <f:facet name="title">
+                            Área de administración de personal
+                        </f:facet>
+                        <f:facet name="subtitle">
+                            Administra los empleados de la fundación
+                        </f:facet>
+
+                        <f:facet name="footer">
+
+                            <p:button
+
+                                styleClass="ui-button-outlined ui-button-info"
+                                value="Acceder a Administración"
+                                style="width: 100%; color: #7749F8" 
+                                href="personal/Administracion.xhtml">
+
+                            </p:button>
+
+                        </f:facet>
+                    </p:card>
+
+                    <p:card class="cardForm">
+                        <f:facet name="header">
+                            <img alt="user header" src="../resources/img/indexAdminIT/img1.png"/>
+                        </f:facet>
+                        <f:facet name="title">
+                            Administración en áreas de trabajo
+                        </f:facet>
+                        <f:facet name="subtitle">
+                            Administra las áreas de trabajo de los empleados de la
+                            fundación
+                        </f:facet>
+
+                        <f:facet name="footer">
+
+                            <p:button
+
+                                styleClass="ui-button-outlined ui-button-info"
+                                value="Acceder a sección"
+                                style="width: 100%; color: #7749F8" 
+                                href="personal/TablaArea.xhtml">
+
+                            </p:button>
+
+                        </f:facet>
+                    </p:card>
+
+                </div>
+
+            </div>
+        
+        </c:if>
+        
+        <!--Condicional que verifica si el usuario ha iniciado sesión
+        Si no es así redirecciona al login-->
+        <c:if test="#{nombre == null}">
+            
+            <meta http-equiv="REFRESH" content="1;URL=${request.contextPath}/faces/index.xhtml"/>
+            
+        </c:if>
+            
+    </h:body>
+</html>
+

@@ -7,14 +7,14 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         
-        <h:outputStylesheet library="css" name="styleIndexMemos.css"/>
+        <h:outputStylesheet library="css" name="styleIndexCrearMemos.css"/>
         <h:outputStylesheet library="css" name="primeflex.min.css"/>
         <h:outputStylesheet library="css" name="style.css"/>
         
-        <title>Memos</title>
+        <title>Creación de memos</title>
         
     </h:head>
-
+    
     <h:body class="firstBody">
 
         <menu class="menu">
@@ -55,7 +55,7 @@
                 <div class="title p-col-8" style="width: 70%; margin: auto">
 
                     <h1 class="titleH1">
-                        Administración de memos
+                        Creación de memos
                     </h1>
 
                 </div>
@@ -75,17 +75,17 @@
             value="Regresar" 
             icon="pi pi-chevron-left"
             style="width: 50%; margin-left: 25%; margin-bottom: 20px; margin-top: 10px; color: #17A2B8"
-            href="${request.contextPath}/faces/adminIT/indexAdminIT.xhtml"
+            href="${request.contextPath}/faces/adminIT/memos/indexMemos.xhtml"
             />
         
         <div class="p-grid containerCards" style="margin: auto">
             
             <p:card class="cardForm" style="text-align: center">
                 <f:facet name="header">
-                    <i class="pi pi-book" style="font-size: 500%; "></i>
+                    <i class="pi pi-user" style="font-size: 500%; "></i>
                 </f:facet>
                 <f:facet name="title">
-                    Ver historial
+                    De asignación
                 </f:facet>
 
                 <f:facet name="footer">
@@ -95,7 +95,7 @@
                         styleClass="ui-button-outlined ui-button-info"
                         icon="pi pi-check"
                         style="width: 100%; color: #7749F8"
-                        href="historial/ver-historial.xhtml">
+                        href="asignacion/memo-asignacion.xhtml">
 
                     </p:button>
 
@@ -104,10 +104,10 @@
 
             <p:card class="cardForm" style="text-align: center">
                 <f:facet name="header">
-                    <i class="pi pi-th-large" style="font-size: 500%; "></i>
+                    <i class="pi pi-sort-alt" style="font-size: 500%; "></i>
                 </f:facet>
                 <f:facet name="title">
-                    Crear memo
+                    De sustitución
                 </f:facet>
 
                 <f:facet name="footer">
@@ -124,12 +124,13 @@
                 </f:facet>
                 
             </p:card>
-             <p:card class="cardForm" style="text-align: center">
+            
+            <p:card class="cardForm" style="text-align: center">
                 <f:facet name="header">
-                    <i class="pi pi-trash" style="font-size: 500%; "></i>
+                    <i class="pi pi-users" style="font-size: 500%; "></i>
                 </f:facet>
                 <f:facet name="title">
-                    Eliminar
+                    De prestamo
                 </f:facet>
 
                 <f:facet name="footer">
@@ -139,36 +140,17 @@
                         styleClass="ui-button-outlined ui-button-info"
                         icon="pi pi-check"
                         style="width: 100%; color: #7749F8"
-                        href="eliminar/eliminarMemo.xhtml">
+                        href="crear/index-crear.xhtml">
 
                     </p:button>
 
                 </f:facet>
+                
             </p:card>
-            <p:card class="cardForm" style="text-align: center">
-                <f:facet name="header">
-                    <i class="pi pi-pencil" style="font-size: 500%; "></i>
-                </f:facet>
-                <f:facet name="title">
-                    Editar
-                </f:facet>
-
-                <f:facet name="footer">
-
-                    <p:button
-
-                        styleClass="ui-button-outlined ui-button-info"
-                        icon="pi pi-check"
-                        style="width: 100%; color: #7749F8" 
-                        href="editar/editarMemo.xhtml">
-
-                    </p:button>
-
-                </f:facet>
-            </p:card>
+            
         </div>
-
+        
     </h:body>
-
+    
 </html>
 

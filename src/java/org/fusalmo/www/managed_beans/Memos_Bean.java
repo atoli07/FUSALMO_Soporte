@@ -43,6 +43,7 @@ public class Memos_Bean {
     private List<RecursosEntity> recursosSeleccionados;
     private List<RecursosEntity> listarRecursos;
     private List<RecursosEntity> filtrarListaRecursos;
+    private List<MemosEntity> listaMemosActivos;
     private EmpleadoEntity empleadoSeleccionado;
     private Date date;
     private String areaSeleccionada;
@@ -71,6 +72,24 @@ public class Memos_Bean {
         
         return modelo.listaEmpleados();
         
+    }
+    
+    public List<MemosEntity> getListaMemosActivos(){
+        return modelo.listaMemosActivos();
+    }
+    
+    public String borrarMemo(){
+        String idMemo = JsfUtil.getRequest().getParameter("idMemo");
+        
+        if(modelo.eliminarMemo(idMemo)> 0){
+        
+            return "eliminarMemo?faces-redirect=true&result=1";
+            
+        }else{
+        
+            return "eliminarMemo?faces-redirect=true&result=0";
+            
+        }
     }
     
     public void onChanged(){

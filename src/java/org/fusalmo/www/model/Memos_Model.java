@@ -131,6 +131,20 @@ public class Memos_Model {
         
     }
     
+    public List<MemosEntity> listaMemosActivos(){
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            Query consulta = em.createNamedQuery("MemosEntity.findByIsDeleted").setParameter("isDeleted", Boolean.FALSE);
+            List<MemosEntity> lista = consulta.getResultList();
+            return lista;
+        } catch (Exception e) {
+            em.close();
+            return null;
+        }
+        
+    }
+    
+    
     public AreaEntity obtenerArea(String idArea){
         
         EntityManager em = JPAUtil.getEntityManager();
@@ -240,6 +254,24 @@ public class Memos_Model {
             
         }
         
+    }
+    
+    public int eliminarMemo(String memo){
+        EntityManager em= JPAUtil.getEntityManager();
+        EntityTransaction tran =em.getTransaction();
+        try{
+            MemosEntity temp=em.find(MemosEntity.class, memo);
+            temp.setIsDeleted(Boolean.TRUE);
+            tran.begin();
+            em.persist(temp);
+            tran.commit();
+            em.close();
+            return 1;
+        }catch(Exception e){
+            em.close();
+            System.out.println(e);
+            return 0;
+        }        
     }
     
     //Creación de fuentes

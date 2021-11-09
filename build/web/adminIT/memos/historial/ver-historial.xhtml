@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        
+        <h:outputStylesheet library="css" name="primeflex.min.css"/>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <h:outputStylesheet library="css" name="style-ver-historial.css"/>
+        
+        <title>Historial</title>
+        
+    </h:head>
+    
+    <h:body class="firstBody">
+        
+        <menu class="menu">
+
+            <div class="card">
+
+                <h:form>
+
+                    <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
+
+                        <p:menuitem url="${request.contextPath}/faces/adminIT/indexAdminIT.xhtml">
+
+                            <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
+
+                        </p:menuitem>
+
+                        <f:facet name="options">
+                            <p:button 
+                                class="buttonLogout"
+                                value="Salir" 
+                                icon="pi pi-fw pi-sign-out" 
+                                styleClass="ui-button-info" 
+                                href="${request.contextPath}/faces/logout.jsp"
+                                style="color: #DEE2E6; font-weight: bold;"
+                                />
+                        </f:facet>
+
+                    </p:menubar>
+
+                </h:form>
+
+            </div>
+
+        </menu>
+
+        <div class="welcome">
+            <div class="p-grid">
+                <div class="title p-col-8" style="width: 70%; margin: auto">
+
+                    <h1 class="titleH1">
+                        Historial de memos
+                    </h1>
+
+                </div>
+                <div class="image p-col-4" style="width: 20%; margin: auto">
+
+                    <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
+
+                </div>
+            </div>
+            
+            <p:divider class=""/>
+
+        </div>
+        
+        <p:button 
+            styleClass="ui-button-outlined ui-button-info"
+            value="Regresar" 
+            icon="pi pi-chevron-left"
+            style="width: 50%; margin-left: 25%; margin-bottom: 20px; margin-top: 10px; color: #17A2B8"
+            href="${request.contextPath}/faces/adminIT/memos/indexMemos.xhtml"
+            />
+        
+        <h:form>
+
+            <p:dataTable id="tbl" 
+                         var="history_memo" 
+                         value="#{historial_Memos_Bean.listarMemos}"
+                         sortMode="single" 
+                         filteredValue="#{historial_Memos_Bean.filtrarMemos}"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                         paginator="true" 
+                         rows="10" 
+                         styleClass="container"
+                         paginatorPosition="bottom"
+                         >
+
+                <p:column headerText="ID" sortBy="#{history_memo.id}" filterBy="#{history_memo.id}">
+                    <h:outputText value="#{history_memo.id}"/>
+                </p:column>
+                
+                <p:column headerText="Tipo" sortBy="#{history_memo.idTipo.nombre}" filterBy="#{history_memo.idTipo.nombre}">
+                    <h:outputText value="#{history_memo.idTipo.nombre}"/>
+                </p:column>
+                
+                <p:column headerText="Asunto" sortBy="#{history_memo.asunto}" filterBy="#{history_memo.asunto}">
+                    <h:outputText value="#{history_memo.asunto}"/>
+                </p:column>
+                
+                <p:column headerText="Descargar PDF" style="text-align: center;">
+                    <p:commandButton icon="pi pi-arrow-down" styleClass="ui-button-outlined" style="width: 25%">
+                        <p:fileDownload value="#{historial_Memos_Bean.file}"/>
+                    </p:commandButton>
+                </p:column>
+                
+                <p:column headerText="Subir PDF firmado" style="text-align: center;">
+                    <p:commandButton 
+                        icon="pi pi-arrow-up" 
+                        styleClass="ui-button-outlined" 
+                        style="width: 25%"
+                        onclick="PF('choseFile').show()"
+                        >
+                        <p:ajax event="click" listener="#{memos_Bean.updateEmpSelect(history_memo.id)}" update="formFile"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+        
+        <p:dialog header="Seleccione el archivo PDF firmado" widgetVar="choseFile" minHeight="40" width="350" showEffect="fade" modal="true">
+            
+            <h:form enctype="multipart/form-data" id="formFile">
+                
+                <h:outputLabel value="#{memos_Bean.memoSelected}"/>
+                
+                <p:fileUpload 
+                    value="#{memos_Bean.filePDF}"
+                    mode="simple" 
+                    skinSimple="true" 
+                    label="Seleccionar"
+                    allowTypes="/(\.|\/)(pdf)$/"
+                    accept=".pdf"
+                    />
+
+                <p:commandButton 
+                    value="Enviar" 
+                    ajax="false" 
+                    action="#{memos_Bean.uploadPDF}" 
+                    styleClass="p-mt-3 ui-button-outlined p-d-block">
+                    <f:param name="args" value="#{memos_Bean.memoSelected}"/>
+                </p:commandButton>
+            </h:form>
+
+        </p:dialog>
+
+    </h:body>
+    
+</html>
+

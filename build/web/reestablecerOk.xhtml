@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>FUSALMO IT Portal - Reestablecer Contraseña</title>
+            </f:facet>
+            <h:outputStylesheet library="css" name="style.css"/>
+        <h:outputStylesheet library="css" name="primeflex.min.css" />
+        </h:head>
+
+        <h:body class="firstBody">
+        
+        <menu class="menu">
+
+            <div class="card">
+
+                <h:form>
+
+                    <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
+
+                        <p:menuitem url="index.xhtml">
+                            
+                            <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
+
+                        </p:menuitem>
+
+                    </p:menubar>
+
+                </h:form>
+
+            </div>
+
+        </menu>
+        
+        <div class="welcome">
+            <div class="p-grid">
+                <div class="title p-col-8">
+                
+                <h1 class="titleH1">Revise su bandeja de entrada</h1>
+                
+            </div>
+                <div class="image p-col-4">
+                
+                <i class="pi pi-check-circle" style="font-size: 44pt; color: #299795;"></i>
+                    </div>
+            </div>
+            <p:divider class=""/>
+            
+        </div>
+
+        <div class="card p-grid">
+
+            <h:form class="container">
+                <div id="mensaje" class="p-col-12">
+                    <p:outputLabel value="Deberias de recibir un mensaje a tu bandeja de entrada con la contraseña
+                                que tenías asignado/a."/>
+                    <br/>
+                    <br/>
+                    <p:outputLabel value="En caso no hayas recibido nada, recomendamos que revises spam."/>
+                    <br/>
+                    <br/>
+                    <p:outputLabel value="Y si aún no lo encuentra, comuníquese con el área de Recursos Tecnológicos
+                               en el área de Innovación"/>
+                </div>
+                <p:commandButton action="index"  value="REGRESAR A LOGIN" styleClass="ui-button-outlined ui-button-help"/>
+            </h:form>
+        </div>
+        
+    </h:body>
+
+    </f:view>
+</html>
+
