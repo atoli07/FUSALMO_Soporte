@@ -38,18 +38,14 @@ public class MantenimientosBean {
 
     public MantenimientosBean() {
         mante = new MantenimientosEntity();
+        MantenimientosModel modelo = new MantenimientosModel();
+        
+    }
 
-  MantenimientosModel modelo = new MantenimientosModel();
- private MantenimientosEntity mante;
- private List<MantenimientosEntity> Listamante;
- 
- public MantenimientosBean() {
- mante = new MantenimientosEntity();
- }
- public MantenimientosEntity getMantenimientos() {
- return mante;
- }
- public void setMantenimientos(MantenimientosEntity mante) {
+    public MantenimientosEntity getMantenimientos() {
+        return mante;
+    }
+
     public void setMantenimientos(MantenimientosEntity mante) {
         this.mante = mante;
     }

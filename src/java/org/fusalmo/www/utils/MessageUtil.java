@@ -33,6 +33,12 @@ public class MessageUtil {
     public void error() {
         addMessage("Error", "El recurso está siendo ocupado");
     }
+    
+    public void confirmAddMemo(){
+        
+        addMessage("Confimación", "¡El memo se ha creado con éxito!");
+        
+    }
 
     public void confirmDeleteToken(){
         addMessage("Confirmación", "El token ha sido eliminado");
