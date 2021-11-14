@@ -8,10 +8,36 @@ import org.fusalmo.www.model.MantenimientosModel;
 import org.fusalmo.www.utils.JPAUtil;
 import org.fusalmo.www.utils.JsfUtil;
 
-
 @ManagedBean
 @RequestScoped
 public class MantenimientosBean {
+    
+    private String idRecurso;
+
+    public String getIdRecurso() {
+        return idRecurso;
+    }
+
+    public void setIdRecurso(String idRecurso) {
+        this.idRecurso = idRecurso;
+    }
+    
+    private MantenimientosEntity mantenimiento;
+
+    public MantenimientosEntity getMantenimiento() {
+        return mantenimiento;
+    }
+
+    public void setMantenimiento(MantenimientosEntity mantenimiento) {
+        this.mantenimiento = mantenimiento;
+    }
+
+    MantenimientosModel modelo = new MantenimientosModel();
+    private MantenimientosEntity mante;
+    private List<MantenimientosEntity> Listamante;
+
+    public MantenimientosBean() {
+        mante = new MantenimientosEntity();
 
   MantenimientosModel modelo = new MantenimientosModel();
  private MantenimientosEntity mante;
@@ -24,47 +50,52 @@ public class MantenimientosBean {
  return mante;
  }
  public void setMantenimientos(MantenimientosEntity mante) {
- this.mante = mante;
- }
- public List<MantenimientosEntity> getListaMantenimientos() {
- /* Notese que se llama al método listarMantemientos
- para obtener la lista de objetos a partir de la bd */
- return modelo.listarMantenimientos();
- }
- public String guardarMantenimientos() {
- if (modelo.insertarMantenimientos(mante) != 1) {
- JsfUtil.setErrorMessage(null, "Ya se registró un mantenimiento con este ID");
- return null;//Regreso a la misma página
- } else {
- JsfUtil.setFlashMessage("exito", "Mantenimiento registrado exitosamente");
- //Forzando la redirección en el cliente
- return "TablaMantenimientos?faces-redirect=true";
- }
- }
- public String eliminarMantenimientos() {
- // Leyendo el parametro enviado desde la vista
- String id= JsfUtil.getRequest().getParameter("id");
+    public void setMantenimientos(MantenimientosEntity mante) {
+        this.mante = mante;
+    }
 
- if (modelo.eliminarMantenimientos(id) > 0) {
- JsfUtil.setFlashMessage("exito", "Mantenimiento eliminado exitosamente");
- }
- else{
- JsfUtil.setErrorMessage(null, "No se pudo eliminar este Mantenimiento");
- }
- return "TablaMantenimientos?faces-redirect=true";
- }
- 
- public String ModificarMantenimientos() {
-      
-     if(modelo.modificarMantenimientos(mante) >= 1){
-         JsfUtil.setErrorMessage(null," no funcionó");
-         return null;
-     } else{
-         JsfUtil.setFlashMessage("exito", "Manteminiento modificado exitosamente");
-     }
+    public List<MantenimientosEntity> getListaMantenimientos() {
+        /* Notese que se llama al método listarMantemientos
+ para obtener la lista de objetos a partir de la bd */
+        return modelo.listarMantenimientos();
+    }
+
+    public String guardarMantenimientos() {
+        System.out.println( getIdRecurso() );
+        mante.setIdRecurso(modelo.buscarRecursoId(getIdRecurso()));
+        if (modelo.insertarMantenimientos(mante) != 1) {
+            JsfUtil.setErrorMessage(null, "Ya se registró un mantenimiento con este ID");
+            return null;//Regreso a la misma página
+        } else {
+            JsfUtil.setFlashMessage("exito", "Mantenimiento registrado exitosamente");
+            //Forzando la redirección en el cliente
+            return "TablaMantenimientos?faces-redirect=true";
+        }
+    }
+
+    public String eliminarMantenimientos() {
+        // Leyendo el parametro enviado desde la vista
+        String id = JsfUtil.getRequest().getParameter("id");
+
+        if (modelo.eliminarMantenimientos(id) > 0) {
+            JsfUtil.setFlashMessage("exito", "Mantenimiento eliminado exitosamente");
+        } else {
+            JsfUtil.setErrorMessage(null, "No se pudo eliminar este Mantenimiento");
+        }
+        return "eliminarMante?faces-redirect=true";
+    }
+
+    public String ModificarMantenimientos() {
+
+        if (modelo.modificarMantenimientos(mante) >= 1) {
+            JsfUtil.setErrorMessage(null, " no funcionó");
+            return null;
+        } else {
+            JsfUtil.setFlashMessage("exito", "Manteminiento modificado exitosamente");
+        }
         return "TablaMantenimientos?faces-redirect=true";
-     
- }   
+
+    }
     
-    
+
 }

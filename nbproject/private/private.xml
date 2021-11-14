@@ -3,12 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/model/Memos_Model.java</file>
-            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/web/adminIT/memos/eliminar/eliminarMemo.xhtml</file>
-            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/web/adminIT/memos/indexMemos.xhtml</file>
-            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/web/adminIT/memos/editar/editarMemo.xhtml</file>
-            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/web/adminIT/recursos/administrarRecursosEmpleadoIT.xhtml</file>
-            <file>file:/C:/Users/Soporte/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/utils/MessageUtil.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/mantenimiento/editar/editarMante.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/mantenimiento/editar/editor/editorMate.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/mantenimiento/eliminar/eliminarMante.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/recursos/editar/tipo/laptop.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/mantenimiento/administrar.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/recursos/editar/verEditar.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/mantenimiento/listar/listar.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/managed_beans/MantenimientosBean.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/recursos/agregar/tipo/agregar-pc.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/mantenimiento/crear/agregarMante.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/recursos/eliminar/eliminarRecurso.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/model/RecursosModel.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/managed_beans/RecursosBean.java</file>
         </group>
     </open-files>
 </project-private>
