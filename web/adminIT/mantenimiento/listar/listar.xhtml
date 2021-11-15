@@ -89,7 +89,9 @@
                         <h:outputText value="#{item.idRecurso.nombre}"/>
                     </p:column>
                     <p:column headerText="Fecha de realización">
-                        <h:outputText value="#{item.fechaRealizacion}"/>
+                        <h:outputText value="#{item.fechaRealizacion}">
+                        <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                        </h:outputText>
                     </p:column>
                     <p:column headerText="Descripción">
                         <h:outputText value="#{item.descripcion}"/>
