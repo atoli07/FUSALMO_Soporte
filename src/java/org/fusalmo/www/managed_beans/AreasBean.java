@@ -87,7 +87,7 @@ public class AreasBean {
 
     public String guardarMantenimientos() {
         System.out.println(getIdRecurso());
-        mante.setIdRecurso(modelo.buscarRecursoId(getIdRecurso()));
+        //mante.setIdRecurso(modelo.buscarRecursoId(getIdRecurso()));
         if (modelo.insertarMantenimientos(mante) != 1) {
             JsfUtil.setErrorMessage(null, "Ya se registró un mantenimiento con este ID");
             return null;//Regreso a la misma página

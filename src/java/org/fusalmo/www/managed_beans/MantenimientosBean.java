@@ -55,19 +55,9 @@ public class MantenimientosBean {
     public MantenimientosEntity getMantenimientos() {
         return mante;
     }
-
-  MantenimientosModel modelo = new MantenimientosModel();
- //private MantenimientosEntity mante;
- //private List<MantenimientosEntity> Listamante;
- 
- //public MantenimientosBean() {
- //mante = new MantenimientosEntity();
- }
- public MantenimientosEntity getMantenimientos() {
- return mante;
- }
- public void setMantenimientos(MantenimientosEntity mante) {
-   // public void setMantenimientos(MantenimientosEntity mante) {
+    
+    public void setMantenimientos(MantenimientosEntity mante) {
+        // public void setMantenimientos(MantenimientosEntity mante) {
         this.mante = mante;
     }
 
@@ -79,7 +69,7 @@ public class MantenimientosBean {
 
     public String guardarMantenimientos() {
         //mante.setId(modelo.crearID());
-        System.out.println( getIdRecurso() );
+        System.out.println(getIdRecurso());
         mante.setIdRecurso(modelo.buscarRecursoId(getIdRecurso()));
         if (modelo.insertarMantenimientos(mante) != 1) {
             JsfUtil.setErrorMessage(null, "Ya se registró un mantenimiento con este ID");
@@ -91,20 +81,20 @@ public class MantenimientosBean {
         }
     }
 
-    public String borrarMante(){
-    
-        String idRecurso= JsfUtil.getRequest().getParameter("id");
-        
-        if(modelo.eliminarMante(idRecurso) == 1){
-        
+    public String borrarMante() {
+
+        String idRecurso = JsfUtil.getRequest().getParameter("id");
+
+        if (modelo.eliminarMante(idRecurso) == 1) {
+
             return "eliminarMante?faces-redirect=true&result=1";
-            
-        }else{
-        
+
+        } else {
+
             return "eliminarMante?faces-redirect=true&result=0";
-            
+
         }
-        
+
     }
 
     public String ModificarMantenimientos() {
@@ -118,6 +108,5 @@ public class MantenimientosBean {
         return "TablaMantenimientos?faces-redirect=true";
 
     }
-    
 
 }
