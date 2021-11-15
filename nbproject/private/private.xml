@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/brand/OneDrive/Documentos/GitHub/FUSALMO_Soponrte/web/adminIT/recursos/administrarRecursosEmpleadoIT.xhtml</file>
             <file>file:/C:/Users/brand/OneDrive/Documentos/GitHub/FUSALMO_Soponrte/web/adminIT/personal/Jefes/EditarJefe/EditarJefe.xhtml</file>
             <file>file:/C:/Users/brand/OneDrive/Documentos/GitHub/FUSALMO_Soponrte/web/adminIT/personal/Jefes/EliminarJefe/EliminarJefe.xhtml</file>
@@ -14,6 +15,57 @@
             <file>file:/C:/Users/brand/OneDrive/Documentos/GitHub/FUSALMO_Soponrte/web/adminIT/personal/Editar/EditarEmpleado.xhtml</file>
             <file>file:/C:/Users/brand/OneDrive/Documentos/GitHub/FUSALMO_Soponrte/web/adminIT/personal/Eliminar/TablaEmpleado_1.xhtml</file>
             <file>file:/C:/Users/brand/OneDrive/Documentos/GitHub/FUSALMO_Soponrte/web/adminIT/personal/Jefes/AdminJefes.xhtml</file>
+=======
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/prestamos/index-prestamos.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/recursos/agregar/seleccionDeRecurso.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/recursos/administrarRecursosEmpleadoIT.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/mantenimiento/listar/listar.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/memos/crear/prestamo/memo-prestamo.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/entities/AreaEntity.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/recursos/eliminar/eliminarRecurso.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/entities/EstadoTokenEntity.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/empleadoIT/bienvenidoEmpleado.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/mantenimiento/eliminar/eliminarMante.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/recursos/editar/verEditar.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/recursos/agregar/tipo/agregarMicrosoftENT.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/managed_beans/MantenimientosBean.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/model/MantenimientosModel.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/entities/RecursosDeEmpleadosEntity.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/managed_beans/TokensBean.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/model/RecursosModel.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/entities/TipoRecursoEntity.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/managed_beans/RecursosBean.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/areas/AgregarMantenimiento.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/managed_beans/AreaBean.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/recursos/editar/tipo/laptop.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/mantenimiento/crear/crear.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/recursos/editar/tipo/microsoft.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/entities/JefeAsignadoEntity.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/managed_beans/EmpleadoBean.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/mantenimiento/administrarMantenimientos.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/entities/PrestamoRecursosEntity.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/recursos/agregar/tipo/agregar-pc.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/recursos/agregar/tipo/agregarLaptop.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/recursos/editar/tipo/accesorios.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/memos/indexMemos.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/entities/EmpleadoEntity.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/memos/historial/ver-historial.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/managed_beans/Memos_Bean.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/entities/TipoMemoEntity.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/personal/TablaArea.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/personal/Administracion.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/mantenimiento/editarM/editarMante.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/mantenimiento/editarM/editor/editorMate.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/indexAdminIT.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/model/RecursosEmpleadosModel.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/entities/MantenimientosEntity.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/areas/Mantenimientos.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/recursos/agregar/tipo/agregar-accesorio.xhtml</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/entities/TokensEntity.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/entities/RecursosEntity.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/src/java/org/fusalmo/www/entities/UsuariosITEntity.java</file>
+            <file>file:/C:/Users/Brymolina/Documents/GitHub/FUSALMOSoporte/web/adminIT/recursos/editar/tipo/pc.xhtml</file>
+>>>>>>> 51f26e5c32937701b292a57fff58cb1fad27c93b
         </group>
     </open-files>
 </project-private>

@@ -77,14 +77,14 @@
             
             <h:form class="p-grid">
                 
-                <p:dataTable id="tokens" var="item" value="#{mantenimientosBean.listaMantenimientos}" stripedRows="true">
+                <p:dataTable id="tokens" var="item" value="#{mantenimientosBean.listaManteActivos}" stripedRows="true">
                     
                     <p:column headerText="ID">
                         <h:outputText value="#{item.id}"/>
                     </p:column>
                     
                     <p:column headerText="Recurso">
-                        <h:outputText value="#{item.idRecurso.id} --- #{item.idRecurso.marca} (#{item.idRecurso.modelo}"/>
+                        <h:outputText value="#{item.idRecurso.id} - #{item.idRecurso.marca} (#{item.idRecurso.modelo}"/>
                     </p:column>
                     
                     <p:column headerText="nombre">
@@ -92,7 +92,9 @@
                     </p:column>
                     
                     <p:column headerText="Fecha">
-                        <h:outputText value="#{item.fechaRealizacion}"/>
+                        <h:outputText value="#{item.fechaRealizacion}">
+                              <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                        </h:outputText>
                     </p:column>
                     
                     <p:column headerText="Descripcion">
@@ -103,7 +105,7 @@
 
                         <p:growl id="message" showDetail="true"/>
 
-                        <p:commandButton value="Borrar" action="#{mantenimientosBean.eliminarMantenimientos()}" update="message" styleClass="ui-button-danger" icon="pi pi-times">
+                        <p:commandButton value="Borrar" action="#{mantenimientosBean.borrarMante()}" update="message" styleClass="ui-button-danger" icon="pi pi-times">
                             <f:param name="id" value="#{item.id}"/>
                             <p:confirm type="popup" header="Confirmation" message="¿Está seguro de eliminar el recurso?" icon="pi pi-info-circle"/>
                         </p:commandButton>

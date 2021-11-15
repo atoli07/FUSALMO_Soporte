@@ -1,17 +1,17 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
 
-        <h:outputStylesheet library="css" name="styleVerEditarRecurso.css"/>
+        <h:outputStylesheet library="css" name="styleVerRecursosDisponibles.css"/>
         <h:outputStylesheet library="css" name="primeflex.min.css"/>
         <h:outputStylesheet library="css" name="style.css"/>
 
-        <title>FUSALMO IT PORTAL - Editar Mantenimientos</title>
+        <title>Ver Areas</title>
 
     </h:head>
     <h:body class="firstBody">
@@ -53,7 +53,7 @@
             <div class="p-grid">
                 <div class="title p-col-8" style="width: 70%; margin: auto">
 
-                    <h1 class="titleH1">Editar Mantenimientos</h1>
+                    <h1 class="titleH1">Listado de Areas Fusalmo</h1>
 
                 </div>
                 <div class="image p-col-4" style="width: 20%; margin: auto">
@@ -68,51 +68,34 @@
         <p:button 
             styleClass="ui-button-outlined ui-button-info"
             value="Regresar" 
-            icon="pi pi-chevron-left"
-            style="width: 50%; margin-left: 25%; margin-bottom: 20px; margin-top: 10px; color: #17A2B8" 
-            href="${request.contextPath}/faces/adminIT/mantenimiento/administrarMantenimientos.xhtml"
+            icon="pi pi-chevron-left" 
+            style="width: 50%; margin-left: 25%; margin-bottom: 20px; margin-top: 10px; color: #17A2B8"
+            href="${request.contextPath}/faces/adminIT/areas/administrarAreas.xhtml"
             />
 
         <div class="container">
 
             <h:form class="p-grid">
-                <p:growl id="message" showDetail="true"/>
 
-                <p:dataTable id="tokens" var="item" value="#{mantenimientosBean.listaMantenimientos}" stripedRows="true">
+                <p:dataTable id="datalist" var="item" value="#{areasBean.listaMantenimientos}" stripedRows="true">
 
                     <p:column headerText="Id">
                         <h:outputText value="#{item.id}"/>
                     </p:column>
-                    <p:column headerText="Recurso">
-                        <h:outputText value="#{item.idRecurso.id} --- #{item.idRecurso.marca} (#{item.idRecurso.modelo})"/>
-                    </p:column>
+                   
                     <p:column headerText="Nombre">
-                        <h:outputText value="#{item.idRecurso.nombre}"/>
+                        <h:outputText value="#{item.nombre}"/>
                     </p:column>
-                    <p:column headerText="Fecha de realización">
-                        <h:outputText value="#{item.fechaRealizacion}">
-                            <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
-                        </h:outputText>
+                    
+                     <p:column headerText="IdJefeAsignado">
+                        <h:outputText value="#{item.idJefeAsignado.id}"/>
                     </p:column>
-                    <p:column headerText="Descripción">
-                        <h:outputText value="#{item.descripcion}"/>
-                    </p:column>
-
-                    <p:column headerText="Acciones">
-
-                        <p:commandButton value="Editar" action="#{mantenimientosBean.ModificarMantenimientos()}" styleClass="ui-button-warning" icon="pi pi-pencil">
-                            <f:param name="idMantenimiento" value="#{item.id}"/>
-                        </p:commandButton>
-
-                    </p:column>
-
+                  
                 </p:dataTable>
 
             </h:form>
-
         </div>
 
     </h:body>
-
 </html>
 

@@ -9,7 +9,7 @@
         <h:outputStylesheet library="css" name="styleAgregarLaptop.css"/>
         <h:outputStylesheet library="css" name="primeflex.min.css"/>
         <h:outputStylesheet library="css" name="style.css"/>
-        <title>Agregar Mantenimiento</title>
+        <title>Agregar Areas Fusalmo</title>
     </h:head>
     <h:body class="firstBody">
 
@@ -50,14 +50,20 @@
             <div class="p-grid">
                 <div class="title p-col-8" style="width: 70%; margin: auto">
 
-                    <h1 class="titleH1">Nuevo Mantenimiento</h1>
+                    <h1 class="titleH1">Nueva Area </h1>
 
                 </div>
                 <div class="image p-col-4" style="width: 20%; margin: auto">
 
                     <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
                 </div>
-
+                <p:button 
+                    styleClass="ui-button-outlined ui-button-info"
+                    value="Regresar" 
+                    icon="pi pi-chevron-left" 
+                    style="width: 50%; margin-left: 25%; margin-bottom: 20px; margin-top: 10px; color: #17A2B8"
+                    href="${request.contextPath}/faces/adminIT/areas/administrarAreas.xhtml"
+                    />
             </div>
             <p:divider class=""/>
 
@@ -71,45 +77,25 @@
             <h:panelGrid columns="1" style="width: 50%" cellpadding="7" styleClass="p-mb-1">
 
                 <h5>Id</h5>
-                <p:inputText style="width: 100%" 
-                             value="#{mantenimientosBean.mantenimientos.id}"
-                             required="true"
-                             requiredMessage="Campo necesario "
-                             validatorMessage="Debes ingresar un ID válido"
-                             placeholder="id"
-                             size="50"
-                             />
+                <p:inputText style="width: 100%" value="#{areasBean.mantenimientos.id}"/>
 
-                <h5>Recurso</h5>
-                <p:selectOneMenu  required="true" requiredMessage="Introduce el modelo del recurso" style="width: 100%" filter="true" filterMatchMode="contains" id="option" value="#{mantenimientosBean.idRecurso}">
-                    <f:selectItem itemLabel="SELECCIONE" itemValue=""/>
-                    <f:selectItems value="#{recursosBean.listaRecursosActivos}"
-                                   var="recurso"
-                                   itemValue="#{recurso.id}"
-                                   itemLabel="#{recurso.id} - #{recurso.marca} (#{recurso.modelo})"/>
+                <h5>Nombre</h5>
+                <p:inputText style="width: 100%" value="#{areasBean.mantenimientos.nombre}"/>
+
+
+                <h:outputLabel for="IdJefe" value="IdJefeAsignado:"/>
+                <p:selectOneMenu id="opciones"  value="#{areasBean}">
+                    <f:selectItems value="#{areasBean.listarJefeAsignado}" var="listar"  itemLabel="#{listar.id}"/> 
                 </p:selectOneMenu>
 
-                <h5>Descripcion</h5>
-                <p:inputTextarea rows="6" style="width: 100%" autoResize="true" value="#{mantenimientosBean.mantenimientos.descripcion}"
-                             
-                             placeholder="Resume el trabajo realizado"
-                             
-                                 />
 
-
-                <p:outputLabel for="button" value="Fecha"/>
-                <p:datePicker id="button"  style="width: 100%" value="#{mantenimientosBean.mantenimientos.fechaRealizacion}" showIcon="true"
-                              required="true"
-                             requiredMessage="Fecha es necesaria para registar"
-                             
-                             />
 
                 <p:commandButton 
                     value="Guardar"
                     update="@form"
                     styleClass="ui-button-outlined ui-button-success" 
                     style="margin-bottom: 35px; margin-top: 35px; margin-right: 20px; min-width: 25%;"
-                    action="#{mantenimientosBean.guardarMantenimientos()}"
+                    action="#{areasBean.guardarMantenimientos()}"
                     >
 
                 </p:commandButton>
@@ -119,10 +105,21 @@
                     value="Cancelar" 
                     styleClass="ui-button-outlined ui-button-danger" 
                     style="margin-bottom: 35px; margin-top: 35px; min-width: 25%;" 
-                    href="${request.contextPath}/faces/adminIT/mantenimiento/administrarMantenimientos.xhtml"
+                    href="${request.contextPath}/faces/adminIT/areas/administrarAreas.xhtml"
                     />
             </h:panelGrid>
         </h:form>
+
+
+
+
+
+
+
+
+
+
+
 
     </h:body>
 

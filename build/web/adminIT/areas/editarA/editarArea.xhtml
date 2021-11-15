@@ -11,7 +11,7 @@
         <h:outputStylesheet library="css" name="primeflex.min.css"/>
         <h:outputStylesheet library="css" name="style.css"/>
 
-        <title>FUSALMO IT PORTAL - Editar Mantenimientos</title>
+        <title>FUSALMO IT PORTAL - Editar Areas</title>
 
     </h:head>
     <h:body class="firstBody">
@@ -53,7 +53,7 @@
             <div class="p-grid">
                 <div class="title p-col-8" style="width: 70%; margin: auto">
 
-                    <h1 class="titleH1">Editar Mantenimientos</h1>
+                    <h1 class="titleH1">Editar Areas Fusalmo</h1>
 
                 </div>
                 <div class="image p-col-4" style="width: 20%; margin: auto">
@@ -70,38 +70,35 @@
             value="Regresar" 
             icon="pi pi-chevron-left"
             style="width: 50%; margin-left: 25%; margin-bottom: 20px; margin-top: 10px; color: #17A2B8" 
-            href="${request.contextPath}/faces/adminIT/mantenimiento/administrarMantenimientos.xhtml"
+            href="${request.contextPath}/faces/adminIT/areas/administrarAreas.xhtml"
             />
 
         <div class="container">
 
             <h:form class="p-grid">
-                <p:growl id="message" showDetail="true"/>
 
-                <p:dataTable id="tokens" var="item" value="#{mantenimientosBean.listaMantenimientos}" stripedRows="true">
+                <p:dataTable id="tokens" var="item" value="#{areasBean.listaMantenimientos}" stripedRows="true">
 
                     <p:column headerText="Id">
                         <h:outputText value="#{item.id}"/>
                     </p:column>
-                    <p:column headerText="Recurso">
-                        <h:outputText value="#{item.idRecurso.id} --- #{item.idRecurso.marca} (#{item.idRecurso.modelo})"/>
-                    </p:column>
+                    
+                  
+                  
                     <p:column headerText="Nombre">
-                        <h:outputText value="#{item.idRecurso.nombre}"/>
+                        <h:outputText value="#{item.nombre}"/>
                     </p:column>
-                    <p:column headerText="Fecha de realización">
-                        <h:outputText value="#{item.fechaRealizacion}">
-                            <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
-                        </h:outputText>
+                    
+                    
+                    <p:column headerText="Id">
+                        <h:outputText value="#{item.idJefeAsignado.id}"/>
                     </p:column>
-                    <p:column headerText="Descripción">
-                        <h:outputText value="#{item.descripcion}"/>
-                    </p:column>
+                  
 
                     <p:column headerText="Acciones">
 
-                        <p:commandButton value="Editar" action="#{mantenimientosBean.ModificarMantenimientos()}" styleClass="ui-button-warning" icon="pi pi-pencil">
-                            <f:param name="idMantenimiento" value="#{item.id}"/>
+                        <p:commandButton value="Editar" action="#{areasBean.ModificarMantenimientos()}" styleClass="ui-button-warning" icon="pi pi-pencil">
+                            <f:param name="id" value="#{item.id}"/>
                         </p:commandButton>
 
                     </p:column>
