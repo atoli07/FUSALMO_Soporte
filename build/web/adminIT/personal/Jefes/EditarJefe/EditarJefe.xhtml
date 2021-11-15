@@ -40,10 +40,10 @@
                         <f:facet name="options">
                             <p:button 
                                 class="buttonLogout"
-                                value="Regresar" 
+                                value="Salir" 
                                 icon="pi pi-fw pi-sign-out" 
                                 styleClass="ui-button-info" 
-                                href="${request.contextPath}/faces/adminIT/personal/Jefes/AdminJefes.xhtml"
+                                href="${request.contextPath}/faces/logout.jsp"
                                 style="color: #DEE2E6; font-weight: bold;"
                                 />
                         </f:facet>
@@ -70,6 +70,13 @@
                     <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
                     
                 </div>
+                <p:button 
+            styleClass="ui-button-outlined ui-button-info"
+            value="Regresar" 
+            icon="pi pi-chevron-left"
+            style="width: 50%; margin-left: 25%; margin-bottom: 20px; margin-top: 10px; color: #17A2B8" 
+            href="${request.contextPath}/faces/adminIT/personal/Jefes/AdminJefes.xhtml"
+            />
             </div>
             
             <p:divider class=""/>
@@ -104,9 +111,13 @@
                         <p:growl id="message" showDetail="true"/>
 
                         
-                        <p:commandButton value="Editar" action="#{jefeAsignadoBean.editarJefe()}" styleClass="ui-button-warning" icon="pi pi-pencil">
-                            <f:param name="idRecurso" value="#{jefe.id}"/>
+                        <p:commandButton value="Editar" action="#{jefeAsignadoBean.redirectEdit()}" styleClass="ui-button-warning" icon="pi pi-pencil">
+                            <f:param name="idJefe" value="#{jefe.id}"/>
                         </p:commandButton>
+                        <p:confirmPopup global="true">
+                            <p:commandButton value="No" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+                            <p:commandButton value="Sí" type="button" styleClass="ui-confirm-popup-yes" />
+                        </p:confirmPopup>
                     </p:column>
 
                 </p:dataTable>

@@ -139,4 +139,59 @@ public class EmpleadoBean {
         this.f_seleccionada = f_seleccionada;
     }
     
+    public void obtenerEmpleadoID(String empleados){
+        
+        setEmpleado(modelo.buscarEmpleadosId(empleados));
+        
+       
+        
+        
+        
+    }
+    
+    public String editarEmpleado(){
+        
+        //-----------System.out.println(recurso);-------------
+        //System.out.println(recurso.getId());
+        //System.out.println(recurso.getNombre());
+        //System.out.println(recurso.getCodActivo());
+        //System.out.println(recurso.getImagen());
+        //System.out.println(areaAsignada);
+        //System.out.println(recurso.getIdTipoRecurso());
+        
+        //System.out.println(JsfUtil.getRequest().getParameter("tipoRecurso"));
+        //System.out.println(JsfUtil.getRequest().getParameter("idRecurso"));
+        
+        empleado.setId(JsfUtil.getRequest().getParameter("idEmpleado"));
+        empleado.setIdAreaAsignada(modelo.obtenerArea(areaAsignada));
+        
+        
+        if(modelo.modificarEmpleado(empleado) !=0){
+            
+            System.out.println("Se modificó correctamente el empleado");
+            return "/adminIT/personal/Editar/EditarEmpleado?faces-redirect=true";
+            
+        }else{
+            
+            System.out.println("Hubo un error al modificar el recurso");
+            return null;
+            
+        }
+        
+        
+    }
+    
+    public String redirectEdit(){
+        
+        setEmpleado(
+                modelo.buscarEmpleadosId(
+                        JsfUtil.getRequest().getParameter("idEmpleado")
+                )
+        );
+  
+        
+        return "/adminIT/personal/Editar/tipo/editando?faces-redirect=true&empleado=" + JsfUtil.getRequest().getParameter("idEmpleado") ;
+        
+    }
+    
 }

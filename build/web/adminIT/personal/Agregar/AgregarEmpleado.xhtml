@@ -34,10 +34,10 @@
                         <f:facet name="options">
                             <p:button 
                                 class="buttonLogout"
-                                value="Regresar" 
+                                value="Salir" 
                                 icon="pi pi-fw pi-sign-out" 
                                 styleClass="ui-button-info" 
-                                href="${request.contextPath}/faces/adminIT/personal/Administracion.xhtml"
+                                href="${request.contextPath}/faces/logout.jsp"
                                 style="color: #DEE2E6; font-weight: bold;"
                                 />
                         </f:facet>
@@ -61,6 +61,13 @@
 
                     <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
                 </div>
+                <p:button 
+            styleClass="ui-button-outlined ui-button-info"
+            value="Regresar" 
+            icon="pi pi-chevron-left"
+            style="width: 50%; margin-left: 25%; margin-bottom: 20px; margin-top: 10px; color: #17A2B8" 
+            href="${request.contextPath}/faces/adminIT/personal/Administracion.xhtml"
+            />
             </div>
             <p:divider class=""/>
 
@@ -126,10 +133,10 @@
                     label="telefono"
                     requiredMessage="Introduce un numero de telefono valido"
                     validatorMessage="Debes ingresar un numero de telefono valido"
-                    placeholder="2200-1425"
+                    placeholder="22001425"
                     size="50"
                     > 
-                   <f:validateRegex pattern="[0-9]{8}"/>
+                    <f:validateRegex  pattern="[0-9]{8}"/>
                     <p:ajax update="telefono" event="keyup"/>
                 </p:inputText>
                 <p:message for="telefono" id="telefonomsg"/>
@@ -141,7 +148,7 @@
                         
                     <f:selectItem itemLabel="M" itemValue="M"/>
                         <f:selectItem itemLabel="F" itemValue="F"/> 
-                        <f:selectItem itemLabel="Otro" itemValue="Otro"/> 
+                        
                      </p:selectOneMenu>
                     
                     

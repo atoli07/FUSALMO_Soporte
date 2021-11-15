@@ -124,20 +124,27 @@ em.remove(est);//Borrando la instancia
  return 0;
  }
  }
- public int modificarEmpleado(EmpleadoEntity empleado) {
- EntityManager em = JPAUtil.getEntityManager();
- EntityTransaction tran = em.getTransaction();
- try {
- tran.begin();//Iniciando transacción
- em.merge(empleado); //Actualizando el objeto en la BD
- tran.commit();//Confirmando la transacción
- em.close();
- return 1;
- } catch (Exception e) {
- em.close();
- return 0;
- }
- }
+ public int modificarEmpleado(EmpleadoEntity idEmpleado){
+        
+        EntityManager em = JPAUtil.getEntityManager();
+        EntityTransaction tran = em.getTransaction();
+        
+        try {
+            
+            tran.begin();
+            em.merge(idEmpleado);
+            tran.commit();
+            em.close();
+            return 1;
+                
+        } catch (Exception e) {
+            
+            em.close();
+            return 0;
+            
+        }
+        
+    }
  public int eliminarEmpleado(String id) {
  EntityManager em = JPAUtil.getEntityManager();
  int filasBorradas = 0;
@@ -855,6 +862,52 @@ em.remove(est);//Borrando la instancia
             
         }
         
+    }
+    
+    public EmpleadoEntity buscarEmpleadosId(String idEmpleado){
+        
+        EntityManager em = JPAUtil.getEntityManager();
+        
+        try {
+            
+            //em.refresh(em);
+            //em.clear();
+            //em.flush();
+            
+            EmpleadoEntity empleado = em.find(EmpleadoEntity.class, idEmpleado);
+            
+            em.close();
+            
+            return empleado;
+            
+        } catch (Exception e) {
+            
+            em.close();
+            
+            return null;
+            
+        }
+        
+    }
+
+    public int modificarEmpleado(String idEmpleado) {
+        EntityManager em = JPAUtil.getEntityManager();
+        EntityTransaction tran = em.getTransaction();
+        
+        try {
+            
+            tran.begin();
+            em.merge(idEmpleado);
+            tran.commit();
+            em.close();
+            return 1;
+                
+        } catch (Exception e) {
+            
+            em.close();
+            return 0;
+            
+        }
     }
 
     

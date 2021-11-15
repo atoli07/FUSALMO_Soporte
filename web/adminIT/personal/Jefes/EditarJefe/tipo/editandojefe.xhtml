@@ -47,12 +47,15 @@
                                 style="color: #DEE2E6; font-weight: bold;"
                                 />
                         </f:facet>
+                        
+                        
 
                     </p:menubar>
 
                 </h:form>
 
             </div>
+            
 
         </menu>
         
@@ -61,7 +64,7 @@
                 <div class="title p-col-8" style="width: 70%; margin: auto">
 
                     <h1 class="titleH1">
-                       Ver Jefes
+                        Agregar Jefe
                     </h1>
 
                 </div>
@@ -79,44 +82,84 @@
             />
             </div>
             
-            <p:divider class=""/>
-
+           
+           #{jefeAsignadoBean.obtenerJefeID(request.getParameter("idJefe"))}
         </div>
+
+        <h:form>
+            
+           
+
+                
+               <p:outputLabel for="nombre" value="Nombre"/>
+                <p:inputText 
+                    id="nombre" 
+                    value="#{jefeAsignadoBean.jefe.nombres}" 
+                    required="true"
+                    label="Firstname"
+                    requiredMessage="Introduce tu nombre"
+                    validatorMessage="Debes ingresar un nombre válido"
+                    placeholder="Nombre"
+                    size="50"
+                    >
+                    
+                    
+                    <p:ajax update="msgNombre" event="blur"/>
+                </p:inputText>
+                <p:message for="nombre" id="msgNombre"/>
+
+                <p:outputLabel for="apellidos" value="Apellidos"/>
+                <p:inputText 
+                    id="apellidos" 
+                    value="#{jefeAsignadoBean.jefe.apellidos}" 
+                    required="true"
+                    label="Firslastname"
+                    requiredMessage="Introduce tu apellido"
+                    validatorMessage="Debes ingresar apellidos válido"
+                    placeholder="Apellido"
+                    size="50"
+                    >
+                    
+                    <p:ajax update="msgApellidos" event="blur"/>
+                </p:inputText>
+                <p:message for="apellidos" id="msgApellidos"/>  
+                
+                
+            
+
+            <div class="p-grid" style="margin: auto; width: 90%">
+
+                <div class="p-col" style="text-align: end">
+                    
+                    <p:commandButton 
+                        value="Guardar"
+                update="@form"
+                styleClass="ui-button-outlined ui-button-success" 
+                style="margin-bottom: 35px; margin-top: 35px; margin-right: 20px; min-width: 25%;"
+                action="${jefeAsignadoBean.editarJefe()}">
+                
+                
+                <f:param name="idJefe" value="#{request.getParameter('idJefe')}"/>
+                        
+                    </p:commandButton>
+                
+                </div>
+
+                <div class="p-col" style="text-align: start">
+
+                    <p:button value="Cancelar" styleClass="ui-button-outlined ui-button-danger" style="width: 50%" 
+                              href="${request.contextPath}/faces/adminIT/personal/Jefes/AdminJefes.xhtml"/>
+
+                </div>
+
+            </div>
 
         
-        <div class="container">
-            
-            <h:form class="p-grid">
-                
-                <p:dataTable id="tokens" var="jefe"  value="#{jefeAsignadoBean.listaJefe}" stripedRows="true">
-                    
-                    <p:column headerText="ID">
-                        <h:outputText value="#{jefe.id}"/>
-                    </p:column>
-                    
-                    <p:column headerText="Nombre">
-                        <h:outputText value="#{jefe.nombres}"/>
-                    </p:column>
-                    
-                    <p:column headerText="Apellido">
-                        <h:outputText value="#{jefe.apellidos}"/>
-                    </p:column>
-                    
-                    <p:column headerText="Deleted">
-                        <h:outputText value="#{jefe.isDeleted}"/>
-                    </p:column>
-
-                    
-
-                </p:dataTable>
-                
-
-            </h:form>
-
-        </div>
                             
-
+        </h:form>
     </h:body>
 
 </html>
+
+
 

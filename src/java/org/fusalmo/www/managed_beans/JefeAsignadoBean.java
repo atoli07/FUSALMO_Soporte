@@ -107,7 +107,7 @@ public class JefeAsignadoBean {
         if(modelo.modificarJefe(jefe) != 0){
             
             System.out.println("Se modificó correctamente el jefe");
-            return "TablaJefeAsignado_1_1";
+            return "/adminIT/personal/Jefes/EditarJefe/EditarJefe?faces-redirect=true";
             
         }else{
             
@@ -115,6 +115,28 @@ public class JefeAsignadoBean {
             return null;
             
         }
+        
+    }
+ public String redirectEdit(){
+        
+        setJefe(
+                modelo.buscarJefeId(
+                        JsfUtil.getRequest().getParameter("idJefe")
+                )
+        );
+  
+        
+        return "/adminIT/personal/Jefes/EditarJefe/tipo/editandojefe?faces-redirect=true&idJefe=" + JsfUtil.getRequest().getParameter("idJefe") ;
+        
+    }
+ 
+  public void obtenerJefeID(String jefe){
+        
+        setJefe(modelo.buscarJefeId(jefe));
+        
+       
+        
+        
         
     }
 }
