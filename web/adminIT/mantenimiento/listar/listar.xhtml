@@ -83,29 +83,17 @@
                         <h:outputText value="#{item.id}"/>
                     </p:column>
                     <p:column headerText="Recurso">
-                        <h:outputText value="#{item.idRecurso.id} -(#{item.idRecurso.modelo}) "/>
+                        <h:outputText value="#{item.idRecurso.id} --- #{item.idRecurso.marca} (#{item.idRecurso.modelo})"/>
                     </p:column>
                     <p:column headerText="Nombre">
-                        <h:outputText value="#{item.idRecurso.nombre} (#{item.idRecurso.marca}) "/>
+                        <h:outputText value="#{item.idRecurso.nombre}"/>
                     </p:column>
                     <p:column headerText="Fecha de realización">
-                        <h:outputText value="#{item.fechaRealizacion}">
-                            <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
-                        </h:outputText>
+                        <h:outputText value="#{item.fechaRealizacion}"/>
                     </p:column>
                     <p:column headerText="Descripción">
                         <h:outputText value="#{item.descripcion}"/>
                     </p:column>
-
-                    <p:column headerText="Estado">
-                        <!--verifica si isdeleted es tru o falses y lo muesta-->
-                        <h:outputText value="Elminado" rendered="#{item.isDeleted eq true}" />
-
-                        <h:outputText value="Activo" rendered="#{item.isDeleted eq false}" />
-
-                    </p:column>
-
-
                 </p:dataTable>
 
             </h:form>
