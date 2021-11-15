@@ -7,7 +7,7 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
- 
+
         <!--<h:outputStylesheet name="css/bootstrap.min.css" />-->
 
         <h:outputStylesheet name="css/alertify.core.css" />
@@ -50,7 +50,7 @@
                 <div class="title p-col-8" style="width: 70%; margin: auto">
 
                     <h1 class="titleH1">
-                        Agregar Jefe
+                        Eliminar Jefe
                     </h1>
 
                 </div>
@@ -65,64 +65,7 @@
 
         </div>
 
-        <h:form>
-            
-            <div class="p-grid container2" style="margin: auto">
-
-                <div class="p-col cardsForm">
-
-                    <h5>ID</h5>
-                    <span class="ui-float-label">
-                        <p:inputText id="float-input2" value="#{jefeAsignadoBean.jefe.id}"/>
-                        <p:outputLabel for="@previous" value="Ejemplo: NE2121"/>
-                    </span>
-
-                </div>
-
-                <div class="p-col cardsForm">
-
-                    <h5>Nombres</h5>
-                    <span class="ui-float-label">
-                        <p:inputText id="float-input3" value="#{jefeAsignadoBean.jefe.nombres}"/>
-                        <p:outputLabel for="@previous" value="Nombres"/>
-                    </span>
-
-                </div>
-
-                <div class="p-col cardsForm">
-
-                    <h5>Apellidos</h5>
-                    <span class="ui-float-label">
-                        <p:inputText id="float-input4" value="#{jefeAsignadoBean.jefe.apellidos}"/>
-                        <p:outputLabel for="@previous" value="Apellidos"/>
-                    </span>
-
-                </div>                              
-            </div>
-
-            <div class="p-grid" style="margin: auto; width: 90%">
-
-                <div class="p-col" style="text-align: end">
-                    
-                    <p:commandButton 
-                        value="Guardar"
-                        styleClass="ui-button-outlined ui-button-success" 
-                        style="width: 50%" 
-                        action="#{jefeAsignadoBean.guardarJefe()}">
-                        
-                    </p:commandButton>
-                
-                </div>
-
-                <div class="p-col" style="text-align: start">
-
-                    <p:button value="Cancelar" styleClass="ui-button-outlined ui-button-danger" style="width: 50%" href="TablaJefeAsignado_1.xhtml"/>
-
-                </div>
-
-            </div>
-
-        </h:form>
+        
         <div class="container">
             
             <h:form class="p-grid">
@@ -140,6 +83,10 @@
                     <p:column headerText="Apellido">
                         <h:outputText value="#{jefe.apellidos}"/>
                     </p:column>
+                    
+                    <p:column headerText="Deleted">
+                        <h:outputText value="#{jefe.isDeleted}"/>
+                    </p:column>
 
                     <p:column headerText="Acciones">
 
@@ -153,6 +100,7 @@
                             <p:commandButton value="No" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
                             <p:commandButton value="Sí" type="button" styleClass="ui-confirm-popup-yes" />
                         </p:confirmPopup>
+                        
                     </p:column>
 
                 </p:dataTable>
