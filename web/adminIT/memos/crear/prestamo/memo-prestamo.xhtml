@@ -115,7 +115,6 @@
                                 <f:validateLength minimum="2"/>
                                 <p:ajax update="mostrarAsunto" event="blur"/>
                             </p:inputText>
-                            
                             <p:message for="asunto" id="msgAsunto"/>
 
                             <p:outputLabel for="basic" value="Fecha de entrega:"/>
@@ -142,57 +141,39 @@
                             </p:datePicker>
                             <p:message for="dev" id="msgDevolucion"/>
                             
-                            <p:outputLabel for="emp" value="Empleado a sustituir equipo:"/>
-                            <p:selectOneMenu 
-                                id="emp" 
-                                value="#{memos_Bean.empleadoSelected}"
+                            <p:outputLabel for="finalidad" value="Describa el uso que se le dará a los recursos:"/>
+                            <p:inputText 
+                                id="finalidad" 
+                                value="#{memos_Bean.memos.asunto}" 
                                 required="true"
-                                requiredMessage="Seleccione un empleado al que sustituirá el equipo"
+                                label="descripcion"
+                                requiredMessage="Debes ingresar una descripción"
+                                validatorMessage="La descripción debe contener más de dos caracteres"
+                                placeholder="Desarrollo de talleres y contenido audio visual"
+                                size="50"
                                 >
-                                <f:selectItem itemLabel="Seleccione una opción" itemValue="null"/>
-                                <f:selectItems
-                                    value="#{memos_Bean.empleadosConRecursos}" 
-                                    var="listEmpRecursos" 
-                                    itemLabel="#{listEmpRecursos.nombres} #{listEmpRecursos.apellidos} (#{listEmpRecursos.cargo})" 
-                                    itemValue="#{listEmpRecursos.id}"/>
-                                <p:ajax event="change" listener="#{memos_Bean.onChangedEmpleado()}" update="empleados"/>
-                            </p:selectOneMenu>
-                            <p:message for="emp" id="msgEmp"/>
-
+                                <f:validateLength minimum="2"/>
+                                <p:ajax update="mostrarAsunto" event="blur"/>
+                            </p:inputText>
+                            <p:message for="finalidad" id="msgFinalidad"/>
+                            
+                            <p:outputLabel for="horario" value="Escriba el horario en el que se utilizarán:"/>
+                            <p:inputText 
+                                id="horario" 
+                                value="#{memos_Bean.memos.asunto}" 
+                                required="true"
+                                label="horario"
+                                requiredMessage="Debes ingresar el horario de uso"
+                                validatorMessage="El horario debe contener más de dos caracteres"
+                                placeholder="Por la mañana de 7:00 a 11:00"
+                                size="50"
+                                >
+                                <f:validateLength minimum="2"/>
+                                <p:ajax update="mostrarAsunto" event="blur"/>
+                            </p:inputText>
+                            <p:message for="horario" id="msgHorario"/>
+                            
                         </h:panelGrid>
-
-                        <p:dataTable var="empResources" value="#{memos_Bean.recursosDeEmpleado}" 
-                                     widgetVar="customersTable"
-                                     emptyMessage="No ha seleccionado un empleado para sustituir sus recursos"
-                                     paginator="true"
-                                     rows="5"
-                                     paginatorPosition="bottom"
-                                     id="empleados"
-                                     >
-                            
-                            <f:facet name="header">
-                                <div class="p-d-flex p-ai-center p-jc-between">
-                                    <span>Recursos actuales del empleado</span>
-                                </div>
-                            </f:facet>
-
-                            <p:column headerText="Nombre">
-                                <h:outputText value="#{empResources.idRecurso.nombre}" />
-                            </p:column>
-                            
-                            <p:column headerText="Modelo">
-                                <h:outputText value="#{empResources.idRecurso.modelo}" />
-                            </p:column>
-                            
-                            <p:column headerText="Código activo">
-                                <h:outputText value="#{empResources.idRecurso.codActivo}" />
-                            </p:column>
-                            
-                            <p:column headerText="Cargador si es laptop">
-                                <h:outputText value="#{memos_Bean.convertBoolean(empResources.idRecurso.cargador)}" />
-                            </p:column>
-
-                        </p:dataTable>
                         
                         <p:dataTable var="resources" value="#{memos_Bean.listarRecursos}" 
                                      widgetVar="customersResources"
@@ -311,38 +292,17 @@
                         
                         <p>
                             Por este medio, se efectúa la asignación de equipo
-                            informático en calidad de <b>SUSTITUCIÓN</b> del
-                            usuario
+                            informático en calidad de <b>PRÉSTAMO</b>. Para
                             <b>"El usuario se mostrará en el documento final"</b>
                         </p>
                         
                         <p>
-                            El equipo que tenía asignado era el siguiente:
+                            Los días de uso serán los siguientes:
                         </p>
                         
-                        <p:dataTable var="empResources" value="#{memos_Bean.recursosDeEmpleado}" 
-                                     emptyMessage="Los recursos actuales del empleado se mostrarán en el documento final."
-                                     id="empleadosPreview"
-                                     showGridlines="true">
-                                     >
-
-                            <p:column headerText="Nombre">
-                                <h:outputText value="#{empResources.idRecurso.nombre}" />
-                            </p:column>
-                            
-                            <p:column headerText="Modelo">
-                                <h:outputText value="#{empResources.idRecurso.modelo}" />
-                            </p:column>
-                            
-                            <p:column headerText="Código activo">
-                                <h:outputText value="#{empResources.idRecurso.codActivo}" />
-                            </p:column>
-                            
-                            <p:column headerText="Cargador si es laptop">
-                                <h:outputText value="#{memos_Bean.convertBoolean(empResources.idRecurso.cargador)}" />
-                            </p:column>
-
-                        </p:dataTable>
+                        <p>
+                        Los talleres se realizarán por la mañana
+                        </p>
                         
                         <p>
                             El recurso a entregar es el siguiente:
