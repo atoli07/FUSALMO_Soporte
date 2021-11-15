@@ -8,6 +8,7 @@ import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.model.MantenimientosModel;
 import org.fusalmo.www.utils.JPAUtil;
 import org.fusalmo.www.utils.JsfUtil;
+import org.fusalmo.www.utils.MessageUtil;
 
 @ManagedBean
 @RequestScoped
@@ -98,15 +99,27 @@ public class MantenimientosBean {
     }
 
     public String ModificarMantenimientos() {
-
-        if (modelo.modificarMantenimientos(mante) >= 1) {
-            JsfUtil.setErrorMessage(null, " no funcionó");
-            return null;
-        } else {
-            JsfUtil.setFlashMessage("exito", "Manteminiento modificado exitosamente");
+        mante= modelo.obtenerMantenimientos(JsfUtil.getRequest().getParameter("idMantenimiento"));
+        return "editor/editarMantenimiento?faces-redirect=true&idMantenimiento="+mante.getId();
+    }
+    
+    public void obtenerMantenimiento(String mantenimiento){
+        setMantenimientos(modelo.obtenerMantenimientos(mantenimiento));
+        setIdRecurso(mante.getIdRecurso().getId());
+    }
+    
+    public String editarMantenimiento(){
+        mante.setId(JsfUtil.getRequest().getParameter("idMantenimiento"));
+        mante.setIdRecurso(modelo.buscarRecursoId(getIdRecurso()));
+        if (modelo.modificarMantenimientos(mante)>1) {
+            MessageUtil mensaje= new MessageUtil();
+            mensaje.addMessage("Confirmación", "El mantenimiento ha sido actualizado");
+            return "/adminIT/mantenimiento/editarM/editarMante?faces-redirect=true";
+        }else{
+             MessageUtil mensaje= new MessageUtil();
+            mensaje.addMessage("Error", "El mantenimiento no pudo ser actualizado");
+            return "/adminIT/mantenimiento/editarM/editarMante?faces-redirect=true";
         }
-        return "TablaMantenimientos?faces-redirect=true";
-
     }
 
 }

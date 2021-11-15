@@ -76,6 +76,7 @@
         <div class="container">
 
             <h:form class="p-grid">
+                <p:growl id="message" showDetail="true"/>
 
                 <p:dataTable id="tokens" var="item" value="#{mantenimientosBean.listaMantenimientos}" stripedRows="true">
 
@@ -100,7 +101,7 @@
                     <p:column headerText="Acciones">
 
                         <p:commandButton value="Editar" action="#{mantenimientosBean.ModificarMantenimientos()}" styleClass="ui-button-warning" icon="pi pi-pencil">
-                            <f:param name="id" value="#{item.id}"/>
+                            <f:param name="idMantenimiento" value="#{item.id}"/>
                         </p:commandButton>
 
                     </p:column>

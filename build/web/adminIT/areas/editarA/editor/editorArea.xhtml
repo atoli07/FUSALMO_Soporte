@@ -9,7 +9,7 @@
         <h:outputStylesheet library="css" name="styleAgregarLaptop.css"/>
         <h:outputStylesheet library="css" name="primeflex.min.css"/>
         <h:outputStylesheet library="css" name="style.css"/>
-        <title>FUSALMO IT PORTAL - Editar PC</title>
+        <title>FUSALMO IT PORTAL - Editar Area</title>
     </h:head>
     <h:body class="firstBody">
         
@@ -62,7 +62,7 @@
             value="Regresar" 
             icon="pi pi-chevron-left" 
             style="width: 50%; margin-left: 25%; margin-bottom: 20px; margin-top: 10px; color: #17A2B8"
-            href="${request.contextPath}/faces/adminIT/mantenimiento/administrarMantenimientos.xhtml"
+            href="${request.contextPath}/faces/adminIT/Areas/administrarAreas.xhtml"
             />
             </div>
             <p:divider class=""/>
@@ -81,7 +81,7 @@
                 <p:outputLabel for="nombre" value="Nombre"/>
                 <p:inputText 
                     id="nombre" 
-                    value="#{recursosBean.recurso.nombre}" 
+                    value="#{areasBean.item.nombre}" 
                     required="true"
                     label="Firstname"
                     requiredMessage="Introduce el nombre del recurso"
@@ -94,81 +94,7 @@
                 </p:inputText>
                 <p:message for="nombre" id="msgNombre"/>
 
-                <p:outputLabel for="marca" value="Marca"/>
-                <p:inputText 
-                    id="marca" 
-                    value="#{recursosBean.recurso.marca}" 
-                    label="marca" 
-                    required="true"
-                    requiredMessage="Introduce la marca del recurso"
-                    validatorMessage="Debes ingresar una marca válida"
-                    placeholder="DELL"
-                    size="50"
-                    >
-                    <f:validateLength minimum="2"/>
-                    <p:ajax update="msgMarca" event="blur"/>
-                </p:inputText>
-                <p:message for="marca" id="msgMarca"/>
-                
-                <p:outputLabel for="modelo" value="Modelo"/>
-                <p:inputText 
-                    id="modelo" 
-                    value="#{recursosBean.recurso.modelo}" 
-                    required="true"
-                    label="Modelo"
-                    requiredMessage="Introduce el modelo del recurso"
-                    placeholder="DELL EXPIRON"
-                    size="50"
-                    >
-                    <p:ajax update="msgModelo" event="blur"/>
-                </p:inputText>
-                <p:message for="modelo" id="msgModelo"/>
-                
-                <p:outputLabel for="serie" value="Número de serie"/>
-                <p:inputText 
-                    id="serie" 
-                    value="#{recursosBean.recurso.numSerie}" 
-                    required="true"
-                    label="Serie"
-                    requiredMessage="Introduce el número de serie del recurso"
-                    placeholder="LW430UA#ABA"
-                    size="50"
-                    >
-                    <p:ajax update="msgSerie" event="blur"/>
-                </p:inputText>
-                <p:message for="serie" id="msgSerie"/>
-                
-                <p:outputLabel for="dirIP" value="Dirección IP"/>
-                <p:inputText 
-                    id="dirIP" 
-                    value="#{recursosBean.recurso.direccionIP}" 
-                    required="true"
-                    label="IP"
-                    requiredMessage="Introduce la dirección IP del recurso"
-                    validatorMessage="Debes ingresar una dirección IP válida"
-                    placeholder="192.168.0.1"
-                    size="50"
-                    >
-                    <f:validator validatorId="validate.ip"/>
-                    <p:ajax update="msgIP" event="keyup"/>
-                </p:inputText>
-                <p:message for="dirIP" id="msgIP"/>
-                
-                <p:outputLabel for="dirMAC" value="Dirección MAC"/>
-                <p:inputText 
-                    id="dirMAC" 
-                    value="#{recursosBean.recurso.direccionMAC}" 
-                    required="true"
-                    label="MAC"
-                    requiredMessage="Introduce la dirección MAC del recurso"
-                    validatorMessage="Debes ingresar una dirección mac válida"
-                    placeholder="XX:XX:XX:XX:XX:XX"
-                    size="50"
-                    >
-                    <f:validator validatorId="validate.MAC"/>
-                    <p:ajax update="msgMAC" event="keyup"/>
-                </p:inputText>
-                <p:message for="dirMAC" id="msgMAC"/>
+        
                 
                 <p:outputLabel for="codACT" value="Código Activo"/>
                 <p:inputText 
@@ -186,26 +112,9 @@
                 </p:inputText>
                 <p:message for="codACT" id="msgCodAct"/>
                 
-                <p:outputLabel for="url" value="URL Imágen"/>
-                <p:inputText 
-                    id="url" 
-                    value="#{recursosBean.recurso.imagen}" 
-                    required="true"
-                    label="url"
-                    requiredMessage="Ingrese un nombre"
-                    placeholder="URL"
-                    size="50"
-                    >
-                    <f:validator validatorId="validate.URL"/>
-                    <p:ajax update="imgRecurso" event="blur"/>
-                    <p:ajax update="msgURL" event="blur"/>
-                </p:inputText>
-                <p:message for="url" id="msgURL"/>
+        
                 
-                <h:graphicImage url="#{recursosBean.recurso.imagen}" width="30%" id="imgRecurso">
-                </h:graphicImage>
-                
-                <p:outputLabel for="area" value="Área asignada"/>
+                <p:outputLabel for="area" value=" Jefe Área asignada"/>
                 <p:selectOneMenu id="area" value="#{recursosBean.areaAsignada}">
                     <f:selectItems value="#{recursosBean.listarAreas}" var="list" itemLabel="#{list.nombre}" itemValue="#{list.id}"/>
                 </p:selectOneMenu>
@@ -221,8 +130,6 @@
                 action="#{recursosBean.editarRecurso()}"
                 >
                 
-                <f:param name="tipoRecurso" value="4"/>
-                <f:param name="idRecurso" value="#{request.getParameter('idRecurso')}"/>
                 
             </p:commandButton>
             
@@ -230,7 +137,7 @@
                 value="Cancelar" 
                 styleClass="ui-button-outlined ui-button-danger" 
                 style="margin-bottom: 35px; margin-top: 35px; min-width: 25%;" 
-                href="${request.contextPath}/faces/adminIT/mantenimiento/administrarMantenimientos.xhtml"
+                href="${request.contextPath}/faces/adminIT/Areas/administrarAreas.xhtml"
                 />
             
         </h:form>
