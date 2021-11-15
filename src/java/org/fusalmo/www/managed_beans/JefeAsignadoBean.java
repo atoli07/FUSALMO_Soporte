@@ -40,14 +40,20 @@ public class JefeAsignadoBean {
  return modelo.listarJefe();
  }
  public String guardarJefe() {
+     jefe.setId(modelo.crearID());
+     jefe.setIsDeleted(false);
  if (modelo.insertarJefe(jefe) != 1) {
- JsfUtil.setErrorMessage(null, "Ya se registró un jefe con este ID");
- return null;//Regreso a la misma página
+ if(modelo.nuevoJefe(getJefe()) != 1){
+            System.out.println("Hubo un error inesperado al registrar el jefe");
+            return null;//Regreso a la misma página
  } else {
  JsfUtil.setFlashMessage("exito", "Jefe registrado exitosamente");
  //Forzando la redirección en el cliente
- return "TablaJefeAsignado?faces-redirect=true";
  }
+ 
+ 
+ }
+        return "/adminIT/personal/Jefes/AdminJefes?faces-redirect=true";
  }
  public String eliminarJefe() {
  // Leyendo el parametro enviado desde la vista
@@ -59,18 +65,56 @@ public class JefeAsignadoBean {
  else{
  JsfUtil.setErrorMessage(null, "No se pudo borrar a este Jefe");
  }
- return "TablaJefeAsignado?faces-redirect=true";
+ return "/adminIT/personal/Jefes/EliminarJefe/EliminarJefe?faces-redirect=true";
  }
  
  public String ModificarJefe() {
       
-     if(modelo.modificarJefe(jefe) >= 1){
-         JsfUtil.setErrorMessage(null,"alavergA no funcionó");
-         return null;
-     } else{
-         JsfUtil.setFlashMessage("exito", "Alumno modificado exitosamente");
-     }
-        return "TablaJefeAsignado?faces-redirect=true";
+     jefe.setId(modelo.crearID());
+     jefe.setIsDeleted(false);
+ if (modelo.modificarJefe(jefe) != 1) {
+ if(modelo.nuevoJefe(getJefe()) != 1){
+            System.out.println("Hubo un error inesperado al registrar el jefe");
+            return null;//Regreso a la misma página
+ } else {
+ JsfUtil.setFlashMessage("exito", "Jefe registrado exitosamente");
+ //Forzando la redirección en el cliente
+ }
+ 
+ 
+ }
+        return "TablaJefeAsignado_1_1?faces-redirect=true";
      
  }   
+ 
+ public String editarJefe(){
+        
+        //-----------System.out.println(recurso);-------------
+        //System.out.println(recurso.getId());
+        //System.out.println(recurso.getNombre());
+        //System.out.println(recurso.getCodActivo());
+        //System.out.println(recurso.getImagen());
+        //System.out.println(areaAsignada);
+        //System.out.println(recurso.getIdTipoRecurso());
+        
+        //System.out.println(JsfUtil.getRequest().getParameter("tipoRecurso"));
+        //System.out.println(JsfUtil.getRequest().getParameter("idRecurso"));
+        
+        jefe.setId(JsfUtil.getRequest().getParameter("idJefe"));
+        
+        
+        
+        if(modelo.modificarJefe(jefe) != 0){
+            
+            System.out.println("Se modificó correctamente el jefe");
+            return "TablaJefeAsignado_1_1";
+            
+        }else{
+            
+            System.out.println("Hubo un error al modificar el recurso");
+            return null;
+            
+        }
+        
+    }
 }
