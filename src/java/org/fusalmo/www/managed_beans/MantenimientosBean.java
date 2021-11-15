@@ -48,6 +48,13 @@ public class MantenimientosBean {
 
     public MantenimientosBean() {
         mante = new MantenimientosEntity();
+        MantenimientosModel modelo = new MantenimientosModel();
+        
+    }
+
+    public MantenimientosEntity getMantenimientos() {
+        return mante;
+    }
 
   MantenimientosModel modelo = new MantenimientosModel();
  //private MantenimientosEntity mante;

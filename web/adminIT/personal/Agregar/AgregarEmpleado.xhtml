@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        
+        <h:outputStylesheet library="css" name="styleSeleccionDeRecurso.css"/>
+        <h:outputStylesheet library="css" name="primeflex.min.css"/>
+        <h:outputStylesheet library="css" name="style.css"/>
+        
+        <title>Agregar Empleado</title>
+        
+    </h:head>
+    
+    <h:body class="firstBody">
+        
+        <menu class="menu">
+            
+            <div class="card">
+
+                <h:form>
+
+                    <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
+
+                        <p:menuitem url="index.xhtml">
+                            
+                            <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
+
+                        </p:menuitem>
+                        
+                        <f:facet name="options">
+                            <p:button 
+                                class="buttonLogout"
+                                value="Regresar" 
+                                icon="pi pi-fw pi-sign-out" 
+                                styleClass="ui-button-info" 
+                                href="${request.contextPath}/faces/adminIT/personal/Administracion.xhtml"
+                                style="color: #DEE2E6; font-weight: bold;"
+                                />
+                        </f:facet>
+
+                    </p:menubar>
+
+                </h:form>
+
+            </div>
+
+        </menu>
+        
+        <div class="welcome">
+            <div class="p-grid">
+                <div class="title p-col-8" style="width: 70%; margin: auto">
+
+                    <h1 class="titleH1">Agregar Empleado</h1>
+
+                </div>
+                <div class="image p-col-4" style="width: 20%; margin: auto">
+
+                    <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
+                </div>
+            </div>
+            <p:divider class=""/>
+
+        </div>
+
+        <h:form style="width: 80%; margin: auto;">
+            
+            <h:panelGrid columns="1" cellpadding="7" styleClass="p-mb-1">
+                
+                <p:outputLabel for="nombre" value="Nombres"/>
+                <p:inputText 
+                    id="nombre" 
+                    value="#{empleadoBean.empleado.nombres}" 
+                    required="true"
+                    label="Firstname"
+                    requiredMessage="Introduce tu nombre"
+                    validatorMessage="Debes ingresar un nombre válido"
+                    placeholder="Nombres"
+                    size="50"
+                    >
+                    <f:validateLength minimum="2"/>
+                    <p:ajax update="msgNombre" event="blur"/>
+                </p:inputText>
+                <p:message for="nombre" id="msgNombre"/>
+                
+                <p:outputLabel for="apellidos" value="Apellidos"/>
+                <p:inputText 
+                    id="apellidos" 
+                    value="#{empleadoBean.empleado.apellidos}" 
+                    required="true"
+                    label="Firslastname"
+                    requiredMessage="Introduce tu apellido"
+                    validatorMessage="Debes ingresar apellidos válido"
+                    placeholder="Apellidos"
+                    size="50"
+                    >
+                    <f:validateLength minimum="2"/>
+                    <p:ajax update="msgNombre" event="blur"/>
+                </p:inputText>
+                <p:message for="apellidos" id="msgApellidos"/>
+               
+                
+                <p:outputLabel for="fecha" value="Fecha de Nacimiento"/>
+                    
+           <p:calendar value="#{empleadoBean.empleado.fechaNacimiento}" locale="es" pattern="dd/MM/yyyy"
+                    id="fecha" 
+                    required="true"
+                    label="fecha"
+                    requiredMessage="Introduce una fecha valida"
+                    validatorMessage="Debes ingresar una fecha valida"
+                    placeholder="01/02/21"
+                    size="50">
+            </p:calendar>
+                    <p:ajax update="fecha" event="keyup"/>
+                
+                <p:message for="fecha" id="fechamsg"/>
+                
+                <p:outputLabel for="telefono" value="Telefono"/>
+                <p:inputText 
+                    id="telefono" 
+                    value="#{empleadoBean.empleado.telefonoFijo}"
+                    required="true"
+                    label="telefono"
+                    requiredMessage="Introduce un numero de telefono valido"
+                    validatorMessage="Debes ingresar un numero de telefono valido"
+                    placeholder="2200-1425"
+                    size="50"
+                    > 
+                   <f:validateRegex pattern="[0-9]{8}"/>
+                    <p:ajax update="telefono" event="keyup"/>
+                </p:inputText>
+                <p:message for="telefono" id="telefonomsg"/>
+                
+                
+                <p:outputLabel for="genero" value="Genero"/>
+                
+                <p:selectOneMenu id="genero"  value="#{empleadoBean.empleado.genero}">
+                        
+                    <f:selectItem itemLabel="M" itemValue="M"/>
+                        <f:selectItem itemLabel="F" itemValue="F"/> 
+                        <f:selectItem itemLabel="Otro" itemValue="Otro"/> 
+                     </p:selectOneMenu>
+                    
+                    
+                
+                
+                
+                <p:outputLabel for="dui" value="dui"/>
+                <p:inputText 
+                    id="dui" 
+                    value="#{empleadoBean.empleado.dui}"
+                    required="true"
+                    label="dui"
+                    requiredMessage="Introduce un dui valido"
+                    validatorMessage="Debes ingresar un dui valido"
+                    placeholder="2345909-8"
+                    size="50"
+                    > 
+                    <f:validateRegex pattern="[0-9]{9}"/>
+                    <p:ajax update="dui" event="keyup"/>
+                </p:inputText>
+                <p:message for="dui" id="duimsg"/>
+                
+                <p:outputLabel for="cargo" value="Cargo"/>
+                <p:inputText 
+                    id="cargo" 
+                    value="#{empleadoBean.empleado.cargo}" 
+                    required="true"
+                    label="cargo"
+                    requiredMessage="Introduce tu cargo"
+                    validatorMessage="Debes ingresar un cargo válido"
+                    placeholder="Capacitador"
+                    size="50"
+                    >
+                    <f:validateLength minimum="2"/>
+                    <p:ajax update="msgCargo" event="blur"/>
+                </p:inputText>
+                <p:message for="cargo" id="msgCargo"/>
+                
+                <p:outputLabel for="correo" value="Correo"/>
+                <p:inputText 
+                    id="correo" 
+                    value="#{empleadoBean.empleado.correo}" 
+                    required="true"
+                    label="correo"
+                    requiredMessage="Introduce tu correo"
+                    validatorMessage="Debes ingresar un correo válido"
+                    placeholder="ejemplo@gmail.com"
+                    size="50"
+                    >
+                    <f:validateLength minimum="2"/>
+                    <p:ajax update="msgCorreo" event="blur"/>
+                </p:inputText>
+                <p:message for="correo" id="msgCorreo"/>
+                
+                <p:outputLabel for="Contraseña" value="Contraeña"/>
+                <p:inputText 
+                    id="Contraseña" 
+                    value="#{empleadoBean.empleado.contra}" 
+                    required="true"
+                    label="Contraeña"
+                    requiredMessage="Introduce una contraseña valida"
+                    
+                    placeholder="Contraseña"
+                    size="50"
+                    >
+                    <f:validateLength minimum="2"/>
+                    <p:ajax update="msgContraseña" event="blur"/>
+                </p:inputText>
+                <p:message for="Contraseña" id="msgContraseña"/>
+                
+                
+                
+                <p:outputLabel for="area" value="Área asignada"/>
+                <p:selectOneMenu id="area" value="#{empleadoBean.areaAsignada}">
+                    <f:selectItems value="#{areaBean.listaArea}" var="list" itemLabel="#{list.nombre}" itemValue="#{list.id}"/>
+                </p:selectOneMenu>
+                <p:message for="area"/>
+                
+            </h:panelGrid>
+            <a href="AgregarEmpleado.xhtml"></a>
+            <p:commandButton 
+                value="Guardar"
+                update="@form"
+                styleClass="ui-button-outlined ui-button-success" 
+                style="margin-bottom: 35px; margin-top: 35px; margin-right: 20px; min-width: 25%;"
+                action="${empleadoBean.guardarEmpleado()}">
+                <f:param name="tipoRecurso" value="2"/>
+            </p:commandButton>
+
+            <p:button 
+                value="Cancelar" 
+                styleClass="ui-button-outlined ui-button-danger" 
+                style="margin-bottom: 35px; margin-top: 35px; min-width: 25%;" 
+                href="${request.contextPath}/faces/adminIT/personal/Agregar/AgregarEmpleado.xhtml"
+                />
+
+        </h:form>
+
+    </h:body>
+
+</html>
+
+
+
