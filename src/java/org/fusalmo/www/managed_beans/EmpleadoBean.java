@@ -5,13 +5,17 @@
  */
 package org.fusalmo.www.managed_beans;
 
+import java.text.SimpleDateFormat;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.util.List;
+import org.fusalmo.www.entities.AreaEntity;
 import org.fusalmo.www.entities.EmpleadoEntity;
+import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.model.EmpleadoModel;
-import org.fusalmo.www.utils.JPAUtil;
+import org.fusalmo.www.model.RecursosModel;
 import org.fusalmo.www.utils.JsfUtil;
+import org.primefaces.event.SelectEvent;
 
 
 /**
@@ -25,6 +29,13 @@ public class EmpleadoBean {
     EmpleadoModel modelo = new EmpleadoModel();
  private EmpleadoEntity empleado;
  private List<EmpleadoEntity> listaEmpleado;
+    private String areaAsignada;
+    private Integer tipoRecurso;
+    private RecursosEntity recurso;
+    private List<RecursosEntity>listaRecursos;
+    private List<AreaEntity> listarAreas;
+    private String f_seleccionada = "";
+    private AreaEntity area;
  public EmpleadoBean() {
  empleado = new EmpleadoEntity();
  }
@@ -50,27 +61,45 @@ public class EmpleadoBean {
  return modelo.listaRecursos();
  }
  public String guardarEmpleado() {
- if (modelo.insertarEmpleado(empleado) != 1) {
- JsfUtil.setErrorMessage(null, "Ya se registró un empleado con este ID");
- return null;//Regreso a la misma página
- } else {
- JsfUtil.setFlashMessage("exito", "Empleado registrado exitosamente");
- //Forzando la redirección en el cliente
- return "TablaEmpleado?faces-redirect=true";
+     empleado.setIdAreaAsignada(modelo.obtenerArea(getAreaAsignada()));
+     empleado.setId(modelo.crearID());
+     empleado.setIsDeleted(false);
+ if(modelo.nuevoEmpleado(getEmpleado()) != 1){
+            System.out.println("Hubo un error inesperado al registrar el empleado");
+            return null;
+        }else {
+ 
+ return "/adminIT/personal/Administracion?faces-redirect=true";
  }
+ }
+  public String eliminarEmpleados() {
+ // Leyendo el parametro enviado desde la vista
+ String id= JsfUtil.getRequest().getParameter("id");
+
+ if (modelo.eliminarEmpleados(id) > 0) {
+ JsfUtil.setFlashMessage("exito", "Jefe eliminado exitosamente");
+ }
+ else{
+ JsfUtil.setErrorMessage(null, "No se pudo borrar a este Jefe");
+ }
+ return "/adminIT/personal/Eliminar/TablaEmpleado_1?faces-redirect=true";
  }
  public String eliminarEmpleado() {
  // Leyendo el parametro enviado desde la vista
  String id= JsfUtil.getRequest().getParameter("id");
+ 
+ if(modelo.eliminarArea(id)>0)
 
  if (modelo.eliminarEmpleado(id) > 0) {
  JsfUtil.setFlashMessage("exito", "Empleado eliminado exitosamente");
  }
  else{
  JsfUtil.setErrorMessage(null, "No se pudo borrar a este Empleado");
+
  }
- return "TablaEmpleado?faces-redirect=true";
+ return "TablaEmpleado_1?faces-redirect=true";
  }
+ 
  
  public String ModificarEmpleado() {
       
@@ -83,4 +112,31 @@ public class EmpleadoBean {
         return "TablaEmpleado?faces-redirect=true";
      
  }   
+
+
+ public String getAreaAsignada() {
+        return areaAsignada;
+    }
+
+    /**
+     * @param areaAsignada the areaAsignada to set
+     */
+    public void setAreaAsignada(String areaAsignada) {
+        this.areaAsignada = areaAsignada;
+    }
+    
+    public void actualizar_fecha(SelectEvent event) {
+        SimpleDateFormat fecha1 = new SimpleDateFormat("EEEEE dd MMMMM yyyy");
+        StringBuilder cadena_fecha1_11 = new StringBuilder(fecha1.format(event.getObject()));
+        f_seleccionada = cadena_fecha1_11.toString();
+        
+    }
+    public String getF_seleccionada() {
+        return f_seleccionada;
+    }
+
+    public void setF_seleccionada(String f_seleccionada) {
+        this.f_seleccionada = f_seleccionada;
+    }
+    
 }

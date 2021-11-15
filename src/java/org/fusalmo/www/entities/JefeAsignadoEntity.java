@@ -26,7 +26,8 @@ import javax.persistence.Table;
     @NamedQuery(name = "JefeAsignadoEntity.findAll", query = "SELECT j FROM JefeAsignadoEntity j")
     , @NamedQuery(name = "JefeAsignadoEntity.findById", query = "SELECT j FROM JefeAsignadoEntity j WHERE j.id = :id")
     , @NamedQuery(name = "JefeAsignadoEntity.findByNombres", query = "SELECT j FROM JefeAsignadoEntity j WHERE j.nombres = :nombres")
-    , @NamedQuery(name = "JefeAsignadoEntity.findByApellidos", query = "SELECT j FROM JefeAsignadoEntity j WHERE j.apellidos = :apellidos")})
+    , @NamedQuery(name = "JefeAsignadoEntity.findByApellidos", query = "SELECT j FROM JefeAsignadoEntity j WHERE j.apellidos = :apellidos")
+    , @NamedQuery(name = "JefeAsignadoEntity.countAll", query = "SELECT COUNT(r.id) FROM JefeAsignadoEntity r")})
 public class JefeAsignadoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -122,3 +123,4 @@ public class JefeAsignadoEntity implements Serializable {
     }
     
 }
+

@@ -40,7 +40,9 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "EmpleadoEntity.findByCorreo", query = "SELECT e FROM EmpleadoEntity e WHERE e.correo = :correo")
     , @NamedQuery(name = "EmpleadoEntity.findByContra", query = "SELECT e FROM EmpleadoEntity e WHERE e.contra = :contra")
     , @NamedQuery(name = "EmpleadoEntity.findByMailPass", query = "SELECT e FROM EmpleadoEntity e WHERE e.correo = :correo AND e.contra = :contra")
-    , @NamedQuery(name = "EmpleadoEntity.findByAreaAsignada", query = "SELECT e FROM EmpleadoEntity e WHERE e.idAreaAsignada.id = :idAreaAsignada")})
+    , @NamedQuery(name = "EmpleadoEntity.findByAreaAsignada", query = "SELECT e FROM EmpleadoEntity e WHERE e.idAreaAsignada.id = :idAreaAsignada")
+    , @NamedQuery(name = "RecursosEntity.countAll", query = "SELECT COUNT(r.id) FROM RecursosEntity r")
+    , @NamedQuery(name = "EmpleadoEntity.countAll", query = "SELECT COUNT(r.id) FROM EmpleadoEntity r")})
 public class EmpleadoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -78,6 +80,7 @@ public class EmpleadoEntity implements Serializable {
     private List<MemosEntity> memosEntityList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")
     private List<TokensEntity> tokensEntityList;
+    
 
     public EmpleadoEntity() {
     }
@@ -251,5 +254,14 @@ public class EmpleadoEntity implements Serializable {
     public String toString() {
         return "org.fusalmo.www.entities.EmpleadoEntity[ id=" + id + " ]";
     }
+
+   /** public TipoRecursoEntity getIdTipoEmpleado() {
+       
+        return idTipoEmpleado;
+    }
+
+    public void setIdTipoEmpleado(TipoRecursoEntity idTipoRecurso) {
+        this.idTipoEmpleado = idTipoRecurso;
+    } */
     
 }

@@ -91,22 +91,26 @@
                          styleClass="container"
                          paginatorPosition="bottom"
                          >
-
-                <p:column headerText="ID" sortBy="#{history_memo.id}" filterBy="#{history_memo.id}">
-                    <h:outputText value="#{history_memo.id}"/>
+                
+                <p:column headerText="De" sortBy="#{history_memo.de}" filterBy="#{history_memo.de}">
+                    <h:outputText value="#{history_memo.de}"/>
                 </p:column>
                 
-                <p:column headerText="Tipo" sortBy="#{history_memo.idTipo.nombre}" filterBy="#{history_memo.idTipo.nombre}">
-                    <h:outputText value="#{history_memo.idTipo.nombre}"/>
+                <p:column headerText="Para" sortBy="#{history_memo.para}" filterBy="#{history_memo.para}">
+                    <h:outputText value="#{history_memo.para}"/>
                 </p:column>
                 
-                <p:column headerText="Asunto" sortBy="#{history_memo.asunto}" filterBy="#{history_memo.asunto}">
-                    <h:outputText value="#{history_memo.asunto}"/>
+                <p:column headerText="Empleado" sortBy="#{history_memo.idEmpleado.nombres}" filterBy="#{history_memo.idEmpleado.nombres}">
+                    <h:outputText value="#{history_memo.idEmpleado.nombres}"/>
+                </p:column>
+                
+                <p:column headerText="Fecha de entrega" sortBy="#{memos_Bean.convertDateFromDatabase(history_memo.fechaEntrega)}" filterBy="#{memos_Bean.convertDateFromDatabase(history_memo.fechaEntrega)}">
+                    <h:outputText value="#{memos_Bean.convertDateFromDatabase(history_memo.fechaEntrega)}"/>
                 </p:column>
                 
                 <p:column headerText="Descargar PDF" style="text-align: center;">
-                    <p:commandButton icon="pi pi-arrow-down" styleClass="ui-button-outlined" style="width: 25%">
-                        <p:fileDownload value="#{historial_Memos_Bean.file}"/>
+                    <p:commandButton icon="pi pi-arrow-down" styleClass="ui-button-outlined" style="width: 25%" ajax="false">
+                        <p:fileDownload value="#{memos_Bean.obtenerPDF(history_memo.id)}"/>
                     </p:commandButton>
                 </p:column>
                 
