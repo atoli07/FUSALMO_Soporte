@@ -27,7 +27,8 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "AreaEntity.findAll", query = "SELECT a FROM AreaEntity a")
     , @NamedQuery(name = "AreaEntity.findById", query = "SELECT a FROM AreaEntity a WHERE a.id = :id")
-    , @NamedQuery(name = "AreaEntity.findByNombre", query = "SELECT a FROM AreaEntity a WHERE a.nombre = :nombre")})
+    , @NamedQuery(name = "AreaEntity.findByNombre", query = "SELECT a FROM AreaEntity a WHERE a.nombre = :nombre")
+    , @NamedQuery(name = "AreaEntity.countAll", query = "SELECT COUNT(a.id) FROM AreaEntity a")})
 public class AreaEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

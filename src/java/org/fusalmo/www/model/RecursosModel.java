@@ -14,6 +14,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.FlushModeType;
 import javax.persistence.Query;
 import org.fusalmo.www.entities.AreaEntity;
+import org.fusalmo.www.entities.PrestamoRecursosEntity;
 import org.fusalmo.www.entities.RecursosDeEmpleadosEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.entities.TipoRecursoEntity;
@@ -49,13 +50,13 @@ public class RecursosModel {
      }
     
     public List<RecursosEntity> listarRecursosByIdEmpleado(String idemp){
-        RecursosEmpleadosModel modelo= new RecursosEmpleadosModel();
+        Memos_Model modelo= new Memos_Model();
         EntityManager em= JPAUtil.getEntityManager();
         try{
             List<RecursosEntity> lista= new ArrayList();
             RecursosEntity recursotemp= new RecursosEntity();
-            List<RecursosDeEmpleadosEntity> listaId= modelo.listarRecursosPorIdEmpleado(idemp);
-            for (RecursosDeEmpleadosEntity idrec: listaId) {
+            List<PrestamoRecursosEntity> listaId= modelo.listarRecursosPrestadosByID(idemp);
+            for (PrestamoRecursosEntity idrec: listaId) {
                 if (idrec.getIdRecurso().getId()!= null) {
                     recursotemp=em.find(RecursosEntity.class, idrec.getIdRecurso().getId());
                     lista.add(recursotemp);

@@ -123,7 +123,8 @@
                                 value="#{memos_Bean.date}" 
                                 placeholder="MM-DD-YYYY"
                                 required="true"
-                                requiredMessage="Debe ingresar una fecha"
+                                requiredMessage="Debe ingresar una fecha de entrega de equipo"
+                                readonlyInput="true"
                                 >
                                 <p:ajax event="blur" listener="#{memos_Bean.convertirFecha()}" update="mostrarFecha"/>
                             </p:datePicker>
@@ -135,16 +136,63 @@
                                 value="#{memos_Bean.dateReturn}" 
                                 placeholder="MM-DD-YYYY"
                                 required="true"
-                                requiredMessage="Debe ingresar una fecha"
+                                requiredMessage="Debe ingresar una fecha de devolución de equipo"
+                                readonlyInput="true"
                                 >
                                 <p:ajax event="blur" listener="#{memos_Bean.convertirFechaDos()}" update="mostrarFechaEntrega"/>
                             </p:datePicker>
                             <p:message for="dev" id="msgDevolucion"/>
                             
+                            <p:outputLabel for="emp" value="Empleado encargado del equipo:"/>
+                            <p:selectOneMenu 
+                                id="emp" 
+                                value="#{memos_Bean.empleadoSelected}"
+                                required="true"
+                                requiredMessage="Seleccione un empleado encargado"
+                                >
+                                <f:selectItem itemLabel="Seleccione una opción" itemValue="null"/>
+                                <f:selectItems
+                                    value="#{memos_Bean.empleadosConRecursos}" 
+                                    var="listEmpRecursos" 
+                                    itemLabel="#{listEmpRecursos.nombres} #{listEmpRecursos.apellidos} (#{listEmpRecursos.cargo})" 
+                                    itemValue="#{listEmpRecursos.id}"/>
+                            </p:selectOneMenu>
+                            <p:message for="emp" id="msgEmp"/>
+                            
+                            <p:outputLabel for="dias" value="Días de uso:"/>
+                            <p:datePicker id="dias"
+                                          selectionMode="multiple"
+                                          value="#{memos_Bean.listDaysUse}"
+                                          readonlyInput="true"
+                                          placeholder="MM-DD-YYYY"
+                                          required="true"
+                                          requiredMessage="Debe ingresar los días de uso del equipo"
+                                          >
+                                <p:ajax 
+                                    event="blur" 
+                                    listener="#{memos_Bean.multiDateSelected()}" 
+                                    update="
+                                    mostrarMes1 mostrarDias1
+                                    mostrarMes2 mostrarDias2
+                                    mostrarMes3 mostrarDias3
+                                    mostrarMes4 mostrarDias4
+                                    mostrarMes5 mostrarDias5
+                                    mostrarMes6 mostrarDias6
+                                    mostrarMes7 mostrarDias7
+                                    mostrarMes8 mostrarDias8
+                                    mostrarMes9 mostrarDias9
+                                    mostrarMes10 mostrarDias10
+                                    mostrarMes11 mostrarDias11
+                                    mostrarMes12 mostrarDias12
+                                    "
+                                    />
+                            </p:datePicker>
+                            <p:message for="dias" id="msgDias"/>
+                            
                             <p:outputLabel for="finalidad" value="Describa el uso que se le dará a los recursos:"/>
                             <p:inputText 
                                 id="finalidad" 
-                                value="#{memos_Bean.memos.asunto}" 
+                                value="#{memos_Bean.descripcionDeUso}" 
                                 required="true"
                                 label="descripcion"
                                 requiredMessage="Debes ingresar una descripción"
@@ -153,14 +201,14 @@
                                 size="50"
                                 >
                                 <f:validateLength minimum="2"/>
-                                <p:ajax update="mostrarAsunto" event="blur"/>
+                                <p:ajax event="blur" update="mostrarDescripcion"/>
                             </p:inputText>
                             <p:message for="finalidad" id="msgFinalidad"/>
                             
                             <p:outputLabel for="horario" value="Escriba el horario en el que se utilizarán:"/>
                             <p:inputText 
                                 id="horario" 
-                                value="#{memos_Bean.memos.asunto}" 
+                                value="#{memos_Bean.horarioAUtilizar}" 
                                 required="true"
                                 label="horario"
                                 requiredMessage="Debes ingresar el horario de uso"
@@ -169,7 +217,7 @@
                                 size="50"
                                 >
                                 <f:validateLength minimum="2"/>
-                                <p:ajax update="mostrarAsunto" event="blur"/>
+                                <p:ajax event="blur" update="mostrarHorario"/>
                             </p:inputText>
                             <p:message for="horario" id="msgHorario"/>
                             
@@ -232,7 +280,7 @@
                             >
                             <f:param name="nombreAdminIT" value="#{nombre}"/>
                             <f:param name="IdEmp" value="#{idEmpleado}"/>
-                            <f:param name="tipoMemo" value="SUS"/>
+                            <f:param name="tipoMemo" value="EXT"/>
                         </p:commandButton>
 
                         <p:button 
@@ -292,16 +340,51 @@
                         
                         <p>
                             Por este medio, se efectúa la asignación de equipo
-                            informático en calidad de <b>PRÉSTAMO</b>. Para
-                            <b>"El usuario se mostrará en el documento final"</b>
+                            informático en calidad de <b>PRÉSTAMO</b>. 
+                            Para
+                            <b><h:outputText value="#{memos_Bean.descripcionDeUso}" id="mostrarDescripcion"/></b>
+                            el cual queda encargado el empleado
+                            <b>
+                                "El usuario se mostrará en el documento final"
+                            </b>
                         </p>
                         
+                        <br/>
+                        <br/>
+                        
                         <p>
+                            
                             Los días de uso serán los siguientes:
+                            
                         </p>
                         
+                        <p><b><h:outputText value="#{memos_Bean.mesEnero}" id="mostrarMes1"/></b></p>
+                        <p><h:outputText value="#{memos_Bean.diasEnero}" id="mostrarDias1"/></p>
+                        <p><b><h:outputText value="#{memos_Bean.mesFebrero}" id="mostrarMes2"/></b></p>
+                        <p><h:outputText value="#{memos_Bean.diasFebrero}" id="mostrarDias2"/></p>
+                        <p><b><h:outputText value="#{memos_Bean.mesMarzo}" id="mostrarMes3"/></b></p>
+                        <p><h:outputText value="#{memos_Bean.diasMarzo}" id="mostrarDias3"/></p>
+                        <p><b><h:outputText value="#{memos_Bean.mesAbril}" id="mostrarMes4"/></b></p>
+                        <p><h:outputText value="#{memos_Bean.diasAbril}" id="mostrarDias4"/></p>
+                        <p><b><h:outputText value="#{memos_Bean.mesMayo}" id="mostrarMes5"/></b></p>
+                        <p><h:outputText value="#{memos_Bean.diasMayo}" id="mostrarDias5"/></p>
+                        <p><b><h:outputText value="#{memos_Bean.mesJunio}" id="mostrarMes6"/></b></p>
+                        <p><h:outputText value="#{memos_Bean.diasJunio}" id="mostrarDias6" /></p>
+                        <p><b><h:outputText value="#{memos_Bean.mesJulio}" id="mostrarMes7"/></b></p>
+                        <p><h:outputText value="#{memos_Bean.diasJulio}" id="mostrarDias7"/></p>
+                        <p><b><h:outputText value="#{memos_Bean.mesAgosto}" id="mostrarMes8"/></b></p>
+                        <p><h:outputText value="#{memos_Bean.diasAgosto}" id="mostrarDias8"/></p>
+                        <p><b><h:outputText value="#{memos_Bean.mesSeptiembre}" id="mostrarMes9"/></b></p>
+                        <p><h:outputText value="#{memos_Bean.diasSeptiembre}" id="mostrarDias9"/></p>
+                        <p><b><h:outputText value="#{memos_Bean.mesOctubre}" id="mostrarMes10"/></b></p>
+                        <p><h:outputText value="#{memos_Bean.diasOctubre}" id="mostrarDias10"/></p>
+                        <p><b><h:outputText value="#{memos_Bean.mesNoviembre}" id="mostrarMes11"/></b></p>
+                        <p><h:outputText value="#{memos_Bean.diasNoviembre}" id="mostrarDias11"/></p>
+                        <p><b><h:outputText value="#{memos_Bean.mesDiciembre}" id="mostrarMes12"/></b></p>
+                        <p><h:outputText value="#{memos_Bean.diasDiciembre}" id="mostrarDias12"/></p>
+                        
                         <p>
-                        Los talleres se realizarán por la mañana
+                            <b><h:outputText value="#{memos_Bean.horarioAUtilizar}" id="mostrarHorario"/></b>
                         </p>
                         
                         <p>

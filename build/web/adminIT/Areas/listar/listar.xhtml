@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+
+        <h:outputStylesheet library="css" name="styleVerRecursosDisponibles.css"/>
+        <h:outputStylesheet library="css" name="primeflex.min.css"/>
+        <h:outputStylesheet library="css" name="style.css"/>
+
+        <title>Ver Areas</title>
+
+    </h:head>
+    <h:body class="firstBody">
+
+        <menu class="menu">
+
+            <div class="card">
+
+                <h:form>
+
+                    <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
+
+                        <p:menuitem url="${request.contextPath}/faces/adminIT/indexAdminIT.xhtml">
+
+                            <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
+
+                        </p:menuitem>
+
+                        <f:facet name="options">
+                            <p:button 
+                                class="buttonLogout"
+                                value="Salir" 
+                                icon="pi pi-fw pi-sign-out" 
+                                styleClass="ui-button-info" 
+                                href="${request.contextPath}/faces/logout.jsp"
+                                style="color: #DEE2E6; font-weight: bold;"
+                                />
+                        </f:facet>
+
+                    </p:menubar>
+
+                </h:form>
+
+            </div>
+
+        </menu>
+
+        <div class="welcome">
+            <div class="p-grid">
+                <div class="title p-col-8" style="width: 70%; margin: auto">
+
+                    <h1 class="titleH1">Listado de Areas Fusalmo</h1>
+
+                </div>
+                <div class="image p-col-4" style="width: 20%; margin: auto">
+
+                    <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
+                </div>
+            </div>
+            <p:divider class=""/>
+
+        </div>
+
+        <p:button 
+            styleClass="ui-button-outlined ui-button-info"
+            value="Regresar" 
+            icon="pi pi-chevron-left" 
+            style="width: 50%; margin-left: 25%; margin-bottom: 20px; margin-top: 10px; color: #17A2B8"
+            href="${request.contextPath}/faces/adminIT/areas/administrarAreas.xhtml"
+            />
+
+        <div class="container">
+
+            <h:form class="p-grid">
+
+                <p:dataTable id="datalist" var="item" value="#{areasBean.listaMantenimientos}" stripedRows="true">
+
+                    <p:column headerText="Id">
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+                    
+                   
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{item.nombre}"/>
+                    </p:column>
+                    
+                     <p:column headerText="IdJefeAsignado">
+                        <h:outputText value="#{item.idJefeAsignado.id}"/>
+                    </p:column>
+                    
+                    
+                    <p:column headerText="Estado">
+                        <!--verifica si isdeleted es tru o falses y lo muesta-->
+                        <h:outputText value="Elminado" rendered="#{item.isDeleted eq true}" />
+
+                        <h:outputText value="Activo" rendered="#{item.isDeleted eq false}" />
+
+                    </p:column>
+                  
+                </p:dataTable>
+
+            </h:form>
+        </div>
+
+    </h:body>
+</html>
+

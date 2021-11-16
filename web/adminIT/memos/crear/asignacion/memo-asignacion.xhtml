@@ -131,6 +131,7 @@
                                 placeholder="MM-DD-YYYY"
                                 required="true"
                                 requiredMessage="Debe ingresar una fecha"
+                                readonlyInput="true"
                                 >
                                 <p:ajax event="blur" listener="#{memos_Bean.convertirFecha()}" update="mostrarFecha"/>
                             </p:datePicker>

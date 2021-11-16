@@ -76,7 +76,11 @@
                 </div>
                 
                 <p:dataTable id="tokens" var="token" value="#{tokensBean.listaTokensActivos}" 
-                             rowKey="#{token.id}" selectionMode="single" selection="#{tokensBean.selectedToken}" stripedRows="true">
+                             rowKey="#{token.id}" selectionMode="single" 
+                             selection="#{tokensBean.selectedToken}" stripedRows="true"
+                             paginator="true"
+                             rows="10"
+                             paginatorPosition="bottom">
                     <p:column headerText="Fecha de creación" class="p-col-2">
                         <h:outputText value="#{token.fecha}">
                             <f:convertDateTime pattern="dd/MM/yyyy"/> 

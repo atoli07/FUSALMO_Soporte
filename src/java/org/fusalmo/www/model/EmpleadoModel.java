@@ -76,26 +76,45 @@ id);
  return null;
  }
  }
- public int eliminarArea(String id) {
- EntityManager em = JPAUtil.getEntityManager();
- int filasBorradas = 0;
- try {
- //Recuperando el objeto a eliminar
- AreaEntity est = em.find(AreaEntity.class, id);
- if (est != null) {
- EntityTransaction tran = em.getTransaction();
- tran.begin();//Iniciando transacción
-em.remove(est);//Borrando la instancia
- tran.commit();//Confirmando la transacción
- filasBorradas = 1;
- }
- em.close();
- return filasBorradas;
- } catch (Exception e) {
- em.close();
- return 0;
- }
- }
+    public int eliminarArea(String id) {
+        EntityManager em = JPAUtil.getEntityManager();
+        int filasBorradas = 0;
+        try {
+            //Recuperando el objeto a eliminar
+            AreaEntity est = em.find(AreaEntity.class, id);
+            if (est != null) {
+                EntityTransaction tran = em.getTransaction();
+                tran.begin();//Iniciando transacción
+                em.remove(est);//Borrando la instancia
+                tran.commit();//Confirmando la transacción
+                filasBorradas = 1;
+            }
+            em.close();
+            return filasBorradas;
+        } catch (Exception e) {
+            em.close();
+            return 0;
+        }
+    }
+    
+    public int eliminarEmp(String empleado){
+        EntityManager em= JPAUtil.getEntityManager();
+        EntityTransaction tran =em.getTransaction();
+        try{
+            EmpleadoEntity temp=em.find(EmpleadoEntity.class, empleado);
+            temp.setIsDeleted(Boolean.TRUE);
+            tran.begin();
+            em.persist(temp);
+            tran.commit();
+            em.close();
+            return 1;
+        }catch(Exception e){
+            em.close();
+            System.out.println(e);
+            return 0;
+        }        
+    }
+    
  public int insertarArea(AreaEntity estudiante) {
  EntityManager em = JPAUtil.getEntityManager();
  EntityTransaction tran = em.getTransaction();

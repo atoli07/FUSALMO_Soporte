@@ -57,18 +57,12 @@
 
                     <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
                 </div>
-                 <p:button 
-            styleClass="ui-button-outlined ui-button-info"
-            value="Regresar" 
-            icon="pi pi-chevron-left" 
-            style="width: 50%; margin-left: 25%; margin-bottom: 20px; margin-top: 10px; color: #17A2B8"
-            href="${request.contextPath}/faces/adminIT/mantenimiento/administrarMantenimientos.xhtml"
-            />
+
             </div>
             <p:divider class=""/>
 
         </div>
-       
+
 
         <h:form style="width: 80%; margin: auto;">
 
@@ -77,25 +71,42 @@
             <h:panelGrid columns="1" style="width: 50%" cellpadding="7" styleClass="p-mb-1">
 
                 <h5>Id</h5>
-                <p:inputText style="width: 100%" value="#{mantenimientosBean.mantenimientos.id}"/>
+                <p:inputText style="width: 100%" 
+                             value="#{mantenimientosBean.mantenimientos.id}"
+                             required="true"
+                             requiredMessage="Campo necesario "
+                             validatorMessage="Debes ingresar un ID válido"
+                             placeholder="id"
+                             size="50"
+                             />
 
                 <h5>Recurso</h5>
-                <p:selectOneMenu style="width: 100%" filter="true" filterMatchMode="contains" id="option" value="#{mantenimientosBean.idRecurso}">
-                    <f:selectItem itemLabel="SELECCIONE" itemValue="null"/>
+                <p:selectOneMenu  required="true" requiredMessage="Introduce el modelo del recurso" style="width: 100%" filter="true" filterMatchMode="contains" id="option" value="#{mantenimientosBean.idRecurso}">
+                    <f:selectItem itemLabel="SELECCIONE" itemValue=""/>
                     <f:selectItems value="#{recursosBean.listaRecursosActivos}"
                                    var="recurso"
                                    itemValue="#{recurso.id}"
-                                   itemLabel="#{recurso.id} --- #{recurso.marca} (#{recurso.modelo})"/>
+                                   itemLabel="#{recurso.id} - #{recurso.marca} (#{recurso.modelo})"/>
                 </p:selectOneMenu>
 
                 <h5>Descripcion</h5>
-                <p:inputTextarea rows="6" style="width: 100%" autoResize="true" value="#{mantenimientosBean.mantenimientos.descripcion}"/>
+                <p:inputTextarea rows="6" style="width: 100%" autoResize="true" value="#{mantenimientosBean.mantenimientos.descripcion}"
+                             
+                             placeholder="Resume el trabajo realizado"
+                             
+                                 />
 
 
                 <p:outputLabel for="button" value="Fecha"/>
-                <p:datePicker id="button"  style="width: 100%" value="#{mantenimientosBean.mantenimientos.fechaRealizacion}" showIcon="true"/>
-                
-                <p:commandButton 
+                <p:datePicker id="button"  style="width: 100%" value="#{mantenimientosBean.mantenimientos.fechaRealizacion}" showIcon="true"
+                              required="true"
+                             requiredMessage="Fecha es necesaria para registar"
+                             
+                             />
+
+            </h:panelGrid>
+            
+            <p:commandButton 
                 value="Guardar"
                 update="@form"
                 styleClass="ui-button-outlined ui-button-success" 
@@ -106,13 +117,13 @@
             </p:commandButton>
 
 
-                <p:button 
-                    value="Cancelar" 
-                    styleClass="ui-button-outlined ui-button-danger" 
-                    style="margin-bottom: 35px; margin-top: 35px; min-width: 25%;" 
-                    href="${request.contextPath}/faces/adminIT/mantenimiento/administrarMantenimientos.xhtml"
-                    />
-            </h:panelGrid>
+            <p:button 
+                value="Cancelar" 
+                styleClass="ui-button-outlined ui-button-danger" 
+                style="margin-bottom: 35px; margin-top: 35px; min-width: 25%;" 
+                href="${request.contextPath}/faces/adminIT/mantenimiento/administrarMantenimientos.xhtml"
+                />
+
         </h:form>
 
     </h:body>

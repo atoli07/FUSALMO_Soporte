@@ -101,8 +101,7 @@ public class JefeAsignadoBean {
         //System.out.println(JsfUtil.getRequest().getParameter("idRecurso"));
         
         jefe.setId(JsfUtil.getRequest().getParameter("idJefe"));
-        
-        
+        jefe.setIsDeleted(false);
         
         if(modelo.modificarJefe(jefe) != 0){
             
@@ -117,6 +116,23 @@ public class JefeAsignadoBean {
         }
         
     }
+
+    public String borrarJefe() {
+
+        String idJefe = JsfUtil.getRequest().getParameter("id");
+
+        if (modelo.eliminarJef(idJefe) == 1) {
+
+            return "EliminarJefe?faces-redirect=true&result=1";
+
+        } else {
+
+            return "EliminarJefe?faces-redirect=true&result=0";
+
+        }
+
+    }
+
  public String redirectEdit(){
         
         setJefe(

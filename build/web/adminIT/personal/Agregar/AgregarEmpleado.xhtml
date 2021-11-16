@@ -25,7 +25,7 @@
 
                     <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
 
-                        <p:menuitem url="index.xhtml">
+                        <p:menuitem url="${request.contextPath}/faces/adminIT/indexAdminIT.xhtml">
                             
                             <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
 
@@ -61,13 +61,6 @@
 
                     <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
                 </div>
-                <p:button 
-            styleClass="ui-button-outlined ui-button-info"
-            value="Regresar" 
-            icon="pi pi-chevron-left"
-            style="width: 50%; margin-left: 25%; margin-bottom: 20px; margin-top: 10px; color: #17A2B8" 
-            href="${request.contextPath}/faces/adminIT/personal/Administracion.xhtml"
-            />
             </div>
             <p:divider class=""/>
 
@@ -163,7 +156,7 @@
                     label="dui"
                     requiredMessage="Introduce un dui valido"
                     validatorMessage="Debes ingresar un dui valido"
-                    placeholder="2345909-8"
+                    placeholder="234590988"
                     size="50"
                     > 
                     <f:validateRegex pattern="[0-9]{9}"/>
@@ -203,20 +196,20 @@
                 </p:inputText>
                 <p:message for="correo" id="msgCorreo"/>
                 
-                <p:outputLabel for="Contraseña" value="Contraeña"/>
-                <p:inputText 
+                <p:outputLabel for="Contraseña" value="Contraseña"/>
+                <p:password 
                     id="Contraseña" 
                     value="#{empleadoBean.empleado.contra}" 
                     required="true"
-                    label="Contraeña"
+                    label="Contraseña"
                     requiredMessage="Introduce una contraseña valida"
-                    
+                    toggleMask="true" redisplay="true"
                     placeholder="Contraseña"
                     size="50"
                     >
                     <f:validateLength minimum="2"/>
                     <p:ajax update="msgContraseña" event="blur"/>
-                </p:inputText>
+                </p:password>
                 <p:message for="Contraseña" id="msgContraseña"/>
                 
                 
@@ -242,7 +235,7 @@
                 value="Cancelar" 
                 styleClass="ui-button-outlined ui-button-danger" 
                 style="margin-bottom: 35px; margin-top: 35px; min-width: 25%;" 
-                href="${request.contextPath}/faces/adminIT/personal/Agregar/AgregarEmpleado.xhtml"
+                href="${request.contextPath}/faces/adminIT/personal/Administracion.xhtml"
                 />
 
         </h:form>

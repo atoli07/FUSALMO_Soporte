@@ -92,7 +92,25 @@ em.remove(est);//Borrando la instancia
  em.close();
  return 0;
  }
- }
+    }
+
+    public int eliminarJef(String jefe) {
+        EntityManager em = JPAUtil.getEntityManager();
+        EntityTransaction tran = em.getTransaction();
+        try {
+            JefeAsignadoEntity temp = em.find(JefeAsignadoEntity.class, jefe);
+            temp.setIsDeleted(Boolean.TRUE);
+            tran.begin();
+            em.persist(temp);
+            tran.commit();
+            em.close();
+            return 1;
+        } catch (Exception e) {
+            em.close();
+            System.out.println(e);
+            return 0;
+        }
+    }
 
     public String crearID() {
         StringBuilder idPlantilla = new StringBuilder("JF0000");

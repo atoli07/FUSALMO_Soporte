@@ -67,38 +67,54 @@ public class EmpleadoBean {
  if(modelo.nuevoEmpleado(getEmpleado()) != 1){
             System.out.println("Hubo un error inesperado al registrar el empleado");
             return null;
-        }else {
- 
- return "/adminIT/personal/Administracion?faces-redirect=true";
- }
- }
-  public String eliminarEmpleados() {
- // Leyendo el parametro enviado desde la vista
- String id= JsfUtil.getRequest().getParameter("id");
+        } else {
 
- if (modelo.eliminarEmpleados(id) > 0) {
- JsfUtil.setFlashMessage("exito", "Jefe eliminado exitosamente");
- }
- else{
- JsfUtil.setErrorMessage(null, "No se pudo borrar a este Jefe");
- }
- return "/adminIT/personal/Eliminar/TablaEmpleado_1?faces-redirect=true";
- }
- public String eliminarEmpleado() {
- // Leyendo el parametro enviado desde la vista
- String id= JsfUtil.getRequest().getParameter("id");
- 
- if(modelo.eliminarArea(id)>0)
+            return "/adminIT/personal/Administracion?faces-redirect=true";
+        }
+    }
 
- if (modelo.eliminarEmpleado(id) > 0) {
- JsfUtil.setFlashMessage("exito", "Empleado eliminado exitosamente");
- }
- else{
- JsfUtil.setErrorMessage(null, "No se pudo borrar a este Empleado");
+    public String eliminarEmpleados() {
+        // Leyendo el parametro enviado desde la vista
+        String id = JsfUtil.getRequest().getParameter("id");
 
- }
- return "TablaEmpleado_1?faces-redirect=true";
- }
+        if (modelo.eliminarEmpleados(id) > 0) {
+            JsfUtil.setFlashMessage("exito", "Jefe eliminado exitosamente");
+        } else {
+            JsfUtil.setErrorMessage(null, "No se pudo borrar a este Jefe");
+        }
+        return "/adminIT/personal/Eliminar/TablaEmpleado_1?faces-redirect=true";
+    }
+    
+    public String borrarEmpleado() {
+
+        String idEmpleado = JsfUtil.getRequest().getParameter("id");
+
+        if (modelo.eliminarEmp(idEmpleado) == 1) {
+
+            return "TablaEmpleado_1?faces-redirect=true&result=1";
+
+        } else {
+
+            return "TablaEmpleado_1?faces-redirect=true&result=0";
+
+        }
+
+    }
+
+    public String eliminarEmpleado() {
+        // Leyendo el parametro enviado desde la vista
+        String id = JsfUtil.getRequest().getParameter("id");
+
+        if (modelo.eliminarArea(id) > 0) {
+            if (modelo.eliminarEmpleado(id) > 0) {
+                JsfUtil.setFlashMessage("exito", "Empleado eliminado exitosamente");
+            } else {
+                JsfUtil.setErrorMessage(null, "No se pudo borrar a este Empleado");
+
+            }
+        }
+        return "TablaEmpleado_1?faces-redirect=true";
+    }
  
  
  public String ModificarEmpleado() {

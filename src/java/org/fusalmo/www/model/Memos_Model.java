@@ -321,7 +321,7 @@ public class Memos_Model {
             temp.getClass().getResourceAsStream("pDFFirmado");
             InputStream stream= new ByteArrayInputStream(temp);
             StreamedContent archivo = DefaultStreamedContent.builder()
-                    .name("pdf_firmado.pdf")
+                    .name(a.getId()+"_firmado.pdf")
                     .contentType("aplication/pdf")
                     .stream(
                             ()-> stream
@@ -516,7 +516,7 @@ public class Memos_Model {
     }
     
     //Creación de fuentes
-    public static final String FONT = "C:\\Users\\hassa\\Documents\\NetBeansProjects\\Proyecto de catedra\\alexia\\FUSALMO_Soporte\\build\\web\\resources\\fonts\\arialBold.ttf";
+    public static final String FONT = "C:\\Users\\Soporte\\Documents\\NetBeansProjects\\FUSALMO_Soporte\\web\\resources\\fonts\\arialBold.ttf";
     private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
     private static Font arialFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
     private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.RED);
@@ -551,7 +551,7 @@ public class Memos_Model {
             documento = new Document();
             
             //Destino de la creación del archivo y su nombre como ruta absoluta
-            file = new File("C:\\Users\\hassa\\Documents\\NetBeansProjects\\Proyecto de catedra\\alexia\\FUSALMO_Soporte\\build\\web\\resources\\demo\\" + idMemo + ".pdf");
+            file = new File("C:\\Users\\Soporte\\Documents\\NetBeansProjects\\FUSALMO_Soporte\\web\\resources\\demo\\" + idMemo + ".pdf");
             
             //Se crea una instancia de tipo fileOutputStream pasando la ruta
             //absoluta
@@ -572,7 +572,7 @@ public class Memos_Model {
             Image image = null;
             
             //Se guarda la ruta absoluta de la imagen
-            image = Image.getInstance("C:\\Users\\hassa\\Documents\\NetBeansProjects\\Proyecto de catedra\\alexia\\FUSALMO_Soporte\\build\\web\\resources\\img\\LogoFusalmo.png");
+            image = Image.getInstance("C:\\Users\\Soporte\\Documents\\NetBeansProjects\\FUSALMO_Soporte\\web\\resources\\img\\LogoFusalmo.png");
             
             //Se le da una escala absoluta o estática
             image.scaleAbsolute(150, 100);
@@ -695,7 +695,7 @@ public class Memos_Model {
             documento = new Document();
             
             //Destino de la creación del archivo y su nombre como ruta absoluta
-            file = new File("C:\\Users\\hassa\\Documents\\NetBeansProjects\\Proyecto de catedra\\alexia\\FUSALMO_Soporte\\build\\web\\resources\\demo\\" + idMemo + ".pdf");
+            file = new File("C:\\Users\\Soporte\\Documents\\NetBeansProjects\\FUSALMO_Soporte\\web\\resources\\demo\\" + idMemo + ".pdf");
             
             //Se crea una instancia de tipo fileOutputStream pasando la ruta
             //absoluta
@@ -716,7 +716,7 @@ public class Memos_Model {
             Image image = null;
             
             //Se guarda la ruta absoluta de la imagen
-            image = Image.getInstance("C:\\Users\\hassa\\Documents\\NetBeansProjects\\Proyecto de catedra\\alexia\\FUSALMO_Soporte\\build\\web\\resources\\img\\LogoFusalmo.png");
+            image = Image.getInstance("C:\\Users\\Soporte\\Documents\\NetBeansProjects\\FUSALMO_Soporte\\web\\resources\\img\\LogoFusalmo.png");
             
             //Se le da una escala absoluta o estática
             image.scaleAbsolute(150, 100);
@@ -844,10 +844,270 @@ public class Memos_Model {
         
     }
     
+    public void crearPDFPrestamo(
+            String para,
+            String adminIT,
+            String asunto,
+            String date,
+            String empleado,
+            List<RecursosEntity> recursosSeleccionados,
+            String idMemo,
+            String finalidadDeUso,
+            String mesEnero,
+            String diasEnero,
+            String mesFebrero,
+            String diasFebrero,
+            String mesMarzo,
+            String diasMarzo,
+            String mesAbril,
+            String diasAbril,
+            String mesMayo,
+            String diasMayo,
+            String mesJunio,
+            String diasJunio,
+            String mesJulio,
+            String diasJulio,
+            String mesAgosto,
+            String diasAgosto,
+            String mesSeptiembre,
+            String diasSeptiembre,
+            String mesOctubre,
+            String diasOctubre,
+            String mesNoviembre,
+            String diasNoviembre,
+            String mesDiciembre,
+            String diasDiciembre,
+            String horarioAUtilizar
+    ){
+        
+        Document documento;
+        File file;
+        FileOutputStream archivo;
+        Paragraph titulo;
+        int num = 0;
+        
+        try {
+            
+            //Font arial = FontFactory.getFont(FONT, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            //Se obtiene la fuente
+            BaseFont bf = BaseFont.createFont(FONT, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            //Se crea el tipo de fuente
+            Font arial12 = new Font(bf, 12);
+            
+            //Se inicializa la instancia de la clase document
+            documento = new Document();
+            
+            //Destino de la creación del archivo y su nombre como ruta absoluta
+            file = new File("C:\\Users\\Soporte\\Documents\\NetBeansProjects\\FUSALMO_Soporte\\web\\resources\\demo\\" + idMemo + ".pdf");
+            
+            //Se crea una instancia de tipo fileOutputStream pasando la ruta
+            //absoluta
+            archivo = new FileOutputStream(file);
+            
+            //Verifica si el archivo existe (condicional utilizada después)
+            if(file.exists() == true){
+                System.out.println("El archivo ya existe");
+            }
+            
+            //Se crea el archivo como escritura
+            PdfWriter.getInstance(documento, archivo);
+            
+            //Se abre el archivo
+            documento.open();
+            
+            //Se crea una variable de tipo image de itext inicializado en null
+            Image image = null;
+            
+            //Se guarda la ruta absoluta de la imagen
+            image = Image.getInstance("C:\\Users\\Soporte\\Documents\\NetBeansProjects\\FUSALMO_Soporte\\web\\resources\\img\\LogoFusalmo.png");
+            
+            //Se le da una escala absoluta o estática
+            image.scaleAbsolute(150, 100);
+            
+            //Se posiciona en los ejes x, y
+            image.setAbsolutePosition(225, 750);
+            //image.setAlignment(1);
+            
+            //Se agrega la imagen al pdf
+            documento.add(image);
+            
+            documento.add(new Paragraph("\n"));
+            documento.add(new Paragraph("\n"));
+            documento.add(new Paragraph("\n"));
+            
+            documento.add(new Paragraph("MEMORÁNDUM", arial12));
+            documento.add(Chunk.NEWLINE);
+            documento.add(new Paragraph("Para: " + para, arial12));
+            documento.add(Chunk.NEWLINE);
+            documento.add(new Paragraph("De: " + adminIT, arial12));
+            documento.add(Chunk.NEWLINE);
+            documento.add(new Paragraph("Asunto: " + asunto, arial12));
+            documento.add(Chunk.NEWLINE);
+            documento.add(new Paragraph("Fecha: " + date, arial12));
+            documento.add(Chunk.NEWLINE);
+            
+            LineSeparator ls = new LineSeparator();
+            documento.add(new Chunk(ls));
+            
+            documento.add(new Paragraph("\n"));
+            
+            Chunk texto1 = new Chunk(
+                    "Por este medio, se efectúa la asignación de equipo "
+                            + "informático en calidad de "
+            );
+            documento.add(texto1);
+            
+            Chunk tipo = new Chunk("PRÉSTAMO.", arial12);
+            documento.add(tipo);
+            
+            Chunk texto2 = new Chunk(
+                    " Para "
+            );
+            documento.add(texto2);
+            
+            Chunk finalidad = new Chunk(finalidadDeUso, arial12);
+            documento.add(finalidad);
+            
+            Chunk empEncargado = new Chunk(
+                    " y como empleado encargado del recurso "
+            );
+            documento.add(empEncargado);
+            
+            Chunk emp = new Chunk(empleado, arial12);
+            documento.add(emp);
+            
+            documento.add(new Paragraph("\n"));
+            
+            documento.add(new Paragraph("Los días de uso serán los siguientes:"));
+            
+            documento.add(new Paragraph("\n"));
+            
+            if(mesEnero.isEmpty() != true && diasEnero.isEmpty() != true){
+                documento.add(new Paragraph(mesEnero));
+                documento.add(new Paragraph("\n"));
+                documento.add(new Paragraph(diasEnero));
+                documento.add(new Paragraph("\n"));
+            }
+            if(mesFebrero.isEmpty() != true && diasFebrero.isEmpty() != true){
+                documento.add(new Paragraph(mesFebrero));
+                documento.add(new Paragraph("\n"));
+                documento.add(new Paragraph(diasFebrero));
+                documento.add(new Paragraph("\n"));
+            }
+            if(mesMarzo.isEmpty() != true && diasMarzo.isEmpty() != true){
+                documento.add(new Paragraph(mesMarzo));
+                documento.add(new Paragraph("\n"));
+                documento.add(new Paragraph(diasMarzo));
+                documento.add(new Paragraph("\n"));
+            }
+            if(mesAbril.isEmpty() != true && diasAbril.isEmpty() != true){
+                documento.add(new Paragraph(mesAbril));
+                documento.add(new Paragraph("\n"));
+                documento.add(new Paragraph(diasAbril));
+                documento.add(new Paragraph("\n"));
+            }
+            if(mesMayo.isEmpty() != true && diasMayo.isEmpty() != true){
+                documento.add(new Paragraph(mesMayo));
+                documento.add(new Paragraph("\n"));
+                documento.add(new Paragraph(diasMayo));
+                documento.add(new Paragraph("\n"));
+            }
+            if(mesJunio.isEmpty() != true && diasJunio.isEmpty() != true){
+                documento.add(new Paragraph(mesJunio));
+                documento.add(new Paragraph("\n"));
+                documento.add(new Paragraph(diasJunio));
+                documento.add(new Paragraph("\n"));
+            }
+            if(mesJulio.isEmpty() != true && diasJulio.isEmpty() != true){
+                documento.add(new Paragraph(mesJulio));
+                documento.add(new Paragraph("\n"));
+                documento.add(new Paragraph(diasJulio));
+                documento.add(new Paragraph("\n"));
+            }
+            if(mesAgosto.isEmpty() != true && diasAgosto.isEmpty() != true){
+                documento.add(new Paragraph(mesAgosto));
+                documento.add(new Paragraph("\n"));
+                documento.add(new Paragraph(diasAgosto));
+                documento.add(new Paragraph("\n"));
+            }
+            if(mesSeptiembre.isEmpty() != true && diasSeptiembre.isEmpty() != true){
+                documento.add(new Paragraph(mesSeptiembre));
+                documento.add(new Paragraph("\n"));
+                documento.add(new Paragraph(diasSeptiembre));
+                documento.add(new Paragraph("\n"));
+            }
+            if(mesOctubre.isEmpty() != true && diasOctubre.isEmpty() != true){
+                documento.add(new Paragraph(mesOctubre));
+                documento.add(new Paragraph("\n"));
+                documento.add(new Paragraph(diasOctubre));
+                documento.add(new Paragraph("\n"));
+            }
+            if(mesNoviembre.isEmpty() != true && diasNoviembre.isEmpty() != true){
+                documento.add(new Paragraph(mesNoviembre));
+                documento.add(new Paragraph("\n"));
+                documento.add(new Paragraph(diasNoviembre));
+                documento.add(new Paragraph("\n"));
+            }
+            if(mesDiciembre.isEmpty() != true && diasDiciembre.isEmpty() != true){
+                documento.add(new Paragraph(mesDiciembre));
+                documento.add(new Paragraph("\n"));
+                documento.add(new Paragraph(diasDiciembre));
+                documento.add(new Paragraph("\n"));
+            }
+            
+            documento.add(new Paragraph("\n"));
+            
+            documento.add(new Paragraph(horarioAUtilizar, arial12));
+            
+            //Creación de espaciado
+            documento.add(new Paragraph("\n"));
+            
+            documento.add(new Paragraph("El recurso a entregar es el siguiente:"));
+            
+            documento.add(new Paragraph("\n"));
+            
+            //Creación de la tabla
+            PdfPTable tabla = new PdfPTable(new float[]{5f, 10f, 10f, 10f, 10f});
+            tabla.setWidthPercentage(100);
+            PdfPCell numero = new PdfPCell(new Phrase("Número", arial12));
+            PdfPCell tipoEquipo = new PdfPCell(new Phrase("Tipo de equipo", arial12));
+            PdfPCell marca = new PdfPCell(new Phrase("Marca", arial12));
+            PdfPCell modelo = new PdfPCell(new Phrase("Modelo", arial12));
+            PdfPCell serie = new PdfPCell(new Phrase("Número de serie/Etiqueta de servicio", arial12));
+            
+            //Agrega las celdas a la tabla
+            tabla.addCell(numero);
+            tabla.addCell(tipoEquipo);
+            tabla.addCell(marca);
+            tabla.addCell(modelo);
+            tabla.addCell(serie);
+            
+            for (RecursosEntity recursosSeleccionado : recursosSeleccionados) {
+                
+                num += 1;
+                tabla.addCell(String.valueOf(num));
+                tabla.addCell(recursosSeleccionado.getIdTipoRecurso().getNombre());
+                tabla.addCell(recursosSeleccionado.getMarca());
+                tabla.addCell(recursosSeleccionado.getModelo());
+                tabla.addCell(recursosSeleccionado.getNumSerie());
+                
+            }
+            
+            //Agrega la tabla al documento
+            documento.add(tabla);
+            
+            documento.close();
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+    }
+    
     public byte[] convertirPDF(String idMemo){
         
         byte[] content = null;
-        Path pdfPath = Paths.get("C:\\Users\\hassa\\Documents\\NetBeansProjects\\Proyecto de catedra\\alexia\\FUSALMO_Soporte\\build\\web\\resources\\demo\\" + idMemo + ".pdf");
+        Path pdfPath = Paths.get("C:\\Users\\Soporte\\Documents\\NetBeansProjects\\FUSALMO_Soporte\\web\\resources\\demo\\" + idMemo + ".pdf");
         
         try {
             content = Files.readAllBytes(pdfPath);
@@ -861,7 +1121,7 @@ public class Memos_Model {
     
     public void borrarPDF(String idMemo){
         
-        File file = new File("C:\\Users\\hassa\\Documents\\NetBeansProjects\\Proyecto de catedra\\alexia\\FUSALMO_Soporte\\build\\web\\resources\\demo\\" + idMemo + ".pdf");
+        File file = new File("C:\\Users\\Soporte\\Documents\\NetBeansProjects\\FUSALMO_Soporte\\web\\resources\\demo\\" + idMemo + ".pdf");
         
         if(file.delete()){
             

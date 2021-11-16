@@ -230,16 +230,14 @@
                 styleClass="ui-button-outlined ui-button-success" 
                 style="margin-bottom: 35px; margin-top: 35px; margin-right: 20px; min-width: 25%;"
                 action="${empleadoBean.editarEmpleado()}">
-                
-                
-                <f:param name="idEmpleado" value="#{request.getParameter('idEmpleado')}"/>
+                <f:param name="idEmpleado" value="#{request.getParameter('empleado')}"/>
             </p:commandButton>
 
             <p:button 
                 value="Cancelar" 
                 styleClass="ui-button-outlined ui-button-danger" 
                 style="margin-bottom: 35px; margin-top: 35px; min-width: 25%;" 
-                href="${request.contextPath}/faces/adminIT/personal/Agregar/AgregarEmpleado.xhtml"
+                href="${request.contextPath}/faces/adminIT/personal/Administracion.xhtml"
                 />
 
         </h:form>

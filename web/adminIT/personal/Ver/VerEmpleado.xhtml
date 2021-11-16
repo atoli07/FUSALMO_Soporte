@@ -103,7 +103,9 @@
                     </p:column>
                     
                     <p:column headerText="Fecha de nacimiento">
-                        <h:outputText value="#{empleado.fechaNacimiento}"/>
+                        <h:outputText value="#{empleado.fechaNacimiento}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/> 
+                        </h:outputText>
                     </p:column>
                     
                     <p:column headerText="Telefono">

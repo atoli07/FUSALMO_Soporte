@@ -56,6 +56,7 @@ public class UserItController {
 
         try {
             UsuariosITEntity u = USER.recuperarUsuario(login);
+            System.out.println("CORREO: "+login);
             password = u.getContra();
             String mensaje = "Buen día " + u.getNombres() + " " + u.getApellidos() + ", tu contraseña es: " + password;
             MailUtil.sendMail(u.getCorreo(), mensaje);
@@ -65,6 +66,8 @@ public class UserItController {
             try {
                 EmpleadoEntity emp = USER.recuperarEmpleado(login);
                 password = emp.getContra();
+                String mensaje = "Buen día " + emp.getNombres() + " " + emp.getApellidos() + ", tu contraseña es: " + password;
+                MailUtil.sendMail(emp.getCorreo(), mensaje);
                 return "reestablecerOk";
             } catch (NoResultException e2) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","El correo no existe, por favor ingrese un correo válido"));

@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="styleAgregarLaptop.css"/>
+        <h:outputStylesheet library="css" name="primeflex.min.css"/>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <title>Agregar Areas Fusalmo</title>
+    </h:head>
+    <h:body class="firstBody">
+
+        <menu class="menu">
+
+            <div class="card">
+
+                <h:form>
+
+                    <p:menubar style="background-color: #299795; border-radius: 0%; border: none;">
+
+                        <p:menuitem url="${request.contextPath}/faces/adminIT/indexAdminIT.xhtml">
+
+                            <h:outputLabel value="FUSALMO IT PORTAL" style="color: #DEE2E6; font-weight: bold;"/>
+
+                        </p:menuitem>
+
+                        <f:facet name="options">
+                            <p:button 
+                                class="buttonLogout"
+                                value="Salir" 
+                                icon="pi pi-fw pi-sign-out" 
+                                styleClass="ui-button-info" 
+                                href="${request.contextPath}/faces/logout.jsp"
+                                style="color: #DEE2E6; font-weight: bold;"
+                                />
+                        </f:facet>
+
+                    </p:menubar>
+
+                </h:form>
+
+            </div>
+
+        </menu>
+
+        <div class="welcome">
+            <div class="p-grid">
+                <div class="title p-col-8" style="width: 70%; margin: auto">
+
+                    <h1 class="titleH1">Nueva Area </h1>
+
+                </div>
+                <div class="image p-col-4" style="width: 20%; margin: auto">
+
+                    <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
+                </div>
+            </div>
+            <p:divider class=""/>
+
+        </div>
+
+
+        <h:form style="width: 80%; margin: auto;">
+
+            <!--<p:messages id="msgs"/>-->
+
+            <h:panelGrid columns="1" style="width: 50%" cellpadding="7" styleClass="p-mb-1">
+                
+                <p:outputLabel for="nombre" value="Nombre"/>
+                <p:inputText 
+                    id="nombre" 
+                    style="width: 100%" 
+                    value="#{areasBean.mantenimientos.nombre}"
+                    required="true"
+                    requiredMessage="Debe ingresar el nombre del área"
+                    />
+
+                <p:outputLabel for="IdJefe" value="Jefe que se asignará a área:"/>
+                <p:selectOneMenu id="IdJefe"  value="#{areasBean.jefeSeleccionado}">
+                    <f:selectItem itemLabel="Seleccione un jefe" itemValue="null"/>
+                    <f:selectItems
+                        value="#{areasBean.listarJefeAsignado}"
+                        var="listar"
+                        itemLabel="#{listar.nombres} #{listar.apellidos}"
+                        itemValue="#{listar.id}"
+                        /> 
+                </p:selectOneMenu>
+
+            </h:panelGrid>
+
+            <p:commandButton 
+                value="Guardar"
+                update="@form"
+                styleClass="ui-button-outlined ui-button-success" 
+                style="margin-bottom: 35px; margin-top: 35px; margin-right: 20px; min-width: 25%;"
+                action="#{areasBean.guardarArea()}"
+                >
+
+            </p:commandButton>
+
+
+            <p:button 
+                value="Cancelar" 
+                styleClass="ui-button-outlined ui-button-danger" 
+                style="margin-bottom: 35px; margin-top: 35px; min-width: 25%;" 
+                href="${request.contextPath}/faces/adminIT/areas/administrarAreas.xhtml"
+                />
+
+        </h:form>
+
+    </h:body>
+
+</html>
+

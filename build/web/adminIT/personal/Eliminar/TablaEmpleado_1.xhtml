@@ -142,7 +142,7 @@
 
                         <p:growl id="message" showDetail="true"/>
 
-                        <p:commandButton value="Borrar" action="#{empleadoBean.eliminarEmpleados()}" update="message" styleClass="ui-button-danger" icon="pi pi-times">                         
+                        <p:commandButton value="Borrar" action="#{empleadoBean.borrarEmpleado()}" update="message" styleClass="ui-button-danger" icon="pi pi-times">                         
                             <p:confirm type="popup" header="Confirmation" message="¿Está seguro de eliminar este empleado?" icon="pi pi-info-circle"/>
                             <f:param name="id"  value="#{empleado.id}"/>
                         </p:commandButton>
@@ -158,7 +158,29 @@
             </h:form>
 
         </div>
-                            
+                    
+        <c:if test="#{request.getParameter('result') == 1}">
+            <!---->
+            <button id="action-button" onclick="#{messageUtil.confirm()}" disabled="true"></button>
+            <h:form>
+
+                <p:growl id="message2" showDetail="true"/>
+
+            </h:form>
+
+        </c:if>
+        
+        <c:if test="#{request.getParameter('result') == 0}">
+            
+            <button id="action-button" onclick="#{messageUtil.error()}" disabled="true"></button>
+            
+            <h:form>
+
+                <p:growl id="message2" showDetail="true"/>
+
+            </h:form>
+            
+        </c:if>
 
     </h:body>
 

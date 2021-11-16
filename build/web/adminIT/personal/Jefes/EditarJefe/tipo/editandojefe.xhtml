@@ -64,7 +64,7 @@
                 <div class="title p-col-8" style="width: 70%; margin: auto">
 
                     <h1 class="titleH1">
-                        Agregar Jefe
+                        Editar Jefe
                     </h1>
 
                 </div>
@@ -73,25 +73,21 @@
                     <h:graphicImage library="img" name="LogoFusalmo.png" class="styleImage"/>
                     
                 </div>
-                <p:button 
-            styleClass="ui-button-outlined ui-button-info"
-            value="Regresar" 
-            icon="pi pi-chevron-left"
-            style="width: 50%; margin-left: 25%; margin-bottom: 20px; margin-top: 10px; color: #17A2B8" 
-            href="${request.contextPath}/faces/adminIT/personal/Jefes/AdminJefes.xhtml"
-            />
+                
             </div>
             
+            <p:divider class=""/>
            
            #{jefeAsignadoBean.obtenerJefeID(request.getParameter("idJefe"))}
+           
         </div>
 
-        <h:form>
+        <h:form style="width: 80%; margin: auto;">
             
-           
+            <h:panelGrid columns="1" cellpadding="7" styleClass="p-mb-1">
 
-                
-               <p:outputLabel for="nombre" value="Nombre"/>
+                <p:outputLabel for="nombre" value="Nombre"/>
+
                 <p:inputText 
                     id="nombre" 
                     value="#{jefeAsignadoBean.jefe.nombres}" 
@@ -102,8 +98,8 @@
                     placeholder="Nombre"
                     size="50"
                     >
-                    
-                    
+
+
                     <p:ajax update="msgNombre" event="blur"/>
                 </p:inputText>
                 <p:message for="nombre" id="msgNombre"/>
@@ -119,44 +115,48 @@
                     placeholder="Apellido"
                     size="50"
                     >
-                    
+
                     <p:ajax update="msgApellidos" event="blur"/>
                 </p:inputText>
                 <p:message for="apellidos" id="msgApellidos"/>  
-                
-                
+
+            </h:panelGrid>
             
-
-            <div class="p-grid" style="margin: auto; width: 90%">
-
-                <div class="p-col" style="text-align: end">
-                    
-                    <p:commandButton 
-                        value="Guardar"
+            <p:commandButton 
+                value="Guardar"
                 update="@form"
                 styleClass="ui-button-outlined ui-button-success" 
                 style="margin-bottom: 35px; margin-top: 35px; margin-right: 20px; min-width: 25%;"
                 action="${jefeAsignadoBean.editarJefe()}">
-                
-                
+
+
                 <f:param name="idJefe" value="#{request.getParameter('idJefe')}"/>
-                        
-                    </p:commandButton>
-                
+
+            </p:commandButton>
+
+            <p:button value="Cancelar" styleClass="ui-button-outlined ui-button-danger" style="width: 25%" 
+                      href="${request.contextPath}/faces/adminIT/personal/Jefes/EditarJefe/EditarJefe.xhtml"/>
+
+            <!--
+            <div class="p-grid" style="margin: auto; width: 90%">
+
+                <div class="p-col" style="text-align: end">
+
+                    
+
                 </div>
 
                 <div class="p-col" style="text-align: start">
 
-                    <p:button value="Cancelar" styleClass="ui-button-outlined ui-button-danger" style="width: 50%" 
-                              href="${request.contextPath}/faces/adminIT/personal/Jefes/AdminJefes.xhtml"/>
+                    
 
                 </div>
 
             </div>
+            -->
 
-        
-                            
         </h:form>
+        
     </h:body>
 
 </html>
