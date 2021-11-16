@@ -12,13 +12,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.persistence.EntityManager;
 import org.fusalmo.www.entities.AreaEntity;
 import org.fusalmo.www.entities.EmpleadoEntity;
 import org.fusalmo.www.entities.MemosEntity;
@@ -26,6 +29,7 @@ import org.fusalmo.www.entities.PrestamoRecursosEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.entities.UsuariosITEntity;
 import org.fusalmo.www.model.Memos_Model;
+import org.fusalmo.www.utils.JPAUtil;
 import org.fusalmo.www.utils.JsfUtil;
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.StreamedContent;
@@ -158,6 +162,36 @@ public class Memos_Bean {
         System.out.println(dateFormat.format(getDateReturn()));
         setDateSelectedReturn(dateFormat.format(getDateReturn()));
         
+    }
+    
+    public String redirectEdit() {
+        memos= modelo.buscarMemoById(JsfUtil.getRequest().getParameter("idMemo"));
+        if (memos.getIdTipo().getIdTipo().equals("ASI")) {
+            return "asignacion/edicionAsignacion?faces-redirect=true&idMemo="+memos.getId()+"&IdTipo="+memos.getIdTipo().getIdTipo();
+        }
+        return null;
+    }
+    
+    public void obtenerMemo(String memo){
+        setMemos(modelo.buscarMemoById(memo));
+        setDate(getMemos().getFechaEntrega());
+        setEmpleadoSeleccionado(getMemos().getIdEmpleado());
+        setAreaSeleccionada(getMemos().getPara());
+        setRecursosSeleccionados(llenarRecursosSeleccionados());
+    }
+    
+    public List<RecursosEntity> llenarRecursosSeleccionados(){
+        EntityManager em= JPAUtil.getEntityManager();
+        List<RecursosEntity> lista= new ArrayList();
+        List<PrestamoRecursosEntity> listaId= getModelo().listarRecursosPrestadosByID(getEmpleadoSeleccionado().getId());
+        RecursosEntity recursotemp= new RecursosEntity();
+        for (PrestamoRecursosEntity idrec: listaId) {
+            if (idrec.getIdRecurso().getId()!= null) {
+                recursotemp=em.find(RecursosEntity.class, idrec.getIdRecurso().getId());
+                lista.add(recursotemp);
+            }
+        }
+        return lista;
     }
     
     public String agregarMemo() throws ParseException{
@@ -486,6 +520,132 @@ public class Memos_Bean {
         
     }
     
+    public String modificarMemo() throws ParseException{
+        //De Asignación
+        if (JsfUtil.getRequest().getParameter("tipoMemo").equals("ASI")) {
+
+            if (getEmpleadoSeleccionado() != null && getRecursosSeleccionados().isEmpty() != true) {
+
+                //Nombre, apellido y cargo
+                String datosAdmin = "";
+
+                //Creación de instancia de tipo AreaEntity para agregarlo a la bd
+                AreaEntity area = getModelo().obtenerArea(getAreaSeleccionada());
+
+                //Formato de fecha para el documento PDF
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+
+                //Se setea la fecha final que irá en el documento PDF
+                setDateSelected(dateFormat.format(getDate()));
+
+                //Seteo de campos para la bd
+                memos.setAsunto(getMemos().getAsunto());
+                FacesContext facesContext = FacesContext. getCurrentInstance();
+                ExternalContext externalContext = facesContext.getExternalContext();
+                Map params = externalContext.getRequestParameterMap();
+                memos.setId((String)params.get("idMemo"));
+                memos.setIdAgenteIT(getModelo().obtenerAdminIT(JsfUtil.getRequest().getParameter("IdEmp")));
+                memos.setIdEmpleado(getEmpleadoSeleccionado());
+                memos.setIdTipo(getModelo().obtenerTipoMemo(JsfUtil.getRequest().getParameter("tipoMemo")));
+                memos.setFechaEntrega(getDate());
+                memos.setCantidadRecursos(getRecursosSeleccionados().size());
+                memos.setPara(
+                        area.getIdJefeAsignado().getNombres()
+                        + " "
+                        + area.getIdJefeAsignado().getApellidos()
+                        + " ("
+                        + area.getNombre()
+                        + ")"
+                );
+                memos.setDe(
+                        memos.getIdAgenteIT().getNombres()
+                        + memos.getIdAgenteIT().getApellidos()
+                        + " (Administrador IT)"
+                );
+                memos.setDescripcion(
+                        "Por este medio, se efectúa la asignación de equipo "
+                        + "informático en calidad de "
+                        + "ASIGNACIÓN para el usuario "
+                        + memos.getIdEmpleado().getNombres()
+                        + " "
+                        + memos.getIdEmpleado().getApellidos()
+                        + " ("
+                        + memos.getIdEmpleado().getCargo()
+                        + ")"
+                );
+                memos.setIsDeleted(false);
+                //Fin de seteo de campos
+
+                //Se setea los datos del empleado con los datos antes seteados
+                //del addMemo de tipo MemoEntity para poder llenar el PDF
+                setDatosEmpleado(
+                        memos.getIdEmpleado().getNombres()
+                        + " "
+                        + memos.getIdEmpleado().getApellidos()
+                        + " ("
+                        + memos.getIdEmpleado().getCargo()
+                        + ")"
+                );
+
+                //Datos del administrador o empleado IT del que ha hecho el memo
+                datosAdmin = memos.getIdAgenteIT().getNombres()
+                        + " "
+                        + memos.getIdAgenteIT().getApellidos()
+                        + " (Administrador IT)";
+
+                //Se crea el PDF
+                getModelo().crearPDFAsignacion(
+                        memos.getPara(),
+                        datosAdmin,
+                        memos.getAsunto(),
+                        getDateSelected(),
+                        getDatosEmpleado(),
+                        getRecursosSeleccionados(),
+                        memos.getId()
+                );
+
+                //Se convierte el PDF a un arreglo de byte para agregarlo a la BD
+                memos.setPdf(getModelo().convertirPDF(memos.getId()));
+
+                getModelo().borrarPDF(memos.getId());
+                if (getModelo().modificarMemo(memos) != 0) {
+                    System.out.println("Se modifico el memo con éxito");
+                    //Agregar datos a prestamo recursos
+                    for (RecursosEntity recursosSeleccionado : recursosSeleccionados) {
+                        PrestamoRecursosEntity prestamo = new PrestamoRecursosEntity();
+                        prestamo.setIdEmpleado(memos.getIdEmpleado());
+                        prestamo.setIdMemo(getModelo().buscarMemoById(memos.getId()));
+                        prestamo.setIdRecurso(recursosSeleccionado);
+                        //Modifica el valor de isDelete para que el recurso no se
+                        //vuelva a reutilizar porque ya se asignó
+                        recursosSeleccionado.setIsDeleted(true);
+                        getModelo().modificarRecursoEntity(recursosSeleccionado);
+                        if (getModelo().crearPrestamoRecurso(prestamo) != 0) {
+                            System.out.println("el prestamo se agregó correctamente");
+                        } else {
+                            System.out.println("Hubo un error al agregar el prestamo");
+                        }
+                    }
+                    return "/adminIT/memos/editar/editarMemo?faces-redirect=true&result=1";
+
+                } else {
+                    System.out.println("No se pudo agregar el memo");
+                    return "edicionAsignacion?faces-redirect=true&result=0";
+                }
+            } else {
+                FacesContext.getCurrentInstance().addMessage(
+                        null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                "Debe seleccionar un empleado y los recursos a asignar.",
+                                "Algun campo malo")
+                );
+                return null;
+            }
+        }
+        else{
+            return null;
+        }
+    }
     public void prueba(){
         
         System.out.println("ENTROOOo");

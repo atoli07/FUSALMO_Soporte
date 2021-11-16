@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< Updated upstream
             <file>file:/C:/Users/brand/OneDrive/Documentos/GitHub/FUSALMO_Soponrte/web/adminIT/recursos/administrarRecursosEmpleadoIT.xhtml</file>
             <file>file:/C:/Users/brand/OneDrive/Documentos/GitHub/FUSALMO_Soponrte/web/adminIT/personal/Jefes/EditarJefe/EditarJefe.xhtml</file>
             <file>file:/C:/Users/brand/OneDrive/Documentos/GitHub/FUSALMO_Soponrte/web/adminIT/personal/Jefes/EliminarJefe/EliminarJefe.xhtml</file>
@@ -14,6 +15,14 @@
             <file>file:/C:/Users/brand/OneDrive/Documentos/GitHub/FUSALMO_Soponrte/web/adminIT/personal/Editar/EditarEmpleado.xhtml</file>
             <file>file:/C:/Users/brand/OneDrive/Documentos/GitHub/FUSALMO_Soponrte/web/adminIT/personal/Eliminar/TablaEmpleado_1.xhtml</file>
             <file>file:/C:/Users/brand/OneDrive/Documentos/GitHub/FUSALMO_Soponrte/web/adminIT/personal/Jefes/AdminJefes.xhtml</file>
+=======
+            <file>file:/C:/Users/El%20Salvador/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/managed_beans/RecursosBean.java</file>
+            <file>file:/C:/Users/El%20Salvador/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/model/Memos_Model.java</file>
+            <file>file:/C:/Users/El%20Salvador/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/managed_beans/Memos_Bean.java</file>
+            <file>file:/C:/Users/El%20Salvador/Documents/GitHub/FUSALMO_Soporte/web/adminIT/memos/editar/asignacion/edicionAsignacion.xhtml</file>
+            <file>file:/C:/Users/El%20Salvador/Documents/GitHub/FUSALMO_Soporte/web/adminIT/memos/editar/editarMemo.xhtml</file>
+            <file>file:/C:/Users/El%20Salvador/Documents/GitHub/FUSALMO_Soporte/src/java/org/fusalmo/www/model/RecursosModel.java</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>

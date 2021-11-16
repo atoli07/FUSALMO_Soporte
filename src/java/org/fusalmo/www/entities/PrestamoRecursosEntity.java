@@ -27,7 +27,8 @@ import javax.persistence.Table;
     @NamedQuery(name = "PrestamoRecursosEntity.findAll", query = "SELECT p FROM PrestamoRecursosEntity p")
     , @NamedQuery(name = "PrestamoRecursosEntity.findByIdPrestamo", query = "SELECT p FROM PrestamoRecursosEntity p WHERE p.idPrestamo = :idPrestamo")
     , @NamedQuery(name = "PrestamoRecursosEntity.countAll", query = "SELECT COUNT(pr.idPrestamo) FROM PrestamoRecursosEntity pr")
-    , @NamedQuery(name = "PrestamoRecursosEntity.findByIdEmpleado", query = "SELECT pr FROM PrestamoRecursosEntity pr WHERE pr.idEmpleado.id = :id")})
+    , @NamedQuery(name = "PrestamoRecursosEntity.findByIdEmpleado", query = "SELECT pr FROM PrestamoRecursosEntity pr WHERE pr.idEmpleado.id = :id")
+    , @NamedQuery(name = "PrestamoRecursosEntity.findByIdMemo", query = "SELECT pr FROM PrestamoRecursosEntity pr WHERE pr.idMemo.id = :id")})
 public class PrestamoRecursosEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
