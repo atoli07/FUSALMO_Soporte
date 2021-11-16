@@ -36,11 +36,9 @@ import javax.persistence.Table;
     , @NamedQuery(name = "RecursosEntity.findByDireccionMAC", query = "SELECT r FROM RecursosEntity r WHERE r.direccionMAC = :direccionMAC")
     , @NamedQuery(name = "RecursosEntity.findByCargador", query = "SELECT r FROM RecursosEntity r WHERE r.cargador = :cargador")
     , @NamedQuery(name = "RecursosEntity.findByCodActivo", query = "SELECT r FROM RecursosEntity r WHERE r.codActivo = :codActivo")
-    , @NamedQuery(name = "RecursosEntity.countAll", query = "SELECT COUNT(r.id) FROM RecursosEntity r")})
+    , @NamedQuery(name = "RecursosEntity.countAll", query = "SELECT COUNT(r.id) FROM RecursosEntity r")
+    , @NamedQuery(name = "RecursosEntity.findByIsDeleted", query ="SELECT r FROM RecursosEntity r WHERE r.isDeleted =  :isDeleted")})
 public class RecursosEntity implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRecurso")
-    private List<RecursosDeEmpleadosEntity> recursosDeEmpleadosEntityList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,27 +46,25 @@ public class RecursosEntity implements Serializable {
     private String id;
     @Basic(optional = false)
     private String nombre;
-    @Basic(optional = false)
     private String marca;
-    @Basic(optional = false)
     private String modelo;
-    @Basic(optional = false)
     private String numSerie;
     private String direccionIP;
     private String direccionMAC;
-    @Basic(optional = false)
-    private boolean cargador;
+    private Boolean cargador;
     @Basic(optional = false)
     private String codActivo;
     @Basic(optional = false)
     @Lob
     private String imagen;
+    @Basic(optional = false)
+    private boolean isDeleted;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRecurso")
+    private List<PrestamoRecursosEntity> prestamoRecursosEntityList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRecurso")
     private List<MantenimientosEntity> mantenimientosEntityList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRecurso")
-    private List<EmpleadoEntity> empleadoEntityList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRecurso")
-    private List<PrestamoRecursosEntity> prestamoRecursosEntityList;
+    private List<RecursosDeEmpleadosEntity> recursosDeEmpleadosEntityList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seleccionRecurso")
     private List<TokensEntity> tokensEntityList;
     @JoinColumn(name = "IdAreaAsignada", referencedColumnName = "Id")
@@ -83,6 +79,14 @@ public class RecursosEntity implements Serializable {
 
     public RecursosEntity(String id) {
         this.id = id;
+    }
+
+    public RecursosEntity(String id, String nombre, String codActivo, String imagen, boolean isDeleted) {
+        this.id = id;
+        this.nombre = nombre;
+        this.codActivo = codActivo;
+        this.imagen = imagen;
+        this.isDeleted= isDeleted;
     }
 
     public RecursosEntity(
@@ -191,11 +195,11 @@ public class RecursosEntity implements Serializable {
         this.direccionMAC = direccionMAC;
     }
 
-    public boolean getCargador() {
+    public Boolean getCargador() {
         return cargador;
     }
 
-    public void setCargador(boolean cargador) {
+    public void setCargador(Boolean cargador) {
         this.cargador = cargador;
     }
 
@@ -215,20 +219,12 @@ public class RecursosEntity implements Serializable {
         this.imagen = imagen;
     }
 
-    public List<MantenimientosEntity> getMantenimientosEntityList() {
-        return mantenimientosEntityList;
+    public boolean isIsDeleted() {
+        return isDeleted;
     }
 
-    public void setMantenimientosEntityList(List<MantenimientosEntity> mantenimientosEntityList) {
-        this.mantenimientosEntityList = mantenimientosEntityList;
-    }
-
-    public List<EmpleadoEntity> getEmpleadoEntityList() {
-        return empleadoEntityList;
-    }
-
-    public void setEmpleadoEntityList(List<EmpleadoEntity> empleadoEntityList) {
-        this.empleadoEntityList = empleadoEntityList;
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public List<PrestamoRecursosEntity> getPrestamoRecursosEntityList() {
@@ -237,6 +233,22 @@ public class RecursosEntity implements Serializable {
 
     public void setPrestamoRecursosEntityList(List<PrestamoRecursosEntity> prestamoRecursosEntityList) {
         this.prestamoRecursosEntityList = prestamoRecursosEntityList;
+    }
+
+    public List<MantenimientosEntity> getMantenimientosEntityList() {
+        return mantenimientosEntityList;
+    }
+
+    public void setMantenimientosEntityList(List<MantenimientosEntity> mantenimientosEntityList) {
+        this.mantenimientosEntityList = mantenimientosEntityList;
+    }
+
+    public List<RecursosDeEmpleadosEntity> getRecursosDeEmpleadosEntityList() {
+        return recursosDeEmpleadosEntityList;
+    }
+
+    public void setRecursosDeEmpleadosEntityList(List<RecursosDeEmpleadosEntity> recursosDeEmpleadosEntityList) {
+        this.recursosDeEmpleadosEntityList = recursosDeEmpleadosEntityList;
     }
 
     public List<TokensEntity> getTokensEntityList() {
@@ -287,25 +299,5 @@ public class RecursosEntity implements Serializable {
     public String toString() {
         return "org.fusalmo.www.entities.RecursosEntity[ id=" + id + " ]";
     }
-
-    public RecursosEntity(String id, String nombre, String codActivo, String imagen) {
-        this.id = id;
-        this.nombre = nombre;
-        this.codActivo = codActivo;
-        this.imagen = imagen;
-    }
-
-    public void setCargador(Boolean cargador) {
-        this.cargador = cargador;
-    }
-
-
-    public List<RecursosDeEmpleadosEntity> getRecursosDeEmpleadosEntityList() {
-        return recursosDeEmpleadosEntityList;
-    }
-
-    public void setRecursosDeEmpleadosEntityList(List<RecursosDeEmpleadosEntity> recursosDeEmpleadosEntityList) {
-        this.recursosDeEmpleadosEntityList = recursosDeEmpleadosEntityList;
-    }
-
+    
 }

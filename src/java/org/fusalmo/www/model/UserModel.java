@@ -49,5 +49,32 @@ public class UserModel {
     
     return empleado;
    }
+   
+   public EmpleadoEntity recuperarEmpleado(String correo){
+       EmpleadoEntity empleado;
+       EntityManager em = emf.createEntityManager();
+       
+    String sql ="SELECT e FROM EmpleadoEntity e WHERE e.correo = :correo ";
+    Query query =em.createQuery(sql);
+    query.setParameter("correo", correo);
+ 
+    
+    empleado = (EmpleadoEntity) query.getSingleResult();
+    
+    return empleado;
+   }
+   
+    public UsuariosITEntity recuperarUsuario(String correo){
+    UsuariosITEntity user;
+    EntityManager em=emf.createEntityManager();
+    
+    String sql="SELECT u FROM UsuariosITEntity u WHERE u.correo = :correo ";
+    Query query =em.createQuery(sql);
+    query.setParameter("correo", correo);
+   
+    
+    user= (UsuariosITEntity) query.getSingleResult();
+        return user;
+}
     
 }

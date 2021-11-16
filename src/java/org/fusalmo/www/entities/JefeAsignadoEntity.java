@@ -26,7 +26,8 @@ import javax.persistence.Table;
     @NamedQuery(name = "JefeAsignadoEntity.findAll", query = "SELECT j FROM JefeAsignadoEntity j")
     , @NamedQuery(name = "JefeAsignadoEntity.findById", query = "SELECT j FROM JefeAsignadoEntity j WHERE j.id = :id")
     , @NamedQuery(name = "JefeAsignadoEntity.findByNombres", query = "SELECT j FROM JefeAsignadoEntity j WHERE j.nombres = :nombres")
-    , @NamedQuery(name = "JefeAsignadoEntity.findByApellidos", query = "SELECT j FROM JefeAsignadoEntity j WHERE j.apellidos = :apellidos")})
+    , @NamedQuery(name = "JefeAsignadoEntity.findByApellidos", query = "SELECT j FROM JefeAsignadoEntity j WHERE j.apellidos = :apellidos")
+    , @NamedQuery(name = "JefeAsignadoEntity.countAll", query = "SELECT COUNT(r.id) FROM JefeAsignadoEntity r")})
 public class JefeAsignadoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,6 +38,8 @@ public class JefeAsignadoEntity implements Serializable {
     private String nombres;
     @Basic(optional = false)
     private String apellidos;
+    @Basic(optional = false)
+    private Boolean isDeleted;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idJefeAsignado")
     private List<AreaEntity> areaEntityList;
 
@@ -47,10 +50,11 @@ public class JefeAsignadoEntity implements Serializable {
         this.id = id;
     }
 
-    public JefeAsignadoEntity(String id, String nombres, String apellidos) {
+    public JefeAsignadoEntity(String id, String nombres, String apellidos, Boolean isDeleted) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
+        this.isDeleted = isDeleted;
     }
 
     public String getId() {
@@ -75,6 +79,14 @@ public class JefeAsignadoEntity implements Serializable {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public List<AreaEntity> getAreaEntityList() {
@@ -109,4 +121,6 @@ public class JefeAsignadoEntity implements Serializable {
     public String toString() {
         return "org.fusalmo.www.entities.JefeAsignadoEntity[ id=" + id + " ]";
     }
+    
 }
+

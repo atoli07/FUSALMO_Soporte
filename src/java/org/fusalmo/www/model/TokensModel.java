@@ -33,21 +33,25 @@ public class TokensModel {
         }
     }
      
+    public  List<TokensEntity> listarTokensActivos(){
+         EntityManager em= JPAUtil.getEntityManager();
+         try{
+            Query consulta= em.createNamedQuery("TokensEntity.findByIsDeleted");
+            consulta.setParameter("isDeleted", Boolean.FALSE);
+            List<TokensEntity> lista= consulta.getResultList();
+            return lista;
+        }catch(Exception e){
+            em.close();
+            return null;
+        }
+     }
+     
     public List<TokensEntity> listarTokensByIdEmpleado(String idemp){
         EntityManager em= JPAUtil.getEntityManager();
         try{
             Query consulta =em.createQuery("SELECT t FROM TokensEntity t WHERE t.idEmpleado.id = :idEmpleado");
             consulta.setParameter("idEmpleado",idemp);
             List<TokensEntity> lista= consulta.getResultList();
-            /*for (TokensEntity tokensEntity : lista) {
-                
-                System.out.println("+++++++++++++++++++++++++++++++++++++++++");
-                System.out.println(tokensEntity.getId());
-                System.out.println(tokensEntity.getIdEmpleado());
-                System.out.println(tokensEntity.getDescripcion());
-                System.out.println("+++++++++++++++++++++++++++++++++++++++++");
-                
-            }*/
             return lista;
         }catch(Exception e){
             em.close();
@@ -105,6 +109,24 @@ public class TokensModel {
         }
      }
      
+   public int eliminarToken(String id){
+        EntityManager em= JPAUtil.getEntityManager();
+        EntityTransaction tran =em.getTransaction();
+        try{
+            TokensEntity temp=em.find(TokensEntity.class, id);
+            temp.setIsDeleted(Boolean.TRUE);
+            tran.begin();
+            em.persist(temp);
+            tran.commit();
+            em.close();
+            return 1;
+        }catch(Exception e){
+            em.close();
+            System.out.println(e);
+            return 0;
+        }
+    }
+     
      
      public int crearToken(TokensEntity token){
         EntityManager em= JPAUtil.getEntityManager();
@@ -112,6 +134,21 @@ public class TokensModel {
         try{
             tran.begin();
             em.persist(token);
+            tran.commit();
+            em.close();
+            return 1;
+        }catch(Exception e){
+            em.close();
+            return 0;
+        }
+     }
+     
+     public int actualizarEstadoToken(TokensEntity token){
+         EntityManager em= JPAUtil.getEntityManager();
+        EntityTransaction tran =em.getTransaction();
+        try{
+            tran.begin();
+            em.merge(token);
             tran.commit();
             em.close();
             return 1;
@@ -153,10 +190,10 @@ public class TokensModel {
         EntityManager em= JPAUtil.getEntityManager();
         int countResource = Integer.valueOf(contarTokens());
         int resultLength = String.valueOf(countResource).length();
+        System.out.println("El resultLength es: "+resultLength);
         int numberReturn;
         System.out.println(countResource + " Conteo de tokens");
         if(resultLength == 1 && countResource < 10){
-            
             if(countResource == 9){
                 
                 //Borra el caracter 5 y 4 de la cadena
@@ -188,13 +225,11 @@ public class TokensModel {
                 //para guardar dinámicamente
                 countResource = countResource + 1;
                 finalID = idPlantilla + String.valueOf(countResource);
-                
                 //Comprueba si ya existe este recurso, si existe se guardará en una
                 //posición anterior, sino continuará en aumento el numero en la BD
                 numberReturn = checkToken(finalID, countResource, idPlantilla);
-                
                 resultLength = String.valueOf(numberReturn).length();
-                
+                System.out.println("~~~~resultLength "+resultLength);
                 if(resultLength == 1){
                     
                     finalID = idPlantilla + String.valueOf(numberReturn);
@@ -204,7 +239,8 @@ public class TokensModel {
                 if(resultLength == 2){
                     
                     //Borra el caracter 4 de la cadena
-                    idPlantilla = idPlantilla.deleteCharAt(4);
+                    System.out.println("~~~~idPlantilla "+idPlantilla);
+                    //idPlantilla = idPlantilla.deleteCharAt(4);
                     
                     finalID = idPlantilla + String.valueOf(numberReturn);
                     return finalID;
@@ -618,8 +654,22 @@ public class TokensModel {
             while (returnResource != null) {
 
                 resultCount += 1;
-                
-                finalId = id + String.valueOf(resultCount);
+           
+                if (resultCount>=10) {
+                    id= id.deleteCharAt(4);
+                    System.out.println(id);
+                    
+                    while(returnResource != null){
+                        resultCount += 1;
+                        finalId = id + String.valueOf(resultCount);
+                        returnResource = obtenerToken(finalId);
+                        System.out.println(returnResource + " token retornado");
+                    }
+                    return resultCount;
+                }
+                else{
+                    finalId = id + String.valueOf(resultCount);
+                }
 
                 returnResource = obtenerToken(finalId);
                 System.out.println(returnResource + " token retornado");

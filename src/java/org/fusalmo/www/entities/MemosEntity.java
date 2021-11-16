@@ -31,11 +31,16 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "MemosEntity.findAll", query = "SELECT m FROM MemosEntity m")
     , @NamedQuery(name = "MemosEntity.findById", query = "SELECT m FROM MemosEntity m WHERE m.id = :id")
-    , @NamedQuery(name = "MemosEntity.findByFechaPrestamo", query = "SELECT m FROM MemosEntity m WHERE m.fechaPrestamo = :fechaPrestamo")
+    , @NamedQuery(name = "MemosEntity.findByFechaDevolucion", query = "SELECT m FROM MemosEntity m WHERE m.fechaDevolucion = :fechaDevolucion")
     , @NamedQuery(name = "MemosEntity.findByFechaEntrega", query = "SELECT m FROM MemosEntity m WHERE m.fechaEntrega = :fechaEntrega")
-    , @NamedQuery(name = "MemosEntity.findByCantidadRecursos", query = "SELECT m FROM MemosEntity m WHERE m.cantidadRecursos = :cantidadRecursos")})
+    , @NamedQuery(name = "MemosEntity.findByCantidadRecursos", query = "SELECT m FROM MemosEntity m WHERE m.cantidadRecursos = :cantidadRecursos")
+    , @NamedQuery(name = "MemosEntity.findByPara", query = "SELECT m FROM MemosEntity m WHERE m.para = :para")
+    , @NamedQuery(name = "MemosEntity.findByDe", query = "SELECT m FROM MemosEntity m WHERE m.de = :de")
+    , @NamedQuery(name = "MemosEntity.countAll", query = "SELECT COUNT(m.id) FROM MemosEntity m")
+    , @NamedQuery(name = "MemosEntity.findByIsDeleted", query = "SELECT m FROM MemosEntity m WHERE m.isDeleted = :isDeleted")})
 public class MemosEntity implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     private String id;
@@ -43,9 +48,9 @@ public class MemosEntity implements Serializable {
     @Lob
     private String asunto;
     @Lob
-    private String pdf;
+    private byte[] pdf;
     @Lob
-    private String pDFFirmado;
+    private byte[] pDFFirmado;
     @Temporal(TemporalType.DATE)
     private Date fechaDevolucion;
     @Temporal(TemporalType.DATE)
@@ -58,8 +63,8 @@ public class MemosEntity implements Serializable {
     @Basic(optional = false)
     @Lob
     private String descripcion;
-
-    private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    private boolean isDeleted;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMemo")
     private List<PrestamoRecursosEntity> prestamoRecursosEntityList;
     @JoinColumn(name = "IdEmpleado", referencedColumnName = "Id")
@@ -79,9 +84,13 @@ public class MemosEntity implements Serializable {
         this.id = id;
     }
 
-    public MemosEntity(String id, String asunto) {
+    public MemosEntity(String id, String asunto, String para, String de, String descripcion, boolean isDeleted) {
         this.id = id;
         this.asunto = asunto;
+        this.para = para;
+        this.de = de;
+        this.descripcion = descripcion;
+        this.isDeleted = isDeleted;
     }
 
     public String getId() {
@@ -100,22 +109,30 @@ public class MemosEntity implements Serializable {
         this.asunto = asunto;
     }
 
-    public String getPdf() {
+    public byte[] getPdf() {
         return pdf;
     }
 
-    public void setPdf(String pdf) {
+    public void setPdf(byte[] pdf) {
         this.pdf = pdf;
     }
 
-    public String getPDFFirmado() {
+    public byte[] getPDFFirmado() {
         return pDFFirmado;
     }
 
-    public void setPDFFirmado(String pDFFirmado) {
+    public void setPDFFirmado(byte[] pDFFirmado) {
         this.pDFFirmado = pDFFirmado;
     }
-    
+
+    public Date getFechaDevolucion() {
+        return fechaDevolucion;
+    }
+
+    public void setFechaDevolucion(Date fechaDevolucion) {
+        this.fechaDevolucion = fechaDevolucion;
+    }
+
     public Date getFechaEntrega() {
         return fechaEntrega;
     }
@@ -130,6 +147,38 @@ public class MemosEntity implements Serializable {
 
     public void setCantidadRecursos(Integer cantidadRecursos) {
         this.cantidadRecursos = cantidadRecursos;
+    }
+
+    public String getPara() {
+        return para;
+    }
+
+    public void setPara(String para) {
+        this.para = para;
+    }
+
+    public String getDe() {
+        return de;
+    }
+
+    public void setDe(String de) {
+        this.de = de;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public List<PrestamoRecursosEntity> getPrestamoRecursosEntityList() {
@@ -163,6 +212,7 @@ public class MemosEntity implements Serializable {
     public void setIdAgenteIT(UsuariosITEntity idAgenteIT) {
         this.idAgenteIT = idAgenteIT;
     }
+    
 
     @Override
     public int hashCode() {
@@ -188,44 +238,5 @@ public class MemosEntity implements Serializable {
     public String toString() {
         return "org.fusalmo.www.entities.MemosEntity[ id=" + id + " ]";
     }
-
-    public MemosEntity(String id, String asunto, String para, String de, String descripcion) {
-        this.id = id;
-        this.asunto = asunto;
-        this.para = para;
-        this.de = de;
-        this.descripcion = descripcion;
-    }
-
-    public Date getFechaDevolucion() {
-        return fechaDevolucion;
-    }
-
-    public void setFechaDevolucion(Date fechaDevolucion) {
-        this.fechaDevolucion = fechaDevolucion;
-    }
     
-    public String getPara() {
-        return para;
-    }
-
-    public void setPara(String para) {
-        this.para = para;
-    }
-
-    public String getDe() {
-        return de;
-    }
-
-    public void setDe(String de) {
-        this.de = de;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 }

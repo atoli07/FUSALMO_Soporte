@@ -67,38 +67,35 @@
 
             <div class="container">
                 <h1 class="titleH3">Menú de opciones:</h1>
-                <h:form class="p-grid">
+                <h:form class="p-grid p-d-flex">
                     <br/>
-                    <div class="p-col-4 opciones">
-                        <p:graphicImage library="img" name="woman-blue.jpg" class="styleImage"/>
-                        <div class="info-opciones">
-                            <h:outputText value="Token" class="title-opciones"/>
-                            <br/>
-                            <br/>
-                            <p:outputLabel value="Esta sección es para que nos reporte si tiene un problema con su recurso."/>
-                            <br/>
-                            <br/>
-
+                    <p:card class="p-col-4">
+                        <f:facet name="header">
+                            <p:graphicImage library="img" name="woman-blue.jpg"/>
+                        </f:facet>
+                        <f:facet name="title">
+                            Token
+                        </f:facet>
+                        <p>Esta sección es para que nos reporte si tiene un problema con su recurso.</p>
+                        <f:facet name="footer">
                             <p:button value="CREAR TOKEN" styleClass="ui-button-outlined ui-button-help"
                                              style="margin-bottom: 10px" 
                                              href="#{request.contextPath}/faces/empleadoIT/tokens/nuevoTokenEmpleado.xhtml"/>
                             <p:button value="VER TOKENS EN PROCESO E HISTORIAL" href="#{request.contextPath}/faces/empleadoIT/tokens/listadoTokens.xhtml" styleClass="ui-button-outlined"/>
-                        </div>
-                    </div>
-                    <div class="p-col-4 opciones">
-                        <p:graphicImage library="img" name="person-laptop.jpg" class="styleImage"/>
-                        <div class="info-opciones">
-                            <h:outputText value="Mis recursos" class="title-opciones"/>
-                            <br/>
-                            <br/>
-                            <p:outputLabel value="Aquí puede ver el equipo (o los equipos) que tiene asignado."/>
-                            <br/>
-                            <br/>
+                        </f:facet>
+                    </p:card>
+                    <p:card class="p-col-4 p-ml-2">
+                        <f:facet name="header">
+                            <img src="../../resources/img/person-laptop.jpg"/>
+                        </f:facet>
+                        <f:facet name="title">
+                            Mis recursos
+                        </f:facet>
+                        <p>Aquí puede ver el equipo (o los equipos) que tiene asignado.</p>
+                        <f:facet name="footer">
                             <p:button value="VER MIS RECURSOS ASIGNADOS" href="#{request.contextPath}/faces/empleadoIT/recursos/recursosAsignados.xhtml" styleClass="ui-button-outlined"/>
-                        </div>
-
-                    </div>
-
+                        </f:facet>
+                    </p:card>
                 </h:form>
 
                 <br/>

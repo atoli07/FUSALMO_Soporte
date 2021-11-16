@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Soporte
+ * @author El Salvador
  */
 @Entity
 @Table(name = "tokens")
@@ -30,8 +30,7 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "TokensEntity.findById", query = "SELECT t FROM TokensEntity t WHERE t.id = :id")
     , @NamedQuery(name = "TokensEntity.findByFecha", query = "SELECT t FROM TokensEntity t WHERE t.fecha = :fecha")
     , @NamedQuery(name = "TokensEntity.findByPrioridad", query = "SELECT t FROM TokensEntity t WHERE t.prioridad = :prioridad")
-    , @NamedQuery(name= "TokensEntity.countAll", query ="SELECT COUNT(t.id) FROM TokensEntity t")
-    ,@NamedQuery(name="TokensEntity.findByIdEmpleado", query="SELECT t FROM TokensEntity t WHERE t.idEmpleado.id = :idEmp")})
+    , @NamedQuery(name = "TokensEntity.findByIsDeleted", query = "SELECT t FROM TokensEntity t WHERE t.isDeleted = :isDeleted")})
 public class TokensEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,6 +45,8 @@ public class TokensEntity implements Serializable {
     private Date fecha;
     @Basic(optional = false)
     private String prioridad;
+    @Basic(optional = false)
+    private Boolean isDeleted;
     @JoinColumn(name = "IdEmpleado", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private EmpleadoEntity idEmpleado;
@@ -63,11 +64,12 @@ public class TokensEntity implements Serializable {
         this.id = id;
     }
 
-    public TokensEntity(String id, String descripcion, Date fecha, String prioridad) {
+    public TokensEntity(String id, String descripcion, Date fecha, String prioridad, Boolean isDeleted) {
         this.id = id;
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.prioridad = prioridad;
+        this.isDeleted = isDeleted;
     }
 
     public String getId() {
@@ -100,6 +102,14 @@ public class TokensEntity implements Serializable {
 
     public void setPrioridad(String prioridad) {
         this.prioridad = prioridad;
+    }
+
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public EmpleadoEntity getIdEmpleado() {

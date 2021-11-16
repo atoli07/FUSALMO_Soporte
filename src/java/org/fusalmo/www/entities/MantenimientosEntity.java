@@ -28,7 +28,8 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "MantenimientosEntity.findAll", query = "SELECT m FROM MantenimientosEntity m")
     , @NamedQuery(name = "MantenimientosEntity.findById", query = "SELECT m FROM MantenimientosEntity m WHERE m.id = :id")
-    , @NamedQuery(name = "MantenimientosEntity.findByFechaRealizacion", query = "SELECT m FROM MantenimientosEntity m WHERE m.fechaRealizacion = :fechaRealizacion")})
+    , @NamedQuery(name = "MantenimientosEntity.findByFechaRealizacion", query = "SELECT m FROM MantenimientosEntity m WHERE m.fechaRealizacion = :fechaRealizacion")
+    , @NamedQuery(name = "MantenimientosEntity.findByIsDeleted", query = "SELECT m FROM MantenimientosEntity m WHERE m.isDeleted = :isDeleted")})
 public class MantenimientosEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,6 +41,8 @@ public class MantenimientosEntity implements Serializable {
     @Basic(optional = false)
     @Temporal(TemporalType.DATE)
     private Date fechaRealizacion;
+    @Basic(optional = false)
+    private boolean isDeleted;
     @JoinColumn(name = "IdRecurso", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private RecursosEntity idRecurso;
@@ -51,9 +54,10 @@ public class MantenimientosEntity implements Serializable {
         this.id = id;
     }
 
-    public MantenimientosEntity(String id, Date fechaRealizacion) {
+    public MantenimientosEntity(String id, Date fechaRealizacion, boolean isDeleted) {
         this.id = id;
         this.fechaRealizacion = fechaRealizacion;
+        this.isDeleted = isDeleted;
     }
 
     public String getId() {
@@ -78,6 +82,14 @@ public class MantenimientosEntity implements Serializable {
 
     public void setFechaRealizacion(Date fechaRealizacion) {
         this.fechaRealizacion = fechaRealizacion;
+    }
+
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public RecursosEntity getIdRecurso() {

@@ -1,0 +1,30 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10-22-2021, 06:06:46 PM
+    Author     : Nemy
+*/
+
+.cardForm{
+    width: calc(32.8% - 5px);
+    margin: 5px;
+}
+
+.containerCards{
+    width: 80%
+}
+
+div.ui-card-title{
+    min-height: 100px;
+}
+
+div.ui-card-subtitle{
+    min-height: 100px;
+}
+
+div.ui-card-content{
+    display: none;
+}

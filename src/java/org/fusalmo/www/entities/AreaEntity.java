@@ -27,7 +27,8 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "AreaEntity.findAll", query = "SELECT a FROM AreaEntity a")
     , @NamedQuery(name = "AreaEntity.findById", query = "SELECT a FROM AreaEntity a WHERE a.id = :id")
-    , @NamedQuery(name = "AreaEntity.findByNombre", query = "SELECT a FROM AreaEntity a WHERE a.nombre = :nombre")})
+    , @NamedQuery(name = "AreaEntity.findByNombre", query = "SELECT a FROM AreaEntity a WHERE a.nombre = :nombre")
+    , @NamedQuery(name = "AreaEntity.countAll", query = "SELECT COUNT(a.id) FROM AreaEntity a")})
 public class AreaEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,6 +37,8 @@ public class AreaEntity implements Serializable {
     private String id;
     @Basic(optional = false)
     private String nombre;
+    @Basic(optional = false)
+    private boolean isDeleted;
     @JoinColumn(name = "IdJefeAsignado", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private JefeAsignadoEntity idJefeAsignado;
@@ -51,9 +54,10 @@ public class AreaEntity implements Serializable {
         this.id = id;
     }
 
-    public AreaEntity(String id, String nombre) {
+    public AreaEntity(String id, String nombre, boolean isDeleted) {
         this.id = id;
         this.nombre = nombre;
+        this.isDeleted= isDeleted;
     }
 
     public String getId() {
@@ -71,6 +75,15 @@ public class AreaEntity implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+    
 
     public JefeAsignadoEntity getIdJefeAsignado() {
         return idJefeAsignado;
@@ -120,4 +133,5 @@ public class AreaEntity implements Serializable {
     public String toString() {
         return "org.fusalmo.www.entities.AreaEntity[ id=" + id + " ]";
     }
+    
 }

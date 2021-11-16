@@ -15,11 +15,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.EntityManager;
 import org.fusalmo.www.entities.EmpleadoEntity;
+import org.fusalmo.www.entities.EstadoTokenEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.entities.TokensEntity;
+import org.fusalmo.www.model.EstadoTokenModel;
 import org.fusalmo.www.model.TokensModel;
 import org.fusalmo.www.utils.JPAUtil;
 import org.fusalmo.www.utils.JsfUtil;
+import org.fusalmo.www.utils.MessageUtil;
 import org.primefaces.PrimeFaces;
 
 /**
@@ -33,11 +36,14 @@ public class TokensBean {
     TokensModel modelo= new TokensModel();
     private String idRecurso;
     private String idToken;
+    private Integer idEstadoToken;
     private EmpleadoEntity empleadoModel;
     private String idEmpleado;
     private TokensEntity token;
     private TokensEntity selectedToken;
     private List<TokensEntity> listaTokens;
+    private List<TokensEntity> listaTokensActivos;
+    private List<EstadoTokenEntity> listaEstado;
 
     /**
      * Creates a new instance of TokensBean
@@ -48,6 +54,10 @@ public class TokensBean {
     
     public List<TokensEntity> getListaTokens(){
         return modelo.listarTokens();
+    }
+    
+    public List<TokensEntity> getListaTokensActivos(){
+        return modelo.listarTokensActivos();
     }
     
     public List<TokensEntity> getListaTokensByIdEmpleado(String idemp){
@@ -61,24 +71,53 @@ public class TokensBean {
         return  listaTokens;
     }
     
+    public List<EstadoTokenEntity> getListaEstadoTokens(){
+        EstadoTokenModel estadoModel= new EstadoTokenModel();
+        listaEstado = estadoModel.listarEstadoTokens();
+        return listaEstado;
+    }
+    
     public String crearToken(){
         EntityManager em= JPAUtil.getEntityManager();
         token.setId(modelo.crearID());
-        token.setIdEmpleado(modelo.obtenerEmpleado(idEmpleado.substring(22,28)));
-        System.out.println("-----------------------");
-        System.out.println(getIdEmpleado());
+        if (idEmpleado.length()>6) {
+            System.out.println("ENTRA AL IF DE >6");
+            token.setIdEmpleado(modelo.obtenerEmpleado(idEmpleado.substring(22,28)));
+        }
+        else{
+            token.setIdEmpleado(modelo.obtenerEmpleado(idEmpleado));
+        }
         token.setIdEstado(modelo.obtenerEstadoToken(1));
         java.util.Date fecha = new Date();
-        System.out.println(fecha);
         token.setFecha(fecha);
         token.setSeleccionRecurso(em.find(RecursosEntity.class, idRecurso));
+        token.setIsDeleted(Boolean.FALSE);
         
-        if(modelo.crearToken(getToken()) != 1){
+        if (idEmpleado.length()>6) {
+            if(modelo.crearToken(getToken()) != 1){
             System.out.println("Hubo un error inesperado al crear el token");
             return null;
-        }else{
+            }else{
             return "listadoTokens?faces-redirect=true";
-        }     
+            } 
+        } 
+        else{
+            if(modelo.crearToken(getToken()) != 1){
+            System.out.println("Hubo un error inesperado al crear el token");
+            return null;
+            }else{
+            return "administracionTokens?faces-redirect=true";
+            } 
+        }
+    }
+    
+    public String borrarToken(){
+        String id = JsfUtil.getRequest().getParameter("idToken");
+        if (modelo.eliminarToken(id)== 1) {
+            return "administracionTokens?faces-redirect=true&result=1";
+        }else{
+            return "administracionTokens?faces-redirect=true&result=0";
+        }
     }
     
     public void borrarDatos(){
@@ -91,11 +130,29 @@ public class TokensBean {
         token.setSeleccionRecurso(null);
     }
     
-    public void verBitacora(){
-        Map<String, Object> options= new HashMap<>();
-        options.put("resizable", false);
-        PrimeFaces.current().dialog().openDynamic("detalleBitacoraToken",options,null);
+    public void mostrarDetalle(){
+        String id = JsfUtil.getRequest().getParameter("idToken");
+        this.selectedToken = new TokensEntity();
+        selectedToken = modelo.obtenerToken(id);        
     }
+    
+    public void cambiarEstadoToken(Integer idEst){
+        String id = JsfUtil.getRequest().getParameter("idToken");
+        EstadoTokenEntity newId=modelo.obtenerEstadoToken(idEst);
+        this.selectedToken= modelo.obtenerToken(id);
+        selectedToken.setIdEstado(newId);
+        
+        if (modelo.actualizarEstadoToken(getSelectedToken())!=1) {
+            MessageUtil mensaje= new MessageUtil();
+            mensaje.addMessage("Error", "El estado del token no puede ser actualizado");
+        }
+        else{
+            MessageUtil mensaje= new MessageUtil();
+            mensaje.addMessage("Confirmación", "El estado del token ha sido actualizado");
+        }
+        
+    }
+    
     
     /*
     public String crearToken(){
@@ -147,5 +204,14 @@ public class TokensBean {
     public void setIdEmpleado(String idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
+
+    public Integer getIdEstadoToken() {
+        return idEstadoToken;
+    }
+
+    public void setIdEstadoToken(Integer idEstadoToken) {
+        this.idEstadoToken = idEstadoToken;
+    }
+    
     
 }

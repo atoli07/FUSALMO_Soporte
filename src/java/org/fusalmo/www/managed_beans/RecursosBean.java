@@ -40,6 +40,7 @@ public class RecursosBean {
     private EmpleadoEntity empleado;
     private int tipoRecursoModificar;
     private List<RecursosEntity>listaRecursos;
+    private List<RecursosEntity>listaRecursosActivos;
     private List<AreaEntity> listarAreas;
     /**
      * Creates a new instance of RecursosBean
@@ -54,14 +55,17 @@ public class RecursosBean {
         return modelo.listarRecursos();
     }
     
+     public List<RecursosEntity> getListaRecursosActivos(){
+        return modelo.listarRecursosActivos();
+    }
+    
     public List<TipoRecursoEntity> getListaTipoRecurso(){
         return modelo.listarTipoRecursos();
     }
     
     public List<RecursosEntity> getListaRecursosByIdEmpleado(String idemp){
-        System.out.println(idemp.substring(22, 28));
-        empleado= empmodelo.obtenerEmpleado(idemp.substring(22, 28));
-        return modelo.listarRecursosByIdEmpleado(empleado.getIdRecurso().getId());
+        String videmp= idemp.substring(22, 28);
+        return modelo.listarRecursosByIdEmpleado(videmp);
     } 
     
     public String ponerIP(RecursosEntity recurso){
@@ -90,6 +94,10 @@ public class RecursosBean {
                 return "tipo/agregarLaptop?faces-redirect=true&type-resource=" + opcAdd;
             case 2://Agregar laptop
                 return "tipo/agregarMicrosoftENT?faces-redirect=true&type-resource=" + opcAdd;
+            case 3://Agregar accesorios
+                return "tipo/agregar-accesorio?faces-redirect=true&type-resource=" + opcAdd;
+            case 4://Agregar pc escritorio
+                return "tipo/agregar-pc?faces-redirect=true&type-resource=" + opcAdd;
             default:
                 throw new AssertionError();
         }
@@ -153,7 +161,12 @@ public class RecursosBean {
         if(getRecurso().getIdTipoRecurso().getId() == 2){
             return "tipo/microsoft?faces-redirect=true&idRecurso=" + getRecurso().getId() + "&tipo-Recurso=" + getRecurso().getIdTipoRecurso().getId();
         }
-        
+        if(getRecurso().getIdTipoRecurso().getId() == 3){
+            return "tipo/accesorios?faces-redirect=true&idRecurso=" + getRecurso().getId() + "&tipo-Recurso=" + getRecurso().getIdTipoRecurso().getId();
+        }
+        if(getRecurso().getIdTipoRecurso().getId() == 4){
+            return "tipo/pc?faces-redirect=true&idRecurso=" + getRecurso().getId() + "&tipo-Recurso=" + getRecurso().getIdTipoRecurso().getId();
+        }
         return null;
         
     }

@@ -5,6 +5,7 @@
  */
 package org.fusalmo.www.model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import org.fusalmo.www.utils.JPAUtil;
 import java.util.List;
@@ -13,6 +14,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.FlushModeType;
 import javax.persistence.Query;
 import org.fusalmo.www.entities.AreaEntity;
+import org.fusalmo.www.entities.PrestamoRecursosEntity;
+import org.fusalmo.www.entities.RecursosDeEmpleadosEntity;
 import org.fusalmo.www.entities.RecursosEntity;
 import org.fusalmo.www.entities.TipoRecursoEntity;
 /**
@@ -33,13 +36,32 @@ public class RecursosModel {
         }
     }
     
+    public  List<RecursosEntity> listarRecursosActivos(){
+         EntityManager em= JPAUtil.getEntityManager();
+         try{
+            Query consulta= em.createNamedQuery("RecursosEntity.findByIsDeleted");
+            consulta.setParameter("isDeleted", Boolean.FALSE);
+            List<RecursosEntity> lista= consulta.getResultList();
+            return lista;
+        }catch(Exception e){
+            em.close();
+            return null;
+        }
+     }
+    
     public List<RecursosEntity> listarRecursosByIdEmpleado(String idemp){
+        Memos_Model modelo= new Memos_Model();
         EntityManager em= JPAUtil.getEntityManager();
         try{
-            Query consulta= em.createNamedQuery("RecursosEntity.findById");
-            consulta.setParameter("id",idemp);
-            System.out.println(idemp);
-            List<RecursosEntity> lista= consulta.getResultList();
+            List<RecursosEntity> lista= new ArrayList();
+            RecursosEntity recursotemp= new RecursosEntity();
+            List<PrestamoRecursosEntity> listaId= modelo.listarRecursosPrestadosByID(idemp);
+            for (PrestamoRecursosEntity idrec: listaId) {
+                if (idrec.getIdRecurso().getId()!= null) {
+                    recursotemp=em.find(RecursosEntity.class, idrec.getIdRecurso().getId());
+                    lista.add(recursotemp);
+                }
+            }
             return lista;
         }catch(Exception e){
             em.close();
@@ -702,35 +724,21 @@ public class RecursosModel {
     }
     
     public int eliminarRecurso(String recurso){
-        
-        EntityManager em = JPAUtil.getEntityManager();
-        
-        int filasBorradas = 0;
-        
-        try {
-            
-            RecursosEntity resource = em.find(RecursosEntity.class, recurso);
-            
-            if(resource != null){
-                
-                EntityTransaction tra = em.getTransaction();
-                tra.begin();
-                em.remove(resource);
-                tra.commit();
-                filasBorradas = 1;
-                
-            }
-            
+        EntityManager em= JPAUtil.getEntityManager();
+        EntityTransaction tran =em.getTransaction();
+        try{
+            RecursosEntity temp=em.find(RecursosEntity.class, recurso);
+            temp.setIsDeleted(Boolean.TRUE);
+            tran.begin();
+            em.persist(temp);
+            tran.commit();
             em.close();
-            return filasBorradas;
-            
-        } catch (Exception e) {
-            
+            return 1;
+        }catch(Exception e){
             em.close();
+            System.out.println(e);
             return 0;
-            
-        }
-        
+        }        
     }
     
     public int modificarRecurso(RecursosEntity recurso){

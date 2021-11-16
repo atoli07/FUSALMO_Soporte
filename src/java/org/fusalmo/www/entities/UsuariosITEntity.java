@@ -57,6 +57,8 @@ public class UsuariosITEntity implements Serializable {
     private String correo;
     @Basic(optional = false)
     private String contra;
+    @Basic(optional = false)
+    private boolean isDeleted;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAgenteIT")
     private List<MemosEntity> memosEntityList;
 
@@ -67,7 +69,7 @@ public class UsuariosITEntity implements Serializable {
         this.id = id;
     }
 
-    public UsuariosITEntity(String id, String nombres, String apellidos, Date fechaNacimiento, Character genero, String dui, String correo, String contra) {
+    public UsuariosITEntity(String id, String nombres, String apellidos, Date fechaNacimiento, Character genero, String dui, String correo, String contra, boolean isDeleted) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -76,6 +78,7 @@ public class UsuariosITEntity implements Serializable {
         this.dui = dui;
         this.correo = correo;
         this.contra = contra;
+        this.isDeleted= isDeleted;
     }
 
     public String getId() {
@@ -140,6 +143,14 @@ public class UsuariosITEntity implements Serializable {
 
     public void setContra(String contra) {
         this.contra = contra;
+    }
+
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public List<MemosEntity> getMemosEntityList() {

@@ -33,7 +33,29 @@ public class MessageUtil {
     public void error() {
         addMessage("Error", "El recurso está siendo ocupado");
     }
+    
+    public void confirmAddMemo(){
+        
+        addMessage("Confimación", "¡El memo se ha creado con éxito!");
+        
+    }
 
+    public void confirmDeleteToken(){
+        addMessage("Confirmación", "El token ha sido eliminado");
+    }
+    
+    public void errorDeleteToken(){
+        addMessage("Error", "El token está siendo ocupado");
+    }
+    
+    public void confirmDeleteMemo(){
+        addMessage("Confirmación", "El memo ha sido eliminado");
+    }
+    
+    public void errorDeleteMemo(){
+        addMessage("Error", "El memo está siendo ocupado");
+    }
+    
     public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);

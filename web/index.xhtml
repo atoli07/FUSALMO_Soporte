@@ -51,8 +51,10 @@
         </div>
 
         <div class="card divLogin">
+            <h3 class="titleH1"> <h:outputLabel value="#{userIT.res} " style="color: #ff0000; font-weight: bold;" /></h3>
 
             <h:form class="formLogin">
+                
 
                 <h:panelGrid columns="1" class="gridField">
                     
@@ -73,7 +75,7 @@
 
                     <p:commandButton styleClass="ui-button-outlined ui-button-help" value="Ingresar" action="#{login_Bean.verifiedData()}" ></p:commandButton>
                     
-                    <p:commandLink value="He olvidado mi contraseña">
+                    <p:commandLink value="He olvidado mi contraseña" action="recuperar">
                         
                     </p:commandLink>
 
