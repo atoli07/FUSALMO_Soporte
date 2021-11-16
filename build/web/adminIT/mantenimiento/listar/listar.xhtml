@@ -83,17 +83,33 @@
                         <h:outputText value="#{item.id}"/>
                     </p:column>
                     <p:column headerText="Recurso">
-                        <h:outputText value="#{item.idRecurso.id} --- #{item.idRecurso.marca} (#{item.idRecurso.modelo})"/>
+                        <h:outputText value="#{item.idRecurso.id} -(#{item.idRecurso.modelo}) "/>
                     </p:column>
                     <p:column headerText="Nombre">
-                        <h:outputText value="#{item.idRecurso.nombre}"/>
+                        <h:outputText value="#{item.idRecurso.nombre} (#{item.idRecurso.marca}) "/>
                     </p:column>
                     <p:column headerText="Fecha de realización">
+<<<<<<< Updated upstream
                         <h:outputText value="#{item.fechaRealizacion}"/>
+=======
+                        <h:outputText value="#{item.fechaRealizacion}">
+                            <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                        </h:outputText>
+>>>>>>> Stashed changes
                     </p:column>
                     <p:column headerText="Descripción">
                         <h:outputText value="#{item.descripcion}"/>
                     </p:column>
+
+                    <p:column headerText="Estado">
+                        <!--verifica si isdeleted es tru o falses y lo muesta-->
+                        <h:outputText value="Elminado" rendered="#{item.isDeleted eq true}" />
+
+                        <h:outputText value="Activo" rendered="#{item.isDeleted eq false}" />
+
+                    </p:column>
+
+
                 </p:dataTable>
 
             </h:form>
